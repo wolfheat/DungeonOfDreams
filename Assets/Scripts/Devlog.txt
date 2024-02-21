@@ -1,0 +1,65 @@
+Dungeon Crawler Jam 2024
+
+DEVLOG FOR Dungeon Crawler 2024
+Feb-Mar 2024
+
+* IDEAS
+- Make a simle fun dungeon scrawler for game jam, maybe minecraft inspired?!? Gold digging?.
+
+
+22/2	* Created specific start menu for the jam, adding some general functionality
+	
+		 - SETTINGS
+		* Gray Out bar when muted - MAYBE
+		* Make cleared menu, maybe have darker background area around text and buttons
+
+		 - MECHANICS
+
+		 - SOUNDS
+
+		 - GRAPHICS
+		// * Barking Dog - 3D Scifi Base Vol 1 - Single Entity
+		// * Mark Dion - Asteroids Pack - Standard EULA
+		// * Ekincan Tas - Damage Numbers Pro - Standard EULA
+		// * Unity Technologies - Particle Pack - Standard EULA
+		// * Sigmoid Button Assets - Props 3D - Standard EULA
+		// * 3D.RINA - Animated Spiders Pack - Standard EULA
+		// * RRFreelance - Tools Pack 1 - Standard EULA
+		// * Ilias Kap - Workplace Tools -  Standard EULA
+
+		 - FONTS
+		// * Gomarice - Shiratama Dango - Apache-2.0
+		* Aenigma Games & Fonts - Euphoric - Commersial Use
+
+		 - MUSIC		
+		// * Kevin MacLeod - Airport Lounge - Royalty Free Upbeat
+		// * Moire - Space Ranger - Royalty Free Upbeat
+		// * Zapsplat - Tropical Dawn - Music from https://www.zapsplat.com
+		* Brock Hewitt - In The Silence - Royalty Free Upbeat
+
+		 -TOOLS
+        * AI Art - Playground
+        * Made in Unity
+
+        TODO
+		If participating in jam start 22mar - deadline 31mar (Dungeon Crawler Jam 2024)
+						
+		MAYBE
+
+		REJECTED
+		
+		
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
+		* USED IN PROJECT
+
+		CHECKLIST FOR BETTER PLAYER EXPERIENCE
+
+		* BUGS, CRASHES, SLOW PERFORMANCE
+		* MISLEADING MARKETING
+		* NOT ENGAGING WITH COMMUNITY
+		* CONFIGURABLE CONTROLS,
+		* TEXT TO SMALL,
+		* CONTRAST,
+		* MISSING FEATURE
+
+------ ------- ------
