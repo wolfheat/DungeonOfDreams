@@ -8,7 +8,8 @@ Feb-Mar 2024
 
 
 22/2	* Created specific start menu for the jam, adding some general functionality
-	
+		* Tweaked start menu, changed colors font and borders etc
+
 		 - SETTINGS
 		* Gray Out bar when muted - MAYBE
 		* Make cleared menu, maybe have darker background area around text and buttons
@@ -30,6 +31,7 @@ Feb-Mar 2024
 		 - FONTS
 		// * Gomarice - Shiratama Dango - Apache-2.0
 		* Aenigma Games & Fonts - Euphoric - Commersial Use
+		* gluk - Prida01 - Commersial Use 
 
 		 - MUSIC		
 		// * Kevin MacLeod - Airport Lounge - Royalty Free Upbeat
