@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-
+using UnityEngine.InputSystem.XR;
+using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Move,Rotate}
 public class MoveAction
@@ -20,6 +22,7 @@ public class MoveAction
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] PlayerAnimationController playerAnimationController;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
 
@@ -30,6 +33,20 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Move.performed += MovePerformed;
         Inputs.Instance.Controls.Player.Move.canceled += MoveCanceled;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;
+    
+        // set up input actions
+        Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
+
+    }
+
+
+    public void InterractWith(CallbackContext context)
+    {
+        // Disable interact when inventory
+        //if (UIController.CraftingActive || UIController.InventoryActive || GameState.IsPaused)
+        Debug.Log("Interact");
+        playerAnimationController.SetState(PlayerState.Hit);
+        //toolHolder.ChangeTool(DestructType.Breakable);
     }
 
     private void MoveCanceled(InputAction.CallbackContext obj)

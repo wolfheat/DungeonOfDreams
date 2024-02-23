@@ -73,6 +73,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d3e98c0-1de1-49e9-be9e-e266598b4dd6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -339,6 +348,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c6f69236-4684-42da-bcc1-c3b27490c227"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -949,6 +969,7 @@ namespace UnityEngine.InputSystem
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_M = m_Player.FindAction("M", throwIfNotFound: true);
             m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
+            m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1028,6 +1049,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_M;
         private readonly InputAction m_Player_Turn;
+        private readonly InputAction m_Player_Click;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
@@ -1037,6 +1059,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @M => m_Wrapper.m_Player_M;
             public InputAction @Turn => m_Wrapper.m_Player_Turn;
+            public InputAction @Click => m_Wrapper.m_Player_Click;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1061,6 +1084,9 @@ namespace UnityEngine.InputSystem
                 @Turn.started += instance.OnTurn;
                 @Turn.performed += instance.OnTurn;
                 @Turn.canceled += instance.OnTurn;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1080,6 +1106,9 @@ namespace UnityEngine.InputSystem
                 @Turn.started -= instance.OnTurn;
                 @Turn.performed -= instance.OnTurn;
                 @Turn.canceled -= instance.OnTurn;
+                @Click.started -= instance.OnClick;
+                @Click.performed -= instance.OnClick;
+                @Click.canceled -= instance.OnClick;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1275,6 +1304,7 @@ namespace UnityEngine.InputSystem
             void OnFire(InputAction.CallbackContext context);
             void OnM(InputAction.CallbackContext context);
             void OnTurn(InputAction.CallbackContext context);
+            void OnClick(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

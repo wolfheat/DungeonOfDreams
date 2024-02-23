@@ -29,18 +29,18 @@ public class SceneChanger : MonoBehaviour
         Debug.Log("** Checking Scenes to Set active. **");
         if (SceneManager.GetSceneByName("StartMenu").IsValid())
         {
-            if (SceneManager.GetSceneByName("MainScene").IsValid())
+            if (SceneManager.GetSceneByName("Dungeon").IsValid())
             {
                 SceneManager.UnloadSceneAsync("StartMenu");
-                SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainScene"));
+                SceneManager.SetActiveScene(SceneManager.GetSceneByName("Dungeon"));
                 return;
             }
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("StartMenu"));
             Debug.Log("  StartMenu is set as active.");
-        }else if (SceneManager.GetSceneByName("MainScene").IsValid())
+        }else if (SceneManager.GetSceneByName("Dungeon").IsValid())
         {
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainScene"));
-            Debug.Log("  MainScene is set as active.");
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Dungeon"));
+            Debug.Log("  Dungeon is set as active.");
         }
     }
 
