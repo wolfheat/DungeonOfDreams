@@ -10,6 +10,7 @@ Feb-Mar 2024
 22/2	* Created specific start menu for the jam, adding some general functionality
 		* Tweaked start menu, changed colors font and borders etc
 23/2	* Updated Credits page with font and adjusted colors
+		* Made basic movement system for grid based game
 
 		 - SETTINGS
 		* Gray Out bar when muted - MAYBE

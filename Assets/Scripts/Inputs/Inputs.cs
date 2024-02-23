@@ -16,6 +16,7 @@ public class Inputs : MonoBehaviour
 
     private void LoadingComplete()
     {
+        Debug.Log("Loading Complete");
         Controls.Player.M.performed += SoundMaster.Instance.ToggleMusic;
     }
 
