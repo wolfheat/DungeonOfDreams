@@ -12,9 +12,21 @@ Feb-Mar 2024
 23/2	* Updated Credits page with font and adjusted colors
 		* Made basic movement system for grid based game
 		* Added hammer animator and animation
+24/2	* Changed FOV to 96
+		* Added pick up items that animate
+		* Added UI that show whats pickable and updates it accordingly
+		* Particle effect system added
+		* Changed camera view slightly backed (FOV 80)
+		* Added Pick Up notices for items
+		* Player Collides with walls by checking overlapBox in movingbireaction with layermask for walls
 
+		* Player picks up item when stepping on it
 
-		 - SETTINGS
+		* Add animation for picking up items into inventory
+
+		* Adding functionality to actually pick up the items
+
+		- SETTINGS
 		* Gray Out bar when muted - MAYBE
 		* Make cleared menu, maybe have darker background area around text and buttons
 
