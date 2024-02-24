@@ -116,8 +116,12 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.Log("CRUSHING BLOCK");
-            playerAnimationController.SetState(PlayerState.Hit);
+            if(pickupController.Wall != null)
+            {
+                Debug.Log("CRUSHING BLOCK");
+                playerAnimationController.SetState(PlayerState.Hit);
+                pickupController.InteractWithWall();
+            }
         }
 
     }
@@ -251,6 +255,6 @@ public class PlayerController : MonoBehaviour
     {
         TurnPerformed();
         MovePerformed();
-        pickupController.UpdateInteractables();
+        pickupController.UpdateColliders();
     }
 }

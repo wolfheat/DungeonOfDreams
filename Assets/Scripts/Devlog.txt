@@ -19,8 +19,8 @@ Feb-Mar 2024
 		* Changed camera view slightly backed (FOV 80)
 		* Added Pick Up notices for items
 		* Player Collides with walls by checking overlapBox in movingbireaction with layermask for walls
-
-		* Player picks up item when stepping on it
+		* Player picks up item when stepping on it -
+		* Player can hit walls and destroy them
 
 		* Add animation for picking up items into inventory
 

@@ -15,12 +15,15 @@ public class InteractableUI : MonoBehaviour
         Instantiate(uiItemPrefab,holder.transform);
     }
     
-    public void UpdateItems(List<string> names)
+    public void UpdateItems(List<string> names, bool resetList)
     {
-        foreach (Transform child in holder.transform)
-            Destroy(child.gameObject);
+        if (resetList)
+            foreach (Transform child in holder.transform)
+                Destroy(child.gameObject);
+
         foreach (string name in names)
         {
+            Debug.Log("Adding Item "+name);
             InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
             item.SetName(name);
         }

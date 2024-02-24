@@ -18,9 +18,9 @@ public class UIController : MonoBehaviour
 	}
 
 
-	public void UpdateShownItemsUI(List<string> names)
+	public void UpdateShownItemsUI(List<string> names,bool resetList = false)
 	{
-		interactableUI.UpdateItems(names);
+		interactableUI.UpdateItems(names,resetList);
 	}
 	
 	public void AddPickedUp(string name)
