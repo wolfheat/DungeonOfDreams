@@ -5,8 +5,16 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
 
+    int health = 5;
 
-    public void Shrink()
+    public void Damage()
+    {
+        health--;
+        if (health == 0)
+            Shrink();
+    }
+    
+    private void Shrink()
     {
         GetComponent<BoxCollider>().enabled = false;
 

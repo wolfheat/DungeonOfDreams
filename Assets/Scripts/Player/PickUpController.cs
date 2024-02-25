@@ -51,7 +51,7 @@ public class PickUpController : MonoBehaviour
         if (Wall == null) return;
 
         Debug.Log("Interacting with wall");
-        Wall.Shrink();
+        Wall.Damage();
         UpdateColliders();
     }
     public void InteractWithActiveItem()

@@ -34,16 +34,29 @@ public class PlayerController : MonoBehaviour
     private const float MoveTime = 0.2f;
     private void Start()
     {
-        Inputs.Instance.Controls.Player.Move.performed += MovePerformed;
-        Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;
-    
         // set up input actions
+        Inputs.Instance.Controls.Player.Move.performed += MovePerformed;
+        Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
 
+        playerAnimationController.HitComplete += HitWithTool;
+    }
+    private void OnDisable()
+    {
+        Inputs.Instance.Controls.Player.Move.performed -= MovePerformed;
+        Inputs.Instance.Controls.Player.Turn.performed -= TurnPerformed;
+        Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
+        playerAnimationController.HitComplete -= HitWithTool;
     }
 
 
+
     public void InterractWith(CallbackContext context)
+    {
+        InterractWith();
+    }
+    
+    public void InterractWith()
     {
         // Disable interact when inventory
         //if (UIController.CraftingActive || UIController.InventoryActive || GameState.IsPaused)
@@ -119,10 +132,18 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("CRUSHING BLOCK");
                 playerAnimationController.SetState(PlayerState.Hit);
-                SoundMaster.Instance.PlaySound(SoundName.HitMetal);
-                pickupController.InteractWithWall();
             }
         }
+
+    }
+
+    public void HitWithTool()
+    {
+        pickupController.InteractWithWall();
+
+        // If player has mouse button down attack again?
+        if (!Inputs.Instance.Controls.Player.Click.IsPressed() || pickupController.Wall == null)
+            playerAnimationController.SetState(PlayerState.Idle);
 
     }
 
