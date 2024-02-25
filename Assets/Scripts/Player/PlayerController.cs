@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Inputs.Instance.Controls.Player.Move.performed += MovePerformed;
-        Inputs.Instance.Controls.Player.Move.canceled += MoveCanceled;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;
     
         // set up input actions
@@ -120,6 +119,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("CRUSHING BLOCK");
                 playerAnimationController.SetState(PlayerState.Hit);
+                SoundMaster.Instance.PlaySound(SoundName.HitMetal);
                 pickupController.InteractWithWall();
             }
         }
@@ -129,11 +129,6 @@ public class PlayerController : MonoBehaviour
 
     // ---------------------------------------------
 
-
-    private void MoveCanceled(InputAction.CallbackContext obj)
-    {
-
-    }
 
     private void Update()
     {
@@ -202,7 +197,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Move(Vector3 target)
     {
-        
+
+        SoundMaster.Instance.PlayStepSound();
 
         DoingAction = true;
         Vector3 start = transform.position;

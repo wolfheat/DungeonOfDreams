@@ -21,8 +21,25 @@ Feb-Mar 2024
 		* Player Collides with walls by checking overlapBox in movingbireaction with layermask for walls
 		* Player picks up item when stepping on it -
 		* Player can hit walls and destroy them
+		* Added footsteps sound
+
+		* Make player able to move forward after block is broken if forward is pressed
+		* Fix player attacking delay, have player hold mouse button to keep attacking wall and after X hits it breaks
+		* Make nice animation transition when breaking walls and generating items from them
+		* Have player auto change tool for what needs to be used
+		* Have upgradable tools - MAYBE
+
+		* // Make sures //
+			Fluent Gameplay, Good Controls
+			Correct view aspect FOV etc
+			Fun - Appeal - Scope
+
+			Fun -> Not frustrating nor boring -> Player wants to feel Accomplishment - Meaning - Empowerment - UNpredictabillity - Avoidance - Ownership
+			Appeal -> Presentation - Fantasy - Readability
+			Scope -> 
 
 		* Add animation for picking up items into inventory
+		* Add animation for destroying walls
 
 		* Adding functionality to actually pick up the items
 

@@ -116,7 +116,7 @@ namespace Wolfheat.StartMenu
 
             //Steps
             stepSource = gameObject.AddComponent<AudioSource>();
-            stepSource.volume = 0.25f;
+            stepSource.volume = 0.5f;
             stepSource.outputAudioMixerGroup = SFXMixerGroup;
 
             // And Music
@@ -302,7 +302,7 @@ namespace Wolfheat.StartMenu
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
 
             // Only play foot step if last footstep is finished playing
-            if (!stepSource.isPlaying)
+            //if (!stepSource.isPlaying)
                 stepSource.PlayOneShot(footstep[Random.Range(0, footstep.Length)]);
         }
         public void ReadDataFromSave()

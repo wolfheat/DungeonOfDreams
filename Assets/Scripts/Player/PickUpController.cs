@@ -6,7 +6,7 @@ public class PickUpController : MonoBehaviour
 {
     private Vector3 boxSize = new Vector3(0.47f, 0.47f, 0.47f);
     public GameObject ActiveInteractable { get; set; }
-    public GameObject Wall { get; set; }
+    public Wall Wall { get; set; }
 
     [SerializeField] private LayerMask wallLayerMask;
     [SerializeField] private LayerMask itemLayerMask;
@@ -31,7 +31,7 @@ public class PickUpController : MonoBehaviour
         if (colliders.Length == 0)
             Wall = null;
         else
-            Wall = colliders[0].gameObject;
+            Wall = colliders[0].gameObject.GetComponent<Wall>();
     }
     
     public void UpdateInteractables()
@@ -40,7 +40,6 @@ public class PickUpController : MonoBehaviour
         Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, itemLayerMask);
         
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.name).ToList(),true);
-        Debug.Log("Updating Item list: "+colliders.Length);
         if (colliders.Length == 0)
             ActiveInteractable = null;
         else
@@ -52,7 +51,7 @@ public class PickUpController : MonoBehaviour
         if (Wall == null) return;
 
         Debug.Log("Interacting with wall");
-        Wall.SetActive(false);
+        Wall.Shrink();
         UpdateColliders();
     }
     public void InteractWithActiveItem()
