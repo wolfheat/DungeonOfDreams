@@ -18,7 +18,8 @@ namespace Wolfheat.StartMenu
         PickUp,
         LowOxygen,
         EnemyShoot,
-        Pinch
+        Pinch,
+        Miss
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 

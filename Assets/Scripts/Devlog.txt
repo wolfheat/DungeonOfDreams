@@ -24,7 +24,8 @@ Feb-Mar 2024
 		* Added footsteps sound
 		* Attack Animation keeps going when mouse is held -
 25/2	* Destroyed walls now spawn items that drop into place
-		
+		* Moving away from wall makes miss sound but only if fully moved when hit happens, collider is allmost entire square 
+		* Made Movement better, turning is now prioritized and after destroying wall player walks if motion is pressed.
 
 		* Make swoosh sound if player misses a wall OR make animation stop so hit is not completed if wall dissappears
 		* Reaching wall with left click held should start attack

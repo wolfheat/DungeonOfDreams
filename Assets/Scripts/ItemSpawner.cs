@@ -26,5 +26,6 @@ public class ItemSpawner : MonoBehaviour
 
         Instantiate(itemPrefabs[type], pos, itemPrefabs[type].transform.rotation, transform);
         PlayerController.Instance.pickupController.UpdateColliders();
+        PlayerController.Instance.MotionActionCompleted();
     }
 }

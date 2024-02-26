@@ -148,7 +148,8 @@ public class PlayerController : MonoBehaviour
 
     public void HitWithTool()
     {
-        pickupController.InteractWithWall();
+        if(!pickupController.InteractWithWall())
+            playerAnimationController.SetState(PlayerState.Idle);
 
         // If player has mouse button down attack again?
         if (!Inputs.Instance.Controls.Player.Click.IsPressed() || pickupController.Wall == null)
@@ -202,13 +203,14 @@ public class PlayerController : MonoBehaviour
     {
         TurnPerformed();
     }
-    private void TurnPerformed()
+    private bool TurnPerformed()
     {
         float movement = Inputs.Instance.Controls.Player.Turn.ReadValue<float>();
-        if (movement == 0) return;
+        if (movement == 0) return false;
 
         MoveAction moveAction = new MoveAction(MoveActionType.Rotate, (int)movement);
         savedAction = moveAction;
+        return true;
     }
 
     private void MovePerformed(InputAction.CallbackContext obj)
@@ -277,10 +279,11 @@ public class PlayerController : MonoBehaviour
         MotionActionCompleted();
     }
 
-    private void MotionActionCompleted()
+    public void MotionActionCompleted()
     {
-        TurnPerformed();
-        MovePerformed();
+        if(savedAction==null)
+            MovePerformed();
+
         pickupController.UpdateColliders();
         if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
             InterractWith();

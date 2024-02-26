@@ -46,13 +46,14 @@ public class PickUpController : MonoBehaviour
             ActiveInteractable = colliders[0].gameObject;
     }
 
-    public void InteractWithWall()
+    public bool InteractWithWall()
     {
-        if (Wall == null) return;
+        if (Wall == null) return false;
 
         Debug.Log("Interacting with wall");
         Wall.Damage();
         UpdateColliders();
+        return true;
     }
     public void InteractWithActiveItem()
     {

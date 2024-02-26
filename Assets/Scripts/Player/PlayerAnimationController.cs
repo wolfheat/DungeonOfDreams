@@ -38,8 +38,17 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void HitPerformed()
     {
-        Debug.Log("HIT");
-        SoundMaster.Instance.PlaySound(SoundName.HitMetal);
+
+        PlayerController.Instance.pickupController.UpdateColliders();
+
+        bool hasWall = PlayerController.Instance.pickupController.Wall != null;
+        Debug.Log("HIT SOUND "+ (hasWall?"WALL":"MISS"));
+
+        // Determine if hitting wall or air
+        if (hasWall)
+            SoundMaster.Instance.PlaySound(SoundName.HitMetal);
+        else
+            SoundMaster.Instance.PlaySound(SoundName.Miss);
     }
     public void HitCompleted()
     {
