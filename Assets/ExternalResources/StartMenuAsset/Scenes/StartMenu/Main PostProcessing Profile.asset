@@ -124,10 +124,10 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.336
+    m_Value: 0.16
   smoothness:
     m_OverrideState: 1
-    m_Value: 0.383
+    m_Value: 0.427
   rounded:
     m_OverrideState: 1
     m_Value: 1

@@ -27,8 +27,13 @@ Feb-Mar 2024
 		* Moving away from wall makes miss sound but only if fully moved when hit happens, collider is allmost entire square 
 		* Made Movement better, turning is now prioritized and after destroying wall player walks if motion is pressed.
 26/2	* Fixed movement finally, can sidestep and hold buttons
-		
-		
+		* Added alternative movement and action buttons
+			* WASD-QE-Click = Main
+			* IJKL-UO-Space = ALT 1
+			* ArrowKeys-CTRL-NumKey0 (Delete-PgDn) SPACE = ALT 2 lefthanders
+		* Added pause to game
+
+
 		* Game to fast? - MAYBE
 		* Have player auto change tool for what needs to be used
 		* Have upgradable tools - MAYBE

@@ -172,7 +172,6 @@ public class PlayerController : MonoBehaviour
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
-                Debug.Log("Performing saved action " + savedAction.moveType+" move to "+target);
                 if (TargetHasWall(target) == null)
                     StartCoroutine(Move(target));
                 else
@@ -208,6 +207,8 @@ public class PlayerController : MonoBehaviour
     }
     private bool TurnPerformed()
     {
+        if (GameState.state == GameStates.Paused) return false; // No input while paused
+
         float movement = Inputs.Instance.Controls.Player.Turn.ReadValue<float>();
         if (movement == 0) return false;
 
@@ -216,18 +217,20 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    private void SideStep(InputAction.CallbackContext obj)
+    private void SideStep(CallbackContext obj)
     {
         SideStep();
     }
     
-    private void Step(InputAction.CallbackContext obj)
+    private void Step(CallbackContext obj)
     {
         Step();
     }
 
     private void SideStep()
     {
+        if (GameState.state == GameStates.Paused) return; // No input while paused
+
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.SideStep.ReadValue<float>();
         if (movement == 0) return;
@@ -240,6 +243,8 @@ public class PlayerController : MonoBehaviour
     
     private bool Step()
     {
+        if (GameState.state == GameStates.Paused) return false; // No input while paused
+
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.Step.ReadValue<float>();
         if (movement == 0) return false;
@@ -258,27 +263,6 @@ public class PlayerController : MonoBehaviour
         if (Step()) return;
         SideStep();
         return;
-
-
-        // Return if no movement input currently held 
-        Vector2 movement = Inputs.Instance.Controls.Player.Move.ReadValue<Vector2>();
-        if (movement.magnitude == 0) return;
-
-
-        if(movement.x != 0 && movement.y != 0)
-        {
-            // discard one here
-        }
-
-
-        // Write or overwrite next action
-        MoveAction moveAction;
-        if (movement.x != 0)
-            moveAction = new MoveAction(MoveActionType.SideStep, Mathf.RoundToInt(movement.x));
-        else
-            moveAction = new MoveAction(MoveActionType.Step, Mathf.RoundToInt(movement.y));
-
-        savedAction = moveAction;
     }
 
     private IEnumerator Move(Vector3 target)

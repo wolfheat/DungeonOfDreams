@@ -100,6 +100,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Esc"",
+                    ""type"": ""Button"",
+                    ""id"": ""6eddb0e9-6244-4cde-bcda-98d0e2c86b89"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -368,9 +377,119 @@ namespace UnityEngine.InputSystem
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""90ec84f2-a758-49b1-b4a2-d7df1109cc4f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ebe825dc-d9c8-4117-9ddf-e42faa6c3517"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""c3c80fa3-bffa-4485-874f-1926182857b6"",
+                    ""path"": ""<Keyboard>/pageDown"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""c3213800-7d64-4624-803c-6a73985a4cd7"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""18f8f342-b5c4-47ac-b3fc-6c3178c60a94"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""a5050a62-cecd-4475-8f17-66879b14f63e"",
+                    ""path"": ""<Keyboard>/numpad0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""cfa5d30d-3a66-4f87-975a-9861d23e86d8"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c0ae871d-e8ea-4999-b86e-781c1d1d2433"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""e956f35f-7797-45b4-aff3-311f3055a571"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
                     ""name"": """",
                     ""id"": ""c6f69236-4684-42da-bcc1-c3b27490c227"",
                     ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0baa9bc3-6fdc-4ed8-9c27-c24b270bfa98"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -413,6 +532,72 @@ namespace UnityEngine.InputSystem
                 },
                 {
                     ""name"": ""1D Axis"",
+                    ""id"": ""121d0e78-199a-4b59-a887-96221dadaa7f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""41268069-b580-46e6-b512-ea5c15e236e7"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7dce1a54-2fa5-4192-912c-088ab06d35e5"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""a2818072-601b-475a-9407-1387803e568b"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""eab25985-de29-4f81-912b-b33308a58c7f"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1ac69a48-8e2d-4cd3-8e1f-4b3f317c4965"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
                     ""id"": ""48e587d9-77d0-4557-9a41-34e861ce5492"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
@@ -443,6 +628,83 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Step"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""545ada1a-8481-4dcf-8937-968a6b7c6643"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""980929fc-2d2a-40a2-a676-c8c49a174f64"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""664632bb-2820-43f2-9a88-83f8d44be9d0"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""6a10d8a0-6858-45c3-b3c1-84a946ea4ae1"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""090fe2bc-6cbc-485f-a732-3d73cacf660b"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""25b98ff2-7020-436a-ae20-7b1543cd1f76"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fc33503e-1dcd-49a5-ae68-d49fef77eb29"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1056,6 +1318,7 @@ namespace UnityEngine.InputSystem
             m_Player_SideStep = m_Player.FindAction("SideStep", throwIfNotFound: true);
             m_Player_Step = m_Player.FindAction("Step", throwIfNotFound: true);
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+            m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1138,6 +1401,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_SideStep;
         private readonly InputAction m_Player_Step;
         private readonly InputAction m_Player_Click;
+        private readonly InputAction m_Player_Esc;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
@@ -1150,6 +1414,7 @@ namespace UnityEngine.InputSystem
             public InputAction @SideStep => m_Wrapper.m_Player_SideStep;
             public InputAction @Step => m_Wrapper.m_Player_Step;
             public InputAction @Click => m_Wrapper.m_Player_Click;
+            public InputAction @Esc => m_Wrapper.m_Player_Esc;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1183,6 +1448,9 @@ namespace UnityEngine.InputSystem
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @Esc.started += instance.OnEsc;
+                @Esc.performed += instance.OnEsc;
+                @Esc.canceled += instance.OnEsc;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1211,6 +1479,9 @@ namespace UnityEngine.InputSystem
                 @Click.started -= instance.OnClick;
                 @Click.performed -= instance.OnClick;
                 @Click.canceled -= instance.OnClick;
+                @Esc.started -= instance.OnEsc;
+                @Esc.performed -= instance.OnEsc;
+                @Esc.canceled -= instance.OnEsc;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1409,6 +1680,7 @@ namespace UnityEngine.InputSystem
             void OnSideStep(InputAction.CallbackContext context);
             void OnStep(InputAction.CallbackContext context);
             void OnClick(InputAction.CallbackContext context);
+            void OnEsc(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {
