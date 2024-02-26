@@ -5,17 +5,15 @@ using UnityEngine.InputSystem;
 using Wolfheat.StartMenu;
 using static UnityEngine.InputSystem.InputAction;
 
-public enum MoveActionType{Move,Rotate}
+public enum MoveActionType{Step,SideStep,Rotate}
 public class MoveAction
 {
     public MoveActionType moveType;
-    public int motionX = 0;
-    public int motionY = 0;
-    public MoveAction(MoveActionType t, int m, int m2 = 0)
+    public int dir = 0;
+    public MoveAction(MoveActionType t, int d)
     {
         moveType = t;
-        motionX = m;
-        motionY = m2;
+        dir = d;
     }
 }
 public class PlayerController : MonoBehaviour
@@ -44,7 +42,9 @@ public class PlayerController : MonoBehaviour
         Instance = this;
 
         // set up input actions
-        Inputs.Instance.Controls.Player.Move.performed += MovePerformed;
+        //Inputs.Instance.Controls.Player.Move.performed += NewMoveInput;
+        Inputs.Instance.Controls.Player.Step.performed += Step;
+        Inputs.Instance.Controls.Player.SideStep.performed += SideStep;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
 
@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDisable()
     {
-        Inputs.Instance.Controls.Player.Move.performed -= MovePerformed;
+        //Inputs.Instance.Controls.Player.Move.performed -= NewMoveInput;
+        Inputs.Instance.Controls.Player.Step.performed -= Step;
+        Inputs.Instance.Controls.Player.SideStep.performed -= SideStep;
         Inputs.Instance.Controls.Player.Turn.performed -= TurnPerformed;
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
         playerAnimationController.HitComplete -= HitWithTool;
@@ -167,9 +169,10 @@ public class PlayerController : MonoBehaviour
 
         if (savedAction != null)
         {
-            if (savedAction.moveType == MoveActionType.Move)
+            if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
+                Debug.Log("Performing saved action " + savedAction.moveType+" move to "+target);
                 if (TargetHasWall(target) == null)
                     StartCoroutine(Move(target));
                 else
@@ -213,17 +216,68 @@ public class PlayerController : MonoBehaviour
         return true;
     }
 
-    private void MovePerformed(InputAction.CallbackContext obj)
+    private void SideStep(InputAction.CallbackContext obj)
     {
-        MovePerformed();
+        SideStep();
     }
-    private void MovePerformed()
+    
+    private void Step(InputAction.CallbackContext obj)
     {
+        Step();
+    }
+
+    private void SideStep()
+    {
+        // Return if no movement input currently held 
+        float movement = Inputs.Instance.Controls.Player.SideStep.ReadValue<float>();
+        if (movement == 0) return;
+
+        // Write or overwrite next action
+        MoveAction moveAction;
+        moveAction = new MoveAction(MoveActionType.SideStep, Mathf.RoundToInt(movement));
+        savedAction = moveAction;
+    }
+    
+    private bool Step()
+    {
+        // Return if no movement input currently held 
+        float movement = Inputs.Instance.Controls.Player.Step.ReadValue<float>();
+        if (movement == 0) return false;
+
+        // Write or overwrite next action
+        MoveAction moveAction;
+        moveAction = new MoveAction(MoveActionType.Step, Mathf.RoundToInt(movement));
+        savedAction = moveAction;
+        return true;
+    }
+
+
+    private void HeldInput()
+    {
+
+        if (Step()) return;
+        SideStep();
+        return;
+
+
+        // Return if no movement input currently held 
         Vector2 movement = Inputs.Instance.Controls.Player.Move.ReadValue<Vector2>();
         if (movement.magnitude == 0) return;
 
-        
-        MoveAction moveAction = new MoveAction(MoveActionType.Move, (int)movement.x, (int)movement.y);
+
+        if(movement.x != 0 && movement.y != 0)
+        {
+            // discard one here
+        }
+
+
+        // Write or overwrite next action
+        MoveAction moveAction;
+        if (movement.x != 0)
+            moveAction = new MoveAction(MoveActionType.SideStep, Mathf.RoundToInt(movement.x));
+        else
+            moveAction = new MoveAction(MoveActionType.Step, Mathf.RoundToInt(movement.y));
+
         savedAction = moveAction;
     }
 
@@ -250,16 +304,12 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 EndPositionForMotion(MoveAction motion)
     {
-        if (motion.motionX != 0)
-            return transform.position+ motion.motionX*transform.right;
-        else
-            return transform.position + motion.motionY * transform.forward;
-
+        return transform.position + motion.dir * (motion.moveType == MoveActionType.Step ? transform.forward:transform.right);
     }
 
     private Quaternion EndRotationForMotion(MoveAction motion)
     {
-        return Quaternion.LookRotation(transform.right * motion.motionX, Vector3.up);
+        return Quaternion.LookRotation(transform.right * motion.dir, Vector3.up);
     }
 
     private IEnumerator Rotate(Quaternion target)
@@ -282,7 +332,7 @@ public class PlayerController : MonoBehaviour
     public void MotionActionCompleted()
     {
         if(savedAction==null)
-            MovePerformed();
+            HeldInput();
 
         pickupController.UpdateColliders();
         if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)

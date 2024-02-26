@@ -75,6 +75,24 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": true
                 },
                 {
+                    ""name"": ""SideStep"",
+                    ""type"": ""Value"",
+                    ""id"": ""8da3dc94-9a6d-41a1-a6ad-59d0cb14483d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Step"",
+                    ""type"": ""Value"",
+                    ""id"": ""275c0f06-a5f8-47d0-8c10-e642a317a0dd"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Click"",
                     ""type"": ""Button"",
                     ""id"": ""6d3e98c0-1de1-49e9-be9e-e266598b4dd6"",
@@ -359,6 +377,72 @@ namespace UnityEngine.InputSystem
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""7c927c10-6943-4b05-a1e5-8034b75a0381"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""9afacce6-3b50-4b5c-8349-aa4a85b507a5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""32be231c-178b-4a84-a900-37a8cf7625c1"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SideStep"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""48e587d9-77d0-4557-9a41-34e861ce5492"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""29216467-fd0e-4fe9-bb99-338849ead768"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""020a5f1f-7a66-4cad-bdb0-4e1844093a99"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Step"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -969,6 +1053,8 @@ namespace UnityEngine.InputSystem
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_M = m_Player.FindAction("M", throwIfNotFound: true);
             m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
+            m_Player_SideStep = m_Player.FindAction("SideStep", throwIfNotFound: true);
+            m_Player_Step = m_Player.FindAction("Step", throwIfNotFound: true);
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1049,6 +1135,8 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_M;
         private readonly InputAction m_Player_Turn;
+        private readonly InputAction m_Player_SideStep;
+        private readonly InputAction m_Player_Step;
         private readonly InputAction m_Player_Click;
         public struct PlayerActions
         {
@@ -1059,6 +1147,8 @@ namespace UnityEngine.InputSystem
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @M => m_Wrapper.m_Player_M;
             public InputAction @Turn => m_Wrapper.m_Player_Turn;
+            public InputAction @SideStep => m_Wrapper.m_Player_SideStep;
+            public InputAction @Step => m_Wrapper.m_Player_Step;
             public InputAction @Click => m_Wrapper.m_Player_Click;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -1084,6 +1174,12 @@ namespace UnityEngine.InputSystem
                 @Turn.started += instance.OnTurn;
                 @Turn.performed += instance.OnTurn;
                 @Turn.canceled += instance.OnTurn;
+                @SideStep.started += instance.OnSideStep;
+                @SideStep.performed += instance.OnSideStep;
+                @SideStep.canceled += instance.OnSideStep;
+                @Step.started += instance.OnStep;
+                @Step.performed += instance.OnStep;
+                @Step.canceled += instance.OnStep;
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
@@ -1106,6 +1202,12 @@ namespace UnityEngine.InputSystem
                 @Turn.started -= instance.OnTurn;
                 @Turn.performed -= instance.OnTurn;
                 @Turn.canceled -= instance.OnTurn;
+                @SideStep.started -= instance.OnSideStep;
+                @SideStep.performed -= instance.OnSideStep;
+                @SideStep.canceled -= instance.OnSideStep;
+                @Step.started -= instance.OnStep;
+                @Step.performed -= instance.OnStep;
+                @Step.canceled -= instance.OnStep;
                 @Click.started -= instance.OnClick;
                 @Click.performed -= instance.OnClick;
                 @Click.canceled -= instance.OnClick;
@@ -1304,6 +1406,8 @@ namespace UnityEngine.InputSystem
             void OnFire(InputAction.CallbackContext context);
             void OnM(InputAction.CallbackContext context);
             void OnTurn(InputAction.CallbackContext context);
+            void OnSideStep(InputAction.CallbackContext context);
+            void OnStep(InputAction.CallbackContext context);
             void OnClick(InputAction.CallbackContext context);
         }
         public interface IUIActions
