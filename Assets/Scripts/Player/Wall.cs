@@ -37,7 +37,13 @@ public class Wall : MonoBehaviour
         }
         transform.localScale = Vector3.one*endSize;
 
+        CreateItem();
+        
+    }
 
-        //gameObject.SetActive(false);
+    private void CreateItem()
+    {
+        ItemSpawner.Instance.SpawnItem(0,transform.position);
+        gameObject.SetActive(false);
     }
 }

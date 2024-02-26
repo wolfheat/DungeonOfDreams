@@ -22,11 +22,14 @@ Feb-Mar 2024
 		* Player picks up item when stepping on it -
 		* Player can hit walls and destroy them
 		* Added footsteps sound
-		* Attack Animation keeps going when mouse is held
+		* Attack Animation keeps going when mouse is held -
+25/2	* Destroyed walls now spawn items that drop into place
+		
 
+		* Make swoosh sound if player misses a wall OR make animation stop so hit is not completed if wall dissappears
 		* Reaching wall with left click held should start attack
 		* Make player able to move forward after block is broken if forward is pressed
-		* Fix player attacking delay, have player hold mouse button to keep attacking wall and after X hits it breaks
+		
 		* Make nice animation transition when breaking walls and generating items from them
 		* Have player auto change tool for what needs to be used
 		* Have upgradable tools - MAYBE

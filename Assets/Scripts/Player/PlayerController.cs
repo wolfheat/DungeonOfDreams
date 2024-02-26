@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Wolfheat.StartMenu;
-using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Move,Rotate}
@@ -23,7 +21,7 @@ public class MoveAction
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerAnimationController playerAnimationController;
-    [SerializeField] PickUpController pickupController;
+    public PickUpController pickupController;
     [SerializeField] private LayerMask wallLayerMask;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
@@ -32,8 +30,19 @@ public class PlayerController : MonoBehaviour
 
     private float timer = 0;
     private const float MoveTime = 0.2f;
+
+
+    public static PlayerController Instance { get; private set; }
+
     private void Start()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+
         // set up input actions
         Inputs.Instance.Controls.Player.Move.performed += MovePerformed;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
@@ -273,5 +282,7 @@ public class PlayerController : MonoBehaviour
         TurnPerformed();
         MovePerformed();
         pickupController.UpdateColliders();
+        if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
+            InterractWith();
     }
 }
