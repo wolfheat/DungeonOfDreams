@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -261,13 +262,18 @@ public class PlayerController : MonoBehaviour
     {
 
         if (Step()) return;
+        CenterPlayerPosition();
         SideStep();
         return;
     }
 
+    private void CenterPlayerPosition()
+    {
+        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+    }
+
     private IEnumerator Move(Vector3 target)
     {
-
         SoundMaster.Instance.PlayStepSound();
 
         DoingAction = true;
@@ -277,18 +283,23 @@ public class PlayerController : MonoBehaviour
         while (timer < MoveTime)
         {
             yield return null;
-            transform.position = Vector3.Lerp(start,end,timer/MoveTime);
+            transform.position = Vector3.LerpUnclamped(start,end,timer/MoveTime);
             timer += Time.deltaTime;
         }
-        transform.position = target;
+        //Debug.Log("Moving player "+(transform.position-target).magnitude);
+        //transform.position = target;
         DoingAction = false;
 
         MotionActionCompleted();
+
     }
 
     private Vector3 EndPositionForMotion(MoveAction motion)
     {
-        return transform.position + motion.dir * (motion.moveType == MoveActionType.Step ? transform.forward:transform.right);
+        // Round the answer
+        Vector3 target = transform.position + motion.dir * (motion.moveType == MoveActionType.Step ? transform.forward : transform.right);
+        target = new Vector3(Mathf.RoundToInt(target.x), Mathf.RoundToInt(target.y), Mathf.RoundToInt(target.z));
+        return target;
     }
 
     private Quaternion EndRotationForMotion(MoveAction motion)

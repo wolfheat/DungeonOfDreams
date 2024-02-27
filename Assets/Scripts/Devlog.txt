@@ -31,8 +31,9 @@ Feb-Mar 2024
 			* WASD-QE-Click = Main
 			* IJKL-UO-Space = ALT 1
 			* ArrowKeys-CTRL-NumKey0 (Delete-PgDn) SPACE = ALT 2 lefthanders
-		* Added pause to game
-
+		* Added pause to game -
+		* Tried to fix stuttering by fixing lerp end points
+		* Added cracks to walls (walls have additional materials supplied from crackmaster class)
 
 		* Game to fast? - MAYBE
 		* Have player auto change tool for what needs to be used

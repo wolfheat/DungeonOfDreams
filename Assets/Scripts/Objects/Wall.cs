@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
-
+    [SerializeField] MeshRenderer meshRenderer;
     int health = 5;
 
     public void Damage()
     {
         health--;
+
         if (health == 0)
             Shrink();
+        else if(meshRenderer != null)
+        {
+            Material[] materials = meshRenderer.materials;
+            materials[1] = CrackMaster.Instance.GetCrack(health);
+            meshRenderer.materials = materials;
+        }
     }
     
     private void Shrink()

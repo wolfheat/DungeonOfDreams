@@ -19,14 +19,13 @@ public class PauseController : MonoBehaviour
         else
         {
             Debug.Log("** SAVING LEVEL **");
-            LevelLoader.Instance.DefineGameDataForSave();
-            SavingUtility.Instance.SavePlayerDataToFile();
-            
+            //LevelLoader.Instance.DefineGameDataForSave();
+            //SavingUtility.Instance.SavePlayerDataToFile();
         }
         
         SoundMaster.Instance.ResetMusic();
 
-        SceneManager.UnloadSceneAsync("MainScene");
+        SceneManager.UnloadSceneAsync("Dungeon");
         SceneChanger.Instance.ChangeScene("StartMenu");
     }
     public void SetActive(bool doSetActive)

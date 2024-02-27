@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using UnityEngine;
-using Wolfheat.StartMenu;
+﻿using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
