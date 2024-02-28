@@ -8,13 +8,7 @@ public class PlayerColliderController : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Items"))
         {
-            Debug.Log("Colliding with Item");
-            SoundMaster.Instance.PlaySound(SoundName.PickUp);
-            ParticleEffects.Instance.PlayTypeAt(ParticleType.PickUp, other.transform.position);
-            other.gameObject.SetActive(false);
-
-            UIController.Instance.AddPickedUp(other.name);
-
+            other.gameObject.GetComponent<Interactable>().InteractWith();
         }
     }
 }

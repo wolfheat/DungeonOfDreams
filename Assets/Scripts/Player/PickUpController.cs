@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
     private Vector3 boxSize = new Vector3(0.47f, 0.47f, 0.47f);
-    public GameObject ActiveInteractable { get; set; }
+    public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
 
     [SerializeField] private LayerMask wallLayerMask;
@@ -18,9 +19,16 @@ public class PickUpController : MonoBehaviour
 
     public void UpdateColliders()
     {
+        StartCoroutine(UpdateCollidersWait());
+    }
+
+    private IEnumerator UpdateCollidersWait()
+    {
+        yield return null;
         UpdateInteractables();
         UpdateWall();
     }
+
     public void UpdateWall()
     {
         // Get list of interactable items
@@ -43,7 +51,7 @@ public class PickUpController : MonoBehaviour
         if (colliders.Length == 0)
             ActiveInteractable = null;
         else
-            ActiveInteractable = colliders[0].gameObject;
+            ActiveInteractable = colliders[0].gameObject.GetComponent<Interactable>();
     }
 
     public bool InteractWithWall()
@@ -60,7 +68,7 @@ public class PickUpController : MonoBehaviour
         if (ActiveInteractable == null) return;
 
         Debug.Log("Interacting with item");
-        ActiveInteractable.SetActive(false);
+        ActiveInteractable.InteractWith();
         UpdateColliders();
     }
 }

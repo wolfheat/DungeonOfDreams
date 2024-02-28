@@ -16,6 +16,16 @@ public class ObjectAnimator : MonoBehaviour
 
 
     // Object hovers and rotates
+    public void Reset()
+    {
+        dir = 0;
+        equilibriumY = equilibriumTarget;
+        animationAcceleration = animationAccelerationDrop;
+        atEquilibrium = false;
+        dir = 1;
+        animationVelocity = 0.005f;
+    }
+    // Object hovers and rotates
     private void Start()
     {
         equilibriumY = equilibriumTarget;

@@ -4,7 +4,7 @@ using UnityEngine;
 public class Wall : MonoBehaviour
 {
     [SerializeField] MeshRenderer meshRenderer;
-    int health = 5;
+    int health = 6;
 
     public void Damage()
     {
@@ -15,7 +15,7 @@ public class Wall : MonoBehaviour
         else if(meshRenderer != null)
         {
             Material[] materials = meshRenderer.materials;
-            materials[1] = CrackMaster.Instance.GetCrack(health);
+            materials[1] = CrackMaster.Instance.GetCrack(health-1);
             meshRenderer.materials = materials;
         }
     }
@@ -49,7 +49,7 @@ public class Wall : MonoBehaviour
 
     private void CreateItem()
     {
-        ItemSpawner.Instance.SpawnItem(0,transform.position);
         gameObject.SetActive(false);
+        ItemSpawner.Instance.SpawnMineralAt(MineralType.Chess,transform.position);
     }
 }

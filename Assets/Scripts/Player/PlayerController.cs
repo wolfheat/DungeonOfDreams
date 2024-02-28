@@ -86,9 +86,6 @@ public class PlayerController : MonoBehaviour
         // Interact with closest visible item 
         if (pickupController.ActiveInteractable != null)
         {
-            Debug.Log("Picking up item: "+pickupController.ActiveInteractable.name);
-            SoundMaster.Instance.PlaySound(SoundName.PickUp);
-            ParticleEffects.Instance.PlayTypeAt(ParticleType.PickUp, pickupController.ActiveInteractable.transform.position);
             pickupController.InteractWithActiveItem();
             
             

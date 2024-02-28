@@ -34,15 +34,34 @@ Feb-Mar 2024
 		* Added pause to game -
 		* Tried to fix stuttering by fixing lerp end points
 		* Added cracks to walls (walls have additional materials supplied from crackmaster class)
+27/2	* Modified cracks
+		* Minerals are pooled
+
+
+		* Make Wall data that defines walls health points and containing minerals
+		* Have cracks show percentage of damage so they dont update every hit if the damage is to low etc
+
+
+		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
+		
+		* SUGGESTION - Speed up boost -> destroys walls in one hit for 10 seconds
+
+		* Implement level saving to file
+		* Implement load save or restart
 
 		* Game to fast? - MAYBE
 		* Have player auto change tool for what needs to be used
+		* Make pickaxe tool instead of sledge hammer
 		* Have upgradable tools - MAYBE
+
+		* If something is placed in game that looks like a promise, make sure it has a reward and is not just a mockup
 
 		* // Make sures //
 			Fluent Gameplay, Good Controls
 			Correct view aspect FOV etc
 			Fun - Appeal - Scope
+			Replayability	- Have timer? Make player go "I want to beat my score"
+							- Secrets have player know how many secrets they found
 
 			Fun -> Not frustrating nor boring -> Player wants to feel Accomplishment - Meaning - Empowerment - UNpredictabillity - Avoidance - Ownership
 			Appeal -> Presentation - Fantasy - Readability
@@ -65,6 +84,9 @@ Feb-Mar 2024
 		 - GRAPHICS
 		// * Unity Technologies - Particle Pack - Standard EULA
 		// * RRFreelance - Tools Pack 1 - Standard EULA
+		// * Freepik - Vector Dividers Collection - Free Licence
+		// * upklyak (freepik) - Ground cracks on land isolated - Free Licence
+
 
 		// * Barking Dog - 3D Scifi Base Vol 1 - Single Entity
 		// * Mark Dion - Asteroids Pack - Standard EULA
