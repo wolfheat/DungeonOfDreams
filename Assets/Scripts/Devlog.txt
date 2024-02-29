@@ -40,7 +40,8 @@ Feb-Mar 2024
 		* Made block shock shen hit -
 		* Made resource data as scriptable objects
 		* Changed so only mineral typ is displayed as name when picking up
-
+29/2	* Moved Wall LayerMask
+		* Adjusted shacke
 
 		* Add 2D visuals for pickup menu and later player menu
 

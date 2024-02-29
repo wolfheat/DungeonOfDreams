@@ -34,11 +34,10 @@ public class ItemSpawner : MonoBehaviour
         int type = (int)data.mineralType;
         if (type >= mineralPrefabs.Length) return;
 
-        Debug.Log(" Spawn Mineral "+data.mineralType);
+        //Debug.Log(" Spawn Mineral "+data.mineralType);
 
         foreach (Mineral mineral in minerals)   
         {
-            Debug.Log("mineral has data "+mineral.Data+" "+mineral.name);
             // Find first mineral that is disabled
             if (!mineral.gameObject.activeSelf && mineral.Data.mineralType == data.mineralType)
             {

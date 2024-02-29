@@ -70,11 +70,12 @@ public class Wall : MonoBehaviour
     {
 
         float shockTimer = 0;
-        const float ShockTime = 0.25f;
+        const float ShockTime = 0.35f;
         //Debug.Log("Wall position starts at " + startPosition);
         startPosition = transform.position;
-        float speed = 100f;
-        float amplitude = 0.05f;
+        float speed = 70f;
+        float amplitude = 0.01f;
+        //float amplitude = 0.05f;
         const float Dampening = 0.8f;
         float dampening;
 
@@ -92,7 +93,7 @@ public class Wall : MonoBehaviour
             yield return null;
             shockTimer += Time.deltaTime;
         }
-        Debug.Log("Reset Wall position to "+startPosition);
+        //Debug.Log("Reset Wall position to "+startPosition);
         transform.position = startPosition;
         shock = null;
     }

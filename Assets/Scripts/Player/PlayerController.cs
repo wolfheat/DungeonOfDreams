@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerAnimationController playerAnimationController;
     public PickUpController pickupController;
-    [SerializeField] private LayerMask wallLayerMask;
+    private LayerMask wallLayerMask;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
 
@@ -50,6 +50,9 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
 
         playerAnimationController.HitComplete += HitWithTool;
+
+        wallLayerMask = LayerMask.GetMask("Wall");
+
     }
     private void OnDisable()
     {
@@ -141,7 +144,7 @@ public class PlayerController : MonoBehaviour
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(target, boxSize, Quaternion.identity, wallLayerMask);
 
-        //Debug.Log("Updating walls for position: " + target);
+        //Debug.Log("Updating walls for position: " + target+" wall: "+colliders.Length+" "+(colliders.Length>0? colliders[0].gameObject.GetComponent<Wall>().name:""));
 
         if (colliders.Length != 0)
         {
