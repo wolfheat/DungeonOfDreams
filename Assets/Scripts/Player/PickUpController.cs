@@ -17,16 +17,19 @@ public class PickUpController : MonoBehaviour
         UpdateColliders();
     }
 
-    public void UpdateColliders()
+    public void UpdateColliders(bool wait = false)
     {
-        StartCoroutine(UpdateCollidersWait());
+        //Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
+        UpdateInteractables();
+        UpdateWall();        
     }
 
-    private IEnumerator UpdateCollidersWait()
+    public IEnumerator UpdateCollidersWait()
     {
         yield return null;
-        UpdateInteractables();
-        UpdateWall();
+        yield return null;
+        UpdateColliders(true);
+        PlayerController.Instance.MotionActionCompleted();
     }
 
     public void UpdateWall()
@@ -49,25 +52,31 @@ public class PickUpController : MonoBehaviour
         
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.name).ToList(),true);
         if (colliders.Length == 0)
+        {
+            //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+boxSize);
             ActiveInteractable = null;
+        }
         else
+        {
+            //Debug.Log("Active Interactable set to: " + colliders[0].name);
             ActiveInteractable = colliders[0].gameObject.GetComponent<Interactable>();
+        }
     }
 
     public bool InteractWithWall()
     {
         if (Wall == null) return false;
 
-        Debug.Log("Interacting with wall");
-        Wall.Damage();
-        UpdateColliders();
+        //Debug.Log("Interacting with wall");
+        if(Wall.Damage())
+            UpdateColliders();
         return true;
     }
     public void InteractWithActiveItem()
     {
         if (ActiveInteractable == null) return;
 
-        Debug.Log("Interacting with item");
+        //Debug.Log("Interacting with item");
         ActiveInteractable.InteractWith();
         UpdateColliders();
     }

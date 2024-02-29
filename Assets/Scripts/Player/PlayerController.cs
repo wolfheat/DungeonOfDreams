@@ -87,61 +87,15 @@ public class PlayerController : MonoBehaviour
         if (pickupController.ActiveInteractable != null)
         {
             pickupController.InteractWithActiveItem();
-            
-            
-            /*
-            Interactable activeObject = pickupController.ActiveInteractable;
-
-            if (activeObject is PickableItem)
-            {
-                if (activeObject is ResourceItem)
-                {
-                    Debug.Log("Interact with resource!");
-                    didPickUp = inventory.AddResource(activeObject as ResourceItem);
-                }
-                else
-                {
-                    Debug.Log("Interact with inventoryitem!");
-                    didPickUp = inventory.AddItem((activeObject as PickableItem).Data);
-                }
-
-                if (didPickUp)
-                {
-                    pickupController.InteractWithActiveItem();
-                    SoundMaster.Instance.PlaySound(SoundName.PickUp);
-                    Debug.Log("Did Pick Up = " + didPickUp);
-                }
-            }
-            */
-
-            /*
-            else if (pickupController.ActiveInteractable is DestructableItem)
-            {
-
-                DestructableItem destructable = pickupController.ActiveInteractable as DestructableItem;
-
-                // Check what type the object is and if player has the tool
-                
-                if (destructable.Data.destructType == DestructType.Breakable)
-                {
-                    Debug.Log("Is Breakable change to hammer");
-                }
-                else if (destructable.Data.destructType == DestructType.Drillable)
-                {
-                    Debug.Log("Is Drillable change to drill");
-                }
-
-                pickupController.InteractWithActiveItem();
-
-            }*/
         }
         else
         {
             if(pickupController.Wall != null)
             {
-                Debug.Log("CRUSHING BLOCK");
+                //Debug.Log("CRUSHING BLOCK");
                 playerAnimationController.SetState(PlayerState.Hit);
             }
+            //else Debug.Log("No Block to crush");
         }
 
     }
@@ -172,8 +126,6 @@ public class PlayerController : MonoBehaviour
                 Vector3 target = EndPositionForMotion(savedAction);
                 if (TargetHasWall(target) == null)
                     StartCoroutine(Move(target));
-                else
-                    Debug.Log("WALL");
             }
             else if (savedAction.moveType == MoveActionType.Rotate)
                 StartCoroutine(Rotate(EndRotationForMotion(savedAction)));
@@ -193,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
         if (colliders.Length != 0)
         {
-            Debug.Log("Wall in that direction: " + colliders[0].name);
+            //Debug.Log("Wall in that direction: " + colliders[0].name);
             return colliders[0].gameObject.GetComponent<Wall>();
         }
         return null;
@@ -255,12 +207,15 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private void HeldInput()
+    private void HeldMovementInput()
     {
 
         if (Step()) return;
         CenterPlayerPosition();
         SideStep();
+        // Check for interact
+
+
         return;
     }
 
@@ -323,11 +278,17 @@ public class PlayerController : MonoBehaviour
 
     public void MotionActionCompleted()
     {
-        if(savedAction==null)
-            HeldInput();
-
+        //Debug.Log("Motion completed, has stored action: "+savedAction);
         pickupController.UpdateColliders();
-        if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
+        if(savedAction==null)
+            HeldMovementInput();
+
+        //if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
+        if (Inputs.Instance.Controls.Player.Click.IsPressed())
+        {
+            //Debug.Log("Mouse is held, interact");
             InterractWith();
+        }
+
     }
 }

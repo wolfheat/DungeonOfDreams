@@ -387,6 +387,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7564ff231f972d64da5c9ce373a5978b, type: 3}
   - {fileID: 8300000, guid: fc05147d5afdc444cae245a4f7c6573d, type: 3}
   - {fileID: 8300000, guid: 9cf9e0fb277c6c8479ab77b1012c674c, type: 3}
+  pickAxeHitStone:
+  - {fileID: 8300000, guid: 036bb8b18dd1f084c963446236f00404, type: 3}
+  - {fileID: 8300000, guid: 9bac378e75376da4c840efe91f711a89, type: 3}
+  - {fileID: 8300000, guid: eac0fbbad1b6822448d0c0d3963569ed, type: 3}
+  pickAxeCrushStone:
+  - {fileID: 8300000, guid: ac5ec20eb2966c94fb4ddfdf5bfd8190, type: 3}
+  - {fileID: 8300000, guid: b56b048b87e55164a8e6e20438377ee3, type: 3}
+  - {fileID: 8300000, guid: 5ea0303174c4b3d409fd7d9b52c23c98, type: 3}
   footstep:
   - {fileID: 8300000, guid: 2f2c7754171a32f4cab8af3dba2763c7, type: 3}
   - {fileID: 8300000, guid: 9b1d48bfc3ed3da46b0ef01d4f8214ac, type: 3}

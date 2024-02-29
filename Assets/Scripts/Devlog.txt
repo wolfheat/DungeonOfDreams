@@ -36,11 +36,14 @@ Feb-Mar 2024
 		* Added cracks to walls (walls have additional materials supplied from crackmaster class)
 27/2	* Modified cracks
 		* Minerals are pooled
-
+28/2	* Made held mouse start action when reaching tile
+		* Made block shock shen hit
+		
+        
+		* Maybe issue with wrong block being hit, might be because the stack of walls in front of player is not updated when reaching new spot?
 
 		* Make Wall data that defines walls health points and containing minerals
 		* Have cracks show percentage of damage so they dont update every hit if the damage is to low etc
-
 
 		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
 		

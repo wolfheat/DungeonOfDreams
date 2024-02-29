@@ -32,24 +32,23 @@ public class ItemSpawner : MonoBehaviour
     {
         if ((int)type >= mineralPrefabs.Length) return;
 
-        Debug.Log("Mineral available in pool");
+        //Debug.Log("Mineral available in pool");
 
         foreach (Mineral mineral in minerals)
         {
-            // Find first minera that is disabled
+            // Find first mineral that is disabled
             if (!mineral.gameObject.activeSelf)
             {
                 mineral.gameObject.SetActive(true);    
                 mineral.GetComponent<ObjectAnimator>().Reset();
                 mineral.transform.position = pos;
-                PlayerController.Instance.pickupController.UpdateColliders();
-                PlayerController.Instance.MotionActionCompleted();
-                Debug.Log("Mineral available in pool");
+                StartCoroutine(PlayerController.Instance.pickupController.UpdateCollidersWait());
+                //Debug.Log("Mineral activated - from pool");
 
                 return;
             }
         }
-        Debug.Log("No Mineral available in pool");
+        //Debug.Log("Mineral created - none available in pool");
         // No item available in pool - Add as new Resource
         minerals.Add(Instantiate(mineralPrefabs[(int)type], pos, mineralPrefabs[(int)type].transform.rotation, transform));
         PlayerController.Instance.pickupController.UpdateColliders();

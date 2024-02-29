@@ -14,7 +14,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void SetState(PlayerState newState)
     {
-        Debug.Log("Set state "+newState);   
+        //Debug.Log("Set state "+newState);   
         switch (newState)
         {
             case PlayerState.Idle:
@@ -39,20 +39,26 @@ public class PlayerAnimationController : MonoBehaviour
     public void HitPerformed()
     {
 
-        PlayerController.Instance.pickupController.UpdateColliders();
+        //PlayerController.Instance.pickupController.UpdateColliders();
 
         bool hasWall = PlayerController.Instance.pickupController.Wall != null;
-        Debug.Log("HIT SOUND "+ (hasWall?"WALL":"MISS"));
+        //Debug.Log("HIT SOUND "+ (hasWall?"WALL":"MISS"));
 
         // Determine if hitting wall or air
         if (hasWall)
-            SoundMaster.Instance.PlaySound(SoundName.HitMetal);
+        {
+            if(PlayerController.Instance.pickupController.Wall.Health>1)
+                SoundMaster.Instance.PlayPickAxeHitStone();
+            else
+                SoundMaster.Instance.PlayPickAxeCrushStone();
+
+        }
         else
             SoundMaster.Instance.PlaySound(SoundName.Miss);
     }
     public void HitCompleted()
     {
-        Debug.Log("HIT Completed");
+        //Debug.Log("HIT Completed");
         HitComplete?.Invoke();
         
     }

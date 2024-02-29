@@ -23,7 +23,7 @@ public class InteractableUI : MonoBehaviour
 
         foreach (string name in names)
         {
-            Debug.Log("Adding Item "+name);
+            //Debug.Log("  - UI Update - Adding Item "+name);
             InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
             item.SetName(name);
         }

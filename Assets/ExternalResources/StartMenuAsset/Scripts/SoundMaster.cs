@@ -19,7 +19,9 @@ namespace Wolfheat.StartMenu
         LowOxygen,
         EnemyShoot,
         Pinch,
-        Miss
+        Miss,
+        HitStone,
+        CrushStone
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -73,6 +75,8 @@ namespace Wolfheat.StartMenu
 
         [SerializeField]private AudioClip[] swosh;
         [SerializeField]private AudioClip[] getHit;
+        [SerializeField]private AudioClip[] pickAxeHitStone;
+        [SerializeField]private AudioClip[] pickAxeCrushStone;
         [SerializeField]private AudioClip[] footstep;
 
         private Dictionary<SoundName,Sound> soundsDictionary = new();
@@ -305,6 +309,18 @@ namespace Wolfheat.StartMenu
             // Only play foot step if last footstep is finished playing
             //if (!stepSource.isPlaying)
                 stepSource.PlayOneShot(footstep[Random.Range(0, footstep.Length)]);
+        }
+        public void PlayPickAxeHitStone()
+        {
+            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
+            stepSource.PlayOneShot(pickAxeHitStone[Random.Range(0, pickAxeHitStone.Length)]);
+
+        }
+        public void PlayPickAxeCrushStone()
+        {
+            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
+            stepSource.PlayOneShot(pickAxeCrushStone[Random.Range(0, pickAxeCrushStone.Length)]);
+
         }
         public void ReadDataFromSave()
         {
