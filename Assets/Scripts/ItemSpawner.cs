@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public enum MineralType{Chess,Soil,Stone }
+public enum MineralType{Gold,Silver,Copper, Soil, Stone, Chess,Coal}
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -28,16 +28,19 @@ public class ItemSpawner : MonoBehaviour
 
 
 
-    public void SpawnMineralAt(MineralType type, Vector3 pos)
+    public void SpawnMineralAt(MineralData data, Vector3 pos)
     {
-        if ((int)type >= mineralPrefabs.Length) return;
+        if (data == null) return;
+        int type = (int)data.mineralType;
+        if (type >= mineralPrefabs.Length) return;
 
-        //Debug.Log("Mineral available in pool");
+        Debug.Log(" Spawn Mineral "+data.mineralType);
 
-        foreach (Mineral mineral in minerals)
+        foreach (Mineral mineral in minerals)   
         {
+            Debug.Log("mineral has data "+mineral.Data+" "+mineral.name);
             // Find first mineral that is disabled
-            if (!mineral.gameObject.activeSelf)
+            if (!mineral.gameObject.activeSelf && mineral.Data.mineralType == data.mineralType)
             {
                 mineral.gameObject.SetActive(true);    
                 mineral.GetComponent<ObjectAnimator>().Reset();
@@ -50,7 +53,9 @@ public class ItemSpawner : MonoBehaviour
         }
         //Debug.Log("Mineral created - none available in pool");
         // No item available in pool - Add as new Resource
-        minerals.Add(Instantiate(mineralPrefabs[(int)type], pos, mineralPrefabs[(int)type].transform.rotation, transform));
+        Mineral newMineral = Instantiate(mineralPrefabs[type], pos, mineralPrefabs[type].transform.rotation, transform);
+        newMineral.Data = data;
+        minerals.Add(newMineral);
         PlayerController.Instance.pickupController.UpdateColliders();
         PlayerController.Instance.MotionActionCompleted();
 

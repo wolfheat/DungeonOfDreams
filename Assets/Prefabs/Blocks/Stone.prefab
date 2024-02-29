@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1911389574804869334, guid: 114f057fd7a314744bea18435eb52daa, type: 3}
+      propertyPath: mineralData
+      value: 
+      objectReference: {fileID: 11400000, guid: ee6f1cee2943ebe488e1d4030157f10e, type: 2}
     - target: {fileID: 4020746136608477998, guid: 114f057fd7a314744bea18435eb52daa, type: 3}
       propertyPath: m_Name
       value: Stone

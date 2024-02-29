@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Threading;
 using UnityEngine;
 
 public class Wall : MonoBehaviour
 {
     [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] MineralData mineralData;
     int health = 6;
     private Coroutine shock;
 
@@ -51,9 +53,10 @@ public class Wall : MonoBehaviour
         CreateItem();
         
     }
+
     public void Hit()
     {
-        Debug.Log("HIT ");
+        //Debug.Log("HIT ");
         if (shock != null)
         {
             transform.position = startPosition;
@@ -68,7 +71,7 @@ public class Wall : MonoBehaviour
 
         float shockTimer = 0;
         const float ShockTime = 0.25f;
-        Debug.Log("Wall position starts at " + startPosition);
+        //Debug.Log("Wall position starts at " + startPosition);
         startPosition = transform.position;
         float speed = 100f;
         float amplitude = 0.05f;
@@ -130,6 +133,6 @@ public class Wall : MonoBehaviour
     private void CreateItem()
     {
         gameObject.SetActive(false);
-        ItemSpawner.Instance.SpawnMineralAt(MineralType.Chess,transform.position);
+        ItemSpawner.Instance.SpawnMineralAt(mineralData,transform.position);
     }
 }

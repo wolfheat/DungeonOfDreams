@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7698389865743645826}
   - component: {fileID: 7911183844963268823}
   m_Layer: 7
-  m_Name: Mineral
+  m_Name: Gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36b1dae692ad73b4285c0e96c56f3aa8, type: 2}
+  - {fileID: 2100000, guid: b2bc99d202d14d24bae14295ce38f2f8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

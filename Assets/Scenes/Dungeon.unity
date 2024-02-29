@@ -2852,6 +2852,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mineral (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}
     - target: {fileID: 7404048137831457149, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3082,6 +3086,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mineral (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}
     - target: {fileID: 7404048137831457149, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3262,6 +3270,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mineral (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}
     - target: {fileID: 7404048137831457149, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3718,6 +3730,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mineral (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}
     - target: {fileID: 7404048137831457149, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4668,7 +4684,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mineralPrefabs:
+  - {fileID: 2968723421562696881, guid: f4da7f3b5d184274d9e0fff8868ba375, type: 3}
+  - {fileID: 2968723421562696881, guid: 15df1fcf407a835429e88249fd7f33d8, type: 3}
+  - {fileID: 2968723421562696881, guid: 071d2aa583a4422418588fbf94cb933b, type: 3}
+  - {fileID: 2968723421562696881, guid: e723c113dbea2c040a475dedd9412197, type: 3}
+  - {fileID: 2968723421562696881, guid: 80f3d756ffd8e974ca343cef8763c968, type: 3}
   - {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
+  - {fileID: 2968723421562696881, guid: 8747e0cae9b28994b814f01f2dad6e6c, type: 3}
 --- !u!1 &1408281245
 GameObject:
   m_ObjectHideFlags: 0
@@ -7459,6 +7481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mineral
       objectReference: {fileID: 0}
+    - target: {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}
     - target: {fileID: 7404048137831457149, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

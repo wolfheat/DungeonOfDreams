@@ -37,8 +37,16 @@ Feb-Mar 2024
 27/2	* Modified cracks
 		* Minerals are pooled
 28/2	* Made held mouse start action when reaching tile
-		* Made block shock shen hit
-		
+		* Made block shock shen hit -
+		* Made resource data as scriptable objects
+		* Changed so only mineral typ is displayed as name when picking up
+
+
+		* Add 2D visuals for pickup menu and later player menu
+
+		* Game needs enemies and combat, have them roam in pockets that player mines into
+			- Bomb enemy
+			- Hit enemy
         
 		* Maybe issue with wrong block being hit, might be because the stack of walls in front of player is not updated when reaching new spot?
 

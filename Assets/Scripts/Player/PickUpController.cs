@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    private Vector3 boxSize = new Vector3(0.47f, 0.47f, 0.47f);
+    private Vector3 boxSize = new Vector3(0.4f, 0.4f, 0.4f);
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
 
@@ -50,7 +50,7 @@ public class PickUpController : MonoBehaviour
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, itemLayerMask);
         
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.name).ToList(),true);
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Mineral>().Data.mineralType.ToString()).ToList(),true);
         if (colliders.Length == 0)
         {
             //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+boxSize);
