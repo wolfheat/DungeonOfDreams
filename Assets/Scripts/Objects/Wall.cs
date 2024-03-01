@@ -20,6 +20,8 @@ public class Wall : MonoBehaviour
         else if(meshRenderer != null)
         {
             Material[] materials = meshRenderer.materials;
+            if(materials.Length==1)
+                materials = new Material[2] {materials[0],null};
             materials[1] = CrackMaster.Instance.GetCrack(health-1);
             meshRenderer.materials = materials;
             Hit();

@@ -45,8 +45,12 @@ Feb-Mar 2024
 		* Fixed player position adjustment repositioning when moving
 		* PowerUps can now be picked up like minerals
 		* Added ability to set sound and particle effect in PowerUps data
-
+		* BUILD  113Mb zipped (43MB) V 0.0.1
+		* Added sprites for UI pickups -
 		
+		
+		* Make item data sent to UI to show images for picked up items
+
 		- Add the enemies
 
 		* Add 2D visuals for pickup menu and later player menu

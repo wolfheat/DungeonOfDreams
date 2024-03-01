@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ChessMineral
   m_EditorClassIdentifier: 
   mineralType: 5
+  sprite: {fileID: -375312494, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 5

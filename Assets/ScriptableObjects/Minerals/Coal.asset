@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Coal
   m_EditorClassIdentifier: 
   mineralType: 6
+  sprite: {fileID: 87791190, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 3

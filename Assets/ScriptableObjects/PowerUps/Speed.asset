@@ -15,4 +15,5 @@ MonoBehaviour:
   particleType: 2
   soundName: 22
   powerUpType: 0
+  sprite: {fileID: -407816780, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 2
