@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 
 public enum MineralType{Gold,Silver,Copper, Soil, Stone, Chess,Coal}
+public enum PowerUpType { Speed,Damage}
 
 public class ItemSpawner : MonoBehaviour
 {

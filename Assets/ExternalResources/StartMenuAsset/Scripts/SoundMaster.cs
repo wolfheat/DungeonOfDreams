@@ -21,7 +21,10 @@ namespace Wolfheat.StartMenu
         Pinch,
         Miss,
         HitStone,
-        CrushStone
+        CrushStone,
+        PowerUpDamage,
+        PowerUpSpeed
+
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 

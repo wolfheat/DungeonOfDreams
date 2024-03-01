@@ -50,7 +50,7 @@ public class PickUpController : MonoBehaviour
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, itemLayerMask);
         
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Mineral>().Data.mineralType.ToString()).ToList(),true);
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Mineral>()?.Data.mineralType.ToString()).ToList(),true);
         if (colliders.Length == 0)
         {
             //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+boxSize);

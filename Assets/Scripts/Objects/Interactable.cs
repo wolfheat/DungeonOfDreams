@@ -3,11 +3,12 @@ using Wolfheat.StartMenu;
 
 public abstract class Interactable : MonoBehaviour
 {
-
+    protected ParticleType particleType = ParticleType.PickUp;
+    protected SoundName soundName = SoundName.PickUp;
     public virtual void InteractWith()
     {
-        SoundMaster.Instance.PlaySound(SoundName.PickUp);
-        ParticleEffects.Instance.PlayTypeAt(ParticleType.PickUp, transform.position);
+        SoundMaster.Instance.PlaySound(soundName);
+        ParticleEffects.Instance.PlayTypeAt(particleType, transform.position);
         gameObject.SetActive(false);
     }
 }

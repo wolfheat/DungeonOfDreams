@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public enum ParticleType{PickUp}
+public enum ParticleType{PickUp,PowerUpStrength,PowerUpSpeed}
 public class ParticleEffects : MonoBehaviour
 {
     public static ParticleEffects Instance;

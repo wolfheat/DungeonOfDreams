@@ -323,9 +323,9 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 13
-  - clip: {fileID: 8300000, guid: 8f479d99fd26b7541b077e298ce69880, type: 3}
+  - clip: {fileID: 8300000, guid: 8695df4299a06d347b7feaa565e0bf50, type: 3}
     volume: 0.181
-    pitch: 1
+    pitch: 0.913
     loop: 0
     audioSource: {fileID: 0}
     name: 14
@@ -353,6 +353,18 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 18
+  - clip: {fileID: 8300000, guid: cb02b3a41e1f831428a21cc5f2fe9d61, type: 3}
+    volume: 0.278
+    pitch: 0.925
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 21
+  - clip: {fileID: 8300000, guid: 8695df4299a06d347b7feaa565e0bf50, type: 3}
+    volume: 0.54
+    pitch: 1.087
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 22
   musics:
   - clip: {fileID: 8300000, guid: 930c875c371f9d74ea5ecd1868808c8f, type: 3}
     volume: 0.619
@@ -360,7 +372,7 @@ MonoBehaviour:
     loop: 1
     audioSource: {fileID: 0}
     name: 0
-  - clip: {fileID: 8300000, guid: 32c7ac701c0942b4aa7244e8661db87f, type: 3}
+  - clip: {fileID: 8300000, guid: 37448417fbcb0ed48a9c9182983d6b91, type: 3}
     volume: 0.619
     pitch: 1
     loop: 1

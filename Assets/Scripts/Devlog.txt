@@ -41,9 +41,19 @@ Feb-Mar 2024
 		* Made resource data as scriptable objects
 		* Changed so only mineral typ is displayed as name when picking up
 29/2	* Moved Wall LayerMask
-		* Adjusted shacke
+		* Adjusted shake -
+		* Fixed player position adjustment repositioning when moving
+		* PowerUps can now be picked up like minerals
+		* Added ability to set sound and particle effect in PowerUps data
+
+		
+		- Add the enemies
 
 		* Add 2D visuals for pickup menu and later player menu
+
+		* Extend sound data to include a list of sound clips
+		* Extend sound data to include a list pitches?
+
 
 		* Game needs enemies and combat, have them roam in pockets that player mines into
 			- Bomb enemy
@@ -116,6 +126,13 @@ Feb-Mar 2024
 		// * Kevin MacLeod - Airport Lounge - Royalty Free Upbeat
 		// * Moire - Space Ranger - Royalty Free Upbeat
 		// * Zapsplat - Tropical Dawn - Music from https://www.zapsplat.com
+		// * Vasyl_Sakal - Cellestial Lullaby - Attribution 4.0 (Ambient sound)
+
+		-SOUND
+		// * PowerupB - freesound - Creative Commons 0
+		// * PowerupC - freesound - Creative Commons 0
+		// * UpgradeA - freesound - Creative Commons 0
+
 		* Brock Hewitt - In The Silence - Royalty Free Upbeat
 
 		 -TOOLS

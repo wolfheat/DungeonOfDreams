@@ -180,18 +180,19 @@ public class PlayerController : MonoBehaviour
         Step();
     }
 
-    private void SideStep()
+    private bool SideStep()
     {
-        if (GameState.state == GameStates.Paused) return; // No input while paused
+        if (GameState.state == GameStates.Paused) return false; // No input while paused
 
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.SideStep.ReadValue<float>();
-        if (movement == 0) return;
+        if (movement == 0) return false;
 
         // Write or overwrite next action
         MoveAction moveAction;
         moveAction = new MoveAction(MoveActionType.SideStep, Mathf.RoundToInt(movement));
         savedAction = moveAction;
+        return true;
     }
     
     private bool Step()
@@ -214,8 +215,8 @@ public class PlayerController : MonoBehaviour
     {
 
         if (Step()) return;
+        if(SideStep()) return;
         CenterPlayerPosition();
-        SideStep();
         // Check for interact
 
 
@@ -224,7 +225,10 @@ public class PlayerController : MonoBehaviour
 
     private void CenterPlayerPosition()
     {
+        Debug.Log("Center player "+transform.position);
         transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+        Debug.Log("Centered player " + transform.position);
+
     }
 
     private IEnumerator Move(Vector3 target)
