@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba085a6b01af0fe47ac833c60318c52f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: b47cd11eac4e6eb428061cab5a1e1806, type: 2}
   meshRenderer: {fileID: 4500728004113674451}
-  mineralData: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}

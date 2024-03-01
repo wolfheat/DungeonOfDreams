@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,10 @@ public class InteractableUIItem : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         Destroy(gameObject);
-    }   
+    }
 
-
+    internal void SetSprite(Sprite sprite)
+    {
+        image.sprite = sprite;
+    }
 }

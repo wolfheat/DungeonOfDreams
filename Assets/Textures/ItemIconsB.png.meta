@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 18b43408ef108b544a98739cf12d5633
+guid: 8b2f65cc548f2b342b56cbf06a323855
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,13 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ItemIconsA_0
+      name: ItemIconsB_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 858
-        width: 278
-        height: 328
+        x: 19
+        y: 233
+        width: 104
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ceeae764b9e6e1418496df15431a3e1
-      internalID: -375312494
+      spriteID: 20efd9597a8306440ba4fb22516c41be
+      internalID: 144287744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIconsA_1
+      name: ItemIconsB_1
       rect:
         serializedVersion: 2
-        x: 304
-        y: 855
-        width: 278
-        height: 328
+        x: 19
+        y: 24
+        width: 104
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d83f43339e5b7e4ea80295aab09afff
-      internalID: -1192948220
+      spriteID: 6393bdda0d6fc3a48bb3816888a3823a
+      internalID: -1289184034
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIconsA_2
+      name: ItemIconsB_2
       rect:
         serializedVersion: 2
-        x: 602
-        y: 846
-        width: 278
-        height: 328
+        x: 228
+        y: 24
+        width: 104
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2780e3cf95eb0a14d9a81014cb70e67f
-      internalID: -897432354
+      spriteID: e5d255e8a686197418fe7b30dcbdb8be
+      internalID: -1067071916
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIconsA_3
+      name: ItemIconsB_3
       rect:
         serializedVersion: 2
-        x: 902
-        y: 845
-        width: 278
-        height: 328
+        x: 437
+        y: 24
+        width: 104
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89aaea462c033f4438d438266468d79d
-      internalID: 512227131
+      spriteID: 57e57a4b6113faa4f9a5c2e7756dd43f
+      internalID: -1297784701
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIconsA_4
+      name: ItemIconsB_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 495
-        width: 278
-        height: 328
+        x: 646
+        y: 24
+        width: 104
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fac17a39bba775b46b856dfe96dcb5f5
-      internalID: 1132745375
+      spriteID: 30f223b62b0be754cbb4ca8859c59d76
+      internalID: 752867676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ItemIconsA_5
+      name: ItemIconsB_5
       rect:
         serializedVersion: 2
-        x: 316
-        y: 496
-        width: 278
-        height: 328
+        x: 855
+        y: 24
+        width: 104
+        height: 104
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,71 +268,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed19d9f297999b543ae95f89689a04e4
-      internalID: 87791190
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ItemIconsA_6
-      rect:
-        serializedVersion: 2
-        x: 648
-        y: 618
-        width: 194
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 19ae930b6af5a754e829f696b9653632
-      internalID: 1330018918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ItemIconsA_7
-      rect:
-        serializedVersion: 2
-        x: 879
-        y: 620
-        width: 194
-        height: 194
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 53b47c8c174c3444a85d722c6f36abf5
-      internalID: -407816780
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ItemIconsA_8
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 137
-        width: 292
-        height: 348
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ba91a0da8292454e95619a2bd6af92f
-      internalID: 471531177
+      spriteID: 7ce69dfbd55f7f44ba9b076989092731
+      internalID: -967851399
       vertices: []
       indices: 
       edges: []
@@ -348,15 +285,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ItemIconsA_0: -375312494
-      ItemIconsA_1: -1192948220
-      ItemIconsA_2: -897432354
-      ItemIconsA_3: 512227131
-      ItemIconsA_4: 1132745375
-      ItemIconsA_5: 87791190
-      ItemIconsA_6: 1330018918
-      ItemIconsA_7: -407816780
-      ItemIconsA_8: 471531177
+      ItemIconsB_0: 144287744
+      ItemIconsB_1: -1289184034
+      ItemIconsB_2: -1067071916
+      ItemIconsB_3: -1297784701
+      ItemIconsB_4: 752867676
+      ItemIconsB_5: -967851399
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

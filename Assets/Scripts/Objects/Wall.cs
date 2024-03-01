@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
+﻿using System.Collections;
 using UnityEngine;
 
-public class Wall : MonoBehaviour
+public class Wall : Interactable
 {
+    new public WallData Data { get { return base.Data as WallData; } set { } }
+
     [SerializeField] MeshRenderer meshRenderer;
-    [SerializeField] MineralData mineralData;
     int health = 6;
     private Coroutine shock;
 
@@ -52,7 +51,8 @@ public class Wall : MonoBehaviour
         }
         transform.localScale = Vector3.one*endSize;
 
-        CreateItem();
+        if(Data.mineralStored != null)
+            CreateItem(Data.mineralStored);
         
     }
 
@@ -133,7 +133,7 @@ public class Wall : MonoBehaviour
         shock = null;
     }
 
-    private void CreateItem()
+    private void CreateItem(MineralData mineralData)
     {
         gameObject.SetActive(false);
         ItemSpawner.Instance.SpawnMineralAt(mineralData,transform.position);

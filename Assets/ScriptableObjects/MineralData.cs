@@ -1,9 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Items/MineralData", fileName ="Mineral")]
-public class MineralData : ScriptableObject
+public class MineralData : ItemData
 {
     public MineralType mineralType;
-    public Sprite sprite;
-    public int value;
 }

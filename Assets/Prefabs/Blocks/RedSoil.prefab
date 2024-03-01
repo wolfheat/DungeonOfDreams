@@ -21,12 +21,16 @@ PrefabInstance:
       value: RedSoil
       objectReference: {fileID: 0}
     - target: {fileID: 3994229017198055995, guid: 406e0ac153557d246a1a4833e4fa781b, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: f68dc232c77f83944aebd88b8b5af903, type: 2}
+    - target: {fileID: 3994229017198055995, guid: 406e0ac153557d246a1a4833e4fa781b, type: 3}
       propertyPath: mineralData
       value: 
       objectReference: {fileID: 11400000, guid: 364dd50f4e22a5c4f9f5aff3f48ddfe9, type: 2}
     - target: {fileID: 4705808390745490986, guid: 406e0ac153557d246a1a4833e4fa781b, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4705808390745490986, guid: 406e0ac153557d246a1a4833e4fa781b, type: 3}
       propertyPath: m_LocalPosition.x

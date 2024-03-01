@@ -55,9 +55,9 @@ public class UIController : MonoBehaviour
         Time.timeScale = pause ? 0f : 1f;
     }
 
-    public void UpdateShownItemsUI(List<string> names,bool resetList = false)
+    public void UpdateShownItemsUI(List<ItemData> data,bool resetList = false)
 	{
-		interactableUI.UpdateItems(names,resetList);
+		interactableUI.UpdateItems(data,resetList);
 	}
 	
 	public void AddPickedUp(string name)

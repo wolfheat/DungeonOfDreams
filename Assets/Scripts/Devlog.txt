@@ -47,7 +47,9 @@ Feb-Mar 2024
 		* Added ability to set sound and particle effect in PowerUps data
 		* BUILD  113Mb zipped (43MB) V 0.0.1
 		* Added sprites for UI pickups -
-		
+1/3		* Added images for walls and items in UI
+		* Fixed so list is sent with all Interactables and all ItemData not dependant of type -
+
 		
 		* Make item data sent to UI to show images for picked up items
 

@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class PowerUp : Interactable
 {
-    public PowerUpData Data;
-
+    new public PowerUpData Data { get { return base.Data as PowerUpData; } set { } }
     private void Start()
     {
         if (Data == null) return;

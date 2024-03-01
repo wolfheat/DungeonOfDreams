@@ -3513,6 +3513,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soil (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3994229017198055995, guid: 406e0ac153557d246a1a4833e4fa781b, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: ac72cada3a28ac146848c404848ec210, type: 2}
     - target: {fileID: 4705808390745490986, guid: 406e0ac153557d246a1a4833e4fa781b, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -5415,6 +5419,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DarkSoil
       objectReference: {fileID: 0}
+    - target: {fileID: 3994229017198055995, guid: b1869629ec72bdc42a796510c4dc09b9, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 86caf6fed5ce03647b802a8c8ede700e, type: 2}
     - target: {fileID: 4705808390745490986, guid: b1869629ec72bdc42a796510c4dc09b9, type: 3}
       propertyPath: m_RootOrder
       value: 0

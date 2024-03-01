@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Wolfheat.StartMenu;
 
-public abstract class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
+    public ItemData Data;
     protected ParticleType particleType = ParticleType.PickUp;
     protected SoundName soundName = SoundName.PickUp;
     public virtual void InteractWith()

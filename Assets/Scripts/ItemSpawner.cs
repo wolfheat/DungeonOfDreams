@@ -40,7 +40,7 @@ public class ItemSpawner : MonoBehaviour
         foreach (Mineral mineral in minerals)   
         {
             // Find first mineral that is disabled
-            if (!mineral.gameObject.activeSelf && mineral.Data.mineralType == data.mineralType)
+            if (!mineral.gameObject.activeSelf && (mineral.Data as MineralData).mineralType == data.mineralType)
             {
                 mineral.gameObject.SetActive(true);    
                 mineral.GetComponent<ObjectAnimator>().Reset();
