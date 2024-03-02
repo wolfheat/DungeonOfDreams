@@ -7,7 +7,7 @@ public class Mineral : Interactable
     public override void InteractWith()
     {
         base.InteractWith();
-        UIController.Instance.AddPickedUp((Data as MineralData).mineralType.ToString());
+        UIController.Instance.AddPickedUp(Data);
     }
 
     internal void ResetTo(Vector3 pos)

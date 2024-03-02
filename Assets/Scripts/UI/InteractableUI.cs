@@ -9,7 +9,16 @@ public class InteractableUI : MonoBehaviour
     [SerializeField] GameObject holder;
     [SerializeField] GameObject pickedHolder;
 
+    [SerializeField] RectTransform pickedUpRect;
 
+    private const float PickedScreenLowPosition = 0f;
+    private const float PickedScreenHighPosition = -40f;
+    private Vector2 pickedUpStartAnchoredPosition;
+
+    private void Start()
+    {
+        pickedUpStartAnchoredPosition = pickedUpRect.anchoredPosition;
+    }
     public void AddItem(string name)
     {
         Instantiate(uiItemPrefab,holder.transform);
@@ -45,13 +54,19 @@ public class InteractableUI : MonoBehaviour
     }
 
     private List<InteractableUIItem> pickedUp = new();
-    public void AddPickedUp(string name)
+    public void AddPickedUp(ItemData data)
     {
         InteractableUIItem pickedUpItem = Instantiate(uiItemPrefab, pickedHolder.transform);
-        pickedUpItem.SetName(name);
+        pickedUpItem.SetName(data.itemName);
+        pickedUpItem.SetSprite(data.sprite);
         StartCoroutine(pickedUpItem.StartRemoveTimer());
         pickedUp.Add(pickedUpItem);
         
+    } 
+    
+    public void MovePickedUpLow(bool low)
+    {
+        pickedUpRect.anchoredPosition = new Vector2() { x = pickedUpStartAnchoredPosition.x, y = pickedUpStartAnchoredPosition.y + (low ?  PickedScreenLowPosition: PickedScreenHighPosition) };
     }
 
 }

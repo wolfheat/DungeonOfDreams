@@ -60,9 +60,9 @@ public class UIController : MonoBehaviour
 		interactableUI.UpdateItems(data,resetList);
 	}
 	
-	public void AddPickedUp(string name)
+	public void AddPickedUp(ItemData data)
 	{
-		interactableUI.AddPickedUp(name);
+		interactableUI.AddPickedUp(data);
 	}
 
 }

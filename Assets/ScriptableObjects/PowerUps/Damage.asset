@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a356556fc48eaa94482979d9f9f1b2eb, type: 3}
   m_Name: Damage
   m_EditorClassIdentifier: 
+  itemName: Damage Boost
+  sprite: {fileID: 1330018918, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  value: 2
   particleType: 1
   soundName: 21
   powerUpType: 1
-  sprite: {fileID: 1330018918, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
-  value: 2
