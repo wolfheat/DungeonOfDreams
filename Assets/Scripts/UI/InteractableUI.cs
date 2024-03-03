@@ -5,9 +5,11 @@ public class InteractableUI : MonoBehaviour
 {
     List<InteractableUIItem> items;
     [SerializeField] InteractableUIItem uiItemPrefab;
+    [SerializeField] BoostUIItem boostuiItemPrefab;
 
     [SerializeField] GameObject holder;
     [SerializeField] GameObject pickedHolder;
+    [SerializeField] GameObject boostsHolder;
 
     [SerializeField] RectTransform pickedUpRect;
 
@@ -39,23 +41,30 @@ public class InteractableUI : MonoBehaviour
         }
     }
     
-    public void UpdateItems(List<string> names, bool resetList)
-    {
-        if (resetList)
-            foreach (Transform child in holder.transform)
-                Destroy(child.gameObject);
-
-        foreach (string name in names)
-        {
-            //Debug.Log("  - UI Update - Adding Item "+name);
-            InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
-            item.SetName(name);
-        }
-    }
-
     private List<InteractableUIItem> pickedUp = new();
     public void AddPickedUp(ItemData data)
     {
+        if(data is PowerUpData)
+        {
+            // Get all powerups
+            BoostUIItem[] uiBoosts = boostsHolder.GetComponentsInChildren<BoostUIItem>();
+            foreach (BoostUIItem item in uiBoosts)
+            {
+                if(item.nameString == data.itemName)
+                {
+                    item.AddBoost(data as PowerUpData);
+                    return;
+                }
+            }
+
+            Debug.Log("Picking Up never used Power Up: "+(data as PowerUpData).itemName);
+            BoostUIItem boostItem = Instantiate(boostuiItemPrefab, boostsHolder.transform);
+            boostItem.SetName(data.itemName);
+            boostItem.SetSprite(data.sprite);
+            boostItem.AddBoost(data as PowerUpData);
+            return;
+        }
+
         InteractableUIItem pickedUpItem = Instantiate(uiItemPrefab, pickedHolder.transform);
         pickedUpItem.SetName(data.itemName);
         pickedUpItem.SetSprite(data.sprite);
@@ -64,7 +73,7 @@ public class InteractableUI : MonoBehaviour
         
     } 
     
-    public void MovePickedUpLow(bool low)
+    public void PositionPickedUpMenu(bool low)
     {
         pickedUpRect.anchoredPosition = new Vector2() { x = pickedUpStartAnchoredPosition.x, y = pickedUpStartAnchoredPosition.y + (low ?  PickedScreenLowPosition: PickedScreenHighPosition) };
     }

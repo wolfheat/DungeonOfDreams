@@ -52,14 +52,15 @@ Feb-Mar 2024
 		* Added help text bar at bottom to explain key bindings
 		* Made the pickeup list move up and down depending on the help bar being active or not -
 2/3		* Updated Help Text instructions -
-
+		* Added boost panel, implemented boosts for mining speed -
+		
 		- Add the enemies
 
 		* Add roots sticking out from roof
 
 		* Extend sound data to include a list of sound clips
 		* Extend sound data to include a list pitches?
-
+		* Allow scalable game window
 
 		* Game needs enemies and combat, have them roam in pockets that player mines into
 			- Bomb enemy

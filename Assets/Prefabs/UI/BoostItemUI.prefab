@@ -222,9 +222,9 @@ GameObject:
   - component: {fileID: 9215600677508797317}
   - component: {fileID: 5849702554908311253}
   - component: {fileID: 6925202294593292825}
-  - component: {fileID: -7702811322210102532}
+  - component: {fileID: 7507640839360505923}
   m_Layer: 5
-  m_Name: ItemHeld
+  m_Name: BoostItemUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,8 +249,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 60}
+  m_AnchoredPosition: {x: 34.4211, y: 0}
+  m_SizeDelta: {x: 368.8421, y: 60}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &5849702554908311253
 CanvasRenderer:
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 6.78
---- !u!114 &-7702811322210102532
+--- !u!114 &7507640839360505923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,11 +299,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5314228701448646435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb167118ed33714499caea750eedf312, type: 3}
+  m_Script: {fileID: 11500000, guid: e39fd6b73129a074ebef3c6fc25bd98c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shownName: {fileID: 6440689121917648395}
-  image: {fileID: 961485267136064145}
+  image: {fileID: 6925202294593292825}
 --- !u!1 &9222868562330163400
 GameObject:
   m_ObjectHideFlags: 0

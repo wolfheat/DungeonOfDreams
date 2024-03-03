@@ -7,11 +7,18 @@ using UnityEngine.UI;
 public class InteractableUIItem : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI shownName;
+    public string nameString;
     [SerializeField] Image image;
 
     public void SetName(string newName)
     {
-        shownName.text = newName;
+        nameString = newName;
+        UpdateName(newName);
+    }
+    
+    public void UpdateName(string fullString)
+    {
+        shownName.text = fullString;
     }
 
     public IEnumerator StartRemoveTimer()

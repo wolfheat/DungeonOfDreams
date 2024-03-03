@@ -10,6 +10,6 @@ public class ToggleHelp : MonoBehaviour
         Debug.Log("Toggle Help");
         panelToToggle.SetActive(!panelToToggle.gameObject.activeSelf);
 
-        interactableUI.MovePickedUpLow(panelToToggle.activeSelf);
+        interactableUI.PositionPickedUpMenu(panelToToggle.activeSelf);
     }
 }

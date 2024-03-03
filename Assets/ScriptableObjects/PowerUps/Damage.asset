@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Damage Boost
   sprite: {fileID: 1330018918, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
-  value: 2
+  value: 20
   particleType: 1
   soundName: 21
   powerUpType: 1

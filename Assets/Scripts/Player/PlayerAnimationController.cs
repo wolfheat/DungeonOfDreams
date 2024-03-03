@@ -22,6 +22,7 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Idle", 0.1f);
                 break;
             case PlayerState.Hit:
+                animator.SetFloat("hitSpeed", Stats.Instance.miningSpeed);
                 animator.SetBool("hit", true);
                 break;
             case PlayerState.Drill:
