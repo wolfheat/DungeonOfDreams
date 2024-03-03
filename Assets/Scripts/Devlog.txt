@@ -51,6 +51,7 @@ Feb-Mar 2024
 		* Fixed so list is sent with all Interactables and all ItemData not dependant of type -
 		* Added help text bar at bottom to explain key bindings
 		* Made the pickeup list move up and down depending on the help bar being active or not -
+2/3		* Updated Help Text instructions -
 
 		- Add the enemies
 
