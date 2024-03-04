@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool<T> : MonoBehaviour where T : MonoBehaviour
+public class Pool<T> where T : MonoBehaviour
 {   
-    List<T> unused = new();
-    List<T> used = new ();
+    private List<T> unused = new();
+    private List<T> used = new ();
 
+    public int Count { get { return used.Count + unused.Count; } }
+    public int UsedCount { get { return used.Count; } }
+    public int UnusedCount { get { return unused.Count; } }
     public T GetNextFromPool(T prefab)
     {
         T item;
@@ -17,7 +20,7 @@ public class Pool<T> : MonoBehaviour where T : MonoBehaviour
         }
         else
         {
-            item = Instantiate(prefab);
+            item = Object.Instantiate(prefab);
 
         }
         used.Add(item);
@@ -32,4 +35,8 @@ public class Pool<T> : MonoBehaviour where T : MonoBehaviour
         item.gameObject.SetActive(false);
     }
 
+    public void Add(T item)
+    {
+        used.Add(item);
+    }
 }

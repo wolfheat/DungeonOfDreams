@@ -17,8 +17,8 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] GameObject enemyHolder;
 
 
-    private List<Mineral> minerals = new List<Mineral>();
     private Pool<Mineral> mineralPool = new Pool<Mineral>();
+    private Pool<PowerUp> powerUpPool = new Pool<PowerUp>();
     private Pool<EnemyController> enemyPool = new Pool<EnemyController>();
     public static ItemSpawner Instance { get; private set; }
 
@@ -32,8 +32,23 @@ public class ItemSpawner : MonoBehaviour
         Instance = this;
 
         // Add initial Minerals
-        minerals = GetComponentsInChildren<Mineral>().ToList();
+        List<Mineral> minerals = GetComponentsInChildren<Mineral>().ToList();
 
+        foreach (Mineral mineral in minerals)
+            mineralPool.Add(mineral);
+        
+        List<PowerUp> powerUps = GetComponentsInChildren<PowerUp>().ToList();
+        foreach (PowerUp powerUp in powerUps)
+            powerUpPool.Add(powerUp);
+
+        // Add initial Enemies
+        List<EnemyController> enemies = enemyHolder.GetComponentsInChildren<EnemyController>().ToList();
+
+        foreach (EnemyController enemy in enemies)
+            enemyPool.Add(enemy);
+
+        Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count+ "] PowerUp=[ " + powerUpPool.Count+"] Enemies=[" + enemyPool.Count+"]");
+        
         SpawnRandomEnemies();
 
     }
@@ -62,6 +77,19 @@ public class ItemSpawner : MonoBehaviour
         return colliders.Length == 0;
     }
 
+    public void ReturnMineral(Mineral mineral)
+    {
+        mineralPool.ReturnToPool(mineral);
+    }
+
+    private void ReturnPowerUp(PowerUp powerUp)
+    {
+        powerUpPool.ReturnToPool(powerUp);        
+    }
+    public void ReturnEnemy(EnemyController enemy)
+    {
+        enemyPool.ReturnToPool(enemy);
+    }
     public void SpawnEnemyAt(EnemyData data, Vector3 pos)
     {
         int type = (int)data.enemyType;
@@ -100,6 +128,16 @@ public class ItemSpawner : MonoBehaviour
 
         PlayerController.Instance.MotionActionCompleted();
         
+    }
+
+    public void ReturnItem(Interactable interactable)
+    {
+        if (interactable is Mineral)
+            ReturnMineral(interactable as Mineral);
+        else if (interactable is PowerUp)
+            ReturnPowerUp(interactable as PowerUp);
+        else if (interactable is EnemyController)
+            ReturnEnemy(interactable as EnemyController);
     }
 
 }

@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
-public enum ParticleType{PickUp,PowerUpStrength,PowerUpSpeed}
+public enum ParticleType{PickUp,PowerUpStrength,PowerUpSpeed,
+    Explode
+}
 public class ParticleEffects : MonoBehaviour
 {
     public static ParticleEffects Instance;
     [SerializeField] ParticleEffect[] particleSystems;
-    [SerializeField] List<ParticleEffect>[] pool;
+    private Pool<ParticleEffect> particlePool = new();
 
 
     private void Awake()    
@@ -18,33 +21,33 @@ public class ParticleEffects : MonoBehaviour
             return;
         }
         Instance = this;
-
-        pool = new List<ParticleEffect>[particleSystems.Length];
-        
     }
 
     public void PlayTypeAt(ParticleType type, Vector3 pos)
     {
         // Create instance
-        ParticleEffect effect = GetNextParticleEffect(type);
+        int index = (int)type;
+        index = (index < particleSystems.Length ? index : 0);
+
+        if (ParticleType.Explode == type)
+        {
+            // Generate 9 explosions
+            PlayExplosions(index,pos);
+            return;
+        }
+
+        ParticleEffect effect = particlePool.GetNextFromPool(particleSystems[index]);
         effect.transform.position = pos;
         effect.Play();
     }
-
-    private ParticleEffect GetNextParticleEffect(ParticleType type)
+    int[][] explosionPositions = {new[] {-1,-1},new[] {-1, 0},new[] {-1, 1},new[] {0, -1},new[] {0, 0},new[] {0, 1},new[] {1, -1},new[] {1, 0},new[] {1, 1}};
+    private void PlayExplosions(int index,Vector3 pos)
     {
-        int index = (int)type;
-        if (pool[index] == null)
-            pool[index] = new List<ParticleEffect>();
-        foreach (ParticleEffect effect in pool[index])
+        foreach(var p in explosionPositions)
         {
-            if (effect.gameObject.activeSelf) continue;
-            
-            effect.gameObject.SetActive(true);
-            return effect;
+            ParticleEffect effect = particlePool.GetNextFromPool(particleSystems[index]);
+            effect.transform.position = pos + new Vector3(p[0], 0, p[1]);
+            effect.Play();
         }
-        ParticleEffect particleEffect = Instantiate(particleSystems[index],transform);
-        pool[index].Add(particleEffect);
-        return particleEffect;
     }
 }

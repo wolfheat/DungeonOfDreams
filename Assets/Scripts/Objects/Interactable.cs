@@ -10,6 +10,7 @@ public class Interactable : MonoBehaviour
     {
         SoundMaster.Instance.PlaySound(soundName);
         ParticleEffects.Instance.PlayTypeAt(particleType, transform.position);
+        ItemSpawner.Instance.ReturnItem(this);
         gameObject.SetActive(false);
     }
 }

@@ -54,14 +54,17 @@ Feb-Mar 2024
 2/3		* Updated Help Text instructions -
 		* Added boost panel, implemented boosts for mining speed -
 3/3		* Adjusted UI positions and sizes		
-		* Added Enemies with basic idle animation
+		* Added Enemies with basic idle animation -
+4/3		* Added explosion enaimation for enemy, and sound + particle effect
+		* Added Generic Pool for pooling objects as well as particle effects -
 
-		
+
 		- Add the enemies / combat
 
 
 		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions
-
+		* Adjust Enemy explosion effect to other particles?
+		* Make Enemy flicker when blowing up red/white? Check up how its done
 
 		* Add roots sticking out from roof
 		* Add sound effects for boosts running out?

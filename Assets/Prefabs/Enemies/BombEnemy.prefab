@@ -1062,7 +1062,7 @@ Transform:
   m_Children:
   - {fileID: 203472233514568784}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5908107287522171377
 Animator:
@@ -1097,6 +1097,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76922979a232992498c9e333357f6f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Data: {fileID: 0}
+  playerDistance: 0
+  animator: {fileID: 5908107287522171377}
 --- !u!1 &9157302922625121717
 GameObject:
   m_ObjectHideFlags: 0

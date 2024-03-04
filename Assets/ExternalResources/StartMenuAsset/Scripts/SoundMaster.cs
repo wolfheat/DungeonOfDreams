@@ -9,9 +9,9 @@ using Random = UnityEngine.Random;
 namespace Wolfheat.StartMenu
 {
     public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, Shoot, HUDPositive, HUDError,
-        BulletImpact,
-        Drowning,
-        Crafting,
+        Explosion,
+        MediumExplosion,
+        RockExplosion,
         CraftComplete,
         HitMetal,
         Drill,
@@ -284,7 +284,6 @@ namespace Wolfheat.StartMenu
         public void ResetMusic()
         {
             ResumeMusic();
-            StopSound(SoundName.Drowning);
         }
         public void ResumeMusic()
         {
