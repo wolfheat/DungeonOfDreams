@@ -303,7 +303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shownName: {fileID: 6440689121917648395}
-  image: {fileID: 6925202294593292825}
+  nameString: 
+  image: {fileID: 961485267136064145}
 --- !u!1 &9222868562330163400
 GameObject:
   m_ObjectHideFlags: 0

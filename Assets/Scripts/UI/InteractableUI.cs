@@ -28,7 +28,6 @@ public class InteractableUI : MonoBehaviour
     
     public void UpdateItems(List<ItemData> itemDatas, bool resetList)
     {
-        Debug.Log("Updating UI woth "+itemDatas.Count+" items");    
         if (resetList)
             foreach (Transform child in holder.transform)
                 Destroy(child.gameObject);
@@ -36,6 +35,7 @@ public class InteractableUI : MonoBehaviour
         foreach (var data in itemDatas)
         {
             InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
+            Debug.Log("data"+data+" resetList: "+resetList);
             item.SetName(data.itemName);
             item.SetSprite(data.sprite);
         }

@@ -7,12 +7,17 @@ public class PickUpController : MonoBehaviour
     private Vector3 boxSize = new Vector3(0.4f, 0.4f, 0.4f);
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
+    public EnemyController Enemy { get; set; }
 
-    [SerializeField] private LayerMask wallLayerMask;
-    [SerializeField] private LayerMask itemLayerMask;
+    private LayerMask enemyLayerMask;
+    private LayerMask wallLayerMask;
+    private LayerMask itemLayerMask;
 
     private void Start()
     {
+        wallLayerMask = LayerMask.GetMask("Wall");
+        enemyLayerMask = LayerMask.GetMask("Enemy");
+        itemLayerMask = LayerMask.GetMask("Items");
         UpdateColliders();
     }
 
@@ -21,6 +26,7 @@ public class PickUpController : MonoBehaviour
         //Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
         UpdateInteractables();
         UpdateWall();        
+        UpdateEnemy();        
     }
 
     public IEnumerator UpdateCollidersWait()
@@ -31,6 +37,19 @@ public class PickUpController : MonoBehaviour
         PlayerController.Instance.MotionActionCompleted();
     }
 
+    public void UpdateEnemy()
+    {
+        // Get list of interactable items
+        Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, enemyLayerMask);
+        
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<Interactable>().Data).ToList());
+
+        if (colliders.Length == 0)
+            Enemy = null;
+        else
+            Enemy = colliders[0].gameObject.GetComponentInParent<EnemyController>();
+    }
+    
     public void UpdateWall()
     {
         // Get list of interactable items

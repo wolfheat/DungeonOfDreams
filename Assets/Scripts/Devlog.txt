@@ -53,11 +53,18 @@ Feb-Mar 2024
 		* Made the pickeup list move up and down depending on the help bar being active or not -
 2/3		* Updated Help Text instructions -
 		* Added boost panel, implemented boosts for mining speed -
+3/3		* Adjusted UI positions and sizes		
+		* Added Enemies with basic idle animation
+
 		
-		- Add the enemies
+		- Add the enemies / combat
+
+
+		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions
+
 
 		* Add roots sticking out from roof
-
+		* Add sound effects for boosts running out?
 		* Extend sound data to include a list of sound clips
 		* Extend sound data to include a list pitches?
 		* Allow scalable game window
@@ -73,6 +80,20 @@ Feb-Mar 2024
 
 		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
 		
+
+		-------------------
+		* Julian feedback
+		* Could have a light slider in settings, it gets a bit to dark in the night
+		* Holding shift ans starting to move should start as running
+		* If it supposed to be a toggle for run then it should only switch off if player presses shift again
+		* Settings store the sliders in volume at correct position but does not start audiosources at correct volume
+		* Stuck in spyglass forever
+		-------------------
+		
+
+
+
+
 		* SUGGESTION - Speed up boost -> destroys walls in one hit for 10 seconds
 
 		* Implement level saving to file

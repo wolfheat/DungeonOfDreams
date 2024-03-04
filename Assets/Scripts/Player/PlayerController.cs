@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] PlayerAnimationController playerAnimationController;
     public PickUpController pickupController;
     private LayerMask wallLayerMask;
+    private LayerMask enemyLayerMask;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
 
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private float timer = 0;
     private const float MoveTime = 0.2f;
 
-
+    public Action PlayerReachedNewTile;
     public static PlayerController Instance { get; private set; }
 
     private void Start()
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
         playerAnimationController.HitComplete += HitWithTool;
 
         wallLayerMask = LayerMask.GetMask("Wall");
+        enemyLayerMask = LayerMask.GetMask("Enemy");
 
     }
     private void OnDisable()
@@ -93,12 +95,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(pickupController.Wall != null)
+            if (pickupController.Wall != null)
             {
                 //Debug.Log("CRUSHING BLOCK");
                 playerAnimationController.SetState(PlayerState.Hit);
             }
-            //else Debug.Log("No Block to crush");
+            else if (pickupController.Enemy != null)
+            {
+
+            }
+
+            else Debug.Log("No Block to crush");
         }
 
     }
@@ -127,8 +134,11 @@ public class PlayerController : MonoBehaviour
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
-                if (TargetHasWall(target) == null)
+                if (TargetHasWall(target) == null && TargetHasEnemy(target) == null)
+                {
+                    //Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
+                }
             }
             else if (savedAction.moveType == MoveActionType.Rotate)
                 StartCoroutine(Rotate(EndRotationForMotion(savedAction)));
@@ -138,6 +148,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private EnemyController TargetHasEnemy(Vector3 target)
+    {
+        // Check if spot is free
+        // Get list of interactable items
+        Collider[] colliders = Physics.OverlapBox(target, boxSize, Quaternion.identity, enemyLayerMask);
+
+        //Debug.Log("Recieved Enemy Controllers: " + colliders.Length);
+
+        if (colliders.Length != 0)
+        {
+            //Debug.Log("Enemy in that direction: " + colliders[0].name);
+            return colliders[0].gameObject.GetComponentInParent<EnemyController>();
+        }
+        return null;
+    }
+    
     private Wall TargetHasWall(Vector3 target)
     {
         // Check if spot is free
@@ -225,9 +251,9 @@ public class PlayerController : MonoBehaviour
 
     private void CenterPlayerPosition()
     {
-        Debug.Log("Center player "+transform.position);
+        //Debug.Log("Center player "+transform.position);
         transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
-        Debug.Log("Centered player " + transform.position);
+        //Debug.Log("Centered player " + transform.position);
 
     }
 
@@ -286,6 +312,7 @@ public class PlayerController : MonoBehaviour
     public void MotionActionCompleted()
     {
         //Debug.Log("Motion completed, has stored action: "+savedAction);
+        PlayerReachedNewTile?.Invoke();
         pickupController.UpdateColliders();
         if(savedAction==null)
             HeldMovementInput();
