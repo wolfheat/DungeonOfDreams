@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5013736601862848285}
   - component: {fileID: 4028209662934854099}
   - component: {fileID: 4334046722391876729}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3494685275080652865}
   - component: {fileID: 8398332456232883977}
   - component: {fileID: 1676346661814673209}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Lid (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7423258500164781278}
   - component: {fileID: 8809777946042135042}
   - component: {fileID: 926824258169707387}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Feet (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 1303570234114422836}
   - component: {fileID: 3208268390338457344}
   - component: {fileID: 2836454894389116439}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: fuse (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,6 +345,7 @@ GameObject:
   - component: {fileID: 5903514808148348028}
   - component: {fileID: 7054450928355323619}
   - component: {fileID: 2811627624644139688}
+  - component: {fileID: 6041821564183361899}
   m_Layer: 9
   m_Name: EnemyGraphics
   m_TagString: Untagged
@@ -443,6 +444,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6041821564183361899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4440618946737721062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1545098c6eeaa6544891b3dfdeefe130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 5709389161940682714}
 --- !u!1 &4927534694297279614
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +468,7 @@ GameObject:
   - component: {fileID: 7662662963617183288}
   - component: {fileID: 5799379062870463816}
   - component: {fileID: 330648547909545232}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: fuse (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +552,7 @@ GameObject:
   - component: {fileID: 2603988472935312759}
   - component: {fileID: 1012546949120464882}
   - component: {fileID: 7499807485388847855}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Eye (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +635,7 @@ GameObject:
   - component: {fileID: 6587103856426184151}
   - component: {fileID: 4715497592130421184}
   - component: {fileID: 8868800933946416518}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: fuse (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,7 +718,7 @@ GameObject:
   - component: {fileID: 7292956495081927862}
   - component: {fileID: 8133641226855887635}
   - component: {fileID: 5705998005119289311}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Eye (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -789,7 +803,7 @@ GameObject:
   - component: {fileID: 8821560197017884439}
   - component: {fileID: 6044824374072478698}
   - component: {fileID: 2499119007412934439}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -872,7 +886,7 @@ GameObject:
   - component: {fileID: 7924444738660120039}
   - component: {fileID: 7855393164846096566}
   - component: {fileID: 1648839691803283263}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -957,7 +971,7 @@ GameObject:
   - component: {fileID: 5155136966196655500}
   - component: {fileID: 4496574018639352604}
   - component: {fileID: 3485379685849512785}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: fuse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1111,7 +1125,7 @@ GameObject:
   - component: {fileID: 188401729915602505}
   - component: {fileID: 7519003629954749637}
   - component: {fileID: 2792447853782550733}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Eye (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

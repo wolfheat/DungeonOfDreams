@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+using Wolfheat.Pool;
 
 public enum ParticleType{PickUp,PowerUpStrength,PowerUpSpeed,
     Explode
@@ -29,25 +29,8 @@ public class ParticleEffects : MonoBehaviour
         int index = (int)type;
         index = (index < particleSystems.Length ? index : 0);
 
-        if (ParticleType.Explode == type)
-        {
-            // Generate 9 explosions
-            PlayExplosions(index,pos);
-            return;
-        }
-
         ParticleEffect effect = particlePool.GetNextFromPool(particleSystems[index]);
         effect.transform.position = pos;
         effect.Play();
-    }
-    int[][] explosionPositions = {new[] {-1,-1},new[] {-1, 0},new[] {-1, 1},new[] {0, -1},new[] {0, 0},new[] {0, 1},new[] {1, -1},new[] {1, 0},new[] {1, 1}};
-    private void PlayExplosions(int index,Vector3 pos)
-    {
-        foreach(var p in explosionPositions)
-        {
-            ParticleEffect effect = particlePool.GetNextFromPool(particleSystems[index]);
-            effect.transform.position = pos + new Vector3(p[0], 0, p[1]);
-            effect.Play();
-        }
     }
 }

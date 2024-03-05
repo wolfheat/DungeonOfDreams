@@ -57,10 +57,13 @@ Feb-Mar 2024
 		* Added Enemies with basic idle animation -
 4/3		* Added explosion enaimation for enemy, and sound + particle effect
 		* Added Generic Pool for pooling objects as well as particle effects -
+		* Made explosion in area around bomber.
+		* Explosions damages and destroys walls and ignites other enemies and send damage to player
 
 
 		- Add the enemies / combat
 
+		* Make different blocks break unevenly
 
 		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions
 		* Adjust Enemy explosion effect to other particles?
@@ -86,9 +89,8 @@ Feb-Mar 2024
 
 		-------------------
 		* Julian feedback
-		* Could have a light slider in settings, it gets a bit to dark in the night
-		* Holding shift ans starting to move should start as running
-		* If it supposed to be a toggle for run then it should only switch off if player presses shift again
+		* SUGGESTION - Could have a light slider in settings, it gets a bit to dark in the night
+		* Holding shift and starting to move should start as running, If it supposed to be a toggle for run then it should only switch off if player presses shift again
 		* Settings store the sliders in volume at correct position but does not start audiosources at correct volume
 		* Stuck in spyglass forever
 		-------------------

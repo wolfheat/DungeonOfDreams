@@ -2,41 +2,44 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Wolfheat.StartMenu;
 
-public class Inputs : MonoBehaviour
+namespace Wolfheat.Inputs
 {
-    public Controls Controls { get; set; }
-    public InputAction Actions { get; set; }
-
-    public static Inputs Instance { get; private set; }
-
-    private void OnEnable()
+    public class Inputs : MonoBehaviour
     {
-        SavingUtility.LoadingComplete += LoadingComplete;
-    }
+        public Controls Controls { get; set; }
+        public InputAction Actions { get; set; }
 
-    private void LoadingComplete()
-    {
-        Debug.Log("Loading Complete");
-        Controls.Player.M.performed += SoundMaster.Instance.ToggleMusic;
-    }
+        public static Inputs Instance { get; private set; }
 
-    private void OnDisable()
-    {
-        Controls.Player.M.performed -= SoundMaster.Instance.ToggleMusic;
-    }
-
-    // Start is called before the first frame update
-    void Awake()
-    {
-        Debug.Log("Created Inputs Controller");
-        if(Instance != null)
+        private void OnEnable()
         {
-            Destroy(this.gameObject);
-            return;
+            SavingUtility.LoadingComplete += LoadingComplete;
         }
-        Instance = this;
 
-        Controls = new Controls();
-        Controls.Enable();
+        private void LoadingComplete()
+        {
+            Debug.Log("Loading Complete");
+            Controls.Player.M.performed += SoundMaster.Instance.ToggleMusic;
+        }
+
+        private void OnDisable()
+        {
+            Controls.Player.M.performed -= SoundMaster.Instance.ToggleMusic;
+        }
+
+        // Start is called before the first frame update
+        void Awake()
+        {
+            Debug.Log("Created Inputs Controller");
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+
+            Controls = new Controls();
+            Controls.Enable();
+        }
     }
 }

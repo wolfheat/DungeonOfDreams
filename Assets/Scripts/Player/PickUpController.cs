@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    private Vector3 boxSize = new Vector3(0.4f, 0.4f, 0.4f);
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
     public EnemyController Enemy { get; set; }
@@ -40,7 +39,7 @@ public class PickUpController : MonoBehaviour
     public void UpdateEnemy()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, enemyLayerMask);
         
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<Interactable>().Data).ToList());
 
@@ -53,7 +52,7 @@ public class PickUpController : MonoBehaviour
     public void UpdateWall()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, wallLayerMask);
         
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Interactable>().Data).ToList());
 
@@ -66,12 +65,12 @@ public class PickUpController : MonoBehaviour
     public void UpdateInteractables()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, boxSize,Quaternion.identity, itemLayerMask);
+        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, itemLayerMask);
         
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Interactable>()?.Data).ToList(),true);
         if (colliders.Length == 0)
         {
-            //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+boxSize);
+            //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+Game.boxSize);
             ActiveInteractable = null;
         }
         else

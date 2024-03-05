@@ -2963,6 +2963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 848317143}
   - component: {fileID: 848317144}
+  - component: {fileID: 848317145}
   m_Layer: 0
   m_Name: ParticleEffects
   m_TagString: Untagged
@@ -3002,6 +3003,21 @@ MonoBehaviour:
   - {fileID: 5565650047399365340, guid: 3d098d698e367ef438cade6fa3b7f49c, type: 3}
   - {fileID: -1480003805656819945, guid: abfeee0cca1f3f94b8b1f70da5e28ce5, type: 3}
   - {fileID: 5565650047399365340, guid: 3d098d698e367ef438cade6fa3b7f49c, type: 3}
+--- !u!114 &848317145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848317142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d3e49bf2c2f424aa519a776cfb9c56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 776
 --- !u!1001 &848380647
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5062,7 +5078,7 @@ GameObject:
   - component: {fileID: 1323331108}
   - component: {fileID: 1323331107}
   - component: {fileID: 1323331106}
-  m_Layer: 3
+  m_Layer: 0
   m_Name: Forward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5101,7 +5117,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5914,7 +5930,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc67178ad26f66745b26ea4033bb2bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 527070668}
 --- !u!1001 &1493052785
 PrefabInstance:
   m_ObjectHideFlags: 0

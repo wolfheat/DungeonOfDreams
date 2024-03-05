@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
 using static UnityEngine.InputSystem.InputAction;
 
@@ -25,8 +26,6 @@ public class PlayerController : MonoBehaviour
     private LayerMask enemyLayerMask;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
-
-    private Vector3 boxSize = new Vector3(0.47f, 0.47f, 0.47f);
 
     private float timer = 0;
     private const float MoveTime = 0.2f;
@@ -152,7 +151,7 @@ public class PlayerController : MonoBehaviour
     {
         // Check if spot is free
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, boxSize, Quaternion.identity, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, enemyLayerMask);
 
         //Debug.Log("Recieved Enemy Controllers: " + colliders.Length);
 
@@ -168,7 +167,7 @@ public class PlayerController : MonoBehaviour
     {
         // Check if spot is free
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, boxSize, Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, wallLayerMask);
 
         //Debug.Log("Updating walls for position: " + target+" wall: "+colliders.Length+" "+(colliders.Length>0? colliders[0].gameObject.GetComponent<Wall>().name:""));
 
@@ -324,5 +323,10 @@ public class PlayerController : MonoBehaviour
             InterractWith();
         }
 
+    }
+
+    public void TakeDamage(int amt)
+    {
+        Debug.Log("Player get hurt " + amt + " hp");
     }
 }

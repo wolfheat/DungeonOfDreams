@@ -1,6 +1,6 @@
+using System;
 using UnityEngine;
 using Wolfheat.StartMenu;
-
 public class EnemyController : Interactable
 {
     PlayerController player;
@@ -28,7 +28,8 @@ public class EnemyController : Interactable
     public void Explode()
     {
         Debug.Log("Enemy Explodes");
-        ParticleEffects.Instance.PlayTypeAt(particleType, transform.position);
+        Explosion.Instance.ExplodeNineAround(particleType, transform.position);
+        
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
     }
 
@@ -53,5 +54,19 @@ public class EnemyController : Interactable
             Debug.Log("Player close enough to explode");
             animator.CrossFade("Explode",0.1f);
         }   
+    }
+
+    public void TakeDamage(int amt)
+    {
+        if(dead) return;
+
+        Debug.Log("Enemy get hurt " + amt + " hp");
+        if (amt >= 10)
+        {
+            Debug.Log("Enemy hurt by explosion, explode");
+            animator.CrossFade("Explode", 0.1f);
+        }else
+            Debug.Log("Enemy hurt by player");
+
     }
 }

@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+using Wolfheat.Pool;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, Soil, Stone, Chess,Coal}
@@ -70,10 +68,9 @@ public class ItemSpawner : MonoBehaviour
         }
     }
 
-    private Vector3 boxSize = new Vector3(0.47f, 0.47f, 0.47f);
     public bool PositionEmpty(Vector3 pos)
     {
-        Collider[] colliders = Physics.OverlapBox(pos, boxSize, Quaternion.identity);
+        Collider[] colliders = Physics.OverlapBox(pos, Game.boxSize, Quaternion.identity);
         return colliders.Length == 0;
     }
 

@@ -10,11 +10,12 @@ public class Wall : Interactable
     private Coroutine shock;
 
     public int Health { get { return health;} }
-    public bool Damage()
+    public bool Damage(int damage=1)
     {
-        health--;
+        Debug.Log("Damage Wall");
+        health-=damage;
 
-        if (health == 0)
+        if (health <= 0)
             Shrink();
         else if(meshRenderer != null)
         {

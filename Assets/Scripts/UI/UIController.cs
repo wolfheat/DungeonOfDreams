@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Wolfheat.Inputs;
 
 public enum GameStates { Running, Paused }
 
