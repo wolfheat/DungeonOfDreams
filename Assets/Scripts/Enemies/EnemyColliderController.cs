@@ -6,6 +6,7 @@ public class EnemyColliderController : MonoBehaviour
     [SerializeField] EnemyController enemy;
     public void TakeDamage(int amt)
     {
-        enemy.TakeDamage(amt);
+        // Enemy taking damage from another explosion?
+        enemy.TakeDamage(amt,true);
     }
 }

@@ -13,8 +13,8 @@ namespace Wolfheat.StartMenu
         MediumExplosion,
         RockExplosion,
         CraftComplete,
-        HitMetal,
-        Drill,
+        StabEnemy,
+        KillEnemy,
         PickUp,
         LowOxygen,
         EnemyShoot,
@@ -24,7 +24,6 @@ namespace Wolfheat.StartMenu
         CrushStone,
         PowerUpDamage,
         PowerUpSpeed
-
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -330,5 +329,14 @@ namespace Wolfheat.StartMenu
             UpdateVolume();
         }
 
+        public void PlayWeaponHitEnemy()
+        {
+            PlaySound(SoundName.StabEnemy);
+        }
+
+        public void PlayWeaponKillsEnemy()
+        {
+            PlaySound(SoundName.KillEnemy);
+        }
     }
 }

@@ -46,7 +46,13 @@ public class PickUpController : MonoBehaviour
         if (colliders.Length == 0)
             Enemy = null;
         else
-            Enemy = colliders[0].gameObject.GetComponentInParent<EnemyController>();
+        {
+            EnemyController enemy = colliders[0].gameObject.GetComponentInParent<EnemyController>();
+            if (!enemy.Dead)
+                Enemy = enemy;
+            else 
+                Enemy = null;
+        }
     }
     
     public void UpdateWall()
@@ -80,6 +86,15 @@ public class PickUpController : MonoBehaviour
         }
     }
 
+    public bool InteractWithEnemy()
+    {
+        if (Enemy == null) return false;
+
+        Enemy.TakeDamage(PlayerController.Instance.Damage);
+        UpdateColliders();
+
+        return true;
+    }
     public bool InteractWithWall()
     {
         if (Wall == null) return false;

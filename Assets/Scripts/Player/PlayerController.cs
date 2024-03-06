@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     public Action PlayerReachedNewTile;
     public static PlayerController Instance { get; private set; }
+    public int Damage { get; set; } = 1;
 
     private void Start()
     {
@@ -101,7 +102,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (pickupController.Enemy != null)
             {
-
+                Debug.Log("Hit Enemy");
+                playerAnimationController.SetState(PlayerState.Attack);
             }
 
             else Debug.Log("No Block to crush");
@@ -111,11 +113,11 @@ public class PlayerController : MonoBehaviour
 
     public void HitWithTool()
     {
-        if(!pickupController.InteractWithWall())
+        if(!pickupController.InteractWithWall() && !pickupController.InteractWithEnemy())
             playerAnimationController.SetState(PlayerState.Idle);
 
         // If player has mouse button down attack again?
-        if (!Inputs.Instance.Controls.Player.Click.IsPressed() || pickupController.Wall == null)
+        if (!Inputs.Instance.Controls.Player.Click.IsPressed() || (pickupController.Wall == null && pickupController.Enemy == null))
             playerAnimationController.SetState(PlayerState.Idle);
 
     }

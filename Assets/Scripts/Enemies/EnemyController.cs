@@ -7,8 +7,9 @@ public class EnemyController : Interactable
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
 
-    bool dead = false;
-
+    private const int StartHealth = 10;
+    public int Health { get; private set; }
+    public bool Dead { get; private set; }
     private void OnEnable()
     {
         player = FindFirstObjectByType<PlayerController>();
@@ -23,13 +24,13 @@ public class EnemyController : Interactable
     private void Start()
     {
         particleType = ParticleType.Explode;
+        Health = StartHealth; // Change to data health later
     }
 
     public void Explode()
     {
         Debug.Log("Enemy Explodes");
-        Explosion.Instance.ExplodeNineAround(particleType, transform.position);
-        
+        Explosion.Instance.ExplodeNineAround(particleType, transform.position);        
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
     }
 
@@ -41,7 +42,7 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistance()
     {
-        if (dead) return;
+        if (Dead) return;
         // Update player distance when player or enemy reaches a new position
 
         // If Player close enough and valid path to player chase player
@@ -56,17 +57,25 @@ public class EnemyController : Interactable
         }   
     }
 
-    public void TakeDamage(int amt)
+    public bool TakeDamage(int amt, bool explosionDamage = false)
     {
-        if(dead) return;
+        if(Dead) return false;
 
-        Debug.Log("Enemy get hurt " + amt + " hp");
-        if (amt >= 10)
+        Health -= amt;
+
+        if (Health <= 0)
         {
-            Debug.Log("Enemy hurt by explosion, explode");
-            animator.CrossFade("Explode", 0.1f);
-        }else
-            Debug.Log("Enemy hurt by player");
+            Dead = true;
+            if (!explosionDamage)
+            {
+                animator.CrossFade("Idle", 0f);
+                ItemSpawner.Instance.ReturnEnemy(this);
+                return true;
+            }
 
+            animator.CrossFade("Explode", 0.1f);
+            return true;
+        }
+        return false;
     }
 }

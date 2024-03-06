@@ -58,12 +58,16 @@ Feb-Mar 2024
 4/3		* Added explosion enaimation for enemy, and sound + particle effect
 		* Added Generic Pool for pooling objects as well as particle effects -
 		* Made explosion in area around bomber.
-		* Explosions damages and destroys walls and ignites other enemies and send damage to player
+		* Explosions damages and destroys walls and ignites other enemies and send damage to player-
+5/3		* Player can now kill enemy by injuring it 10hp
 
+
+		* Make enemy spawn bomb when killed by player
+		* Make Other death-animation for when enemy is killed by player
 
 		- Add the enemies / combat
 
-		* Make different blocks break unevenly
+		* Make blocks have variarity in hitpoints / tools needed?
 
 		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions
 		* Adjust Enemy explosion effect to other particles?
@@ -89,6 +93,34 @@ Feb-Mar 2024
 
 		-------------------
 		* Julian feedback
+		* BUG - Moving slider on Spinner or any Crafting station does not update the amount created text
+		* BUG - Agency blob info is text is bugged but should also tell player how agency is gained somehow
+		* BUG - Harvesting a stone, saving and reloading game, keeps stone as allready harvested but without red indicator
+		* CHANGE - player get already harvested notification for mining the kiln
+		* CHANGE - player is able to move after initiating a tool and before the mini game starts	
+		* CHANGE - Spinner seems to queue up objects created, but player cant see this queue
+		* SUGGESTION - Spinner should prob have a header showing the name of the station
+		* SUGGESTION - the research station should state that the items needed to research wont get comsumed
+		* SUGGESTION - would be nice to be able to TAB out of crafting stations
+
+		// These bugs seems to happen after the game already broke some
+		* BUG - Game not allowing tools to be dropped? Maybe this should be allowed. If inventory is full player cant pick up anything.
+		* BUG - Placing the kiln leaves the icon in the inventory as well as placing it in world, it also gets placed before releasing mouse button, prob as soon as it hits a valid spot?
+		* BUG - Stone axe recipes filling up workstations recipe list - photo
+		* BUG - equipping a tool when already having a tool equipped but no free space in inventory destroyes/"player lose" the removed tool
+		* BUG - After a few seconds in the workstation the output changes to show the players inventory instead		
+		* BUG - Time seems to have stopped at 12:40 on day 7	
+			
+
+		* having bowl equipped and unequipping it still shows player holding it
+		* Unable to save game - video
+		* Setting audio for animals to 0 still allowes high volume for birds
+
+		* Interacting with stations does not respond to E if its held or slowly pressed, only reacts to fast type E
+
+		* NOT SURE - using wrong tool on harvested resource shows already harvested, should it be wrong tool notice?
+
+
 		* SUGGESTION - Could have a light slider in settings, it gets a bit to dark in the night
 		* Holding shift and starting to move should start as running, If it supposed to be a toggle for run then it should only switch off if player presses shift again
 		* Settings store the sliders in volume at correct position but does not start audiosources at correct volume
