@@ -60,7 +60,10 @@ Feb-Mar 2024
 		* Made explosion in area around bomber.
 		* Explosions damages and destroys walls and ignites other enemies and send damage to player-
 5/3		* Player can now kill enemy by injuring it 10hp
+6/3		* Added icon and mockup itch page
 
+		
+		* Have jingle play when player has a powerup?
 
 		* Make enemy spawn bomb when killed by player
 		* Make Other death-animation for when enemy is killed by player
