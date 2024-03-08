@@ -1055,6 +1055,7 @@ GameObject:
   - component: {fileID: 3742668053418511878}
   - component: {fileID: 5908107287522171377}
   - component: {fileID: 5709389161940682714}
+  - component: {fileID: 3523230853023244000}
   m_Layer: 9
   m_Name: BombEnemy
   m_TagString: Untagged
@@ -1076,7 +1077,7 @@ Transform:
   m_Children:
   - {fileID: 203472233514568784}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &5908107287522171377
 Animator:
@@ -1114,6 +1115,21 @@ MonoBehaviour:
   Data: {fileID: 0}
   playerDistance: 0
   animator: {fileID: 5908107287522171377}
+  obstructions:
+    serializedVersion: 2
+    m_Bits: 264
+--- !u!114 &3523230853023244000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7477139183772380264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53a0ed9acf99ca4b82cfd284355c291, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9157302922625121717
 GameObject:
   m_ObjectHideFlags: 0

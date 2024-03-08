@@ -61,6 +61,8 @@ Feb-Mar 2024
 		* Explosions damages and destroys walls and ignites other enemies and send damage to player-
 5/3		* Player can now kill enemy by injuring it 10hp
 6/3		* Added icon and mockup itch page
+8/3		* Added grid for level
+		* Added gizmos showing enemies seing player and what tiles are occupied
 
 		
 		* Have jingle play when player has a powerup?
