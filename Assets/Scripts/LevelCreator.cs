@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class GridSpot
 {
@@ -22,9 +20,19 @@ public class LevelCreator : MonoBehaviour
     GridSpot[] gridSpots;
     [SerializeField] private LayerMask gridDetectionLayerMask;
 
+    private List<Vector2Int> result = new();
+
+    public static LevelCreator Instance { get; private set; }
 
     private void Start()
     {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    
         gridSpots = new GridSpot[10000];
     }
 
@@ -36,6 +44,8 @@ public class LevelCreator : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!Application.isPlaying) return;
+
         if (Camera.current != gizmoCamera) return;
 
         Vector3 boxSize = new Vector3(Game.boxSize.x * 2,0.1f, Game.boxSize.x * 2);
@@ -44,7 +54,9 @@ public class LevelCreator : MonoBehaviour
             if(gridSpot.type!=0)
                 Gizmos.DrawCube(gridSpot.pos+Vector3.down*0.5f, boxSize);
         }
+
     }
+
 
     private void CreateGrid()
     {
@@ -65,4 +77,211 @@ public class LevelCreator : MonoBehaviour
             }
     }
 
+    public bool CanReach(Vector2Int from, Vector2Int to)
+    {
+        //Debug.Log("Checking if we can reach " + to + " from position " + from);
+
+        int minX = Math.Min(from.x, to.x);
+        int maxX = Math.Max(from.x, to.x);
+        int minY = Math.Min(from.y, to.y);        
+        int maxY = Math.Max(from.y, to.y);
+
+        int gridSizeX = maxX - minX + 1;
+        int gridSizeY = maxY - minY + 1;
+
+        Vector2Int Astart = new Vector2Int(minX, minY);
+
+        // Create grid to check for steps
+        int[,] A = new int[gridSizeX,gridSizeY];
+
+        //DrawSquare(from, to);
+        List<Vector2Int> path = FindPath(from,to,A,Astart);
+
+        DrawPath(path);
+        
+
+        return false;
+    }
+
+    private List<Vector2Int> FindPath(Vector2Int from, Vector2Int to, int[,] A, Vector2Int astart)
+    {
+        Vector2Int aend = astart + new Vector2Int(A.GetLength(0) - 1, A.GetLength(1) - 1);
+
+        List<Vector2Int> used = new();
+        List<APoint> open = new();
+
+        APoint startPoint = new APoint() { pos = from, cost = 0, distance = Vector2Int.Distance(from, to) };
+        open.Add(startPoint);
+        used.Add(from);
+
+
+        bool reachedTarget = false;
+
+        int steps = 0;
+        while(!reachedTarget && open.Count > 0 && steps < 50)
+        {
+            //Debug.Log("Step "+steps);
+            // While there is points that has not been checked in the list and target is not reached
+
+            // Get the best point
+            int bestIndex = GetClosest(open);
+            APoint sourcePoint = open[bestIndex]; // for now just take the first point
+            //Debug.Log("There is at least one Point in open list take first item "+sourcePoint.pos);
+            int cost = sourcePoint.cost; 
+            List<Vector2Int> neighbors = GetNeighbors(sourcePoint.pos,astart,aend,ref used);
+            //Debug.Log("Point "+sourcePoint.pos+" had "+neighbors.Count+" neighbors");
+
+
+            foreach(var n in neighbors)
+            {
+                float dist = Vector2Int.Distance(n,to);
+                int newCost = cost + 1;
+                APoint newPoint = new APoint() { pos = n, cost = newCost, distance = Vector2Int.Distance(n, to), parent = sourcePoint };
+
+                if (dist <= 1.1f )
+                {
+                    //Debug.Log("Reached Target since distance from "+n+" to player " +to+ " is "+dist);
+                    return GetResult(newPoint);
+                }
+
+                open.Add(newPoint);
+                //Debug.Log("Added Neighbor " + newPoint.pos + " to open with cost of "+ newPoint.cost + " and distance "+newPoint.distance);
+            }
+            if (open.Contains(sourcePoint))
+            {
+                //Debug.Log("Removing point "+sourcePoint.pos);
+                open.Remove(sourcePoint);
+            }
+
+            used.AddRange(neighbors);
+            steps++;
+        }
+        return null;
+
+
+
+
+        //    A*
+        // 0 0 1 0 0 0 0 0 0
+        // 0 0 0 0 0 0 0 0 0
+        // 0 0 0 0 0 0 0 0 0
+        // 0 0 0 0 0 0 0 0 0
+
+
+        
+
+    }
+
+    private int GetClosest(List<APoint> open)
+    {
+        int best = 0;
+        float dist = 100f;
+        for(int i = 0; i< open.Count; i++)
+        {
+            APoint p = open[i];
+            if(p.distance<dist)
+            {
+                best = i;
+                dist = p.distance;
+            }
+        }
+        return best;
+    }
+
+    private List<Vector2Int> GetResult(APoint lastPoint)
+    {
+
+        APoint point = lastPoint;
+        result = new() { lastPoint.pos };
+
+        while (point.parent != null)
+        {
+            result.Add(point.parent.pos);
+            point = point.parent;
+        }
+        return result;
+    }
+
+    private List<Vector2Int> GetNeighbors(Vector2Int source, Vector2Int astart, Vector2Int aend, ref List<Vector2Int> used)
+    {
+        List<Vector2Int> newPos = new List<Vector2Int>();
+        //Debug.Log(" Get Neighbors for "+source);
+        if(source.x > astart.x)
+        {
+            Vector2Int left = source + Vector2Int.left;
+            //Debug.Log("Point "+source+" has valid neighbor to the left "+left);
+            if(!used.Contains(left) && level[left.x+50,left.y+50] == 0)
+                newPos.Add(left);
+        }
+        if (source.x < aend.x-1)
+        {
+            Vector2Int right = source + Vector2Int.right;
+            //Debug.Log("Point " + source + " has valid neighbor to the right " + right);
+            if (!used.Contains(right) && level[right.x + 50, right.y + 50] == 0)
+                newPos.Add(right);
+        }
+        if(source.y > astart.y)
+        {
+            Vector2Int down = source + Vector2Int.down;
+            //Debug.Log("Point " + source + " has valid neighbor to the down " + down);
+            if (!used.Contains(down) && level[down.x + 50, down.y + 50] == 0)
+                newPos.Add(down);
+        }
+        if(source.y < aend.y)
+        {
+            Vector2Int up = source + Vector2Int.up;
+            //Debug.Log("Point " + source + " has valid neighbor to the up " + up);
+            if (!used.Contains(up) && level[up.x + 50, up.y + 50] == 0)
+                newPos.Add(up);
+        }
+        return newPos;
+    }
+
+    private void DrawPath(List<Vector2Int> list)
+    {
+
+        if (list == null || list.Count==0) return;
+        
+        Vector2Int last = new Vector2Int();
+        bool first = true;
+        //Debug.Log("Points in Path "+list.Count);
+        foreach (Vector2Int r in result)
+        {
+            if (!first)
+            {
+                //Debug.Log("DrawLine from "+r+" to "+last);
+                Debug.DrawLine(new Vector3(r.x,0,r.y), new Vector3(last.x, 0, last.y), Color.white, 1f);
+            }
+            last = r;
+            first = false;
+        }
+        
+
+    }
+    
+    private void DrawSquare(Vector2Int from, Vector2Int to)
+    {
+        Vector3 fromPos = new Vector3(from.x, 0, from.y);
+        Vector3 toPos = new Vector3(to.x, 0, to.y);
+
+        Debug.DrawLine(fromPos, new Vector3(to.x, 0, from.y), Color.cyan, 0.5f);
+        Debug.DrawLine(fromPos, new Vector3(from.x, 0, to.y), Color.cyan, 0.5f);
+        Debug.DrawLine(new Vector3(to.x, 0, from.y), toPos, Color.cyan, 0.5f);
+        Debug.DrawLine(new Vector3(from.x, 0, to.y), toPos, Color.cyan, 0.5f);
+    }
+
+    public bool CanReach(EnemyController enemyController, PlayerController player)
+    {
+        Vector2Int from = new Vector2Int(Mathf.RoundToInt(enemyController.transform.position.x), Mathf.RoundToInt(enemyController.transform.position.z));
+        Vector2Int to = new Vector2Int(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.z));
+        return CanReach(from,to);
+    }
+}
+
+public class APoint
+{
+    public Vector2Int pos;
+    public int cost;
+    public float distance;
+    public APoint parent;
 }

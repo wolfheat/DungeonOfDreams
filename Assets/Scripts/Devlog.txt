@@ -63,7 +63,10 @@ Feb-Mar 2024
 6/3		* Added icon and mockup itch page
 8/3		* Added grid for level
 		* Added gizmos showing enemies seing player and what tiles are occupied
+9/3		* Made A* solution for enemy to reach player
 
+
+		* Make bomb enemy stop blow up if player moves away before blink starts? MAYBE NOT
 		
 		* Have jingle play when player has a powerup?
 
@@ -116,6 +119,10 @@ Feb-Mar 2024
 		* BUG - After a few seconds in the workstation the output changes to show the players inventory instead		
 		* BUG - Time seems to have stopped at 12:40 on day 7	
 			
+		* Completing ballpeople task before activating the ballperson wont make it possible to complete the task?
+		* small spelling error in the notice after exiting the fissure he -> the
+		* player is able to jump when gathering sticks etc
+		* No Translation found for seed - picture
 
 		* having bowl equipped and unequipping it still shows player holding it
 		* Unable to save game - video

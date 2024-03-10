@@ -1,12 +1,16 @@
 using System;
 using UnityEngine;
 using Wolfheat.StartMenu;
+
+
 public class EnemyController : Interactable
 {
     PlayerController player;
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
     [SerializeField] LayerMask obstructions;
+
+    private EnemyStateController enemyStateController; 
 
     private const int StartHealth = 10;
     public int Health { get; private set; }
@@ -26,6 +30,7 @@ public class EnemyController : Interactable
     {
         particleType = ParticleType.Explode;
         Health = StartHealth; // Change to data health later
+        enemyStateController = new EnemyStateController(animator);
     }
 
     public void Explode()
@@ -58,7 +63,7 @@ public class EnemyController : Interactable
         if (playerDistance < 1.8f)
         {
             //Debug.Log("Player close enough to explode");
-            animator.CrossFade("Explode",0.1f);
+            enemyStateController.ChangeState(EnemyState.Exploding);
         }else if(playerDistance < EnemySight)
         {
             Vector3 rayDirection = (player.transform.position - transform.position).normalized*playerDistance;
@@ -70,7 +75,23 @@ public class EnemyController : Interactable
                 Collider collider = hit.collider;
                 //Debug.Log("RayCast Hit Collider "+collider.name);
                 if(collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    // Check if player can be reached find way.
+                    if (LevelCreator.Instance.CanReach(this, player))
+                    {
+                        Debug.Log("Can reach player");  
+
+                    }
+
+
+                    // If not chasing start chase
+                    if(enemyStateController.currentState != EnemyState.Chase)
+                    {
+                        enemyStateController.ChangeState(EnemyState.Chase);
+                        Debug.Log("Enemy starts chasing player",this);
+                    }
                     rayColor = Color.green;
+                }
             }
 
             //Debug.Log("Ray from "+transform.position+" in direction "+ rayDirection);
