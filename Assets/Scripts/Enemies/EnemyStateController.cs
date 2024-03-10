@@ -32,6 +32,7 @@ public class EnemyStateController
             case EnemyState.Dead:
                 break;
         }
+        currentState = newState;
     }
 
 

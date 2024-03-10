@@ -18,9 +18,13 @@ public class LevelCreator : MonoBehaviour
     Vector3 gridStartPosition = new Vector3(-50,0,-50);
 
     GridSpot[] gridSpots;
-    [SerializeField] private LayerMask gridDetectionLayerMask;
 
-    private List<Vector2Int> result = new();
+    [SerializeField] private LayerMask gridDetectionLayerMask;
+    private LayerMask wallLayerMask;
+    private LayerMask enemyLayerMask;
+
+
+    private Stack<Vector2Int> result = new();
 
     public static LevelCreator Instance { get; private set; }
 
@@ -34,6 +38,9 @@ public class LevelCreator : MonoBehaviour
         Instance = this;
     
         gridSpots = new GridSpot[10000];
+
+        wallLayerMask = LayerMask.GetMask("Wall");
+        enemyLayerMask = LayerMask.GetMask("Enemy");
     }
 
     // Start is called before the first frame update
@@ -77,7 +84,7 @@ public class LevelCreator : MonoBehaviour
             }
     }
 
-    public bool CanReach(Vector2Int from, Vector2Int to)
+    public Stack<Vector2Int> CanReach(Vector2Int from, Vector2Int to)
     {
         //Debug.Log("Checking if we can reach " + to + " from position " + from);
 
@@ -95,15 +102,15 @@ public class LevelCreator : MonoBehaviour
         int[,] A = new int[gridSizeX,gridSizeY];
 
         //DrawSquare(from, to);
-        List<Vector2Int> path = FindPath(from,to,A,Astart);
+        Stack<Vector2Int> path = FindPath(from,to,A,Astart);
 
         DrawPath(path);
         
 
-        return false;
+        return path;
     }
 
-    private List<Vector2Int> FindPath(Vector2Int from, Vector2Int to, int[,] A, Vector2Int astart)
+    private Stack<Vector2Int> FindPath(Vector2Int from, Vector2Int to, int[,] A, Vector2Int astart)
     {
         Vector2Int aend = astart + new Vector2Int(A.GetLength(0) - 1, A.GetLength(1) - 1);
 
@@ -188,15 +195,16 @@ public class LevelCreator : MonoBehaviour
         return best;
     }
 
-    private List<Vector2Int> GetResult(APoint lastPoint)
+    private Stack<Vector2Int> GetResult(APoint lastPoint)
     {
 
         APoint point = lastPoint;
-        result = new() { lastPoint.pos };
+        result = new();
+        result.Push(lastPoint.pos);
 
         while (point.parent != null)
         {
-            result.Add(point.parent.pos);
+            result.Push(point.parent.pos);
             point = point.parent;
         }
         return result;
@@ -237,7 +245,7 @@ public class LevelCreator : MonoBehaviour
         return newPos;
     }
 
-    private void DrawPath(List<Vector2Int> list)
+    private void DrawPath(Stack<Vector2Int> list)
     {
 
         if (list == null || list.Count==0) return;
@@ -258,7 +266,41 @@ public class LevelCreator : MonoBehaviour
         
 
     }
-    
+
+
+    public EnemyController TargetHasEnemy(Vector3 target)
+    {
+        // Check if spot is free
+        // Get list of interactable items
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, enemyLayerMask);
+
+        //Debug.Log("Recieved Enemy Controllers: " + colliders.Length);
+
+        if (colliders.Length != 0)
+        {
+            //Debug.Log("Enemy in that direction: " + colliders[0].name);
+            return colliders[0].gameObject.GetComponentInParent<EnemyController>();
+        }
+        return null;
+    }
+
+    public Wall TargetHasWall(Vector3 target)
+    {
+        // Check if spot is free
+        // Get list of interactable items
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, wallLayerMask);
+
+        //Debug.Log("Updating walls for position: " + target+" wall: "+colliders.Length+" "+(colliders.Length>0? colliders[0].gameObject.GetComponent<Wall>().name:""));
+
+        if (colliders.Length != 0)
+        {
+            //Debug.Log("Wall in that direction: " + colliders[0].name);
+            return colliders[0].gameObject.GetComponent<Wall>();
+        }
+        return null;
+    }
+
+
     private void DrawSquare(Vector2Int from, Vector2Int to)
     {
         Vector3 fromPos = new Vector3(from.x, 0, from.y);
@@ -270,7 +312,7 @@ public class LevelCreator : MonoBehaviour
         Debug.DrawLine(new Vector3(from.x, 0, to.y), toPos, Color.cyan, 0.5f);
     }
 
-    public bool CanReach(EnemyController enemyController, PlayerController player)
+    public Stack<Vector2Int> CanReach(EnemyController enemyController, PlayerController player)
     {
         Vector2Int from = new Vector2Int(Mathf.RoundToInt(enemyController.transform.position.x), Mathf.RoundToInt(enemyController.transform.position.z));
         Vector2Int to = new Vector2Int(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.z));

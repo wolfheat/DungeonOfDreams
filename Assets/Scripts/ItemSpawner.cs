@@ -47,7 +47,7 @@ public class ItemSpawner : MonoBehaviour
 
         Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count+ "] PowerUp=[ " + powerUpPool.Count+"] Enemies=[" + enemyPool.Count+"]");
         
-        SpawnRandomEnemies();
+        //SpawnRandomEnemies();
 
     }
 

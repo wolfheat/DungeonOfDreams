@@ -64,25 +64,37 @@ Feb-Mar 2024
 8/3		* Added grid for level
 		* Added gizmos showing enemies seing player and what tiles are occupied
 9/3		* Made A* solution for enemy to reach player
-
-
-		* Make bomb enemy stop blow up if player moves away before blink starts? MAYBE NOT
+10/3	* Enemies can now reach the player after stepping through the path
 		
-		* Have jingle play when player has a powerup?
 
+		* Player cant hit enemy when it has moved using the path
+
+		* Make enemy move to player when in chase mod
+		* Start working on a menu system
+		* Health bar
+
+		// Enemies
+		* Make bomb enemy stop blow up if player moves away before blink starts? PROB NOT
 		* Make enemy spawn bomb when killed by player
 		* Make Other death-animation for when enemy is killed by player
-
-		- Add the enemies / combat
-
-		* Make blocks have variarity in hitpoints / tools needed?
-
-		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions
+		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions - DONE
 		* Adjust Enemy explosion effect to other particles?
-		* Make Enemy flicker when blowing up red/white? Check up how its done
-
-		* Add roots sticking out from roof
+		
+		// Player
+		* Have jingle play when player has a powerup?
 		* Add sound effects for boosts running out?
+		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
+
+		// Walls
+		* Make blocks have variarity in hitpoints / tools needed?
+		* Add roots sticking out from roof
+		* Make Wall data that defines walls health points and containing minerals
+		* Have cracks show percentage of damage so they dont update every hit if the damage is to low etc
+
+		// Scenes
+		* Have end transition for completing game or dying that feels epic?
+
+		// System
 		* Extend sound data to include a list of sound clips
 		* Extend sound data to include a list pitches?
 		* Allow scalable game window
@@ -91,12 +103,9 @@ Feb-Mar 2024
 			- Bomb enemy
 			- Hit enemy
         
+		// Bugs
 		* Maybe issue with wrong block being hit, might be because the stack of walls in front of player is not updated when reaching new spot?
 
-		* Make Wall data that defines walls health points and containing minerals
-		* Have cracks show percentage of damage so they dont update every hit if the damage is to low etc
-
-		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
 		
 
 		-------------------
@@ -123,6 +132,15 @@ Feb-Mar 2024
 		* small spelling error in the notice after exiting the fissure he -> the
 		* player is able to jump when gathering sticks etc
 		* No Translation found for seed - picture
+
+		* BUG - Still an issue - Stone axe recipes filling up workstations recipe list - photo Still an issue
+			OUTPUT shown below crafting station at this point, saving at this point ruins/removes the save file from showing up in load (the aliv files exists in file system)
+		* Going back to main menu unsets the sound settings briefly like half a second or so.
+		* Going back to main menu and restarting a new game starts with old name filled in in the input box
+
+		// Picking up stone right before using it for reconstruction messes up the popup amount -Video https://gemoo.com/tools/upload-video/share/625434510884421632?codeId=PYabol9J9lb4B&card=625434507273125888
+		* SUGGESTION -  maybe have agency as an item in the compendium that describes more what it is and how to aquire it 
+
 
 		* having bowl equipped and unequipping it still shows player holding it
 		* Unable to save game - video

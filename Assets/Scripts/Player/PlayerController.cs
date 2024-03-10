@@ -12,18 +12,22 @@ public class MoveAction
 {
     public MoveActionType moveType;
     public int dir = 0;
+    public Vector2Int move;
     public MoveAction(MoveActionType t, int d)
     {
         moveType = t;
         dir = d;
+    }
+    public MoveAction(MoveActionType t, Vector2Int m)
+    {
+        moveType = t;
+        move = m;
     }
 }
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] PlayerAnimationController playerAnimationController;
     public PickUpController pickupController;
-    private LayerMask wallLayerMask;
-    private LayerMask enemyLayerMask;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
 
@@ -51,9 +55,6 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
 
         playerAnimationController.HitComplete += HitWithTool;
-
-        wallLayerMask = LayerMask.GetMask("Wall");
-        enemyLayerMask = LayerMask.GetMask("Enemy");
 
     }
     private void OnDisable()
@@ -135,7 +136,7 @@ public class PlayerController : MonoBehaviour
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
-                if (TargetHasWall(target) == null && TargetHasEnemy(target) == null)
+                if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null)
                 {
                     //Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
@@ -149,37 +150,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private EnemyController TargetHasEnemy(Vector3 target)
-    {
-        // Check if spot is free
-        // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, enemyLayerMask);
-
-        //Debug.Log("Recieved Enemy Controllers: " + colliders.Length);
-
-        if (colliders.Length != 0)
-        {
-            //Debug.Log("Enemy in that direction: " + colliders[0].name);
-            return colliders[0].gameObject.GetComponentInParent<EnemyController>();
-        }
-        return null;
-    }
-    
-    private Wall TargetHasWall(Vector3 target)
-    {
-        // Check if spot is free
-        // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, wallLayerMask);
-
-        //Debug.Log("Updating walls for position: " + target+" wall: "+colliders.Length+" "+(colliders.Length>0? colliders[0].gameObject.GetComponent<Wall>().name:""));
-
-        if (colliders.Length != 0)
-        {
-            //Debug.Log("Wall in that direction: " + colliders[0].name);
-            return colliders[0].gameObject.GetComponent<Wall>();
-        }
-        return null;
-    }
 
     private void TurnPerformed(InputAction.CallbackContext obj)
     {
