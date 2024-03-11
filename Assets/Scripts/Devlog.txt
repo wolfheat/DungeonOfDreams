@@ -68,6 +68,7 @@ Feb-Mar 2024
 		* Player can hit enemy when it has moved using the path
 11/3	* Made Beveled Blender Cube for softer looking blocks
 		* Moved cracks to separate object cause Blender Bevel Cube messed up materials applied to cube-
+		* Beveled Cube smaller edges and correct wrapping
 
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around
 		* Enemy should lock the tile its heading to so player nor enemies can go there
