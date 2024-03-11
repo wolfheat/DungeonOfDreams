@@ -19,11 +19,8 @@ public class Wall : Interactable
             Shrink();
         else if(meshRenderer != null)
         {
-            Material[] materials = meshRenderer.materials;
-            if(materials.Length==1)
-                materials = new Material[2] {materials[0],null};
-            materials[1] = CrackMaster.Instance.GetCrack(health-1);
-            meshRenderer.materials = materials;
+            if(!meshRenderer.enabled) meshRenderer.enabled = true;  
+            meshRenderer.material = CrackMaster.Instance.GetCrack(health - 1);
             Hit();
         }
         return health == 0;
@@ -54,7 +51,10 @@ public class Wall : Interactable
 
         if(Data.mineralStored != null)
             CreateItem(Data.mineralStored);
-        
+
+        gameObject.SetActive(false);
+        LevelCreator.Instance.RemoveWall(transform.position);
+
     }
 
     public void Hit()
@@ -136,7 +136,6 @@ public class Wall : Interactable
 
     private void CreateItem(MineralData mineralData)
     {
-        gameObject.SetActive(false);
         ItemSpawner.Instance.SpawnMineralAt(mineralData,transform.position);
     }
 }

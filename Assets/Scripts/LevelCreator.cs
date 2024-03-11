@@ -318,6 +318,17 @@ public class LevelCreator : MonoBehaviour
         Vector2Int to = new Vector2Int(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.z));
         return CanReach(from,to);
     }
+
+    internal void RemoveWall(Vector3 position)
+    {
+        Vector2Int pos = Convert.V3ToV2Int(position);
+        if (level[pos.x + 50, pos.y + 50] == 1)
+        {
+            Debug.Log("Removing Wall at pos "+pos);
+            level[pos.x + 50, pos.y + 50] = 0;
+        }else Debug.LogWarning("There is no wall at pos " + pos);
+
+    }
 }
 
 public class APoint

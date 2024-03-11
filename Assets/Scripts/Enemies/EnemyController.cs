@@ -116,8 +116,8 @@ public class EnemyController : Interactable
         }
         else
         {
+            enemyStateController.ChangeState(EnemyState.Idle);
             UpdatePlayerDistance();
-            //enemyStateController.ChangeState(EnemyState.Idle);
         }
     }
 
@@ -198,7 +198,7 @@ public class EnemyController : Interactable
 
                     if (path.Count > 0)
                     {
-                        Debug.Log("Can reach player");
+                        Debug.Log("Can reach player, current state "+enemyStateController.currentState);
 
                         // If not chasing start chase
                         if(enemyStateController.currentState != EnemyState.Chase)
@@ -207,7 +207,7 @@ public class EnemyController : Interactable
                             Debug.Log("Enemy starts chasing player",this);
                             EnemyReachedNewPosition();
                         }
-                    rayColor = Color.green;
+                        rayColor = Color.green;
                     }
                 }
             }

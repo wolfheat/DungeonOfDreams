@@ -20,6 +20,7 @@ public class EnemyStateController
         switch (newState)
         {
             case EnemyState.Idle:
+                animator.CrossFade("Idle", 0.1f);
                 break;
             case EnemyState.Chase:
                 animator.CrossFade("Walk", 0.1f);

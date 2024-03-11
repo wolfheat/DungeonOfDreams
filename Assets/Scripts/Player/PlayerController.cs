@@ -76,6 +76,9 @@ public class PlayerController : MonoBehaviour
     
     public void InterractWith()
     {
+
+        pickupController.UpdateColliders();
+
         // Disable interact when inventory
         //if (UIController.CraftingActive || UIController.InventoryActive || GameState.IsPaused)
 

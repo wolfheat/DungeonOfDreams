@@ -65,9 +65,13 @@ Feb-Mar 2024
 		* Added gizmos showing enemies seing player and what tiles are occupied
 9/3		* Made A* solution for enemy to reach player
 10/3	* Enemies can now reach the player after stepping through the path
-		
+		* Player can hit enemy when it has moved using the path
+11/3	* Made Beveled Blender Cube for softer looking blocks
+		* Moved cracks to separate object cause Blender Bevel Cube messed up materials applied to cube-
 
-		* Player cant hit enemy when it has moved using the path
+		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around
+		* Enemy should lock the tile its heading to so player nor enemies can go there
+
 
 		* Make enemy move to player when in chase mod
 		* Start working on a menu system
