@@ -70,7 +70,7 @@ Feb-Mar 2024
 		* Moved cracks to separate object cause Blender Bevel Cube messed up materials applied to cube-
 		* Beveled Cube smaller edges and correct wrapping -
 12/3	* Moved all data for minerals int SO, so just a base mineral prefab is needed to create every type
-		
+		* Created low poly 3D mineral in blender -
 
 		* Enemies takes rounds around their own position when pathfinding fix
 
