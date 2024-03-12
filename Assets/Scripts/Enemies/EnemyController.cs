@@ -38,6 +38,8 @@ public class EnemyController : Interactable
         particleType = ParticleType.Explode;
         Health = StartHealth; // Change to data health later
         enemyStateController = new EnemyStateController(animator);
+        enemyMock.transform.parent = transform.parent;
+        enemyMock.SetActive(false);
     }
 
 
@@ -56,6 +58,9 @@ public class EnemyController : Interactable
                 {
                     //Debug.Log("No Walls or Enemies ahead");
                     Debug.Log(" loaded action is move");
+
+                    enemyMock.SetActive(true);
+                    enemyMock.transform.position = target;
                     StartCoroutine(Move(target));
                 }
                 else
@@ -96,15 +101,18 @@ public class EnemyController : Interactable
 
     public void Remove()
     {
+        enemyMock.SetActive(false);
         Debug.Log("Enemy Removed");
         ItemSpawner.Instance.ReturnEnemy(this);
     }
-        
+
+    [SerializeField] private GameObject enemyMock;
     public void EnemyReachedNewPosition()
     {
+        enemyMock.SetActive(false);
         Debug.Log("Enemy at new Position");
         // Have new saved action updated with motion
-        if (path.Count > 0)
+        if (path!= null && path.Count > 0)
         {
             Vector2Int step = path.Pop();
             //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
@@ -116,7 +124,7 @@ public class EnemyController : Interactable
         }
         else
         {
-            enemyStateController.ChangeState(EnemyState.Idle);
+            Debug.Log(" Enemy set to Idle");
             UpdatePlayerDistance();
         }
     }
@@ -166,7 +174,11 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistance()
     {
-        if (Dead || enemyStateController.currentState == EnemyState.Exploding) return;
+        if (Dead || enemyStateController.currentState == EnemyState.Exploding)
+        {
+            Debug.Log("Dead or exploding Dead:"+Dead+ " state: "+enemyStateController.currentState);    
+            return;
+        }
         // Update player distance when player or enemy reaches a new position
 
         // If Player close enough and valid path to player chase player
@@ -196,7 +208,7 @@ public class EnemyController : Interactable
                     // Check if player can be reached find way.
                     path = LevelCreator.Instance.CanReach(this, player);
 
-                    if (path.Count > 0)
+                    if (path!= null && path.Count > 0)
                     {
                         Debug.Log("Can reach player, current state "+enemyStateController.currentState);
 
@@ -215,9 +227,8 @@ public class EnemyController : Interactable
             //Debug.Log("Ray from "+transform.position+" in direction "+ rayDirection);
             Debug.DrawRay(transform.position,rayDirection, rayColor, 0.5f);
 
-        }
-
-
+        }else
+            enemyStateController.ChangeState(EnemyState.Idle);
 
     }
 

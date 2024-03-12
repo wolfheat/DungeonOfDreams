@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PowerUp : Interactable
 {
-    new public PowerUpData Data { get { return base.Data as PowerUpData; } set { } }
+    new public PowerUpData Data { get { return base.Data as PowerUpData; } set { base.Data = value; } }
     private void Start()
     {
         if (Data == null) return;
@@ -17,6 +17,11 @@ public class PowerUp : Interactable
         UIController.Instance.AddPickedUp(Data);    
     }
 
+    internal void SetData(MineralData data)
+    {
+        meshFilter.mesh = data.mesh;
+        meshRenderer.material = data.material;
+    }
     internal void ResetTo(Vector3 pos)
     {
         throw new NotImplementedException();

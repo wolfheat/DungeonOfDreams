@@ -9,10 +9,12 @@ public enum PowerUpType { Speed,Damage}
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] Mineral[] mineralPrefabs;
+    [SerializeField] Mineral mineralPrefab;
     [SerializeField] EnemyController[] enemyPrefabs;
     [SerializeField] EnemyData[] enemyDatas;
 
     [SerializeField] GameObject enemyHolder;
+    [SerializeField] GameObject itemHolder;
 
 
     private Pool<Mineral> mineralPool = new Pool<Mineral>();
@@ -105,19 +107,22 @@ public class ItemSpawner : MonoBehaviour
     }
     public void SpawnMineralAt(MineralData data, Vector3 pos)
     {
+
         if (data == null) return;
-        int type = (int)data.mineralType;
-        if (type >= mineralPrefabs.Length) return;
 
-        //Debug.Log(" Spawn Mineral "+data.mineralType);
-
-        Mineral mineral = mineralPool.GetNextFromPool(mineralPrefabs[type]);
+        Mineral mineral = mineralPool.GetNextFromPool(mineralPrefab);
+        Debug.Log(" Returned a free mineral that currently is " + mineral.Data?.itemName);
 
         // Find first mineral that is disabled
         mineral.GetComponent<ObjectAnimator>().Reset();
-        mineral.Data = data;
+
+        mineral.SetData(data);
+        Debug.Log(" Mineral Data " + mineral.Data.itemName);
+
+
         mineral.transform.position = pos;
-        mineral.transform.rotation = mineralPrefabs[type].transform.rotation;
+        mineral.transform.rotation = mineralPrefab.transform.rotation;
+        mineral.transform.parent = itemHolder.transform;
 
         // Wait needed if item just got avtivated so player collider will pick it up
         StartCoroutine(PlayerController.Instance.pickupController.UpdateCollidersWait());

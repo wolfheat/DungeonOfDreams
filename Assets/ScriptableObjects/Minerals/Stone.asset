@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Stone
   sprite: {fileID: -375312494, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 2
+  material: {fileID: 2100000, guid: 5b8777848de2e02458d843eafc826a0f, type: 2}
+  mesh: {fileID: -5495902117074765545, guid: f0e9512e4d3c4f74686e679a2a7ec3dc, type: 3}
   mineralType: 4

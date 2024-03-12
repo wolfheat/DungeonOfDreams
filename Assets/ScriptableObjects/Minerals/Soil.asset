@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Soil
   sprite: {fileID: -897432354, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 1
+  material: {fileID: 2100000, guid: 06479e385052f354dad46c8c884c4dc1, type: 2}
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   mineralType: 3

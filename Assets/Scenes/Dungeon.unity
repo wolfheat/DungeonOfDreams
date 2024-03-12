@@ -1264,6 +1264,7 @@ MonoBehaviour:
   gridDetectionLayerMask:
     serializedVersion: 2
     m_Bits: 776
+  useDrawDebug: 0
 --- !u!1001 &296839130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5578,11 +5579,13 @@ MonoBehaviour:
   - {fileID: 2968723421562696881, guid: 80f3d756ffd8e974ca343cef8763c968, type: 3}
   - {fileID: 2968723421562696881, guid: 02b6179dcccf5c44fa515735ec48b707, type: 3}
   - {fileID: 2968723421562696881, guid: 8747e0cae9b28994b814f01f2dad6e6c, type: 3}
+  mineralPrefab: {fileID: 2968723421562696881, guid: 47e46dac476858c469326f0b25349c26, type: 3}
   enemyPrefabs:
   - {fileID: 5709389161940682714, guid: f6dff2fe28b63bd40bf37d858dadca68, type: 3}
   enemyDatas:
   - {fileID: 11400000, guid: ae11c7a3377ec9f499b00f716846117e, type: 2}
   enemyHolder: {fileID: 435732734}
+  itemHolder: {fileID: 1396416579}
 --- !u!1 &1408281245
 GameObject:
   m_ObjectHideFlags: 0

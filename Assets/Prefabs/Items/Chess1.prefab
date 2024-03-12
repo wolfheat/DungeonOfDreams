@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7698389865743645826}
   - component: {fileID: 7911183844963268823}
   m_Layer: 7
-  m_Name: Silver
+  m_Name: Chess1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825509625853371983}
-  m_Mesh: {fileID: -5495902117074765545, guid: f0e9512e4d3c4f74686e679a2a7ec3dc, type: 3}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &2093169419951993651
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ad778245b9073444fb542814ff577211, type: 2}
+  - {fileID: 2100000, guid: 36b1dae692ad73b4285c0e96c56f3aa8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccc04116f0453c4999d53e96d799d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: ee6f1cee2943ebe488e1d4030157f10e, type: 2}
+  Data: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}
   meshFilter: {fileID: 4654493392093145288, guid: f4da7f3b5d184274d9e0fff8868ba375, type: 3}
   meshRenderer: {fileID: 2093169419951993651, guid: f4da7f3b5d184274d9e0fff8868ba375, type: 3}
 --- !u!114 &7698389865743645826

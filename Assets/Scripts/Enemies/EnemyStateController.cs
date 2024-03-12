@@ -16,19 +16,19 @@ public class EnemyStateController
 
     public void ChangeState(EnemyState newState)
     {
-
+        Debug.Log("Change state from "+currentState+" to "+newState);
         switch (newState)
         {
             case EnemyState.Idle:
-                animator.CrossFade("Idle", 0.1f);
+                animator.CrossFade("Idle", 0.0f);
                 break;
             case EnemyState.Chase:
                 animator.CrossFade("Walk", 0.1f);
                 break;
             case EnemyState.Attack:
                 break;
-            case EnemyState.Exploding:
-                animator.CrossFade("Explode", 0.1f);
+            case EnemyState.Exploding:  
+                animator.CrossFade("Explode", 0.0f);
                 break;
             case EnemyState.Dead:
                 break;

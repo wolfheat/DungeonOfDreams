@@ -68,13 +68,15 @@ Feb-Mar 2024
 		* Player can hit enemy when it has moved using the path
 11/3	* Made Beveled Blender Cube for softer looking blocks
 		* Moved cracks to separate object cause Blender Bevel Cube messed up materials applied to cube-
-		* Beveled Cube smaller edges and correct wrapping
+		* Beveled Cube smaller edges and correct wrapping -
+12/3	* Moved all data for minerals int SO, so just a base mineral prefab is needed to create every type
+		
+
+		* Enemies takes rounds around their own position when pathfinding fix
 
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around
 		* Enemy should lock the tile its heading to so player nor enemies can go there
 
-
-		* Make enemy move to player when in chase mod
 		* Start working on a menu system
 		* Health bar
 

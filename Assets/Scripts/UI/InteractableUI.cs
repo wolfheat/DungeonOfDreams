@@ -34,6 +34,7 @@ public class InteractableUI : MonoBehaviour
 
         foreach (var data in itemDatas)
         {
+            if (data == null) continue;
             InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
             Debug.Log("data"+data+" resetList: "+resetList);
             item.SetName(data.itemName);

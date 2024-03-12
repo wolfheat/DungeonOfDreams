@@ -7,6 +7,7 @@ public class PickUpController : MonoBehaviour
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
     public EnemyController Enemy { get; set; }
+    public bool Mockup { get; set; } = false;
 
     private LayerMask enemyLayerMask;
     private LayerMask wallLayerMask;
@@ -39,8 +40,13 @@ public class PickUpController : MonoBehaviour
     public void UpdateEnemy()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, enemyLayerMask);
+        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, enemyLayerMask);        
         
+        Mockup = colliders.Where(x => x.GetComponentInParent<Interactable>() == null).ToArray().Length > 0?true:false;
+
+        colliders = colliders.Where(x => x.GetComponentInParent<Interactable>() != null).ToArray();
+        
+
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<Interactable>().Data).ToList());
 
         if (colliders.Length == 0)

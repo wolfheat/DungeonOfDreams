@@ -14,4 +14,6 @@ public class ItemData : ScriptableObject
     public string itemName;
     public Sprite sprite;
     public int value;
+    public Material material;
+    public Mesh mesh;
 }

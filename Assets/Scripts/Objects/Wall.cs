@@ -12,7 +12,7 @@ public class Wall : Interactable
     public int Health { get { return health;} }
     public bool Damage(int damage=1)
     {
-        Debug.Log("Damage Wall");
+        //  Debug.Log("Damage Wall");
         health-=damage;
 
         if (health <= 0)

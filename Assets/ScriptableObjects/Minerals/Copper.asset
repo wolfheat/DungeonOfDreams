@@ -15,4 +15,6 @@ MonoBehaviour:
   itemName: Copper
   sprite: {fileID: 1132745375, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 10
+  material: {fileID: 2100000, guid: ca4e1dc15d2c11344b776166e53310c6, type: 2}
+  mesh: {fileID: -5495902117074765545, guid: f0e9512e4d3c4f74686e679a2a7ec3dc, type: 3}
   mineralType: 2
