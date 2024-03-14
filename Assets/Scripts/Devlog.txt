@@ -75,7 +75,8 @@ Feb-Mar 2024
 13/3	* Rewrote enemy AI, Enemy responds to player moving to new position
 		* Enemy able to revert from ewxploding caused issues, now it explodes if explosion started -
 		* Some basic rotation implemented for enemy -
-
+14/3	* Made rotations correct for bomb enemy
+		* Enemy now starts to explode if player hits them -
 
 		* Add rotation for enemies it staggers why?
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct

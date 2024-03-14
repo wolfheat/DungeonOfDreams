@@ -13,6 +13,7 @@ public class EnemyController : Interactable
 
     private float timer = 0;
     private const float MoveTime = 2f;
+    private const float RotateTime = 0.4f;
     public bool DoingAction { get; set; } = false;
 
     private EnemyStateController enemyStateController;
@@ -102,6 +103,7 @@ public class EnemyController : Interactable
         Debug.Log("Enemy Explodes");
         Explosion.Instance.ExplodeNineAround(particleType, transform.position);        
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
+        StopAllCoroutines();
     }
 
     public void Remove()
@@ -117,7 +119,7 @@ public class EnemyController : Interactable
     public void ReachedPosition()
     {
         enemyMock.SetActive(false);
-        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path");
+        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
         if (enemyStateController.currentState == EnemyState.Exploding)
@@ -132,6 +134,9 @@ public class EnemyController : Interactable
 
             UpdatePlayerDistanceAndPath();
         }
+
+        if (enemyStateController.currentState == EnemyState.Exploding)
+            return;
 
         //CheckForExplosion();
 
@@ -219,19 +224,35 @@ public class EnemyController : Interactable
     }
 
 
+    private IEnumerator RotateLockOnPlayer()
+    {
+        while (true)
+        {
+            yield return null;
+            transform.rotation = Quaternion.LookRotation(player.transform.position-transform.position,Vector3.up);
+        }
+    }
     private IEnumerator Rotate(Quaternion target)
     {
+        EnemyState beginState = enemyStateController.currentState;
+
         DoingAction = true;
         Quaternion start = transform.rotation;
         Quaternion end = target;
         timer = 0;
-        while (timer < MoveTime)
+        enemyStateController.ChangeState(EnemyState.Rotate);
+        Debug.Log("Start Rotation - Change to idle state temporarily");
+        while (timer < RotateTime)
         {
             yield return null;
-            transform.rotation = Quaternion.Lerp(start, end, timer / MoveTime);
+            transform.rotation = Quaternion.Lerp(start, end, timer / RotateTime);
             timer += Time.deltaTime;
         }
-        transform.rotation = target;
+        transform.rotation = end;
+
+        Debug.Log("End Rotation -  Reset animation state");
+        enemyStateController.ChangeState(beginState);
+
         DoingAction = false;
         Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
         ReachedPosition();
@@ -254,7 +275,8 @@ public class EnemyController : Interactable
 
         const float EnemySight = 5f;
 
-        CheckForExplosion();
+        if (CheckForExplosion())
+            return;
 
         Debug.Log("Updating enemies path to player");
 
@@ -300,19 +322,17 @@ public class EnemyController : Interactable
 
     }
 
-    private void CheckForExplosion()
+    private bool CheckForExplosion()
     {
         playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
-        if (playerDistance < 1.8f)
+        if (playerDistance < 1.1f)
         {
             Debug.Log("Player close enough to explode");
             enemyStateController.ChangeState(EnemyState.Exploding);
+            StartCoroutine(RotateLockOnPlayer());
+            return true;
         }
-    }
-
-    private void UpdatePlayerLastSeenPosition()
-    {
-        throw new System.NotImplementedException();
+        return false;
     }
 
     public bool TakeDamage(int amt, bool explosionDamage = false)
@@ -320,18 +340,26 @@ public class EnemyController : Interactable
         if(Dead) return false;
 
         Health -= amt;
+        if (!explosionDamage && Health > 0)
+        {
+            SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
+            if(enemyStateController.currentState != EnemyState.Exploding)
+                enemyStateController.ChangeState(EnemyState.Exploding);
+        }
 
         if (Health <= 0)
         {
+            Debug.Log("Enemy dies");
             Dead = true;
             if (!explosionDamage)
             {
-                animator.CrossFade("Idle", 0f);
+                enemyStateController.ChangeState(EnemyState.Idle); 
                 ItemSpawner.Instance.ReturnEnemy(this);
+                Debug.Log("Enemy returned to pool");
                 return true;
             }
 
-            animator.CrossFade("Explode", 0.1f);
+            enemyStateController.ChangeState(EnemyState.Exploding);
             return true;
         }
         return false;

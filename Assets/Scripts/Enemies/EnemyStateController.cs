@@ -2,7 +2,7 @@
 
 using UnityEngine;
 
-public enum EnemyState { Idle, Chase, Attack, Exploding, Dead }
+public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead }
 
 public class EnemyStateController
 {
@@ -28,10 +28,13 @@ public class EnemyStateController
                 break;
             case EnemyState.Attack:
                 break;
-            case EnemyState.Exploding:  
+            case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);
                 break;
             case EnemyState.Dead:
+                break;
+            case EnemyState.Rotate:
+                animator.CrossFade("IdleRotate", 0.0f);
                 break;
         }
         currentState = newState;

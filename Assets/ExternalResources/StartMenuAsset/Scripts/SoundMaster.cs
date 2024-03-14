@@ -17,7 +17,7 @@ namespace Wolfheat.StartMenu
         KillEnemy,
         PickUp,
         LowOxygen,
-        EnemyShoot,
+        EnemyGetHit,
         Pinch,
         Miss,
         HitStone,
