@@ -36,7 +36,7 @@ public class InteractableUI : MonoBehaviour
         {
             if (data == null) continue;
             InteractableUIItem item = Instantiate(uiItemPrefab, holder.transform);
-            Debug.Log("data"+data+" resetList: "+resetList);
+            //Debug.Log("data"+data+" resetList: "+resetList);
             item.SetName(data.itemName);
             item.SetSprite(data.sprite);
         }

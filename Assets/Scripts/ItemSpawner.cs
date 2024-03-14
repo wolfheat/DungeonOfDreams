@@ -117,8 +117,8 @@ public class ItemSpawner : MonoBehaviour
         mineral.GetComponent<ObjectAnimator>().Reset();
 
         mineral.SetData(data);
-        Debug.Log(" Mineral Data " + mineral.Data.itemName);
 
+        Debug.Log(" Set Mineral Data to" + data.itemName);
 
         mineral.transform.position = pos;
         mineral.transform.rotation = mineralPrefab.transform.rotation;
@@ -130,6 +130,11 @@ public class ItemSpawner : MonoBehaviour
 
         PlayerController.Instance.MotionActionCompleted();
         
+    }
+
+    private string SetMineralDataDelayed(Mineral mineral, MineralData data)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void ReturnItem(Interactable interactable)

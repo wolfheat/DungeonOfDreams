@@ -19,18 +19,14 @@ public class EnemyController : Interactable
 
     private Stack<Vector2Int> path = new Stack<Vector2Int>();
 
+    private Vector2Int playerLastPosition = Vector2Int.zero;
+
     private const int StartHealth = 10;
     public int Health { get; private set; }
     public bool Dead { get; private set; }
     private void OnEnable()
     {
         player = FindFirstObjectByType<PlayerController>();
-        player.PlayerReachedNewTile += UpdatePlayerDistance;        
-    }
-
-    private void OnDisable()
-    {
-        player.PlayerReachedNewTile -= UpdatePlayerDistance;
     }
 
     private void Start()
@@ -66,7 +62,9 @@ public class EnemyController : Interactable
                 else
                 {
                     Debug.Log(" loaded action wants to move to a position filled by Wall or Enemy");
-                    EnemyReachedNewPosition();
+                    
+                    Debug.Log("* EnemyReachedNewPosition Update loaded savedAction");                    
+                    ReachedPosition();
                     return;
                 }
 
@@ -76,6 +74,10 @@ public class EnemyController : Interactable
 
             // Remove last attempted motion
             savedAction = null;
+        }else if (enemyStateController.currentState == EnemyState.Idle && PlayerHasNewPosition())
+        {
+            Debug.Log("Enemy is currectly Idle and player has new position");
+            ReachedPosition();
         }
     }
 
@@ -107,26 +109,70 @@ public class EnemyController : Interactable
     }
 
     [SerializeField] private GameObject enemyMock;
-    public void EnemyReachedNewPosition()
+    private bool newPositionEvaluated = false;
+
+    public void ReachedPosition()
     {
         enemyMock.SetActive(false);
-        Debug.Log("Enemy at new Position");
+        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path");
         // Have new saved action updated with motion
-        if (path!= null && path.Count > 0)
+
+        if (enemyStateController.currentState == EnemyState.Exploding)
+            return;
+
+        if (UpdatePlayerPosition() || !newPositionEvaluated)
         {
-            Vector2Int step = path.Pop();
-            //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
+            newPositionEvaluated = true;
+            Debug.Log("Enemy saw that player has moved");
+            // Make new path to players last known position if close enough
+            // TODO How about enemy patrols and gets close enough to player, tyhis should also activate chase
 
-            Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to "+step);
-            savedAction = new MoveAction(MoveActionType.Step, step);
-            Debug.Log(" Save action stored with new action");
+            UpdatePlayerDistanceAndPath();
+        }
 
+        //CheckForExplosion();
+
+        Debug.Log("Enemy is going to check if it has a path to follow: "+path?.Count);
+
+
+        if (HasPath())
+        {
+            ActivateNextPoint();
         }
         else
         {
-            Debug.Log(" Enemy set to Idle");
-            UpdatePlayerDistance();
+            
+            // Enemy should be in patrol mode here
+            Debug.Log(" Enemy keep patroling");
+            enemyStateController.ChangeState(EnemyState.Idle);
         }
+    }
+
+    private bool UpdatePlayerPosition()
+    {
+        bool changing = LevelCreator.Instance.PlayersLastPosition != playerLastPosition;
+        playerLastPosition = LevelCreator.Instance.PlayersLastPosition;
+        return changing;
+    }
+
+    private bool PlayerHasNewPosition()
+    {
+        return LevelCreator.Instance.PlayersLastPosition != playerLastPosition;        
+    }
+
+    private void ActivateNextPoint()
+    {
+        Vector2Int step = path.Pop();
+        //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
+
+        Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to " + step);
+        savedAction = new MoveAction(MoveActionType.Step, step);
+        Debug.Log(" Save action stored with new action");
+    }
+
+    private bool HasPath()
+    {
+        return path != null && path.Count > 0;
     }
 
     public IEnumerator Move(Vector3 target)
@@ -149,9 +195,9 @@ public class EnemyController : Interactable
         }
 
         DoingAction = false;
-
-        EnemyReachedNewPosition();
-
+        Debug.Log("* EnemyReachedNewPosition Move Action Completed");
+        newPositionEvaluated = false;
+        ReachedPosition();
     }
 
 
@@ -169,10 +215,11 @@ public class EnemyController : Interactable
         }
         transform.rotation = target;
         DoingAction = false;
-        EnemyReachedNewPosition();
+        Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
+        ReachedPosition();
     }
 
-    private void UpdatePlayerDistance()
+    private void UpdatePlayerDistanceAndPath()
     {
         if (Dead || enemyStateController.currentState == EnemyState.Exploding)
         {
@@ -183,17 +230,17 @@ public class EnemyController : Interactable
 
         // If Player close enough and valid path to player chase player
 
-        playerDistance = Vector3.Distance(transform.position, player.transform.position);
+        playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
+
         //Debug.Log("Enemy "+name+" recieved player action complete at distance "+playerDistance);
 
         const float EnemySight = 5f;
 
+        CheckForExplosion();
 
-        if (playerDistance < 1.8f)
-        {
-            //Debug.Log("Player close enough to explode");
-            enemyStateController.ChangeState(EnemyState.Exploding);
-        }else if(playerDistance < EnemySight)
+        Debug.Log("Updating enemies path to player");
+
+        if(playerDistance < EnemySight)
         {
             Vector3 rayDirection = (player.transform.position - transform.position).normalized*playerDistance;
             Ray ray = new Ray(transform.position, rayDirection);
@@ -217,8 +264,8 @@ public class EnemyController : Interactable
                         {
                             enemyStateController.ChangeState(EnemyState.Chase);
                             Debug.Log("Enemy starts chasing player",this);
-                            EnemyReachedNewPosition();
                         }
+
                         rayColor = Color.green;
                     }
                 }
@@ -227,9 +274,27 @@ public class EnemyController : Interactable
             //Debug.Log("Ray from "+transform.position+" in direction "+ rayDirection);
             Debug.DrawRay(transform.position,rayDirection, rayColor, 0.5f);
 
-        }else
+        }else if(enemyStateController.currentState == EnemyState.Chase)
+        {
+            Debug.Log("Enemy Chasing, but player to far, go to idle");
             enemyStateController.ChangeState(EnemyState.Idle);
+        }
 
+    }
+
+    private void CheckForExplosion()
+    {
+        playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
+        if (playerDistance < 1.8f)
+        {
+            Debug.Log("Player close enough to explode");
+            enemyStateController.ChangeState(EnemyState.Exploding);
+        }
+    }
+
+    private void UpdatePlayerLastSeenPosition()
+    {
+        throw new System.NotImplementedException();
     }
 
     public bool TakeDamage(int amt, bool explosionDamage = false)

@@ -16,7 +16,8 @@ public class EnemyStateController
 
     public void ChangeState(EnemyState newState)
     {
-        Debug.Log("Change state from "+currentState+" to "+newState);
+        if (currentState == newState) return;
+        //Debug.Log("Change state from "+currentState+" to "+newState);
         switch (newState)
         {
             case EnemyState.Idle:

@@ -71,8 +71,12 @@ Feb-Mar 2024
 		* Beveled Cube smaller edges and correct wrapping -
 12/3	* Moved all data for minerals int SO, so just a base mineral prefab is needed to create every type
 		* Created low poly 3D mineral in blender -
+13/3	* Rewrote enemy AI, Enemy responds to player moving to new position
+		* Enemy able to revert from ewxploding caused issues, now it explodes if explosion started
 
 		* Enemies takes rounds around their own position when pathfinding fix
+
+		* Add particle effect around floating item to make it more visably enchanting
 
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around
 		* Enemy should lock the tile its heading to so player nor enemies can go there
@@ -95,7 +99,6 @@ Feb-Mar 2024
 		// Walls
 		* Make blocks have variarity in hitpoints / tools needed?
 		* Add roots sticking out from roof
-		* Make Wall data that defines walls health points and containing minerals
 		* Have cracks show percentage of damage so they dont update every hit if the damage is to low etc
 
 		// Scenes

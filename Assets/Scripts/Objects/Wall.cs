@@ -5,7 +5,6 @@ public class Wall : Interactable
 {
     new public WallData Data { get { return base.Data as WallData; } set { } }
 
-    [SerializeField] MeshRenderer meshRenderer;
     int health = 6;
     private Coroutine shock;
 

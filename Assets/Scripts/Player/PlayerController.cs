@@ -37,8 +37,7 @@ public class PlayerController : MonoBehaviour
     public Action PlayerReachedNewTile;
     public static PlayerController Instance { get; private set; }
     public int Damage { get; set; } = 1;
-
-    private void Start()
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -46,7 +45,10 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Instance = this;
+    }
 
+    private void Start()
+    {
         // set up input actions
         //Inputs.Instance.Controls.Player.Move.performed += NewMoveInput;
         Inputs.Instance.Controls.Player.Step.performed += Step;

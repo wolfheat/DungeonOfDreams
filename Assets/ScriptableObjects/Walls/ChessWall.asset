@@ -15,6 +15,8 @@ MonoBehaviour:
   itemName: Chess Wall
   sprite: {fileID: -1067071916, guid: 8b2f65cc548f2b342b56cbf06a323855, type: 3}
   value: 0
+  material: {fileID: 2100000, guid: 1f50289e71449c645a62248ca56dbe4c, type: 2}
+  mesh: {fileID: 1359743842423581617, guid: b05a727491409a54785f25efaf337ce9, type: 3}
   particleType: 0
   soundName: 0
   mineralStored: {fileID: 11400000, guid: 48c1d5dc0eae10941b4638a9ce57c8e1, type: 2}

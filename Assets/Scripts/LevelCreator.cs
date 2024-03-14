@@ -25,6 +25,7 @@ public class LevelCreator : MonoBehaviour
     private LayerMask enemyLayerMask;
     [SerializeField] private bool useDrawDebug;
 
+    public Vector2Int PlayersLastPosition { get; set; }
 
     private Stack<Vector2Int> result = new();
 
@@ -43,6 +44,18 @@ public class LevelCreator : MonoBehaviour
 
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
+
+        PlayerController.Instance.PlayerReachedNewTile += UpdatePlayerDistance;
+    }
+
+    private void OnDisable()
+    {
+        PlayerController.Instance.PlayerReachedNewTile -= UpdatePlayerDistance;
+    }
+
+    private void UpdatePlayerDistance()
+    {
+        PlayersLastPosition = Convert.V3ToV2Int(PlayerController.Instance.transform.position);
     }
 
     // Start is called before the first frame update
@@ -150,7 +163,7 @@ public class LevelCreator : MonoBehaviour
 
                 if (dist <= 1.1f )
                 {
-                    //Debug.Log("Reached Target since distance from "+n+" to player " +to+ " is "+dist);
+                    Debug.Log("Reached Target since distance from "+n+" to player " +to+ " is "+dist);
                     return GetResult(newPoint);
                 }
 
@@ -166,6 +179,9 @@ public class LevelCreator : MonoBehaviour
             used.AddRange(neighbors);
             steps++;
         }
+        //if (steps >= 50) Debug.Log("Used more than 50 steps to calculate path, exit");
+        //if (open.Count == 0) Debug.Log("Open Count is Zero");
+        //if (reachedTarget) Debug.Log("Reached Target exit, should not happen");
         return null;
 
 
@@ -217,34 +233,46 @@ public class LevelCreator : MonoBehaviour
     {
         List<Vector2Int> newPos = new List<Vector2Int>();
         //Debug.Log(" Get Neighbors for "+source);
-        if(source.x > astart.x)
+        if (source.x > astart.x)
         {
             Vector2Int left = source + Vector2Int.left;
             //Debug.Log("Point "+source+" has valid neighbor to the left "+left);
-            if(!used.Contains(left) && level[left.x+50,left.y+50] == 0)
+            if (!used.Contains(left) && level[left.x + 50, left.y + 50] == 0)
                 newPos.Add(left);
+            //else if(!used.Contains(left)) Debug.Log("Rejected Left - Does Not Contain");
+            //else Debug.Log("Rejected Left - level value = "+ level[left.x + 50, left.y + 50]);
         }
-        if (source.x < aend.x-1)
+        //else Debug.Log("Rejected Left - Outside");
+        if (source.x < aend.x)
         {
             Vector2Int right = source + Vector2Int.right;
             //Debug.Log("Point " + source + " has valid neighbor to the right " + right);
             if (!used.Contains(right) && level[right.x + 50, right.y + 50] == 0)
                 newPos.Add(right);
+            //else if (!used.Contains(right)) Debug.Log("Rejected Right - Does Not Contain");
+            //else Debug.Log("Rejected Right - level value = " + level[right.x + 50, right.y + 50]);
         }
-        if(source.y > astart.y)
+        //else Debug.Log("Rejected Right - Outside");
+        if (source.y > astart.y)
         {
             Vector2Int down = source + Vector2Int.down;
             //Debug.Log("Point " + source + " has valid neighbor to the down " + down);
             if (!used.Contains(down) && level[down.x + 50, down.y + 50] == 0)
                 newPos.Add(down);
+            //else if (!used.Contains(down)) Debug.Log("Rejected Down - Does Not Contain");
+            //else Debug.Log("Rejected Down - level value = " + level[down.x + 50, down.y + 50]);
         }
-        if(source.y < aend.y)
+        //else Debug.Log("Rejected Down - Outside");
+        if (source.y < aend.y)
         {
             Vector2Int up = source + Vector2Int.up;
             //Debug.Log("Point " + source + " has valid neighbor to the up " + up);
             if (!used.Contains(up) && level[up.x + 50, up.y + 50] == 0)
                 newPos.Add(up);
+            //else if (!used.Contains(up)) Debug.Log("Rejected Up - Does Not Contain");
+            //else Debug.Log("Rejected Up - level value = " + level[up.x + 50, up.y + 50]);
         }
+        //else Debug.Log("Rejected Up - Outside");
         return newPos;
     }
 
@@ -261,7 +289,7 @@ public class LevelCreator : MonoBehaviour
             if (!first)
             {
                 //Debug.Log("DrawLine from "+r+" to "+last);
-                Debug.DrawLine(new Vector3(r.x,0,r.y), new Vector3(last.x, 0, last.y), Color.white, 1f);
+                Debug.DrawLine(new Vector3(r.x,-0.45f,r.y), new Vector3(last.x, -0.45f, last.y), Color.white, 1f);
             }
             last = r;
             first = false;
