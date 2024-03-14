@@ -71,16 +71,15 @@ Feb-Mar 2024
 		* Beveled Cube smaller edges and correct wrapping -
 12/3	* Moved all data for minerals int SO, so just a base mineral prefab is needed to create every type
 		* Created low poly 3D mineral in blender -
+		* Added particle effect around floating item to make it more visably enchanting
 13/3	* Rewrote enemy AI, Enemy responds to player moving to new position
-		* Enemy able to revert from ewxploding caused issues, now it explodes if explosion started
+		* Enemy able to revert from ewxploding caused issues, now it explodes if explosion started -
+		* Some basic rotation implemented for enemy -
 
-		* Enemies takes rounds around their own position when pathfinding fix
 
-		* Add particle effect around floating item to make it more visably enchanting
-
-		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around
-		* Enemy should lock the tile its heading to so player nor enemies can go there
-
+		* Add rotation for enemies it staggers why?
+		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct
+		
 		* Start working on a menu system
 		* Health bar
 

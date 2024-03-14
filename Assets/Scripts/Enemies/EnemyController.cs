@@ -83,7 +83,10 @@ public class EnemyController : Interactable
 
     private Quaternion EndRotationForMotion(MoveAction motion)
     {
-        return Quaternion.LookRotation(transform.right * motion.dir, Vector3.up);
+        Debug.Log("Motion to rotate towards "+motion.move);
+        Debug.Log("Enemy is at position "+transform.position);
+        Debug.Log("Moteion to rotate forward "+(Convert.V2IntToV3(motion.move) - transform.position));
+        return Quaternion.LookRotation(Convert.V2IntToV3(motion.move)-transform.position, Vector3.up);
     }
 
     private Vector3 GetNextStepTarget()
@@ -162,12 +165,27 @@ public class EnemyController : Interactable
 
     private void ActivateNextPoint()
     {
-        Vector2Int step = path.Pop();
-        //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
+        if (EnemyFacingDirection(path.Peek()))
+        {
+            Vector2Int step = path.Pop();
+            //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
 
-        Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to " + step);
-        savedAction = new MoveAction(MoveActionType.Step, step);
-        Debug.Log(" Save action stored with new action");
+            Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to " + step);
+            savedAction = new MoveAction(MoveActionType.Step, step);
+            Debug.Log(" Save action stored with new action");
+        }
+        else
+        {
+            //if (Convert.V3ToV2Int(transform.position) == path.Peek())
+            //    path.Pop(); // remove the first position since enemy is already there
+            // Rotate towards this direction
+            savedAction = new MoveAction(MoveActionType.Rotate, path.Peek());
+        }
+    }
+
+    private bool EnemyFacingDirection(Vector2Int lookPoint)
+    {
+        return Convert.V3ToV2Int(transform.position + transform.forward) == lookPoint;
     }
 
     private bool HasPath()

@@ -121,6 +121,9 @@ public class LevelCreator : MonoBehaviour
         Stack<Vector2Int> path = FindPath(from,to,A,Astart);
 
         DrawPath(path);
+
+        // First point is only for drawing, remove it since enemy is allready there
+        path.Pop();
         
 
         return path;
