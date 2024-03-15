@@ -13,7 +13,9 @@ namespace Wolfheat.Inputs
 
         private void OnEnable()
         {
-            SavingUtility.LoadingComplete += LoadingComplete;
+            // Enable this when you want to use the loading of a saved file
+            //SavingUtility.LoadingComplete += LoadingComplete;
+            LoadingComplete();
         }
 
         private void LoadingComplete()

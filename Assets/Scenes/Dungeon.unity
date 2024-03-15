@@ -2606,13 +2606,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 14127937}
     m_Modifications:
+    - target: {fileID: 382371659969592889, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+    - target: {fileID: 382371659969592889, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+    - target: {fileID: 382371659969592889, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1196115683223388986, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -4
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1196115683223388986, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -4
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1196115683223388986, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2714,6 +2726,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseController
       objectReference: {fileID: 0}
+    - target: {fileID: 4689842880458044807, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5464827725745794491, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+    - target: {fileID: 5464827725745794491, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+    - target: {fileID: 5464827725745794491, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5594582180747082042, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.b
       value: 0.5235849
@@ -2725,6 +2753,18 @@ PrefabInstance:
     - target: {fileID: 5594582180747082042, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
       propertyPath: m_Colors.m_HighlightedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8300760718576420606, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+    - target: {fileID: 8300760718576420606, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 1527479749558565102, guid: 9766fd5cd970dcf4a9c1419ddaf135a1, type: 2}
+    - target: {fileID: 8300760718576420606, guid: b8cd91892eb29e841aad39da02667d43, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8136,7 +8176,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -0.00012207031, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 1080.3999}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1920729819
@@ -9805,7 +9845,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 13.05603, y: 1}
+  m_AnchoredPosition: {x: 13.056152, y: 1}
   m_SizeDelta: {x: 41.603, y: 39.401}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &8430220680512800697

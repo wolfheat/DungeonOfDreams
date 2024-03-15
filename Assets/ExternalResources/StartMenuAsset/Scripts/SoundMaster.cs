@@ -246,6 +246,7 @@ namespace Wolfheat.StartMenu
 
         public void ToggleMusic(InputAction.CallbackContext context)
         {
+            Debug.Log("Soundmaster toggle music");
             ToggleMusic();
             GlobalMuteChanged?.Invoke();
         }
