@@ -82,10 +82,12 @@ Feb-Mar 2024
 		* Fixed issue where pickupCollider updated not centered on a square making it recieve adjecent walls -
 		* Fixed M Mute issue in game, caused by it waiting for a load from file that is not implemented yet
 		* Updated Pause screen fonts-
-
+		* Fixed order of Pause Menu
+15/3	* Bedrock set without data => not mineable, fix of bedrock material
+		
 
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct
-
+		* Make different meshed for different minerals
 		* Start working on a menu system
 		* Health bar / hearts
 

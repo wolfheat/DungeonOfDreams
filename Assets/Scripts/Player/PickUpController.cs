@@ -120,6 +120,11 @@ public class PickUpController : MonoBehaviour
     {
         if (Wall == null) return false;
 
+        if (Wall.Data == null)
+        {
+            Debug.Log("Interact with Wall without Data = Bedrock");
+            return false;
+        }
         //Debug.Log("Interacting with wall");
         if(Wall.Damage())
             UpdateColliders();
