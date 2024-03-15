@@ -23,7 +23,7 @@ public class PickUpController : MonoBehaviour
 
     public void UpdateColliders(bool wait = false)
     {
-        //Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
+        Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
         UpdateInteractables();
         UpdateWall();        
         UpdateEnemy();        
@@ -40,7 +40,7 @@ public class PickUpController : MonoBehaviour
     public void UpdateEnemy()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, enemyLayerMask);        
+        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, enemyLayerMask);        
         
         Mockup = colliders.Where(x => x.GetComponentInParent<Interactable>() == null).ToArray().Length > 0?true:false;
 
@@ -63,9 +63,24 @@ public class PickUpController : MonoBehaviour
     
     public void UpdateWall()
     {
+        // Align box with grid before casting
+
+        Vector3 alignedPos = Convert.Align(transform.position);
+
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, wallLayerMask);
+        Collider[] colliders = Physics.OverlapBox(alignedPos, Game.boxSize,Quaternion.identity, wallLayerMask);
+
+        /*
+        Vector3 a = alignedPos + transform.right*Game.boxSize.x-transform.up*Game.boxSize.y+transform.forward*Game.boxSize.z;
+        Vector3 b = a + Vector3.up*Game.boxSize.y*2;
+        Vector3 c = a - transform.right*Game.boxSize.y*2;
+        Vector3 d = c + Vector3.up*Game.boxSize.y*2;
         
+        // Draw the cube checked
+        Debug.DrawLine(a, b, Color.green,3f);
+        Debug.DrawLine(c, d, Color.green,3f);
+        */
+
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Interactable>().Data).ToList());
 
         if (colliders.Length == 0)
@@ -77,7 +92,7 @@ public class PickUpController : MonoBehaviour
     public void UpdateInteractables()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(transform.position, Game.boxSize,Quaternion.identity, itemLayerMask);
+        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, itemLayerMask);
         
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Interactable>()?.Data).ToList(),true);
         if (colliders.Length == 0)
@@ -114,7 +129,7 @@ public class PickUpController : MonoBehaviour
     {
         if (ActiveInteractable == null) return;
 
-        //Debug.Log("Interacting with item");
+        Debug.Log("Interacting with item");
         ActiveInteractable.InteractWith();
         UpdateColliders();
     }

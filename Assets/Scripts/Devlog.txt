@@ -77,16 +77,17 @@ Feb-Mar 2024
 		* Some basic rotation implemented for enemy -
 14/3	* Made rotations correct for bomb enemy
 		* Enemy now starts to explode if player hits them -
+		* Added hissing sound for enemy bomb preparing to blow up
+		* Renewed images for stone, coal, silver with low poly mesh
+		* Fixed issue where pickupCollider updated not centered on a square making it recieve adjecent walls -
 
-		* Add rotation for enemies it staggers why?
+
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct
-		
+
 		* Start working on a menu system
-		* Health bar
+		* Health bar / hearts
 
 		// Enemies
-		* Make bomb enemy stop blow up if player moves away before blink starts? PROB NOT
-		* Make enemy spawn bomb when killed by player
 		* Make Other death-animation for when enemy is killed by player
 		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions - DONE
 		* Adjust Enemy explosion effect to other particles?
@@ -95,6 +96,7 @@ Feb-Mar 2024
 		* Have jingle play when player has a powerup?
 		* Add sound effects for boosts running out?
 		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
+		* Have player tool light up with particle effects when speed boost is active
 
 		// Walls
 		* Make blocks have variarity in hitpoints / tools needed?

@@ -1,6 +1,7 @@
 ﻿
 
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead }
 
@@ -30,6 +31,7 @@ public class EnemyStateController
                 break;
             case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);
+                SoundMaster.Instance.PlaySound(SoundName.Hissing);
                 break;
             case EnemyState.Dead:
                 break;

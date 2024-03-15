@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
 public class Mineral : Interactable
 {
     new public MineralData Data { get { return base.Data as MineralData; } set { base.Data = value; } }

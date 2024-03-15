@@ -6,6 +6,8 @@ using Wolfheat.StartMenu;
 
 public class EnemyController : Interactable
 {
+    public EnemyData EnemyData { get; set; }
+
     PlayerController player;
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
@@ -22,7 +24,10 @@ public class EnemyController : Interactable
 
     private Vector2Int playerLastPosition = Vector2Int.zero;
 
-    private const int StartHealth = 10;
+    [SerializeField] private GameObject enemyMock;
+    private bool newPositionEvaluated = false;
+
+    private const int StartHealth = 2;
     public int Health { get; private set; }
     public bool Dead { get; private set; }
     private void OnEnable()
@@ -112,9 +117,6 @@ public class EnemyController : Interactable
         Debug.Log("Enemy Removed");
         ItemSpawner.Instance.ReturnEnemy(this);
     }
-
-    [SerializeField] private GameObject enemyMock;
-    private bool newPositionEvaluated = false;
 
     public void ReachedPosition()
     {
@@ -312,7 +314,7 @@ public class EnemyController : Interactable
             }
 
             //Debug.Log("Ray from "+transform.position+" in direction "+ rayDirection);
-            Debug.DrawRay(transform.position,rayDirection, rayColor, 0.5f);
+            //Debug.DrawRay(transform.position,rayDirection, rayColor, 0.5f);
 
         }else if(enemyStateController.currentState == EnemyState.Chase)
         {
@@ -328,6 +330,7 @@ public class EnemyController : Interactable
         if (playerDistance < 1.1f)
         {
             Debug.Log("Player close enough to explode");
+            path = null;
             enemyStateController.ChangeState(EnemyState.Exploding);
             StartCoroutine(RotateLockOnPlayer());
             return true;
@@ -350,12 +353,18 @@ public class EnemyController : Interactable
         if (Health <= 0)
         {
             Debug.Log("Enemy dies");
+            SoundMaster.Instance.StopSound(SoundName.Hissing);
+            SoundMaster.Instance.StopSound(SoundName.EnemyGetHit);
+            enemyMock.SetActive(false);
             Dead = true;
             if (!explosionDamage)
             {
                 enemyStateController.ChangeState(EnemyState.Idle); 
                 ItemSpawner.Instance.ReturnEnemy(this);
                 Debug.Log("Enemy returned to pool");
+                UsableData usableData = ((EnemyData)Data).storedUsable;
+                Debug.Log("usableData "+ usableData);
+                CreateItem(usableData);
                 return true;
             }
 
@@ -363,5 +372,10 @@ public class EnemyController : Interactable
             return true;
         }
         return false;
+    }
+
+    private void CreateItem(UsableData data)
+    {
+        ItemSpawner.Instance.SpawnUsableAt(data, transform.position);
     }
 }

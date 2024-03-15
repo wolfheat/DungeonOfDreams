@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Silver
   m_EditorClassIdentifier: 
   itemName: Silver
-  sprite: {fileID: -375312494, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  sprite: {fileID: -476650172, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 50
   material: {fileID: 2100000, guid: ad778245b9073444fb542814ff577211, type: 2}
   mesh: {fileID: 5011979474169865735, guid: f0e9512e4d3c4f74686e679a2a7ec3dc, type: 3}

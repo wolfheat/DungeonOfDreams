@@ -8,6 +8,10 @@ public static class Game
 
 public static class Convert
 {
+    public static Vector3 Align(this Vector3 v)
+    {
+        return new Vector3( (float)Mathf.RoundToInt(v.x), (float)Mathf.RoundToInt(v.y), (float)Mathf.RoundToInt(v.z));
+    }
     public static Vector3 V2IntToV3(this Vector2Int v)
     {
         return new Vector3(v.x,0,v.y);

@@ -15,6 +15,9 @@ MonoBehaviour:
   itemName: Bomber
   sprite: {fileID: 21300000, guid: 09a1158477843d14faf9c6f520d9c73b, type: 3}
   value: 0
+  material: {fileID: 0}
+  mesh: {fileID: 0}
+  enemyType: 0
   particleType: 0
   soundName: 8
-  powerUpStored: {fileID: 11400000, guid: 6d96ccb3f9848974292c049511cf76f5, type: 2}
+  storedUsable: {fileID: 11400000, guid: 2a89d3435543f4449a1d7bfce674b099, type: 2}

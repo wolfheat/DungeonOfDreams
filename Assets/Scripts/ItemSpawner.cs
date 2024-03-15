@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Wolfheat.Pool;
+using static UnityEngine.Rendering.DebugUI;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, Soil, Stone, Chess,Coal}
+public enum UsableType {Bomb,Other}
 public enum PowerUpType { Speed,Damage}
 public class ItemSpawner : MonoBehaviour
 {
@@ -22,7 +24,11 @@ public class ItemSpawner : MonoBehaviour
     private Pool<EnemyController> enemyPool = new Pool<EnemyController>();
     public static ItemSpawner Instance { get; private set; }
 
-    private void Start()
+    [SerializeField] Usable[] usablePrefabs;
+    Pool<Usable>[] usables;
+
+
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -30,6 +36,14 @@ public class ItemSpawner : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+    private void Start()
+    {
+        usables = new Pool<Usable>[usablePrefabs.Length];
+        // Initiate the List of Usables
+        for (int i = 0; i<usablePrefabs.Length; i++)
+            usables[i] = new Pool<Usable>();
+        Debug.Log("Initiated usables array " + usables[0]);
 
         // Add initial Minerals
         List<Mineral> minerals = GetComponentsInChildren<Mineral>().ToList();
@@ -65,6 +79,7 @@ public class ItemSpawner : MonoBehaviour
             {
                 Debug.Log("Spawn Enemy at pos "+tryPosition+" data: " + enemyDatas.Length);
                 SpawnEnemyAt(enemyDatas[0] ,tryPosition);
+                
                 spawnedAmount++;
             }
         }
@@ -105,6 +120,31 @@ public class ItemSpawner : MonoBehaviour
         Debug.Log("Enemy at " + enemy.transform.position);
 
     }
+
+    public void SpawnUsableAt(UsableData data, Vector3 pos)
+    {
+        Debug.Log("Spawning Usable "+data.itemName+" at "+pos);
+        int type = (int)data.usableType;
+        if (type >= usablePrefabs.Length) return;
+
+        Debug.Log("Get Usable from pool ");
+        Usable usable = usables[type].GetNextFromPool(usablePrefabs[type]);
+        Debug.Log("Got Usable from pool ");
+
+        // Find first mineral that is disabled
+        usable.GetComponent<ObjectAnimator>().Reset();
+
+        usable.Data = data;
+        usable.transform.position = pos;
+        usable.transform.rotation = usablePrefabs[type].transform.rotation;
+        usable.transform.parent = itemHolder.transform;
+
+        // Wait needed if item just got avtivated so player collider will pick it up
+        StartCoroutine(PlayerController.Instance.pickupController.UpdateCollidersWait());
+        
+        PlayerController.Instance.MotionActionCompleted();        
+    }
+    
     public void SpawnMineralAt(MineralData data, Vector3 pos)
     {
 

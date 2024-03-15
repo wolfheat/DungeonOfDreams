@@ -335,14 +335,14 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 15
-  - clip: {fileID: 8300000, guid: 708362c0dc9996e499b64eb869fcd151, type: 3}
+  - clip: {fileID: 8300000, guid: 11fe1276f6cfff14aacde679082fd38c, type: 3}
     volume: 0.181
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
     name: 16
-  - clip: {fileID: 8300000, guid: 627aefae6ec26ca40b51880aa30c565b, type: 3}
-    volume: 0.181
+  - clip: {fileID: 8300000, guid: 64c726178809186458523e4b66f3b66d, type: 3}
+    volume: 1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}

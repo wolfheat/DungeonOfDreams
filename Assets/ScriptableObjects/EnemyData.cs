@@ -11,6 +11,6 @@ public class EnemyData : ItemData
     public ParticleType particleType;
     public SoundName soundName;
 
-    // Have enemies store powerups?
-    public PowerUpData powerUpStored;
+    // Have enemies store bomb?
+    public UsableData storedUsable;
 }
