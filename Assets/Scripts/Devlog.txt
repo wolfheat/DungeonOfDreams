@@ -89,6 +89,7 @@ Feb-Mar 2024
 		* Start working on a menu system
 		* Health bar / hearts
 
+		* Figure out game play hook
 
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct
 		* Make different meshes for different minerals
@@ -228,7 +229,9 @@ Feb-Mar 2024
 		// * Ekincan Tas - Damage Numbers Pro - Standard EULA
 		// * Sigmoid Button Assets - Props 3D - Standard EULA
 		// * 3D.RINA - Animated Spiders Pack - Standard EULA
-		// * Ilias Kap - Workplace Tools -  Standard EULA
+		// * Ilias Kap - Workplace Tools - Standard EULA
+
+		// * Polygon  - Farm Pack -  Standard EULA
 
 		 - FONTS
 		// * Gomarice - Shiratama Dango - Apache-2.0
