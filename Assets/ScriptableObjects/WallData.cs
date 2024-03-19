@@ -7,4 +7,5 @@ public class WallData : ItemData
     public ParticleType particleType;
     public SoundName soundName;
     public MineralData mineralStored;
+    public Material pebbleMaterial;
 }

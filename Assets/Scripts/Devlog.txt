@@ -85,11 +85,16 @@ Feb-Mar 2024
 		* Fixed order of Pause Menu
 15/3	* Bedrock set without data => not mineable, fix of bedrock material-
 19/3	* Added low poly pebbles tested changing colors of the walls
-		
+		* Updated Materials for wall types and updated 2D versions of items
+		* Fixed lights on tools, it now has its own lightsource -
+
+		* Sometimes spawned items are not updated as in front of player
 		* Start working on a menu system
 		* Health bar / hearts
 
 		* Figure out game play hook
+
+		* Lights display incorrectly on tools
 
 		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct
 		* Make different meshes for different minerals

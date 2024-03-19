@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Bedrock
   m_EditorClassIdentifier: 
   itemName: Bedrock
-  sprite: {fileID: 87791190, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  sprite: {fileID: 752867676, guid: 8b2f65cc548f2b342b56cbf06a323855, type: 3}
   value: 0
   material: {fileID: 2100000, guid: 55ad0b024e41a4c4a88244acdd8cfe8e, type: 2}
   mesh: {fileID: 1359743842423581617, guid: b05a727491409a54785f25efaf337ce9, type: 3}
   particleType: 0
   soundName: 0
   mineralStored: {fileID: 0}
+  pebbleMaterial: {fileID: 0}

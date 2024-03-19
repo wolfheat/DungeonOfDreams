@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b7d6a8e2c57374cba6cc2e1d2db78e, type: 3}
+  m_Name: LightStone
+  m_EditorClassIdentifier: 
+  itemName: Light Stone
+  sprite: {fileID: -375312494, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  value: 2
+  material: {fileID: 2100000, guid: 26b6fbc7e7fde994c86eced380e82fc1, type: 2}
+  mesh: {fileID: 5011979474169865735, guid: f0e9512e4d3c4f74686e679a2a7ec3dc, type: 3}
+  mineralType: 4

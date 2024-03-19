@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Gold
   m_EditorClassIdentifier: 
   itemName: Gold
-  sprite: {fileID: 512227131, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  sprite: {fileID: -897432354, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 100
   material: {fileID: 2100000, guid: b2bc99d202d14d24bae14295ce38f2f8, type: 2}
   mesh: {fileID: 5011979474169865735, guid: f0e9512e4d3c4f74686e679a2a7ec3dc, type: 3}

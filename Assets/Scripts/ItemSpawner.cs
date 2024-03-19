@@ -5,7 +5,7 @@ using Wolfheat.Pool;
 using static UnityEngine.Rendering.DebugUI;
 using Random = UnityEngine.Random;
 
-public enum MineralType{Gold,Silver,Copper, Soil, Stone, Chess,Coal}
+public enum MineralType{Gold,Silver,Copper, RedSoil, DarkSoil, Stone, Chess, Coal, Sand}
 public enum UsableType {Bomb,Other}
 public enum PowerUpType { Speed,Damage}
 public class ItemSpawner : MonoBehaviour
@@ -41,7 +41,7 @@ public class ItemSpawner : MonoBehaviour
     {
         usables = new Pool<Usable>[usablePrefabs.Length];
         // Initiate the List of Usables
-        for (int i = 0; i<usablePrefabs.Length; i++)
+        for (int i = 0; i < usablePrefabs.Length; i++)
             usables[i] = new Pool<Usable>();
         Debug.Log("Initiated usables array " + usables[0]);
 
@@ -50,7 +50,7 @@ public class ItemSpawner : MonoBehaviour
 
         foreach (Mineral mineral in minerals)
             mineralPool.Add(mineral);
-        
+
         List<PowerUp> powerUps = GetComponentsInChildren<PowerUp>().ToList();
         foreach (PowerUp powerUp in powerUps)
             powerUpPool.Add(powerUp);
@@ -61,9 +61,13 @@ public class ItemSpawner : MonoBehaviour
         foreach (EnemyController enemy in enemies)
             enemyPool.Add(enemy);
 
-        Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count+ "] PowerUp=[ " + powerUpPool.Count+"] Enemies=[" + enemyPool.Count+"]");
-        
+        Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count + "] PowerUp=[ " + powerUpPool.Count + "] Enemies=[" + enemyPool.Count + "]");
+
         //SpawnRandomEnemies();
+    }
+
+    private void GeneratePebbles()
+    {
 
     }
 
@@ -170,11 +174,6 @@ public class ItemSpawner : MonoBehaviour
 
         PlayerController.Instance.MotionActionCompleted();
         
-    }
-
-    private string SetMineralDataDelayed(Mineral mineral, MineralData data)
-    {
-        throw new System.NotImplementedException();
     }
 
     public void ReturnItem(Interactable interactable)

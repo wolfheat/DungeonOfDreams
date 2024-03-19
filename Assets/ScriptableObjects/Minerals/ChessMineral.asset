@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ChessMineral
   m_EditorClassIdentifier: 
   itemName: Chess
-  sprite: {fileID: 471531177, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  sprite: {fileID: -330924878, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 5
   material: {fileID: 2100000, guid: 36b1dae692ad73b4285c0e96c56f3aa8, type: 2}
   mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-  mineralType: 5
+  mineralType: 6

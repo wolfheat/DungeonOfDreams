@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: LightSoilWall
   m_EditorClassIdentifier: 
   itemName: Light Soil
-  sprite: {fileID: 144287744, guid: 8b2f65cc548f2b342b56cbf06a323855, type: 3}
+  sprite: {fileID: -1297784701, guid: 8b2f65cc548f2b342b56cbf06a323855, type: 3}
   value: 0
   material: {fileID: 2100000, guid: a9c0e81af146e494f842932826c479f7, type: 2}
   mesh: {fileID: 1359743842423581617, guid: b05a727491409a54785f25efaf337ce9, type: 3}
   particleType: 0
   soundName: 0
   mineralStored: {fileID: 11400000, guid: d66fb691a3aa8af488b186e4926ff772, type: 2}
+  pebbleMaterial: {fileID: 2100000, guid: 2babb9a9eba775149bfc451797df8f16, type: 2}

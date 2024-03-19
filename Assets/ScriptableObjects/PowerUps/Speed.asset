@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Speed
   m_EditorClassIdentifier: 
   itemName: Speed Boost
-  sprite: {fileID: -407816780, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
+  sprite: {fileID: -290586423, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
   value: 10
+  material: {fileID: 0}
+  mesh: {fileID: 0}
   particleType: 2
   soundName: 22
   powerUpType: 0
