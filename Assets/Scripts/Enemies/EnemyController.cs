@@ -24,7 +24,9 @@ public class EnemyController : Interactable
 
     private Vector2Int playerLastPosition = Vector2Int.zero;
 
-    [SerializeField] private GameObject enemyMock;
+    private bool showMock = false;
+
+
     private bool newPositionEvaluated = false;
 
     private const int StartHealth = 2;
@@ -40,8 +42,6 @@ public class EnemyController : Interactable
         particleType = ParticleType.Explode;
         Health = StartHealth; // Change to data health later
         enemyStateController = new EnemyStateController(animator);
-        enemyMock.transform.parent = transform.parent;
-        enemyMock.SetActive(false);
     }
 
 
@@ -60,9 +60,6 @@ public class EnemyController : Interactable
                 {
                     //Debug.Log("No Walls or Enemies ahead");
                     Debug.Log(" loaded action is move");
-
-                    enemyMock.SetActive(true);
-                    enemyMock.transform.position = target;
                     StartCoroutine(Move(target));
                 }
                 else
@@ -113,14 +110,12 @@ public class EnemyController : Interactable
 
     public void Remove()
     {
-        enemyMock.SetActive(false);
         Debug.Log("Enemy Removed");
         ItemSpawner.Instance.ReturnEnemy(this);
     }
 
     public void ReachedPosition()
     {
-        enemyMock.SetActive(false);
         Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
@@ -355,7 +350,6 @@ public class EnemyController : Interactable
             Debug.Log("Enemy dies");
             SoundMaster.Instance.StopSound(SoundName.Hissing);
             SoundMaster.Instance.StopSound(SoundName.EnemyGetHit);
-            enemyMock.SetActive(false);
             Dead = true;
             if (!explosionDamage)
             {
