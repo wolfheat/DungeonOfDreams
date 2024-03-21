@@ -12,6 +12,7 @@ public class EnemyController : Interactable
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
     [SerializeField] LayerMask obstructions;
+    public Collider enemyCollider;
 
     private float timer = 0;
     private const float MoveTime = 2f;
@@ -48,7 +49,7 @@ public class EnemyController : Interactable
     private MoveAction savedAction = null;
     private void Update()
     {
-        if (DoingAction) return;
+        if (DoingAction || Dead) return;
 
         if (savedAction != null)
         {
@@ -168,6 +169,12 @@ public class EnemyController : Interactable
                     if(enemyStateController.currentState != EnemyState.Attack)
                         enemyStateController.ChangeState(EnemyState.Attack);
                 }
+                else if(path == null || path.Count == 0)
+                {
+                    Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
+                    enemyStateController.ChangeState(EnemyState.Idle);
+                }
+
                 return;
             }
 
@@ -344,11 +351,21 @@ public class EnemyController : Interactable
 
             //Debug.Log("Ray from "+transform.position+" in direction "+ rayDirection);
             //Debug.DrawRay(transform.position,rayDirection, rayColor, 0.5f);
-
-        }else if(enemyStateController.currentState == EnemyState.Chase)
-        {
-            Debug.Log("Enemy Chasing, but player to far, go to idle");
-            enemyStateController.ChangeState(EnemyState.Idle);
+        }
+        else
+        {        
+            if(path!=null)
+                path.Clear();
+            if(enemyStateController.currentState == EnemyState.Chase)
+            {
+                Debug.Log("Enemy Chasing, but player to far, go to idle");
+                enemyStateController.ChangeState(EnemyState.Idle);
+            }
+            else if (enemyStateController.currentState != EnemyState.Chase || enemyStateController.currentState != EnemyState.Idle)
+            {
+                Debug.Log("player to far, enemy not at idle or patrol, go to idle");
+                enemyStateController.ChangeState(EnemyState.Idle);
+            }
         }
 
     }
@@ -391,8 +408,10 @@ public class EnemyController : Interactable
     {
         if(Dead) return false;
 
+        EnemyData enemyData = (EnemyData)Data;
+
         Health -= amt;
-        if (!explosionDamage && Health > 0)
+        if (enemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
         {
             SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
             if(enemyStateController.currentState != EnemyState.Exploding)
@@ -401,27 +420,47 @@ public class EnemyController : Interactable
 
         if (Health <= 0)
         {
-            Debug.Log("Enemy dies");
-            SoundMaster.Instance.StopSound(SoundName.Hissing);
-            SoundMaster.Instance.StopSound(SoundName.EnemyGetHit);
-            Dead = true;
-            if (!explosionDamage)
+
+            if (enemyData.enemyType == EnemyType.Bomber)
             {
-                enemyStateController.ChangeState(EnemyState.Idle); 
-                ItemSpawner.Instance.ReturnEnemy(this);
-                Debug.Log("Enemy returned to pool");
-                UsableData usableData = ((EnemyData)Data).storedUsable;
-                Debug.Log("usableData "+ usableData);
-                CreateItem(usableData);
+                Debug.Log("Enemy bomber dies");
+                SoundMaster.Instance.StopSound(SoundName.Hissing);
+                SoundMaster.Instance.StopSound(SoundName.EnemyGetHit);
+                Dead = true;
+                if (!explosionDamage)
+                {
+                    enemyStateController.ChangeState(EnemyState.Idle);
+                    ItemSpawner.Instance.ReturnEnemy(this);
+                    Debug.Log("Enemy returned to pool");
+                    CreateItem(enemyData.storedUsable);
+                    return true;
+                }
+            }
+            else if (enemyData.enemyType == EnemyType.Skeleton)
+            {
+                Debug.Log("Enemy skeleton dies");
+                Dead = true;
+                enemyStateController.ChangeState(EnemyState.Dying);
                 return true;
             }
 
-            enemyStateController.ChangeState(EnemyState.Exploding);
+                enemyStateController.ChangeState(EnemyState.Exploding);
             return true;
         }
         return false;
     }
 
+    public void DyingAnimationComplete()
+    {
+        Debug.Log("Animation complete");
+
+        EnemyData enemyData = (EnemyData)Data;
+
+        enemyStateController.ChangeState(EnemyState.Idle);
+        ItemSpawner.Instance.ReturnEnemy(this);
+        Debug.Log("Enemy returned to pool");
+        CreateItem(enemyData.storedUsable);
+    }
     private void CreateItem(UsableData data)
     {
         ItemSpawner.Instance.SpawnUsableAt(data, transform.position);

@@ -16,7 +16,7 @@ namespace Wolfheat.StartMenu
         StabEnemy,
         KillEnemy,
         PickUp,
-        LowOxygen,
+        SkeletonDie,
         EnemyGetHit,
         Hissing,
         Miss,

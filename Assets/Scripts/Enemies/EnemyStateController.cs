@@ -3,7 +3,9 @@
 using UnityEngine;
 using Wolfheat.StartMenu;
 
-public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead }
+public enum EnemyState { Idle, Rotate, Chase, Attack, Exploding, Dead,
+    Dying
+}
 
 public class EnemyStateController
 {
@@ -28,7 +30,7 @@ public class EnemyStateController
                 animator.CrossFade("Walk", 0.1f);
                 break;
             case EnemyState.Attack:
-                animator.CrossFade("Attack", 0.1f); 
+                animator.CrossFade("Attack", 0.1f);
                 break;
             case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);
@@ -38,6 +40,10 @@ public class EnemyStateController
                 break;
             case EnemyState.Rotate:
                 animator.CrossFade("IdleRotate", 0.0f);
+                break;
+            case EnemyState.Dying:
+                animator.CrossFade("Dying", 0.0f);
+                SoundMaster.Instance.PlaySound(SoundName.SkeletonDie);
                 break;
         }
         currentState = newState;

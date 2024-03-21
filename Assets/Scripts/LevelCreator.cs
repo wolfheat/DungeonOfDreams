@@ -303,14 +303,6 @@ public class LevelCreator : MonoBehaviour
     }
 
 
-    public bool TargetHasMockup(Vector3 target)
-    {
-        // Check if spot is free
-        // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, enemyLayerMask);
-                
-        return colliders.Where(x => x.gameObject.GetComponent<EnemyController>()==null).ToArray().Length > 0;
-    }
     public EnemyController TargetHasEnemy(Vector3 target)
     {
         // Check if spot is free

@@ -89,11 +89,13 @@ Feb-Mar 2024
 		* Fixed lights on tools, it now has its own lightsource -
 20/3	* Added skeleton, 
 		* Bomb enemy is nolonger shown as duplicate (was mock item)-
-		* Skeleton can walk and attack towards player
+		* Skeleton can walk and attack towards player -
+		* Added Skeleton death animation
+		* Fixed enemy keep moving on path when player is far away.-
 
-		
 		* Enemy Controller has mesh renderer and MeshFilter, dont need it
 		* enemy, needs other attack animation
+		* Sometimes player can move onto same tile as enemy - fix
 		* Sometimes spawned items are not updated as in front of player - FIxed?
 		* Start working on a menu system
 		* Health bar / hearts
@@ -105,7 +107,6 @@ Feb-Mar 2024
 
 		// Enemies
 		* Make Other death-animation for when enemy is killed by player
-		* Have enemy AI logic move towards player if closer than X tiles and can se player, else back to normal actions - DONE
 		* Adjust Enemy explosion effect to other particles?
 		
 		// Player

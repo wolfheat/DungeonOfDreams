@@ -488,10 +488,10 @@ TextureImporter:
       name: ItemIconsA_16
       rect:
         serializedVersion: 2
-        x: 334
-        y: 17
-        width: 168
-        height: 201
+        x: 333
+        y: 24
+        width: 167
+        height: 191
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

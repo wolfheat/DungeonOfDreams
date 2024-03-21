@@ -141,13 +141,10 @@ public class PlayerController : MonoBehaviour
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
-                if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null && !LevelCreator.Instance.TargetHasMockup(target))
+                if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null)
                 {
                     //Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
-                }else if (LevelCreator.Instance.TargetHasMockup(target))
-                {
-                    Debug.Log("Could not move cause of Mockup");
                 }
             }
             else if (savedAction.moveType == MoveActionType.Rotate)

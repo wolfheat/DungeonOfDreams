@@ -127,6 +127,7 @@ public class ItemSpawner : MonoBehaviour
 
     public void SpawnUsableAt(UsableData data, Vector3 pos)
     {
+        if(data == null) return;
         Debug.Log("Spawning Usable "+data.itemName+" at "+pos);
         int type = (int)data.usableType;
         if (type >= usablePrefabs.Length) return;
