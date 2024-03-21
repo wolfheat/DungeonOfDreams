@@ -123,7 +123,7 @@ public class LevelCreator : MonoBehaviour
         DrawPath(path);
 
         // First point is only for drawing, remove it since enemy is allready there
-        if(path.Count > 0)
+        if(path != null && path.Count > 0)
             path.Pop();
         
 

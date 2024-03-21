@@ -77,7 +77,7 @@ public class EnemyController : Interactable
 
             // Remove last attempted motion
             savedAction = null;
-        }else if (enemyStateController.currentState == EnemyState.Idle && PlayerHasNewPosition())
+        }else if ((enemyStateController.currentState == EnemyState.Attack || enemyStateController.currentState == EnemyState.Idle) && PlayerHasNewPosition())
         {
             Debug.Log("Enemy is currectly Idle and player has new position");
             ReachedPosition();
@@ -146,11 +146,43 @@ public class EnemyController : Interactable
         }
         else
         {
-            
+            EnemyData enemyData = (EnemyData)Data;
+            if (enemyData.enemyType == EnemyType.Skeleton)
+            {
+                Debug.Log("This is a Skeleton");
+                playerDistance = PlayerDistance();
+                Debug.Log("distance "+playerDistance);
+                if (playerDistance < 1.1f)
+                {
+                    // if next to player but not facing player rotate towards player
+                    bool readyToAttack = PlayerIsOneStepAhead();
+                    if (!readyToAttack)
+                    {
+                        Debug.Log("Added rotation to enemy action");
+                        savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
+                        return;
+                    }
+
+                    Debug.Log("Enemy within range, Change to Attack animation");
+
+                    if(enemyStateController.currentState != EnemyState.Attack)
+                        enemyStateController.ChangeState(EnemyState.Attack);
+                }
+                return;
+            }
+
+
+
             // Enemy should be in patrol mode here
-            Debug.Log(" Enemy keep patroling");
+            Debug.Log(" Enemy keep patroling",this);
             enemyStateController.ChangeState(EnemyState.Idle);
+
         }
+    }
+
+    private bool PlayerIsOneStepAhead()
+    {
+        return transform.forward == (player.transform.position - transform.position).normalized;
     }
 
     private bool UpdatePlayerPosition()
@@ -272,9 +304,11 @@ public class EnemyController : Interactable
 
         const float EnemySight = 5f;
 
-        if (CheckForExplosion())
-            return;
+        EnemyData enemyData = (EnemyData)Data;
 
+        if (enemyData.enemyType == EnemyType.Bomber && CheckForExplosion())
+            return;
+        
         Debug.Log("Updating enemies path to player");
 
         if(playerDistance < EnemySight)
@@ -319,9 +353,24 @@ public class EnemyController : Interactable
 
     }
 
-    private bool CheckForExplosion()
+    private bool CheckForAttack()
     {
         playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
+        if (playerDistance < 1.1f)
+        {
+            Debug.Log("Skeleton close enough to attack");
+            path = null;
+            enemyStateController.ChangeState(EnemyState.Exploding);
+            
+            return true;
+        }
+        return false;
+    }
+    
+    private bool CheckForExplosion()
+    {
+
+        playerDistance = PlayerDistance();
         if (playerDistance < 1.1f)
         {
             Debug.Log("Player close enough to explode");
@@ -331,6 +380,11 @@ public class EnemyController : Interactable
             return true;
         }
         return false;
+    }
+
+    private float PlayerDistance()
+    {
+        return Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
     }
 
     public bool TakeDamage(int amt, bool explosionDamage = false)

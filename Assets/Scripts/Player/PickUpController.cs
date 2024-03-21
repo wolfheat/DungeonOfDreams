@@ -23,7 +23,7 @@ public class PickUpController : MonoBehaviour
 
     public void UpdateColliders(bool wait = false)
     {
-        Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
+        //Debug.Log("* Updating Colliders "+(wait?" after waiting *":"*"));
         UpdateInteractables();
         UpdateWall();        
         UpdateEnemy();        

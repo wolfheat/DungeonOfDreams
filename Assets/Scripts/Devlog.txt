@@ -89,7 +89,10 @@ Feb-Mar 2024
 		* Fixed lights on tools, it now has its own lightsource -
 20/3	* Added skeleton, 
 		* Bomb enemy is nolonger shown as duplicate (was mock item)-
+		* Skeleton can walk and attack towards player
 
+		
+		* Enemy Controller has mesh renderer and MeshFilter, dont need it
 		* enemy, needs other attack animation
 		* Sometimes spawned items are not updated as in front of player - FIxed?
 		* Start working on a menu system
