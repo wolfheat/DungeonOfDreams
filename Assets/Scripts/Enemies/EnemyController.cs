@@ -6,7 +6,7 @@ using Wolfheat.StartMenu;
 
 public class EnemyController : Interactable
 {
-    public EnemyData EnemyData { get; set; }
+    public EnemyData EnemyData;// { get; set; }
 
     PlayerController player;
     [SerializeField] private float playerDistance;
@@ -147,8 +147,7 @@ public class EnemyController : Interactable
         }
         else
         {
-            EnemyData enemyData = (EnemyData)Data;
-            if (enemyData.enemyType == EnemyType.Skeleton)
+            if (EnemyData.enemyType == EnemyType.Skeleton)
             {
                 Debug.Log("This is a Skeleton");
                 playerDistance = PlayerDistance();
@@ -311,9 +310,7 @@ public class EnemyController : Interactable
 
         const float EnemySight = 5f;
 
-        EnemyData enemyData = (EnemyData)Data;
-
-        if (enemyData.enemyType == EnemyType.Bomber && CheckForExplosion())
+        if (EnemyData.enemyType == EnemyType.Bomber && CheckForExplosion())
             return;
         
         Debug.Log("Updating enemies path to player");
@@ -408,10 +405,8 @@ public class EnemyController : Interactable
     {
         if(Dead) return false;
 
-        EnemyData enemyData = (EnemyData)Data;
-
         Health -= amt;
-        if (enemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
+        if (EnemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
         {
             SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
             if(enemyStateController.currentState != EnemyState.Exploding)
@@ -421,7 +416,7 @@ public class EnemyController : Interactable
         if (Health <= 0)
         {
 
-            if (enemyData.enemyType == EnemyType.Bomber)
+            if (EnemyData.enemyType == EnemyType.Bomber)
             {
                 Debug.Log("Enemy bomber dies");
                 SoundMaster.Instance.StopSound(SoundName.Hissing);
@@ -432,11 +427,11 @@ public class EnemyController : Interactable
                     enemyStateController.ChangeState(EnemyState.Idle);
                     ItemSpawner.Instance.ReturnEnemy(this);
                     Debug.Log("Enemy returned to pool");
-                    CreateItem(enemyData.storedUsable);
+                    CreateItem(EnemyData.storedUsable);
                     return true;
                 }
             }
-            else if (enemyData.enemyType == EnemyType.Skeleton)
+            else if (EnemyData.enemyType == EnemyType.Skeleton)
             {
                 Debug.Log("Enemy skeleton dies");
                 Dead = true;
@@ -454,12 +449,10 @@ public class EnemyController : Interactable
     {
         Debug.Log("Animation complete");
 
-        EnemyData enemyData = (EnemyData)Data;
-
         enemyStateController.ChangeState(EnemyState.Idle);
         ItemSpawner.Instance.ReturnEnemy(this);
         Debug.Log("Enemy returned to pool");
-        CreateItem(enemyData.storedUsable);
+        CreateItem(EnemyData.storedUsable);
     }
     private void CreateItem(UsableData data)
     {

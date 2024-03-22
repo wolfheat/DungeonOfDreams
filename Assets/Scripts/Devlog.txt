@@ -92,6 +92,10 @@ Feb-Mar 2024
 		* Skeleton can walk and attack towards player -
 		* Added Skeleton death animation
 		* Fixed enemy keep moving on path when player is far away.-
+22/3	* Rewrote ItemData system
+		* Added continious update of colliders
+
+
 
 		* Enemy Controller has mesh renderer and MeshFilter, dont need it
 		* enemy, needs other attack animation

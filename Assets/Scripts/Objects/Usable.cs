@@ -1,4 +1,4 @@
-﻿public class Usable : Interactable
+﻿public class Usable : InteractableItem
 {
     public override void InteractWith()
     {

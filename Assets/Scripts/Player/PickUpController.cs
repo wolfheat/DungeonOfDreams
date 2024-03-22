@@ -19,6 +19,17 @@ public class PickUpController : MonoBehaviour
         enemyLayerMask = LayerMask.GetMask("Enemy");
         itemLayerMask = LayerMask.GetMask("Items");
         UpdateColliders();
+        StartCoroutine(UpdateCollidersInterval());
+    }
+
+    private WaitForSeconds wait = new WaitForSeconds(0.1f);
+    private IEnumerator UpdateCollidersInterval()
+    {
+        while (true)
+        {
+            UpdateColliders();
+            yield return wait;
+        }
     }
 
     public void UpdateColliders(bool wait = false)
@@ -47,7 +58,7 @@ public class PickUpController : MonoBehaviour
         colliders = colliders.Where(x => x.GetComponentInParent<Interactable>() != null).ToArray();
         
 
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<Interactable>().Data).ToList());
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<EnemyController>().EnemyData as ItemData).ToList());
 
         if (colliders.Length == 0)
             Enemy = null;
@@ -81,7 +92,7 @@ public class PickUpController : MonoBehaviour
         Debug.DrawLine(c, d, Color.green,3f);
         */
 
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Interactable>().Data).ToList());
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Wall>().WallData as ItemData).ToList());
 
         if (colliders.Length == 0)
             Wall = null;
@@ -94,7 +105,7 @@ public class PickUpController : MonoBehaviour
         // Get list of interactable items
         Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, itemLayerMask);
         
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Interactable>()?.Data).ToList(),true);
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<InteractableItem>()?.Data).ToList(),true);
         if (colliders.Length == 0)
         {
             //Debug.LogError("No Interactable found. box centered at "+transform.position+" size "+Game.boxSize);
@@ -120,7 +131,7 @@ public class PickUpController : MonoBehaviour
     {
         if (Wall == null) return false;
 
-        if (Wall.Data == null)
+        if (Wall.WallData == null)
         {
             Debug.Log("Interact with Wall without Data = Bedrock");
             return false;

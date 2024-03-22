@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1911389574804869334, guid: 114f057fd7a314744bea18435eb52daa, type: 3}
+      propertyPath: WallData
+      value: 
+      objectReference: {fileID: 11400000, guid: b21f82e6d414ecd4092aca84a60fbaaa, type: 2}
+    - target: {fileID: 1911389574804869334, guid: 114f057fd7a314744bea18435eb52daa, type: 3}
       propertyPath: mineralData
       value: 
       objectReference: {fileID: 11400000, guid: ee6f1cee2943ebe488e1d4030157f10e, type: 2}

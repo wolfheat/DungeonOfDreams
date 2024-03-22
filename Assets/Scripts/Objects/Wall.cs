@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class Wall : Interactable
 {
-    new public WallData Data { get { return base.Data as WallData; } set { } }
+    public WallData WallData;// { get; set;}
 
+    public MeshRenderer meshRenderer;
     int health = 6;
     private Coroutine shock;
 
@@ -48,8 +49,8 @@ public class Wall : Interactable
         }
         transform.localScale = Vector3.one*endSize;
 
-        if(Data.mineralStored != null)
-            CreateItem(Data.mineralStored);
+        if(WallData.mineralStored != null)
+            CreateItem(WallData.mineralStored);
 
         gameObject.SetActive(false);
         LevelCreator.Instance.RemoveWall(transform.position);

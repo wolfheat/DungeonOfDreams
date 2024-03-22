@@ -13,6 +13,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 39cf85445cf06264a80c1f546f28760e, type: 2}
     - target: {fileID: 1911389574804869334, guid: 114f057fd7a314744bea18435eb52daa, type: 3}
+      propertyPath: WallData
+      value: 
+      objectReference: {fileID: 11400000, guid: 39cf85445cf06264a80c1f546f28760e, type: 2}
+    - target: {fileID: 1911389574804869334, guid: 114f057fd7a314744bea18435eb52daa, type: 3}
       propertyPath: mineralData
       value: 
       objectReference: {fileID: 11400000, guid: 50bd3c3301131c241975e8197c2a103a, type: 2}

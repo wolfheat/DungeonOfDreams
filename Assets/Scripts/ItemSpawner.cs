@@ -117,7 +117,7 @@ public class ItemSpawner : MonoBehaviour
         // Find first mineral that is disabled
         //enemy.GetComponent<ObjectAnimator>().Reset();
         Debug.Log("Enemy spawned at "+pos);
-        enemy.Data = data;
+        enemy.EnemyData = data;
         enemy.transform.parent = enemyHolder.transform;
         enemy.transform.position = pos;
         enemy.transform.rotation = enemyPrefabs[type].transform.rotation;

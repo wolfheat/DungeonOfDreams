@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
-public class Mineral : Interactable
+public class Mineral : InteractableItem
 {
     new public MineralData Data { get { return base.Data as MineralData; } set { base.Data = value; } }
     public override void InteractWith()

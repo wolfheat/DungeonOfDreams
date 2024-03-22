@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PowerUp : Interactable
+public class PowerUp : InteractableItem
 {
     new public PowerUpData Data { get { return base.Data as PowerUpData; } set { base.Data = value; } }
     private void Start()

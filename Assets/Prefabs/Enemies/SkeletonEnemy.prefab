@@ -99,14 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76922979a232992498c9e333357f6f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 4f40d64cb738aca438567a24496cce7d, type: 2}
-  meshFilter: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  EnemyData: {fileID: 11400000, guid: 4f40d64cb738aca438567a24496cce7d, type: 2}
   playerDistance: 0
   animator: {fileID: 4559171945477758615}
   obstructions:
     serializedVersion: 2
     m_Bits: 776
+  enemyCollider: {fileID: 0}
 --- !u!1 &627591212012658606
 GameObject:
   m_ObjectHideFlags: 0
