@@ -17,10 +17,13 @@ public class EnemyStateController
         animator = a;
     }
 
-    public void ChangeState(EnemyState newState)
+    public void ChangeState(EnemyState newState,bool force = false)
     {
         if (currentState == newState) return;
         Debug.Log("Change state from "+currentState+" to "+newState);
+        if (!force && (currentState == EnemyState.Dead || currentState == EnemyState.Dying))
+            return;
+
         switch (newState)
         {
             case EnemyState.Idle:

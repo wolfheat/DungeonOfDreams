@@ -293,7 +293,7 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 8
-  - clip: {fileID: 8300000, guid: 7144eff09a3c99c498174f3ebc229d2b, type: 3}
+  - clip: {fileID: 8300000, guid: 625c3900bb5558e44a2156b9ebbd801d, type: 3}
     volume: 0.181
     pitch: 1
     loop: 0
@@ -330,13 +330,13 @@ MonoBehaviour:
     audioSource: {fileID: 0}
     name: 14
   - clip: {fileID: 8300000, guid: f5e03ec911c0866479d04773d6a1a0eb, type: 3}
-    volume: 0.181
+    volume: 1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
     name: 15
   - clip: {fileID: 8300000, guid: 11fe1276f6cfff14aacde679082fd38c, type: 3}
-    volume: 0.181
+    volume: 1
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
@@ -404,9 +404,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9bac378e75376da4c840efe91f711a89, type: 3}
   - {fileID: 8300000, guid: eac0fbbad1b6822448d0c0d3963569ed, type: 3}
   pickAxeCrushStone:
-  - {fileID: 8300000, guid: ac5ec20eb2966c94fb4ddfdf5bfd8190, type: 3}
-  - {fileID: 8300000, guid: b56b048b87e55164a8e6e20438377ee3, type: 3}
-  - {fileID: 8300000, guid: 5ea0303174c4b3d409fd7d9b52c23c98, type: 3}
+  - {fileID: 8300000, guid: e06a18fb764ea6744b157ca61fb1d8f4, type: 3}
   footstep:
   - {fileID: 8300000, guid: 2f2c7754171a32f4cab8af3dba2763c7, type: 3}
   - {fileID: 8300000, guid: 9b1d48bfc3ed3da46b0ef01d4f8214ac, type: 3}

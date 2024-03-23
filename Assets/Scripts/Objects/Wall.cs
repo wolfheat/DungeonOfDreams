@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class Wall : Interactable
 {
@@ -29,7 +30,7 @@ public class Wall : Interactable
     private void Shrink()
     {
         GetComponent<BoxCollider>().enabled = false;
-
+        SoundMaster.Instance.PlaySound(SoundName.StoneShatter);
         StartCoroutine(ShrinkRoutine());
     }
 

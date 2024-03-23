@@ -12,7 +12,6 @@ public class EnemyController : Interactable
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
     [SerializeField] LayerMask obstructions;
-    public Collider enemyCollider;
 
     private float timer = 0;
     private const float MoveTime = 2f;
@@ -30,12 +29,17 @@ public class EnemyController : Interactable
 
     private bool newPositionEvaluated = false;
 
-    private const int StartHealth = 2;
+    private const int StartHealth = 3;
     public int Health { get; private set; }
     public bool Dead { get; private set; }
     private void OnEnable()
     {
         player = FindFirstObjectByType<PlayerController>();
+        Health = StartHealth; // Change to data health later
+        Dead = false;
+        enemyStateController.ChangeState(EnemyState.Idle,true);
+        path.Clear();
+        DoingAction = false;
     }
 
     private void Start()
@@ -71,7 +75,6 @@ public class EnemyController : Interactable
                     ReachedPosition();
                     return;
                 }
-
             }
             else if (savedAction.moveType == MoveActionType.Rotate)
                 StartCoroutine(Rotate(EndRotationForMotion(savedAction)));
@@ -171,7 +174,8 @@ public class EnemyController : Interactable
                 else if(path == null || path.Count == 0)
                 {
                     Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
-                    enemyStateController.ChangeState(EnemyState.Idle);
+                    if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
+                        enemyStateController.ChangeState(EnemyState.Idle);
                 }
 
                 return;
@@ -406,9 +410,11 @@ public class EnemyController : Interactable
         if(Dead) return false;
 
         Health -= amt;
+        Debug.Log("Enemy took damage play hit sound");
+        SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
+
         if (EnemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
         {
-            SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
             if(enemyStateController.currentState != EnemyState.Exploding)
                 enemyStateController.ChangeState(EnemyState.Exploding);
         }

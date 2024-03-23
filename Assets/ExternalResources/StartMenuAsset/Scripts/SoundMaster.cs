@@ -10,7 +10,7 @@ namespace Wolfheat.StartMenu
 {
     public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, Shoot, HUDPositive, HUDError,
         Explosion,
-        MediumExplosion,
+        StoneShatter,
         RockExplosion,
         CraftComplete,
         StabEnemy,

@@ -93,14 +93,15 @@ Feb-Mar 2024
 		* Added Skeleton death animation
 		* Fixed enemy keep moving on path when player is far away.-
 22/3	* Rewrote ItemData system
-		* Added continious update of colliders
+		* Added continious update of colliders-
+		* Add separate enemy sound when getting hit
+		* Added sound for crushing a wall
 
 
+		* Change sound for crushing wall? different sounds for each type? Yeah?
 
-		* Enemy Controller has mesh renderer and MeshFilter, dont need it
 		* enemy, needs other attack animation
 		* Sometimes player can move onto same tile as enemy - fix
-		* Sometimes spawned items are not updated as in front of player - FIxed?
 		* Start working on a menu system
 		* Health bar / hearts
 
