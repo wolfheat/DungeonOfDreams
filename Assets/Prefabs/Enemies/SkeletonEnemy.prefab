@@ -64,7 +64,7 @@ Transform:
   m_Children:
   - {fileID: 1542794452745579379}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4559171945477758615
 Animator:
@@ -100,12 +100,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyData: {fileID: 11400000, guid: 4f40d64cb738aca438567a24496cce7d, type: 2}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
   playerDistance: 0
   animator: {fileID: 4559171945477758615}
   obstructions:
     serializedVersion: 2
     m_Bits: 776
-  enemyCollider: {fileID: 0}
 --- !u!1 &627591212012658606
 GameObject:
   m_ObjectHideFlags: 0

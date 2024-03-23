@@ -304,6 +304,19 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(int amt)
     {
+        if (Stats.Instance.IsDead) return;
+
         Debug.Log("Player get hurt " + amt + " hp");
+        bool died = Stats.Instance.TakeDamage(amt);
+        if (died)
+        {
+            Debug.Log("Player is Killed by low health");
+            // Show death screen
+            UIController.Instance.ShowDeathScreen();
+        }
+        else
+        {
+            // Player still alive
+        }
     }
 }

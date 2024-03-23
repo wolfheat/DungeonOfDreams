@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Wolfheat.StartMenu;
+using static UnityEditor.PlayerSettings;
 
 
 public class EnemyController : Interactable
 {
     public EnemyData EnemyData;// { get; set; }
+
+    [SerializeField] LayerMask playerLayerMask;
 
     PlayerController player;
     [SerializeField] private float playerDistance;
@@ -34,21 +37,15 @@ public class EnemyController : Interactable
     public bool Dead { get; private set; }
     private void OnEnable()
     {
+        Debug.Log("Enemy Enabled");
         player = FindFirstObjectByType<PlayerController>();
         Health = StartHealth; // Change to data health later
         Dead = false;
+        enemyStateController = new EnemyStateController(animator);
         enemyStateController.ChangeState(EnemyState.Idle,true);
         path.Clear();
         DoingAction = false;
     }
-
-    private void Start()
-    {
-        particleType = ParticleType.Explode;
-        Health = StartHealth; // Change to data health later
-        enemyStateController = new EnemyStateController(animator);
-    }
-
 
     private MoveAction savedAction = null;
     private void Update()
@@ -371,6 +368,21 @@ public class EnemyController : Interactable
 
     }
 
+    public void PerformAttack()
+    {
+        Debug.Log("Skeleton performes attack");
+        // Attack entire square infront of enemy if player is there its hit
+
+        Vector3 pos = transform.position + transform.forward;
+
+        Collider[] colliders = Physics.OverlapBox(pos, Game.boxSize, Quaternion.identity, playerLayerMask);
+        if (colliders.Length > 0)
+        {
+            Debug.Log("Enemy Hit Player");
+            player.TakeDamage(1);
+        }
+    }
+    
     private bool CheckForAttack()
     {
         playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));

@@ -96,6 +96,11 @@ Feb-Mar 2024
 		* Added continious update of colliders-
 		* Add separate enemy sound when getting hit
 		* Added sound for crushing a wall
+23/3	* Updated Credits screen
+		* Added transition screen
+		* Moved player health to stats-
+
+
 
 
 		* Change sound for crushing wall? different sounds for each type? Yeah?
@@ -233,20 +238,25 @@ Feb-Mar 2024
 		 - SOUNDS
 
 		 - GRAPHICS
-		// * Unity Technologies - Particle Pack - Standard EULA
-		// * RRFreelance - Tools Pack 1 - Standard EULA
+
+							** USED **
+			STANDARD EULA
 		// * Freepik - Vector Dividers Collection - Free Licence
 		// * upklyak (freepik) - Ground cracks on land isolated - Free Licence
-
-
-		// * Barking Dog - 3D Scifi Base Vol 1 - Single Entity
-		// * Mark Dion - Asteroids Pack - Standard EULA
-		// * Ekincan Tas - Damage Numbers Pro - Standard EULA
-		// * Sigmoid Button Assets - Props 3D - Standard EULA
-		// * 3D.RINA - Animated Spiders Pack - Standard EULA
-		// * Ilias Kap - Workplace Tools - Standard EULA
-
+		// * RRFreelance - Tools Pack 1 - Standard EULA
 		// * Polygon  - Farm Pack -  Standard EULA
+		// * Unity Technologies - Particle Pack - Standard EULA
+
+			SINGLE
+
+			EXTENSIONS
+		//// * João Baltieri - Mini Simple Characters | Skeleton | Extension Asset
+		//
+		//					** OTHER ***
+		//
+		//// * Sigmoid Button Assets - Props 3D - Standard EULA - pack with Chrystal used in breath 
+		//// * 3D.RINA - Animated Spiders Pack - Standard EULA
+		//// * Ekincan Tas - Damage Numbers Pro - Standard EULA
 
 		 - FONTS
 		// * Gomarice - Shiratama Dango - Apache-2.0
@@ -254,17 +264,21 @@ Feb-Mar 2024
 		* gluk - Prida01 - Commersial Use 
 
 		 - MUSIC		
-		// * Kevin MacLeod - Airport Lounge - Royalty Free Upbeat
-		// * Moire - Space Ranger - Royalty Free Upbeat
-		// * Zapsplat - Tropical Dawn - Music from https://www.zapsplat.com
-		// * Vasyl_Sakal - Cellestial Lullaby - Attribution 4.0 (Ambient sound)
+		// * Brock Hewitt - In The Silence - Royalty Free Upbeat - Main Menu
+		// * Vasyl_Sakal - Cellestial Lullaby - Attribution 4.0 (Ambient sound) - InGameMusicA
+
+		//// * Kevin MacLeod - Airport Lounge - Royalty Free Upbeat
+		//// * Moire - Space Ranger - Royalty Free Upbeat
+		//// * Zapsplat - Tropical Dawn - Music from https://www.zapsplat.com
 
 		-SOUND
 		// * PowerupB - freesound - Creative Commons 0
 		// * PowerupC - freesound - Creative Commons 0
 		// * UpgradeA - freesound - Creative Commons 0
 
-		* Brock Hewitt - In The Silence - Royalty Free Upbeat
+
+		* Vasyl Sakal - Celestial Lullaby - Royalty Free FreeSound - InGame Music
+
 
 		 -TOOLS
         * AI Art - Playground

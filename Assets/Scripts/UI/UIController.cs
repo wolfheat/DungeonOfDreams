@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Wolfheat.Inputs;
@@ -11,6 +9,8 @@ public enum GameStates { Running, Paused }
 public class UIController : MonoBehaviour
 {
     [SerializeField] InteractableUI interactableUI;
+    [SerializeField] TransitionScreen transitionScreen;
+    [SerializeField] DeathScreenController deathScreen;
 
 	public static UIController Instance { get; private set; }
 
@@ -29,6 +29,7 @@ public class UIController : MonoBehaviour
     public void OnEnable()
     {
         Inputs.Instance.Controls.Player.Esc.started += Pause;
+        TransitionScreen.AnimationComplete += TransitionComplete;
         Pause(false);
     }
 
@@ -36,6 +37,7 @@ public class UIController : MonoBehaviour
     {
 
         Inputs.Instance.Controls.Player.Esc.started -= Pause;
+        TransitionScreen.AnimationComplete -= TransitionComplete;
     }
 
     public void Pause(InputAction.CallbackContext context)
@@ -64,5 +66,44 @@ public class UIController : MonoBehaviour
 	{
 		interactableUI.AddPickedUp(data);
 	}
+
+    public void ShowDeathScreen()
+	{
+
+        // Transition to Dark
+		transitionScreen.Darken();
+        open = UIActions.DeathScreen;
+	}
+
+    private UIActions open = UIActions.None;
+    private UIActions close = UIActions.None;
+
+    public enum UIActions {None,DeathScreen }
+
+    public void TransitionComplete()
+	{
+        Debug.Log("Transition Complete");        
+        switch (open)
+        {
+            case UIActions.None:
+                break;
+            case UIActions.DeathScreen:
+                deathScreen.Show();
+                break;
+        }
+        open = UIActions.None;
+        /*
+        switch (close)
+        {
+            case UIActions.None:
+                break;
+            case UIActions.DeathScreen:
+                deathScreen.Hide();
+                break;
+        }
+        close = UIActions.None;
+        */
+    }
+
 
 }

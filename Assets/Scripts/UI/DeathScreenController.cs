@@ -2,17 +2,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Wolfheat.StartMenu;
 
-public class PauseController : MonoBehaviour
+public class DeathScreenController : MonoBehaviour
 {
     [SerializeField] UIController UIController;
     [SerializeField] GameObject panel;
 
+    public void Show()
+    {
+        panel.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        panel.SetActive(false);
+    }
+
+    public void SetActive(bool doSetActive)
+    {
+        Debug.Log("Setting pause menu active: " + doSetActive + " Savingutility.playerGameData: " + SavingUtility.playerGameData);
+        panel.SetActive(doSetActive);
+    }
     public void ToMainMenu()
     {
-        Debug.Log("Pause Controller Main Menu Clicked");
+        Debug.Log("Death Controller To Main Menu Clicked");
 
         // Save player data here
-        if(SavingUtility.playerGameData == null)
+        if (SavingUtility.playerGameData == null)
         {
             Debug.LogWarning("Going to Main Menu, saving but playerGameData is null");
         }
@@ -28,15 +43,10 @@ public class PauseController : MonoBehaviour
         SceneManager.UnloadSceneAsync("Dungeon");
         SceneChanger.Instance.ChangeScene("StartMenu");
     }
-    public void SetActive(bool doSetActive)
-    {
-        Debug.Log("Setting pause menu active: "+doSetActive+" Savingutility.playerGameData: "+SavingUtility.playerGameData);
-        panel.SetActive(doSetActive);        
-    }
 
     public void CloseClicked()
     {
-        Debug.Log("Pause Controller Close clicked");
+        Debug.Log("Death Controller Close clicked");
         UIController.Pause(false);
         SetActive(false);
     }

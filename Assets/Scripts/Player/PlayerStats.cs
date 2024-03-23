@@ -3,9 +3,10 @@
 public class PlayerStats : MonoBehaviour
 {
     private int health = 100;
-    private int speed = 2;    
 
     public static PlayerStats Instance;
+
+    public bool IsDead { get; set; } = false;
 
     private void Start()
     {
@@ -29,5 +30,17 @@ public class PlayerStats : MonoBehaviour
         //SavingUtility.playerGameData.PlayerHealth = health;
         //SavingUtility.playerGameData.PlayerOxygen = oxygen;
 
+    }
+
+    public bool TakeDamage(int amt)
+    {
+        health -= amt;
+        if (health <= 0)
+        {
+            health = 0;
+            IsDead = true;
+            return true;
+        }
+        return false;
     }
 }
