@@ -26,9 +26,6 @@ public class EnemyController : Interactable
 
     private Vector2Int playerLastPosition = Vector2Int.zero;
 
-    private bool showMock = false;
-
-
     private bool newPositionEvaluated = false;
 
     private const int StartHealth = 3;

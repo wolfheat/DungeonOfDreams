@@ -5,7 +5,6 @@ using Wolfheat.Inputs;
 
 public enum GameStates { Running, Paused }
 
-
 public class UIController : MonoBehaviour
 {
     [SerializeField] InteractableUI interactableUI;
@@ -76,7 +75,7 @@ public class UIController : MonoBehaviour
 	}
 
     private UIActions open = UIActions.None;
-    private UIActions close = UIActions.None;
+    //private UIActions close = UIActions.None;
 
     public enum UIActions {None,DeathScreen }
 
