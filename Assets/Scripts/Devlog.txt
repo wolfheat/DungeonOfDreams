@@ -102,11 +102,8 @@ Feb-Mar 2024
 		* Player can be killed and revived at start location
 		* Made music stop when killed and resume when revived
 		* Added sound for player getting hit and groun -
+		* Bedrock can no longer break from damage/explosions
 
-
-
-
-		* Change sound for crushing wall? different sounds for each type? Yeah?
 
 		* enemy, needs other attack animation
 		* Sometimes player can move onto same tile as enemy - fix

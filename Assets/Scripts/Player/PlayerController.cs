@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(DoingAction) return;
+        if(DoingAction || Stats.Instance.IsDead) return;
 
         if (savedAction != null)
         {
@@ -332,6 +332,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Reset Player");
         transform.position = Vector3.zero;
+        savedAction = null;
         Stats.Instance.Revive();
     }
 }
