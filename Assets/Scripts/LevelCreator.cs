@@ -186,7 +186,7 @@ public class LevelCreator : MonoBehaviour
         //if (steps >= 50) Debug.Log("Used more than 50 steps to calculate path, exit");
         //if (open.Count == 0) Debug.Log("Open Count is Zero");
         //if (reachedTarget) Debug.Log("Reached Target exit, should not happen");
-        return null;
+        return new Stack<Vector2Int>();
 
 
 

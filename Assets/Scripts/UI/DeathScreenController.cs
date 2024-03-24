@@ -10,6 +10,8 @@ public class DeathScreenController : MonoBehaviour
     public void Show()
     {
         panel.SetActive(true);
+        UIController.Pause(true);
+        Debug.Log("Death screen Active Pause game");
     }
 
     public void Hide()
@@ -47,6 +49,8 @@ public class DeathScreenController : MonoBehaviour
     public void CloseClicked()
     {
         Debug.Log("Death Controller Close clicked");
+        PlayerController.Instance.Reset();
+        SoundMaster.Instance.ResetMusic();
         UIController.Pause(false);
         SetActive(false);
     }

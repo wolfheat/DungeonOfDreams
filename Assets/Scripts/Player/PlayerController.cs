@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
     public Action PlayerReachedNewTile;
     public static PlayerController Instance { get; private set; }
     public int Damage { get; set; } = 1;
+    public bool IsDead { get { return Stats.Instance.IsDead; } }
+
     private void Awake()
     {
         if (Instance != null)
@@ -307,16 +309,29 @@ public class PlayerController : MonoBehaviour
         if (Stats.Instance.IsDead) return;
 
         Debug.Log("Player get hurt " + amt + " hp");
+
+        SoundMaster.Instance.PlaySound(SoundName.EnemyStabs);
+
         bool died = Stats.Instance.TakeDamage(amt);
         if (died)
         {
             Debug.Log("Player is Killed by low health");
             // Show death screen
             UIController.Instance.ShowDeathScreen();
+            SoundMaster.Instance.PlaySound(SoundName.PlayerDies);
+            SoundMaster.Instance.StopMusic();
         }
         else
         {
             // Player still alive
+            SoundMaster.Instance.PlayGetHitSound();
         }
+    }
+
+    public void Reset()
+    {
+        Debug.Log("Reset Player");
+        transform.position = Vector3.zero;
+        Stats.Instance.Revive();
     }
 }

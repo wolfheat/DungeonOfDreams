@@ -99,6 +99,9 @@ Feb-Mar 2024
 23/3	* Updated Credits screen
 		* Added transition screen
 		* Moved player health to stats-
+		* Player can be killed and revived at start location
+		* Made music stop when killed and resume when revived
+		* Added sound for player getting hit and groun -
 
 
 

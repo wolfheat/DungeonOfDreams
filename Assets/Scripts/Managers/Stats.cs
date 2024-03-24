@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -6,7 +7,8 @@ public class Stats : MonoBehaviour
 	public const float MiningSpeedDefault = 3f;
 	public const float MiningSpeedSpeedUp = 12f;
 
-    private int health = 100;
+    private const int StartHealth = 10;
+    private int health = 10;
 
     public bool IsDead { get; set; } = false;
 
@@ -57,5 +59,11 @@ public class Stats : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    internal void Revive()
+    {
+        health = StartHealth;
+        IsDead = false;
     }
 }

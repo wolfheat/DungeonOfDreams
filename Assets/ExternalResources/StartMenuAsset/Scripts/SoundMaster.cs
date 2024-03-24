@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Wolfheat.StartMenu
 {
-    public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, Shoot, HUDPositive, HUDError,
+    public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
         Explosion,
         StoneShatter,
         RockExplosion,
@@ -23,7 +23,8 @@ namespace Wolfheat.StartMenu
         HitStone,
         CrushStone,
         PowerUpDamage,
-        PowerUpSpeed
+        PowerUpSpeed,
+        PlayerDies
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -337,6 +338,11 @@ namespace Wolfheat.StartMenu
         public void PlayWeaponKillsEnemy()
         {
             PlaySound(SoundName.KillEnemy);
+        }
+
+        public void StopMusic()
+        {
+            musicSource.Stop();
         }
     }
 }

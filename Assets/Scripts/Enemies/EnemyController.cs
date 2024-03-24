@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Wolfheat.StartMenu;
-using static UnityEditor.PlayerSettings;
 
 
 public class EnemyController : Interactable
@@ -82,6 +81,11 @@ public class EnemyController : Interactable
         {
             Debug.Log("Enemy is currectly Idle and player has new position");
             ReachedPosition();
+        }else if (enemyStateController.currentState == EnemyState.Attack && player.IsDead)
+        {
+            Debug.Log("Enemy Attacking but PLayer is Dead, go to Idle");
+            path.Clear();
+            enemyStateController.ChangeState(EnemyState.Idle);
         }
     }
 
@@ -123,7 +127,7 @@ public class EnemyController : Interactable
         if (enemyStateController.currentState == EnemyState.Exploding)
             return;
 
-        if (UpdatePlayerPosition() || !newPositionEvaluated)
+        if (!Stats.Instance.IsDead &&( UpdatePlayerPosition() || !newPositionEvaluated))
         {
             newPositionEvaluated = true;
             Debug.Log("Enemy saw that player has moved");
@@ -147,7 +151,7 @@ public class EnemyController : Interactable
         }
         else
         {
-            if (EnemyData.enemyType == EnemyType.Skeleton)
+            if (EnemyData.enemyType == EnemyType.Skeleton && !Stats.Instance.IsDead)
             {
                 Debug.Log("This is a Skeleton");
                 playerDistance = PlayerDistance();
@@ -168,7 +172,7 @@ public class EnemyController : Interactable
                     if(enemyStateController.currentState != EnemyState.Attack)
                         enemyStateController.ChangeState(EnemyState.Attack);
                 }
-                else if(path == null || path.Count == 0)
+                else if(path.Count == 0)
                 {
                     Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
                     if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
@@ -296,9 +300,9 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistanceAndPath()
     {
-        if (Dead || enemyStateController.currentState == EnemyState.Exploding)
+        if (Dead || enemyStateController.currentState == EnemyState.Exploding || Stats.Instance.IsDead)
         {
-            Debug.Log("Dead or exploding Dead:"+Dead+ " state: "+enemyStateController.currentState);    
+            Debug.Log("Dead or exploding or player is dead, current state: "+enemyStateController.currentState);    
             return;
         }
         // Update player distance when player or enemy reaches a new position
@@ -389,7 +393,7 @@ public class EnemyController : Interactable
         if (playerDistance < 1.1f)
         {
             Debug.Log("Skeleton close enough to attack");
-            path = null;
+            path.Clear();
             enemyStateController.ChangeState(EnemyState.Exploding);
             
             return true;
@@ -404,7 +408,7 @@ public class EnemyController : Interactable
         if (playerDistance < 1.1f)
         {
             Debug.Log("Player close enough to explode");
-            path = null;
+            path.Clear();
             enemyStateController.ChangeState(EnemyState.Exploding);
             StartCoroutine(RotateLockOnPlayer());
             return true;
