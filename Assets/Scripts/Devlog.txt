@@ -106,6 +106,17 @@ Feb-Mar 2024
 24/3	* Added Heart for player health 
 		* Added Heart PickUp that increases players max health upt to 10
 		* Changed Death screen continue to revive -
+		* Hearts are now picked up if colliding with them
+		* Made hearts beat in sync -
+
+
+		* Make better heart 3D object representation
+		* Add Heart refill object like food etc
+		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
+		
+
+		// Maybe
+		* Have one start area were player cant leave until clearing it finding a certain object etc and then sledgehammer and change to underground?
 
 
 		* enemy, needs other attack animation

@@ -1,6 +1,4 @@
-using System;
 using UnityEngine;
-using Wolfheat.StartMenu;
 
 public class PlayerColliderController : MonoBehaviour
 {

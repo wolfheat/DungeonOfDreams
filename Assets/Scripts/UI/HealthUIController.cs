@@ -5,6 +5,20 @@ public class HealthUIController : MonoBehaviour
     [SerializeField] GameObject heartsHolder;
     [SerializeField] UIHeart heartPrefab;
 
+    public static HealthUIController Instance { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    public float AnimationTime { get { return heartsList.Count > 0 ? heartsList[0].AnimationTime:0; }}
+
     private List<UIHeart> heartsList = new();
     // Start is called before the first frame update
     private void Start()
