@@ -109,11 +109,17 @@ Feb-Mar 2024
 		* Hearts are now picked up if colliding with them
 		* Made hearts beat in sync -
 25/3	* Made 3D model of heart with texture -
-		
+		* Available pictures scale correctly
+		* Changed Pickup particles for health (still not fancy)-
 
-		* Make better heart 3D object representation
-		* Add Heart refill object like food etc
+
+		* When Player dies, turn towards enemy giving the blow
+
+
+		* Add health refill object like food etc
+
 		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
+
 		* Add inventory - Bombs should be able to be placed
 
 		// Maybe
