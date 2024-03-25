@@ -108,15 +108,20 @@ Feb-Mar 2024
 		* Changed Death screen continue to revive -
 		* Hearts are now picked up if colliding with them
 		* Made hearts beat in sync -
-
+25/3	* Made 3D model of heart with texture -
+		
 
 		* Make better heart 3D object representation
 		* Add Heart refill object like food etc
 		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
-		
+		* Add inventory - Bombs should be able to be placed
 
 		// Maybe
 		* Have one start area were player cant leave until clearing it finding a certain object etc and then sledgehammer and change to underground?
+		
+		// Name
+		* Dig down Crawl Up 
+		* Down To Earth
 
 
 		* enemy, needs other attack animation
