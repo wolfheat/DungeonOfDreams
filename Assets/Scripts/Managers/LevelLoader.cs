@@ -64,7 +64,7 @@ public class LevelLoader : MonoBehaviour
     public void DefineGameDataForSave()
     {
         Debug.Log(" ** SAVING LEVEL **");
-        PlayerStats.Instance.DefineGameDataForSave();
+        Stats.Instance.DefineGameDataForSave();
 
         //Inventory.Instance.DefineGameDataBeforSave();
 

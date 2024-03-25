@@ -7,12 +7,15 @@ public class Stats : MonoBehaviour
 	public const float MiningSpeedDefault = 3f;
 	public const float MiningSpeedSpeedUp = 12f;
 
-    private const int StartHealth = 10;
-    private int health = 10;
+    public const int MaxHealth = 10;
+    public int CurrentMaxHealth { get; private set; } = 2;
+    public int Health { get; private set; } = 2;
 
     public bool IsDead { get; set; } = false;
 
     public static Stats Instance { get; private set; }
+
+    public static Action<int> HealthUpdate;
 
 	private void Start()
 	{
@@ -51,10 +54,13 @@ public class Stats : MonoBehaviour
 
     public bool TakeDamage(int amt)
     {
-        health -= amt;
-        if (health <= 0)
+        Health -= amt;
+        Health = Math.Max(Health, 0);
+        
+        HealthUpdate?.Invoke(Health);
+
+        if (Health <= 0)
         {
-            health = 0;
             IsDead = true;
             return true;
         }
@@ -63,7 +69,15 @@ public class Stats : MonoBehaviour
 
     internal void Revive()
     {
-        health = StartHealth;
+        Health = CurrentMaxHealth;
+        HealthUpdate?.Invoke(Health);
         IsDead = false;
+    }
+
+    internal void AddHealth(int value)
+    {
+        CurrentMaxHealth = Math.Min(CurrentMaxHealth+value, MaxHealth);
+        Health = CurrentMaxHealth;
+        HealthUpdate?.Invoke(Health);
     }
 }

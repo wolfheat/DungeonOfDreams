@@ -47,7 +47,14 @@ public class InteractableUI : MonoBehaviour
     {
         if(data is PowerUpData)
         {
-            // Get all powerups
+            if(((PowerUpData)data).powerUpType == PowerUpType.Health)
+            {
+                Debug.Log("Adding health with heart " + data.value);
+                Stats.Instance.AddHealth(data.value);
+                return;
+            }
+
+            // Check If boost is allready active and if so updat the timer
             BoostUIItem[] uiBoosts = boostsHolder.GetComponentsInChildren<BoostUIItem>();
             foreach (BoostUIItem item in uiBoosts)
             {

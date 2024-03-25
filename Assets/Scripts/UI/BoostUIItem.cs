@@ -7,6 +7,7 @@ public class BoostUIItem : InteractableUIItem
     private Coroutine boostCoroutine;
     public void AddBoost(PowerUpData data)
     {
+        
         Debug.Log("Starting boost with value "+data.value);
         boostTimer += data.value;
         if (boostCoroutine != null) return;

@@ -102,7 +102,10 @@ Feb-Mar 2024
 		* Player can be killed and revived at start location
 		* Made music stop when killed and resume when revived
 		* Added sound for player getting hit and groun -
-		* Bedrock can no longer break from damage/explosions
+		* Bedrock can no longer break from damage/explosions -
+24/3	* Added Heart for player health 
+		* Added Heart PickUp that increases players max health upt to 10
+		* Changed Death screen continue to revive -
 
 
 		* enemy, needs other attack animation
