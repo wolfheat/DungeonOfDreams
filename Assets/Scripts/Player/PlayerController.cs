@@ -121,6 +121,8 @@ public class PlayerController : MonoBehaviour
 
     public void HitWithTool()
     {
+        if (Stats.Instance.IsDead) return;
+
         if(!pickupController.InteractWithWall() && !pickupController.InteractWithEnemy())
             playerAnimationController.SetState(PlayerState.Idle);
 
@@ -136,7 +138,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(DoingAction || Stats.Instance.IsDead) return;
+        if(DoingAction) return;
 
         if (savedAction != null)
         {
@@ -164,7 +166,7 @@ public class PlayerController : MonoBehaviour
     }
     private bool TurnPerformed()
     {
-        if (GameState.state == GameStates.Paused) return false; // No input while paused
+        if (GameState.state == GameStates.Paused || Stats.Instance.IsDead) return false; // No input while paused
 
         float movement = Inputs.Instance.Controls.Player.Turn.ReadValue<float>();
         if (movement == 0) return false;
@@ -186,7 +188,7 @@ public class PlayerController : MonoBehaviour
 
     private bool SideStep()
     {
-        if (GameState.state == GameStates.Paused) return false; // No input while paused
+        if (GameState.state == GameStates.Paused || Stats.Instance.IsDead) return false; // No input while paused
 
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.SideStep.ReadValue<float>();
@@ -201,7 +203,7 @@ public class PlayerController : MonoBehaviour
     
     private bool Step()
     {
-        if (GameState.state == GameStates.Paused) return false; // No input while paused
+        if (GameState.state == GameStates.Paused || Stats.Instance.IsDead) return false; // No input while paused
 
         // Return if no movement input currently held 
         float movement = Inputs.Instance.Controls.Player.Step.ReadValue<float>();
@@ -289,22 +291,25 @@ public class PlayerController : MonoBehaviour
 
     public void MotionActionCompleted()
     {
+        if (Stats.Instance.IsDead) return;
+
         //Debug.Log("Motion completed, has stored action: "+savedAction);
         PlayerReachedNewTile?.Invoke();
         pickupController.UpdateColliders();
+
         if(savedAction==null)
             HeldMovementInput();
 
         //if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
         if (Inputs.Instance.Controls.Player.Click.IsPressed())
         {
-            //Debug.Log("Mouse is held, interact");
+            Debug.Log("Mouse is held, interact");
             InterractWith();
         }
 
     }
 
-    public void TakeDamage(int amt)
+    public void TakeDamage(int amt,EnemyController enemy = null)
     {
         if (Stats.Instance.IsDead) return;
 
@@ -316,6 +321,18 @@ public class PlayerController : MonoBehaviour
         if (died)
         {
             Debug.Log("Player is Killed by low health");
+
+            
+
+            if(enemy != null)
+            {
+                Debug.Log("Enemy at "+enemy.transform.position+" player at: "+transform.position);
+                StartCoroutine(Rotate(Quaternion.LookRotation(enemy.transform.position - transform.position)));
+                //savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(enemy.transform.position)-Convert.V3ToV2Int(transform.position));
+            }
+
+            playerAnimationController.SetState(PlayerState.Idle);
+
             // Show death screen
             UIController.Instance.ShowDeathScreen();
             SoundMaster.Instance.PlaySound(SoundName.PlayerDies);

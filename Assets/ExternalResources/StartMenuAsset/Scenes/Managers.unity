@@ -400,13 +400,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 62884cdbc148fed49b75d53f8ef6a473, type: 3}
   getHit:
   - {fileID: 8300000, guid: f5eb6235525b27e4fa2a506b0790bba7, type: 3}
-  - {fileID: 8300000, guid: 35ea0bc4c3203b249a60afad2e34aa80, type: 3}
-  - {fileID: 8300000, guid: 58b8104b205ee1c40929e6e2aa91c92b, type: 3}
   - {fileID: 8300000, guid: 892daaba59365a14da61ad4cc46b00f7, type: 3}
   - {fileID: 8300000, guid: 89e978dea426ba442b13b8eae751c51c, type: 3}
-  - {fileID: 8300000, guid: b53f34f6d6711de4b8c960a249fe9004, type: 3}
-  - {fileID: 8300000, guid: 1592320f3435e4c4198198a5af8b052d, type: 3}
-  - {fileID: 8300000, guid: 2030f1d144e067a43ab7617fa532b638, type: 3}
   - {fileID: 8300000, guid: 324b7dcbabcbdd44da26683e9bd0b561, type: 3}
   pickAxeHitStone:
   - {fileID: 8300000, guid: 036bb8b18dd1f084c963446236f00404, type: 3}

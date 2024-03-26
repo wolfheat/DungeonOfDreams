@@ -112,11 +112,12 @@ Feb-Mar 2024
 		* Available pictures scale correctly
 		* Changed Pickup particles for health (still not fancy)-
 		* Adjusted pickups and Heart to have separate circles colors around them-
+		* Made player rotate to face killing enemy
 
 
-		* When Player dies, turn towards enemy giving the blow
-
+		* Add Build Up sound to skeleton so player know it will attack
 		* Fix Enemies able to hit player after he moves away, or after being killed.
+		* Fix enemy hitting player unclear
 		* Fix objects oscillating to wide if update slow at startup.
 		* Add health refill object like food etc
 

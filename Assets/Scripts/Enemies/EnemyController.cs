@@ -380,7 +380,7 @@ public class EnemyController : Interactable
         if (colliders.Length > 0)
         {
             Debug.Log("Enemy Hit Player");
-            player.TakeDamage(1);
+            player.TakeDamage(1,this);
         }
     }
     
