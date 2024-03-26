@@ -378,8 +378,8 @@ public class EnemyController : Interactable
     public void PerformAttack()
     {
         Debug.Log("Skeleton performes attack");
-        // Attack entire square infront of enemy if player is there its hit
 
+        // Attack entire square infront of enemy if player is there its hit
         Vector3 pos = transform.position + transform.forward;
 
         Collider[] colliders = Physics.OverlapBox(pos, Game.boxSize, Quaternion.identity, playerLayerMask);

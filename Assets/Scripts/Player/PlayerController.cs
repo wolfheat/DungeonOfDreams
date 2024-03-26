@@ -349,6 +349,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Reset Player");
         transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;   
         savedAction = null;
         Stats.Instance.Revive();
     }
