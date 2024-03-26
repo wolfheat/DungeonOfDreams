@@ -111,11 +111,13 @@ Feb-Mar 2024
 25/3	* Made 3D model of heart with texture -
 		* Available pictures scale correctly
 		* Changed Pickup particles for health (still not fancy)-
+		* Adjusted pickups and Heart to have separate circles colors around them-
 
 
 		* When Player dies, turn towards enemy giving the blow
 
-
+		* Fix Enemies able to hit player after he moves away, or after being killed.
+		* Fix objects oscillating to wide if update slow at startup.
 		* Add health refill object like food etc
 
 		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
