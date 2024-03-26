@@ -270,7 +270,7 @@ MonoBehaviour:
     audioSource: {fileID: 0}
     name: 4
   - clip: {fileID: 8300000, guid: 900fa8639edbf0346bea4945e142d083, type: 3}
-    volume: 0.181
+    volume: 0.811
     pitch: 1
     loop: 0
     audioSource: {fileID: 0}
@@ -377,6 +377,12 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 24
+  - clip: {fileID: 8300000, guid: 708362c0dc9996e499b64eb869fcd151, type: 3}
+    volume: 0.54
+    pitch: 1.107
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 25
   musics:
   - clip: {fileID: 8300000, guid: 930c875c371f9d74ea5ecd1868808c8f, type: 3}
     volume: 0.619

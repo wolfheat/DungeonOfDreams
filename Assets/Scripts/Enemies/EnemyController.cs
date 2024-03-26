@@ -369,6 +369,12 @@ public class EnemyController : Interactable
 
     }
 
+    public void LoadUpAttack()
+    {
+        Debug.Log("Skeleton loades to attack");
+        SoundMaster.Instance.PlaySound(SoundName.SkeletonBuildUpAttack);
+    }
+
     public void PerformAttack()
     {
         Debug.Log("Skeleton performes attack");

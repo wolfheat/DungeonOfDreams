@@ -25,7 +25,8 @@ namespace Wolfheat.StartMenu
         PowerUpDamage,
         PowerUpSpeed,
         PlayerDies,
-        PickUpHeart
+        PickUpHeart,
+        SkeletonBuildUpAttack
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
