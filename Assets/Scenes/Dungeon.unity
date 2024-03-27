@@ -3827,8 +3827,9 @@ MonoBehaviour:
   gizmoCamera: {fileID: 1640061955}
   gridDetectionLayerMask:
     serializedVersion: 2
-    m_Bits: 776
+    m_Bits: 1800
   useDrawDebug: 0
+  mockHolder: {fileID: 435732734}
 --- !u!4 &290027105 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4637662265685850, guid: da0c23b9c7b2dd74c87c14176f98ed17, type: 3}
@@ -21535,7 +21536,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -66}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 154.6317, y: 124.1794}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1877017935
@@ -22242,7 +22243,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -97.12891}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 983.271}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1920729819
@@ -26681,6 +26682,14 @@ PrefabInstance:
       value: BombEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 8066144510914293902, guid: f6dff2fe28b63bd40bf37d858dadca68, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664283178001975026, guid: f6dff2fe28b63bd40bf37d858dadca68, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8664283178001975026, guid: f6dff2fe28b63bd40bf37d858dadca68, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

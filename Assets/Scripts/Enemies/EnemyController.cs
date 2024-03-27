@@ -14,6 +14,7 @@ public class EnemyController : Interactable
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
     [SerializeField] LayerMask obstructions;
+    [SerializeField] GameObject mock;
 
     private float timer = 0;
     private const float MoveTime = 2f;
@@ -34,13 +35,30 @@ public class EnemyController : Interactable
     private void OnEnable()
     {
         Debug.Log("Enemy Enabled");
-        player = FindFirstObjectByType<PlayerController>();
         Health = StartHealth; // Change to data health later
         Dead = false;
-        enemyStateController = new EnemyStateController(animator);
         enemyStateController.ChangeState(EnemyState.Idle,true);
         path.Clear();
         DoingAction = false;
+        mock.gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        mock.gameObject.SetActive(false);
+    }
+
+    private void Awake()
+    {
+        player = FindFirstObjectByType<PlayerController>();
+        enemyStateController = new EnemyStateController(animator);
+        
+    }
+
+    private void Start()
+    {
+        mock.transform.parent = LevelCreator.Instance.mockHolder?.transform;
+        mock.transform.position = transform.position;
     }
 
     private MoveAction savedAction = null;
@@ -54,7 +72,7 @@ public class EnemyController : Interactable
             if (savedAction.moveType == MoveActionType.Step)
             {
                 Vector3 target = Convert.V2IntToV3(savedAction.move);
-                if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null)
+                if (!LevelCreator.Instance.Occupied(target))
                 {
                     //Debug.Log("No Walls or Enemies ahead");
                     Debug.Log(" loaded action is move");
@@ -243,9 +261,10 @@ public class EnemyController : Interactable
 
         // Lock action from enemy
         DoingAction = true; 
-
         Vector3 start = transform.position;
         Vector3 end = target;
+        mock.transform.position = end;
+
         timer = 0;
         while (timer < MoveTime)
         {
@@ -344,7 +363,8 @@ public class EnemyController : Interactable
                         }
 
                         rayColor = Color.green;
-                    }
+                    }else
+                        mock.transform.position = transform.position;
                 }
             }
 

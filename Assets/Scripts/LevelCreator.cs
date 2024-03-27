@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridSpot
@@ -24,6 +25,7 @@ public class LevelCreator : MonoBehaviour
     private LayerMask wallLayerMask;
     private LayerMask enemyLayerMask;
     [SerializeField] private bool useDrawDebug;
+    public GameObject mockHolder;
 
     public Vector2Int PlayersLastPosition { get; set; }
 
@@ -31,7 +33,7 @@ public class LevelCreator : MonoBehaviour
 
     public static LevelCreator Instance { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
         if (Instance != null)
         {
@@ -45,6 +47,9 @@ public class LevelCreator : MonoBehaviour
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
 
+    }
+    private void OnEnable()
+    {
         PlayerController.Instance.PlayerReachedNewTile += UpdatePlayerDistance;
     }
 
@@ -303,6 +308,12 @@ public class LevelCreator : MonoBehaviour
     }
 
 
+    public bool TargetHasEnemyOrMockup(Vector3 target)
+    {
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, enemyLayerMask);
+        return colliders.Length > 0;
+
+    }
     public EnemyController TargetHasEnemy(Vector3 target)
     {
         // Check if spot is free
@@ -319,6 +330,11 @@ public class LevelCreator : MonoBehaviour
         return null;
     }
 
+    public bool Occupied(Vector3 target)
+    {
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, gridDetectionLayerMask);
+        return colliders.Length > 0;        
+    }
     public Wall TargetHasWall(Vector3 target)
     {
         // Check if spot is free

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         // set up input actions
         //Inputs.Instance.Controls.Player.Move.performed += NewMoveInput;
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         if (DoingAction) return;
 
         Vector3 target = transform.forward;
-        if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null)
+        if (!LevelCreator.Instance.Occupied(target))
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
             ItemSpawner.Instance.PlaceBomb(target);
@@ -164,11 +164,12 @@ public class PlayerController : MonoBehaviour
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
-                if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null)
+                if (!LevelCreator.Instance.Occupied(target))
                 {
-                    //Debug.Log("No Walls or Enemies ahead");
+                    Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
-                }
+                }else Debug.Log("Walls or Enemies ahead");
+
             }
             else if (savedAction.moveType == MoveActionType.Rotate)
                 StartCoroutine(Rotate(EndRotationForMotion(savedAction)));

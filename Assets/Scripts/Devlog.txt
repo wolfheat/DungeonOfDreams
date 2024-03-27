@@ -116,10 +116,15 @@ Feb-Mar 2024
 		* Added Skeleton build up sound -
 26/3	* Player Reset to Cardinal north when revive
 		* Added a compass -
-		* Fix objects oscillating to wide if update slow at startup. // just need correct start point if
+		* Fixed objects oscillating to wide if update slow at startup?
 		* Added Bombs UI
 		* Added Physical bomb that is placable
-		* Placable bomb explodes and updates stats
+		* Placable bomb explodes and updates stats -
+27/3	* Readded MockUp to occupy tiles when enemy moves
+		* Fixed issues with mockup not activating and updating correctly
+		* Player can no longer occfupy same spot as enemy, same for enemies
+
+
 
 
 		* Make sure player cant place bombs if not owning any
@@ -128,7 +133,6 @@ Feb-Mar 2024
 
 GAME JAM
 
-27/3
 28/3
 29/3
 30/3
