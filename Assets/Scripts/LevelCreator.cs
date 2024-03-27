@@ -22,6 +22,7 @@ public class LevelCreator : MonoBehaviour
     GridSpot[] gridSpots;
 
     [SerializeField] private LayerMask gridDetectionLayerMask;
+    [SerializeField] private LayerMask itemsLayerMask;
     private LayerMask wallLayerMask;
     private LayerMask enemyLayerMask;
     [SerializeField] private bool useDrawDebug;
@@ -379,6 +380,13 @@ public class LevelCreator : MonoBehaviour
             level[pos.x + 50, pos.y + 50] = 0;
         }else Debug.LogWarning("There is no wall at pos " + pos);
 
+    }
+
+    internal bool TargetHasPlacedBomb(Vector3 target)
+    {
+        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, itemsLayerMask).Where(x=>x.GetComponent<Bomb>()!=null).ToArray();
+        Debug.Log("Colliders with Bomb = "+colliders.Length);
+        return colliders.Length>0;
     }
 }
 

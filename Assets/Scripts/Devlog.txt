@@ -125,7 +125,7 @@ Feb-Mar 2024
 		* Player can no longer occfupy same spot as enemy, same for enemies -
 		* Made sure player can't place bombs if not owning any
 		* Changed so bombs can be placed on anything but walls -
-
+		* Made bombs not placable on other bombs -
 
 
 		* Still one time ended up on same square as bombenemy, dont know why, to much effort to fix now

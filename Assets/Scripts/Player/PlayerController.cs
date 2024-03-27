@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlaceBomb()
     {
-        if (DoingAction)
+        if (DoingAction || IsDead)
         {
             Debug.Log("Cant place Bomb, doing action");
             return;
@@ -95,7 +95,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 target = transform.position + transform.forward;
-        if (LevelCreator.Instance.TargetHasWall(target) == null)
+        if (LevelCreator.Instance.TargetHasWall(target) == null && !LevelCreator.Instance.TargetHasPlacedBomb(target))
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
             ItemSpawner.Instance.PlaceBomb(target);
