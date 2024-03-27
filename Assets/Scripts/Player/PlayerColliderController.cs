@@ -14,6 +14,8 @@ public class PlayerColliderController : MonoBehaviour
         Debug.Log("Colliding with "+other.name);
         if (other.gameObject.layer == LayerMask.NameToLayer("Items"))
         {
+            if (other.GetComponent<Bomb>() != null)
+                return;
             other.gameObject.GetComponent<Interactable>().InteractWith();
         }
     }

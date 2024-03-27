@@ -23,7 +23,7 @@ public class HealthUIController : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        Debug.Log("Initializing hearts Stats: "+Stats.Instance);
+        //Debug.Log("Initializing hearts Stats: "+Stats.Instance);
         InitiateHearts(Stats.Instance.Health,Stats.Instance.CurrentMaxHealth);
     }
 
@@ -40,7 +40,7 @@ public class HealthUIController : MonoBehaviour
     private void UpdateHearts(int amt)
     {
         int max = Stats.Instance.CurrentMaxHealth;
-        Debug.Log("Max hearts is "+max+" currently "+heartsList.Count+ " hearts ");
+        //Debug.Log("Max hearts is "+max+" currently "+heartsList.Count+ " hearts ");
         while (max > heartsList.Count)
         {
             heartsList.Add(Instantiate(heartPrefab, heartsHolder.transform));

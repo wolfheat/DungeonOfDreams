@@ -189,6 +189,7 @@ public class ItemSpawner : MonoBehaviour
     internal void PlaceBomb(Vector3 target)
     {
         // Find first mineral that is disabled
+        Debug.Log("Place bomb: "+bombPrefab);
         Bomb bomb = Instantiate(bombPrefab,itemHolder.transform);
         bomb.transform.position = target;        
     }

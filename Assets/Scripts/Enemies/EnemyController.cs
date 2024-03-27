@@ -68,21 +68,21 @@ public class EnemyController : Interactable
 
         if (savedAction != null)
         {
-            Debug.Log(" loading action from Save action ");
+            //Debug.Log(" loading action from Save action ");
             if (savedAction.moveType == MoveActionType.Step)
             {
                 Vector3 target = Convert.V2IntToV3(savedAction.move);
                 if (!LevelCreator.Instance.Occupied(target))
                 {
                     //Debug.Log("No Walls or Enemies ahead");
-                    Debug.Log(" loaded action is move");
+                   // Debug.Log(" loaded action is move");
                     StartCoroutine(Move(target));
                 }
                 else
                 {
-                    Debug.Log(" loaded action wants to move to a position filled by Wall or Enemy");
+                    //Debug.Log(" loaded action wants to move to a position filled by Wall or Enemy");
                     
-                    Debug.Log("* EnemyReachedNewPosition Update loaded savedAction");                    
+                    //Debug.Log("* EnemyReachedNewPosition Update loaded savedAction");                    
                     ReachedPosition();
                     return;
                 }
@@ -94,11 +94,11 @@ public class EnemyController : Interactable
             savedAction = null;
         }else if ((enemyStateController.currentState == EnemyState.Attack || enemyStateController.currentState == EnemyState.Idle) && PlayerHasNewPosition())
         {
-            Debug.Log("Enemy is currectly Idle and player has new position");
+            //Debug.Log("Enemy is currectly Idle and player has new position");
             ReachedPosition();
         }else if (enemyStateController.currentState == EnemyState.Attack && player.IsDead)
         {
-            Debug.Log("Enemy Attacking but PLayer is Dead, go to Idle");
+            //Debug.Log("Enemy Attacking but PLayer is Dead, go to Idle");
             path.Clear();
             enemyStateController.ChangeState(EnemyState.Idle);
         }
@@ -106,9 +106,9 @@ public class EnemyController : Interactable
 
     private Quaternion EndRotationForMotion(MoveAction motion)
     {
-        Debug.Log("Motion to rotate towards "+motion.move);
-        Debug.Log("Enemy is at position "+transform.position);
-        Debug.Log("Moteion to rotate forward "+(Convert.V2IntToV3(motion.move) - transform.position));
+        //Debug.Log("Motion to rotate towards "+motion.move);
+        //Debug.Log("Enemy is at position "+transform.position);
+        //Debug.Log("Moteion to rotate forward "+(Convert.V2IntToV3(motion.move) - transform.position));
         return Quaternion.LookRotation(Convert.V2IntToV3(motion.move)-transform.position, Vector3.up);
     }
 
@@ -136,7 +136,7 @@ public class EnemyController : Interactable
 
     public void ReachedPosition()
     {
-        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
+        //Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
         if (enemyStateController.currentState == EnemyState.Exploding)
@@ -145,7 +145,7 @@ public class EnemyController : Interactable
         if (!Stats.Instance.IsDead &&( UpdatePlayerPosition() || !newPositionEvaluated))
         {
             newPositionEvaluated = true;
-            Debug.Log("Enemy saw that player has moved");
+            //Debug.Log("Enemy saw that player has moved");
             // Make new path to players last known position if close enough
             // TODO How about enemy patrols and gets close enough to player, tyhis should also activate chase
 
@@ -157,7 +157,7 @@ public class EnemyController : Interactable
 
         //CheckForExplosion();
 
-        Debug.Log("Enemy is going to check if it has a path to follow: "+path?.Count);
+       // Debug.Log("Enemy is going to check if it has a path to follow: "+path?.Count);
 
 
         if (HasPath())
@@ -168,28 +168,28 @@ public class EnemyController : Interactable
         {
             if (EnemyData.enemyType == EnemyType.Skeleton && !Stats.Instance.IsDead)
             {
-                Debug.Log("This is a Skeleton");
+                //Debug.Log("This is a Skeleton");
                 playerDistance = PlayerDistance();
-                Debug.Log("distance "+playerDistance);
+                //Debug.Log("distance "+playerDistance);
                 if (playerDistance < 1.1f)
                 {
                     // if next to player but not facing player rotate towards player
                     bool readyToAttack = PlayerIsOneStepAhead();
                     if (!readyToAttack)
                     {
-                        Debug.Log("Added rotation to enemy action");
+                        //Debug.Log("Added rotation to enemy action");
                         savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
                         return;
                     }
 
-                    Debug.Log("Enemy within range, Change to Attack animation");
+                    //Debug.Log("Enemy within range, Change to Attack animation");
 
                     if(enemyStateController.currentState != EnemyState.Attack)
                         enemyStateController.ChangeState(EnemyState.Attack);
                 }
                 else if(path.Count == 0)
                 {
-                    Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
+                    //Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
                     if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
                         enemyStateController.ChangeState(EnemyState.Idle);
                 }
@@ -200,7 +200,7 @@ public class EnemyController : Interactable
 
 
             // Enemy should be in patrol mode here
-            Debug.Log(" Enemy keep patroling",this);
+            //Debug.Log(" Enemy keep patroling",this);
             enemyStateController.ChangeState(EnemyState.Idle);
 
         }
@@ -230,9 +230,9 @@ public class EnemyController : Interactable
             Vector2Int step = path.Pop();
             //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
 
-            Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to " + step);
+            //Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to " + step);
             savedAction = new MoveAction(MoveActionType.Step, step);
-            Debug.Log(" Save action stored with new action");
+            //Debug.Log(" Save action stored with new action");
         }
         else
         {
@@ -256,7 +256,7 @@ public class EnemyController : Interactable
     public IEnumerator Move(Vector3 target)
     {
 
-        Debug.Log("Enemy started move action");
+        //Debug.Log("Enemy started move action");
         SoundMaster.Instance.PlayStepSound();
 
         // Lock action from enemy
@@ -274,7 +274,7 @@ public class EnemyController : Interactable
         }
 
         DoingAction = false;
-        Debug.Log("* EnemyReachedNewPosition Move Action Completed");
+        //Debug.Log("* EnemyReachedNewPosition Move Action Completed");
         newPositionEvaluated = false;
         ReachedPosition();
     }
@@ -297,7 +297,7 @@ public class EnemyController : Interactable
         Quaternion end = target;
         timer = 0;
         enemyStateController.ChangeState(EnemyState.Rotate);
-        Debug.Log("Start Rotation - Change to idle state temporarily");
+        //Debug.Log("Start Rotation - Change to idle state temporarily");
         while (timer < RotateTime)
         {
             yield return null;
@@ -306,11 +306,11 @@ public class EnemyController : Interactable
         }
         transform.rotation = end;
 
-        Debug.Log("End Rotation -  Reset animation state");
+        //Debug.Log("End Rotation -  Reset animation state");
         enemyStateController.ChangeState(beginState);
 
         DoingAction = false;
-        Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
+        //Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
         ReachedPosition();
     }
 
@@ -334,7 +334,7 @@ public class EnemyController : Interactable
         if (EnemyData.enemyType == EnemyType.Bomber && CheckForExplosion())
             return;
         
-        Debug.Log("Updating enemies path to player");
+        //Debug.Log("Updating enemies path to player");
 
         if(playerDistance < EnemySight)
         {
@@ -353,13 +353,13 @@ public class EnemyController : Interactable
 
                     if (path!= null && path.Count > 0)
                     {
-                        Debug.Log("Can reach player, current state "+enemyStateController.currentState);
+                        //Debug.Log("Can reach player, current state "+enemyStateController.currentState);
 
                         // If not chasing start chase
                         if(enemyStateController.currentState != EnemyState.Chase)
                         {
                             enemyStateController.ChangeState(EnemyState.Chase);
-                            Debug.Log("Enemy starts chasing player",this);
+                            //Debug.Log("Enemy starts chasing player",this);
                         }
 
                         rayColor = Color.green;
@@ -377,12 +377,12 @@ public class EnemyController : Interactable
                 path.Clear();
             if(enemyStateController.currentState == EnemyState.Chase)
             {
-                Debug.Log("Enemy Chasing, but player to far, go to idle");
+                //Debug.Log("Enemy Chasing, but player to far, go to idle");
                 enemyStateController.ChangeState(EnemyState.Idle);
             }
             else if (enemyStateController.currentState != EnemyState.Chase || enemyStateController.currentState != EnemyState.Idle)
             {
-                Debug.Log("player to far, enemy not at idle or patrol, go to idle");
+                //Debug.Log("player to far, enemy not at idle or patrol, go to idle");
                 enemyStateController.ChangeState(EnemyState.Idle);
             }
         }
@@ -391,13 +391,13 @@ public class EnemyController : Interactable
 
     public void LoadUpAttack()
     {
-        Debug.Log("Skeleton loades to attack");
+        //Debug.Log("Skeleton loades to attack");
         SoundMaster.Instance.PlaySound(SoundName.SkeletonBuildUpAttack);
     }
 
     public void PerformAttack()
     {
-        Debug.Log("Skeleton performes attack");
+//Debug.Log("Skeleton performes attack");
 
         // Attack entire square infront of enemy if player is there its hit
         Vector3 pos = transform.position + transform.forward;
@@ -405,7 +405,7 @@ public class EnemyController : Interactable
         Collider[] colliders = Physics.OverlapBox(pos, Game.boxSize, Quaternion.identity, playerLayerMask);
         if (colliders.Length > 0)
         {
-            Debug.Log("Enemy Hit Player");
+            //Debug.Log("Enemy Hit Player");
             player.TakeDamage(1,this);
         }
     }
@@ -415,7 +415,7 @@ public class EnemyController : Interactable
         playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
         if (playerDistance < 1.1f)
         {
-            Debug.Log("Skeleton close enough to attack");
+            //Debug.Log("Skeleton close enough to attack");
             path.Clear();
             enemyStateController.ChangeState(EnemyState.Exploding);
             
@@ -430,7 +430,7 @@ public class EnemyController : Interactable
         playerDistance = PlayerDistance();
         if (playerDistance < 1.1f)
         {
-            Debug.Log("Player close enough to explode");
+            //Debug.Log("Player close enough to explode");
             path.Clear();
             enemyStateController.ChangeState(EnemyState.Exploding);
             StartCoroutine(RotateLockOnPlayer());
@@ -449,7 +449,7 @@ public class EnemyController : Interactable
         if(Dead) return false;
 
         Health -= amt;
-        Debug.Log("Enemy took damage play hit sound");
+        //Debug.Log("Enemy took damage play hit sound");
         SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
 
         if (EnemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
@@ -471,7 +471,7 @@ public class EnemyController : Interactable
                 {
                     enemyStateController.ChangeState(EnemyState.Idle);
                     ItemSpawner.Instance.ReturnEnemy(this);
-                    Debug.Log("Enemy returned to pool");
+                    //Debug.Log("Enemy returned to pool");
                     CreateItem(EnemyData.storedUsable);
                     return true;
                 }
@@ -492,11 +492,11 @@ public class EnemyController : Interactable
 
     public void DyingAnimationComplete()
     {
-        Debug.Log("Animation complete");
+        //Debug.Log("Animation complete");
 
         enemyStateController.ChangeState(EnemyState.Idle);
         ItemSpawner.Instance.ReturnEnemy(this);
-        Debug.Log("Enemy returned to pool");
+        //Debug.Log("Enemy returned to pool");
         CreateItem(EnemyData.storedUsable);
     }
     private void CreateItem(UsableData data)

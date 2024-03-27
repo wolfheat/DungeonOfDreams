@@ -122,12 +122,13 @@ Feb-Mar 2024
 		* Placable bomb explodes and updates stats -
 27/3	* Readded MockUp to occupy tiles when enemy moves
 		* Fixed issues with mockup not activating and updating correctly
-		* Player can no longer occfupy same spot as enemy, same for enemies
+		* Player can no longer occfupy same spot as enemy, same for enemies -
+		* Made sure player can't place bombs if not owning any
+		* Changed so bombs can be placed on anything but walls -
 
 
 
-
-		* Make sure player cant place bombs if not owning any
+		* Still one time ended up on same square as bombenemy, dont know why, to much effort to fix now
 		* Make sure player and enemy cant walk onto a bomb?
 
 

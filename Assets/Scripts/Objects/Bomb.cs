@@ -3,7 +3,6 @@ using Wolfheat.StartMenu;
 
 public class Bomb : MonoBehaviour
 {
-
     private void Start()
     {
         //Start Hissing here?

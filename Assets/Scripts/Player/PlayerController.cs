@@ -82,13 +82,24 @@ public class PlayerController : MonoBehaviour
 
     private void PlaceBomb()
     {
-        if (DoingAction) return;
+        if (DoingAction)
+        {
+            Debug.Log("Cant place Bomb, doing action");
+            return;
+        }
 
-        Vector3 target = transform.forward;
-        if (!LevelCreator.Instance.Occupied(target))
+        if (Stats.Instance.Bombs <= 0)
+        {
+            Debug.Log("You Got No Bombs");
+            return;
+        }
+
+        Vector3 target = transform.position + transform.forward;
+        if (LevelCreator.Instance.TargetHasWall(target) == null)
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
             ItemSpawner.Instance.PlaceBomb(target);
+            Stats.Instance.RemoveBombs(1);
         }
     }
 
@@ -129,11 +140,11 @@ public class PlayerController : MonoBehaviour
             }
             else if (pickupController.Enemy != null)
             {
-                Debug.Log("Hit Enemy");
+                //Debug.Log("Hit Enemy");
                 playerAnimationController.SetState(PlayerState.Attack);
             }
 
-            else Debug.Log("No Block to crush");
+            //else Debug.Log("No Block to crush");
         }
 
     }
@@ -166,9 +177,9 @@ public class PlayerController : MonoBehaviour
                 Vector3 target = EndPositionForMotion(savedAction);
                 if (!LevelCreator.Instance.Occupied(target))
                 {
-                    Debug.Log("No Walls or Enemies ahead");
+                    //Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
-                }else Debug.Log("Walls or Enemies ahead");
+                }//else Debug.Log("Walls or Enemies ahead");
 
             }
             else if (savedAction.moveType == MoveActionType.Rotate)
@@ -333,7 +344,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Stats.Instance.IsDead) return;
 
-        Debug.Log("Player get hurt " + amt + " hp");
+        //Debug.Log("Player get hurt " + amt + " hp");
 
         SoundMaster.Instance.PlaySound(SoundName.EnemyStabs);
 
@@ -346,7 +357,7 @@ public class PlayerController : MonoBehaviour
 
             if(enemy != null)
             {
-                Debug.Log("Enemy at "+enemy.transform.position+" player at: "+transform.position);
+                //Debug.Log("Enemy at "+enemy.transform.position+" player at: "+transform.position);
                 StartCoroutine(Rotate(Quaternion.LookRotation(enemy.transform.position - transform.position)));
                 //savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(enemy.transform.position)-Convert.V3ToV2Int(transform.position));
             }

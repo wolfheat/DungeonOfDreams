@@ -170,7 +170,7 @@ namespace Wolfheat.StartMenu
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
 
-            Debug.Log("Play Sound: "+name);
+            //Debug.Log("Play Sound: "+name);
             if (soundsDictionary.ContainsKey(name))
             {
                 if (!allowInterupt && soundsDictionary[name].audioSource.isPlaying && !soundsDictionary[name].loop)
