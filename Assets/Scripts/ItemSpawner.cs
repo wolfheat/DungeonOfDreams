@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Wolfheat.Pool;
-using static UnityEngine.Rendering.DebugUI;
+using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, RedSoil, DarkSoil, Stone, Chess, Coal, Sand}
@@ -10,10 +10,11 @@ public enum UsableType {Bomb,Other}
 public enum PowerUpType { Speed,Damage,Health}
 public class ItemSpawner : MonoBehaviour
 {
+    [SerializeField] EnemyController[] enemyPrefabs;
     [SerializeField] Mineral[] mineralPrefabs;
     [SerializeField] Mineral mineralPrefab;
-    [SerializeField] EnemyController[] enemyPrefabs;
     [SerializeField] EnemyData[] enemyDatas;
+    [SerializeField] Bomb bombPrefab;
 
     [SerializeField] GameObject enemyHolder;
     [SerializeField] GameObject itemHolder;
@@ -62,8 +63,6 @@ public class ItemSpawner : MonoBehaviour
             enemyPool.Add(enemy);
 
         Debug.Log("Adding start minerals and enemies to pools, total is now Minerals=[" + mineralPool.Count + "] PowerUp=[ " + powerUpPool.Count + "] Enemies=[" + enemyPool.Count + "]");
-
-        //SpawnRandomEnemies();
     }
 
     private void GeneratePebbles()
@@ -187,4 +186,10 @@ public class ItemSpawner : MonoBehaviour
             ReturnEnemy(interactable as EnemyController);
     }
 
+    internal void PlaceBomb(Vector3 target)
+    {
+        // Find first mineral that is disabled
+        Bomb bomb = Instantiate(bombPrefab,itemHolder.transform);
+        bomb.transform.position = target;        
+    }
 }

@@ -116,6 +116,14 @@ Feb-Mar 2024
 		* Added Skeleton build up sound -
 26/3	* Player Reset to Cardinal north when revive
 		* Added a compass -
+		* Fix objects oscillating to wide if update slow at startup. // just need correct start point if
+		* Added Bombs UI
+		* Added Physical bomb that is placable
+		* Placable bomb explodes and updates stats
+
+
+		* Make sure player cant place bombs if not owning any
+		* Make sure player and enemy cant walk onto a bomb?
 
 
 GAME JAM
@@ -129,7 +137,6 @@ GAME JAM
 		* Adjust skeleton Build Up sound
 		* Fix Enemies able to hit player after he moves away, or after being killed.
 		* Fix enemy hitting player unclear
-		* Fix objects oscillating to wide if update slow at startup.
 		* Add health refill object like food etc
 
 		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
@@ -184,7 +191,53 @@ GAME JAM
 		// Bugs
 		* Maybe issue with wrong block being hit, might be because the stack of walls in front of player is not updated when reaching new spot?
 
-		
+SUNO MUSIC
+[Start]
+[Intro]
+[Verse]
+[Chorus]
+[Verse]
+[Chorus]
+(record scratching) Like a DJ, Guitar solo, Drum Solo
+
+
+You got a Dream
+
+[Start]
+	
+[Verse]
+You got a dream, you've got a vision
+Don't you agree? Complete this mission
+Deep down inside, the answer has grown
+Dig deep and find, what you already know
+
+[Chorus]
+My game is great, game is fantastic,
+I'm not the same, maybe I'm drastic
+World passes by, and I got no clue
+The game must complete, you have no clue
+My game is great, game is fantastic,
+I'm not the same, maybe I'm drastic
+World passes by, and I got no clue
+The game must complete, its all up to you
+
+[Verse]
+Early morning to the late of night
+You keep on pushing through,
+You see a glow throughout your fight
+That shine comes from within you
+
+[Chorus]
+My game is great,(great) game is fantastic,
+I'm not the same,(same) maybe I'm drastic
+World passes by,(by by) I got no clue
+The game must complete, it is up to you
+My game is great,(great) game is fantastic,
+I'm not the same,(same) maybe I'm drastic
+World passes by,(by by) I got no clue
+The game must complete, it is up to you
+
+
 
 		-------------------
 		* Julian feedback

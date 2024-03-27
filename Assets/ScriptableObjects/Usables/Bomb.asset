@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Bomb
   sprite: {fileID: -1320908125, guid: 18b43408ef108b544a98739cf12d5633, type: 3}
-  value: 0
+  value: 1
   material: {fileID: 2100000, guid: 203f731f7ff5ccb4a8b7b5f10ebf6661, type: 2}
   mesh: {fileID: 0}
   usableType: 0

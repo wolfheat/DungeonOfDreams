@@ -8,7 +8,6 @@ public class Compass : MonoBehaviour
     void Update()
     {
         float angle = player.rotation.eulerAngles.y;
-        Debug.Log("PLayer facing angle "+angle);
         float percent = angle / 360f;
         float compassPosition = Mathf.Lerp(512, -512, percent);
         compassImage.anchoredPosition = new Vector2(compassPosition,0);           

@@ -145,7 +145,6 @@ public class PickUpController : MonoBehaviour
     {
         if (ActiveInteractable == null) return;
 
-        Debug.Log("Interacting with item");
         ActiveInteractable.InteractWith();
         UpdateColliders();
     }

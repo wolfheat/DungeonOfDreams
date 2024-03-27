@@ -10,12 +10,14 @@ public class Stats : MonoBehaviour
     public const int MaxHealth = 8;
     public int CurrentMaxHealth { get; private set; } = 2;
     public int Health { get; private set; } = 2;
+    public int Bombs { get; private set; } = 2;
 
     public bool IsDead { get; set; } = false;
 
     public static Stats Instance { get; private set; }
 
     public static Action<int> HealthUpdate;
+    public static Action<int> BombUpdate;
 
 	private void Start()
 	{
@@ -80,4 +82,21 @@ public class Stats : MonoBehaviour
         Health = CurrentMaxHealth;
         HealthUpdate?.Invoke(Health);
     }
+
+    internal void AddBomb(int amount)
+    {
+        Bombs += amount;
+        BombUpdate?.Invoke(Bombs);
+    }
+    internal void RemoveBombs(int amount)
+    {
+        Bombs = Math.Max(0,Bombs-amount);
+        BombUpdate?.Invoke(Bombs);
+    }
+
+    internal void AddMineral(MineralData mineralData)
+    {
+        Debug.Log("Adding Mineral "+mineralData.itemName);
+    }
+
 }

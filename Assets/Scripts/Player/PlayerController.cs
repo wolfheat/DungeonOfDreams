@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed += SideStep;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
+        Inputs.Instance.Controls.Player.RightClick.performed += RightClick;   
 
         playerAnimationController.HitComplete += HitWithTool;
 
@@ -68,10 +69,28 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed -= SideStep;
         Inputs.Instance.Controls.Player.Turn.performed -= TurnPerformed;
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
+        Inputs.Instance.Controls.Player.RightClick.performed -= RightClick;   
         playerAnimationController.HitComplete -= HitWithTool;
     }
 
 
+    public void RightClick(CallbackContext context)
+    {
+        Debug.Log("Right Click Place Bomb");
+        PlaceBomb();
+    }
+
+    private void PlaceBomb()
+    {
+        if (DoingAction) return;
+
+        Vector3 target = transform.forward;
+        if (LevelCreator.Instance.TargetHasWall(target) == null && LevelCreator.Instance.TargetHasEnemy(target) == null)
+        {
+            Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
+            ItemSpawner.Instance.PlaceBomb(target);
+        }
+    }
 
     public void InterractWith(CallbackContext context)
     {

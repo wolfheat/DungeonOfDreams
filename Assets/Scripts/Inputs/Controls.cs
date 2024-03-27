@@ -12,6 +12,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
 namespace UnityEngine.InputSystem
@@ -95,6 +96,15 @@ namespace UnityEngine.InputSystem
                     ""name"": ""Click"",
                     ""type"": ""Button"",
                     ""id"": ""6d3e98c0-1de1-49e9-be9e-e266598b4dd6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7f70f19-f081-409d-9159-cd98e4a3ec9c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -702,6 +712,17 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Esc"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2fb0784b-dbf7-4b49-b84a-f2efee55a966"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1317,6 +1338,7 @@ namespace UnityEngine.InputSystem
             m_Player_SideStep = m_Player.FindAction("SideStep", throwIfNotFound: true);
             m_Player_Step = m_Player.FindAction("Step", throwIfNotFound: true);
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+            m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
             m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -1400,6 +1422,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_SideStep;
         private readonly InputAction m_Player_Step;
         private readonly InputAction m_Player_Click;
+        private readonly InputAction m_Player_RightClick;
         private readonly InputAction m_Player_Esc;
         public struct PlayerActions
         {
@@ -1413,6 +1436,7 @@ namespace UnityEngine.InputSystem
             public InputAction @SideStep => m_Wrapper.m_Player_SideStep;
             public InputAction @Step => m_Wrapper.m_Player_Step;
             public InputAction @Click => m_Wrapper.m_Player_Click;
+            public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
             public InputAction @Esc => m_Wrapper.m_Player_Esc;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -1447,6 +1471,9 @@ namespace UnityEngine.InputSystem
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
                 @Esc.started += instance.OnEsc;
                 @Esc.performed += instance.OnEsc;
                 @Esc.canceled += instance.OnEsc;
@@ -1478,6 +1505,9 @@ namespace UnityEngine.InputSystem
                 @Click.started -= instance.OnClick;
                 @Click.performed -= instance.OnClick;
                 @Click.canceled -= instance.OnClick;
+                @RightClick.started -= instance.OnRightClick;
+                @RightClick.performed -= instance.OnRightClick;
+                @RightClick.canceled -= instance.OnRightClick;
                 @Esc.started -= instance.OnEsc;
                 @Esc.performed -= instance.OnEsc;
                 @Esc.canceled -= instance.OnEsc;
@@ -1679,6 +1709,7 @@ namespace UnityEngine.InputSystem
             void OnSideStep(InputAction.CallbackContext context);
             void OnStep(InputAction.CallbackContext context);
             void OnClick(InputAction.CallbackContext context);
+            void OnRightClick(InputAction.CallbackContext context);
             void OnEsc(InputAction.CallbackContext context);
         }
         public interface IUIActions

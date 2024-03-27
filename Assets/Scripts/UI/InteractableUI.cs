@@ -45,12 +45,12 @@ public class InteractableUI : MonoBehaviour
     private List<InteractableUIItem> pickedUp = new();
     public void AddPickedUp(ItemData data)
     {
-        if(data is PowerUpData)
+        if (data is PowerUpData)
         {
-            if(((PowerUpData)data).powerUpType == PowerUpType.Health)
+            if (((PowerUpData)data).powerUpType == PowerUpType.Health)
             {
                 Debug.Log("Adding health with heart " + data.value);
-                Stats.Instance.AddHealth(data.value);
+                Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
                 return;
             }
 
@@ -58,19 +58,27 @@ public class InteractableUI : MonoBehaviour
             BoostUIItem[] uiBoosts = boostsHolder.GetComponentsInChildren<BoostUIItem>();
             foreach (BoostUIItem item in uiBoosts)
             {
-                if(item.nameString == data.itemName)
+                if (item.nameString == data.itemName)
                 {
                     item.AddBoost(data as PowerUpData);
-                    return;
+                    return; // Dont add boosts to picked up list?
                 }
             }
 
-            Debug.Log("Picking Up never used Power Up: "+(data as PowerUpData).itemName);
+            Debug.Log("Picking Up never used Power Up: " + (data as PowerUpData).itemName);
             BoostUIItem boostItem = Instantiate(boostuiItemPrefab, boostsHolder.transform);
             boostItem.SetName(data.itemName);
             boostItem.SetSprite(data.sprite);
             boostItem.AddBoost(data as PowerUpData);
             return;
+        }
+        else if (data is UsableData)
+        {
+            if (((UsableData)data).usableType == UsableType.Bomb)
+            {
+                Debug.Log("Adding bomb to inventory" + data.value);
+                Stats.Instance.AddBomb(data.value);
+            }
         }
 
         InteractableUIItem pickedUpItem = Instantiate(uiItemPrefab, pickedHolder.transform);
