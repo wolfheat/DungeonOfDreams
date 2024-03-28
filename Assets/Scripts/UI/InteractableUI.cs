@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class InteractableUI : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class InteractableUI : MonoBehaviour
             {
                 Debug.Log("Adding health with heart " + data.value);
                 Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
+                SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
                 return;
             }
 
@@ -70,6 +72,7 @@ public class InteractableUI : MonoBehaviour
             boostItem.SetName(data.itemName);
             boostItem.SetSprite(data.sprite);
             boostItem.AddBoost(data as PowerUpData);
+            SoundMaster.Instance.PlaySound(SoundName.Energize);
             return;
         }
         else if (data is UsableData)

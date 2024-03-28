@@ -26,7 +26,17 @@ namespace Wolfheat.StartMenu
         PowerUpSpeed,
         PlayerDies,
         PickUpHeart,
-        SkeletonBuildUpAttack
+        SkeletonBuildUpAttack,
+        NoBombs,
+        CantDoThat,
+        MoreLifeNow,
+        Energize,
+        ItsGonaBlow,
+        WatchOut,
+        WhatIsThisPlace,
+        MyHeadHurts,
+        IDontRemeber,
+        ThatWasTheLastOne
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -76,6 +86,7 @@ namespace Wolfheat.StartMenu
         public AudioMixerGroup musicMixerGroup;  
         public AudioMixerGroup SFXMixerGroup;  
         [SerializeField] private Sound[] sounds;
+        [SerializeField] private Sound[] speech;
         [SerializeField] private Music[] musics;
 
         [SerializeField]private AudioClip[] swosh;
@@ -124,6 +135,13 @@ namespace Wolfheat.StartMenu
                 soundsDictionary.Add(sound.name, sound);
             }
 
+            foreach (var sound in speech)
+            {
+                sound.SetSound(gameObject.AddComponent<AudioSource>());
+                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
+                soundsDictionary.Add(sound.name, sound);
+            }
+
             //Steps
             stepSource = gameObject.AddComponent<AudioSource>();
             stepSource.volume = 0.5f;
@@ -143,7 +161,19 @@ namespace Wolfheat.StartMenu
             // Play theme sound
             activeMusic = MusicName.MenuMusic;
             //PlayMusic(MusicName.MenuMusic);
-        
+
+            
+        }
+
+        public IEnumerator DelayedSpeech()
+        {
+            yield return new WaitForSeconds(5f);
+            PlaySound(SoundName.MyHeadHurts);
+            yield return new WaitForSeconds(5f);
+            PlaySound(SoundName.WhatIsThisPlace);
+            yield return new WaitForSeconds(2f);
+            PlaySound(SoundName.IDontRemeber);
+
         }
 
         public void PlayMusic(MusicName name)

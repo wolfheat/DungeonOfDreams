@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Wolfheat.Pool;
-using static UnityEditor.PlayerSettings;
 using Random = UnityEngine.Random;
 
 public enum MineralType{Gold,Silver,Copper, RedSoil, DarkSoil, Stone, Chess, Coal, Sand}
@@ -54,7 +53,11 @@ public class ItemSpawner : MonoBehaviour
 
         List<PowerUp> powerUps = GetComponentsInChildren<PowerUp>().ToList();
         foreach (PowerUp powerUp in powerUps)
+        {
+            // Fix its oscillation here ?
+
             powerUpPool.Add(powerUp);
+        }
 
         // Add initial Enemies
         List<EnemyController> enemies = enemyHolder.GetComponentsInChildren<EnemyController>().ToList();
@@ -135,13 +138,14 @@ public class ItemSpawner : MonoBehaviour
         Usable usable = usables[type].GetNextFromPool(usablePrefabs[type]);
         Debug.Log("Got Usable from pool ");
 
-        // Find first mineral that is disabled
-        usable.GetComponent<ObjectAnimator>().Reset();
 
         usable.Data = data;
         usable.transform.position = pos;
         usable.transform.rotation = usablePrefabs[type].transform.rotation;
         usable.transform.parent = itemHolder.transform;
+
+        // Find first mineral that is disabled
+        usable.GetComponent<ObjectAnimator>().Reset();
 
         // Wait needed if item just got avtivated so player collider will pick it up
         StartCoroutine(PlayerController.Instance.pickupController.UpdateCollidersWait());
@@ -157,8 +161,6 @@ public class ItemSpawner : MonoBehaviour
         Mineral mineral = mineralPool.GetNextFromPool(mineralPrefab);
         Debug.Log(" Returned a free mineral that currently is " + mineral.Data?.itemName);
 
-        // Find first mineral that is disabled
-        mineral.GetComponent<ObjectAnimator>().Reset();
 
         mineral.SetData(data);
 
@@ -167,6 +169,9 @@ public class ItemSpawner : MonoBehaviour
         mineral.transform.position = pos;
         mineral.transform.rotation = mineralPrefab.transform.rotation;
         mineral.transform.parent = itemHolder.transform;
+
+        // Find first mineral that is disabled
+        mineral.GetComponent<ObjectAnimator>().Reset();
 
         // Wait needed if item just got avtivated so player collider will pick it up
         StartCoroutine(PlayerController.Instance.pickupController.UpdateCollidersWait());

@@ -91,15 +91,25 @@ public class PlayerController : MonoBehaviour
         if (Stats.Instance.Bombs <= 0)
         {
             Debug.Log("You Got No Bombs");
+            SoundMaster.Instance.PlaySound(SoundName.NoBombs);
             return;
-        }
+        }else if(Stats.Instance.Bombs==1)
+            SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
+
 
         Vector3 target = transform.position + transform.forward;
         if (LevelCreator.Instance.TargetHasWall(target) == null && !LevelCreator.Instance.TargetHasPlacedBomb(target))
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
+            
+            SoundMaster.Instance.PlaySound(SoundName.DropItem);
             ItemSpawner.Instance.PlaceBomb(target);
             Stats.Instance.RemoveBombs(1);
+        }
+        else
+        {
+            // Something is in the way
+            SoundMaster.Instance.PlaySound(SoundName.CantDoThat);
         }
     }
 

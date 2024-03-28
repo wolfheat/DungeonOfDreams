@@ -18,6 +18,12 @@ public class Bomb : MonoBehaviour
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
     }
 
+    public void WatchOut()
+    {
+        if (Vector3.Distance(transform.position, PlayerController.Instance.transform.position) < 1.6f)
+            SoundMaster.Instance.PlaySound(SoundName.WatchOut);
+        
+    }
     public void Remove()
     {
         Debug.Log("Remove Bomb");

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class GridSpot
 {
@@ -47,6 +48,7 @@ public class LevelCreator : MonoBehaviour
 
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
+        StartCoroutine(SoundMaster.Instance.DelayedSpeech());
 
     }
     private void OnEnable()
@@ -64,7 +66,6 @@ public class LevelCreator : MonoBehaviour
         PlayersLastPosition = Convert.V3ToV2Int(PlayerController.Instance.transform.position);
     }
 
-    // Start is called before the first frame update
     void Update()
     {
         CreateGrid();    
