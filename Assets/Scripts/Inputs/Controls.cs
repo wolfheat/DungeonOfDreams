@@ -66,6 +66,15 @@ namespace UnityEngine.InputSystem
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""N"",
+                    ""type"": ""Button"",
+                    ""id"": ""aff98210-eb74-4899-aa97-57bfb8004e6f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Turn"",
                     ""type"": ""Value"",
                     ""id"": ""ccc4529b-eac3-4a1b-bda6-2804be545523"",
@@ -747,6 +756,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""RightClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c0e6ae31-15bd-412c-9cfa-9604d1d38d20"",
+                    ""path"": ""<Keyboard>/n"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""N"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1356,6 +1376,7 @@ namespace UnityEngine.InputSystem
             m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
             m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
             m_Player_M = m_Player.FindAction("M", throwIfNotFound: true);
+            m_Player_N = m_Player.FindAction("N", throwIfNotFound: true);
             m_Player_Turn = m_Player.FindAction("Turn", throwIfNotFound: true);
             m_Player_SideStep = m_Player.FindAction("SideStep", throwIfNotFound: true);
             m_Player_Step = m_Player.FindAction("Step", throwIfNotFound: true);
@@ -1440,6 +1461,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Look;
         private readonly InputAction m_Player_Fire;
         private readonly InputAction m_Player_M;
+        private readonly InputAction m_Player_N;
         private readonly InputAction m_Player_Turn;
         private readonly InputAction m_Player_SideStep;
         private readonly InputAction m_Player_Step;
@@ -1454,6 +1476,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Look => m_Wrapper.m_Player_Look;
             public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputAction @M => m_Wrapper.m_Player_M;
+            public InputAction @N => m_Wrapper.m_Player_N;
             public InputAction @Turn => m_Wrapper.m_Player_Turn;
             public InputAction @SideStep => m_Wrapper.m_Player_SideStep;
             public InputAction @Step => m_Wrapper.m_Player_Step;
@@ -1481,6 +1504,9 @@ namespace UnityEngine.InputSystem
                 @M.started += instance.OnM;
                 @M.performed += instance.OnM;
                 @M.canceled += instance.OnM;
+                @N.started += instance.OnN;
+                @N.performed += instance.OnN;
+                @N.canceled += instance.OnN;
                 @Turn.started += instance.OnTurn;
                 @Turn.performed += instance.OnTurn;
                 @Turn.canceled += instance.OnTurn;
@@ -1515,6 +1541,9 @@ namespace UnityEngine.InputSystem
                 @M.started -= instance.OnM;
                 @M.performed -= instance.OnM;
                 @M.canceled -= instance.OnM;
+                @N.started -= instance.OnN;
+                @N.performed -= instance.OnN;
+                @N.canceled -= instance.OnN;
                 @Turn.started -= instance.OnTurn;
                 @Turn.performed -= instance.OnTurn;
                 @Turn.canceled -= instance.OnTurn;
@@ -1727,6 +1756,7 @@ namespace UnityEngine.InputSystem
             void OnLook(InputAction.CallbackContext context);
             void OnFire(InputAction.CallbackContext context);
             void OnM(InputAction.CallbackContext context);
+            void OnN(InputAction.CallbackContext context);
             void OnTurn(InputAction.CallbackContext context);
             void OnSideStep(InputAction.CallbackContext context);
             void OnStep(InputAction.CallbackContext context);

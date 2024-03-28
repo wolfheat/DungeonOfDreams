@@ -129,7 +129,8 @@ Feb-Mar 2024
 		* Added Male voice to player
 		* Added drop sound for placing bombs
 		* Added warning to player if to close to bomb
-		* Fixed oscillations error, it is now a combined solution
+		* Fixed oscillations error, it is now a combined solution -
+		* M and N Now works to mute music or all audio -
 
 		* Still one time ended up on same square as bombenemy, dont know why, to much effort to fix now, 
 			prob because player can start moving to a square and enemy does not see this directly
@@ -137,11 +138,7 @@ Feb-Mar 2024
 		* Placing bombs sound may be better
 		
 		SPEECE NEEDED
-		* Something is in the way - placing bomb
-		* Its gona blow - Enemy bomber first time? 
-		* That should get this baby going - SpeedPowerUp?
-		* Energize - SpeedPowerUp?
-
+		
 		GENNY AI - MATHEW VOICE -
 
 GAME JAM

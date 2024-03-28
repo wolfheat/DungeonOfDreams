@@ -277,24 +277,32 @@ namespace Wolfheat.StartMenu
 
         }
 
+        public void ToggleAllAudio(InputAction.CallbackContext context)
+        {
+            Debug.Log("Soundmaster toggle all audio");
+            soundSettings.GlobalMaster = !soundSettings.GlobalMaster;
+            ToggleMusic();
+            //GlobalMuteChanged?.Invoke();
+        }
         public void ToggleMusic(InputAction.CallbackContext context)
         {
             Debug.Log("Soundmaster toggle music");
+            soundSettings.UseMusic = !soundSettings.UseMusic;
             ToggleMusic();
-            GlobalMuteChanged?.Invoke();
         }
         public void ToggleMusic()
         {
             Debug.Log("TOGGLE MUSIC");
-            soundSettings.GlobalMaster = !soundSettings.GlobalMaster;
             
             Debug.Log("Global Sound Set To:"+ (soundSettings.GlobalMaster==true?"ON":"OFF") + " Master: "+ soundSettings.UseMaster + " Music: " +soundSettings.UseMusic+" SFX: "+ soundSettings.UseSFX);
             // Update Music playing 
             if (soundSettings.GlobalMaster)
             {
                 Debug.Log("GLobal master is on");
-                if(soundSettings.UseMaster && soundSettings.UseMusic && !musicSource.isPlaying)
+                if (soundSettings.UseMaster && soundSettings.UseMusic && !musicSource.isPlaying)
                     ResumeMusic();
+                else
+                    musicSource.Stop();
             }
             else 
                 if (musicSource.isPlaying)

@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "N",
+                    "type": "Button",
+                    "id": "aff98210-eb74-4899-aa97-57bfb8004e6f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Turn",
                     "type": "Value",
                     "id": "ccc4529b-eac3-4a1b-bda6-2804be545523",
@@ -721,6 +730,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0e6ae31-15bd-412c-9cfa-9604d1d38d20",
+                    "path": "<Keyboard>/n",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "N",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

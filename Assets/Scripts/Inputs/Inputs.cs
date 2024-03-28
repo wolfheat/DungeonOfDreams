@@ -21,12 +21,14 @@ namespace Wolfheat.Inputs
         private void LoadingComplete()
         {
             Debug.Log("Loading Complete");
-            Controls.Player.M.performed += SoundMaster.Instance.ToggleMusic;
+            Controls.Player.M.performed += SoundMaster.Instance.ToggleAllAudio;
+            Controls.Player.N.performed += SoundMaster.Instance.ToggleMusic;
         }
 
         private void OnDisable()
         {
-            Controls.Player.M.performed -= SoundMaster.Instance.ToggleMusic;
+            Controls.Player.M.performed -= SoundMaster.Instance.ToggleAllAudio;
+            Controls.Player.N.performed -= SoundMaster.Instance.ToggleMusic;
         }
 
         // Start is called before the first frame update
