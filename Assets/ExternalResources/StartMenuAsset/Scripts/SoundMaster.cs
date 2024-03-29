@@ -40,7 +40,10 @@ namespace Wolfheat.StartMenu
         IvebeenStuck,
         MakingThisGame,
         IShouldGoOut,
-        WhereAreMyWindows
+        WhereAreMyWindows,
+        AmIStillSleeping,
+        INowHaveASledgehammer,
+        IHaveACompass
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -91,6 +94,8 @@ namespace Wolfheat.StartMenu
         public AudioMixerGroup SFXMixerGroup;  
         [SerializeField] private Sound[] sounds;
         [SerializeField] private Sound[] speech;
+        [SerializeField] private Sound[] speechStart;
+        [SerializeField] private Sound[] speechFirstTimeUses;
         [SerializeField] private Music[] musics;
 
         [SerializeField]private AudioClip[] swosh;
@@ -141,6 +146,20 @@ namespace Wolfheat.StartMenu
             }
 
             foreach (var sound in speech)
+            {
+                sound.SetSound(gameObject.AddComponent<AudioSource>());
+                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
+                soundsDictionary.Add(sound.name, sound);
+            }
+            
+            foreach (var sound in speechStart)
+            {
+                sound.SetSound(gameObject.AddComponent<AudioSource>());
+                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
+                soundsDictionary.Add(sound.name, sound);
+            }
+            
+            foreach (var sound in speechFirstTimeUses)
             {
                 sound.SetSound(gameObject.AddComponent<AudioSource>());
                 sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;

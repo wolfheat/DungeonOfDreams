@@ -145,6 +145,11 @@ Feb-Mar 2024
 		* Added more speech
 		* Fixed issue with double speech when cant place and last one -
 		* Issue with missplaced sledgehammer fixed -
+		* BUILD 29/3 - zipped size 127Mb 
+29/3	READY TO POLISH DAY ?
+		* Fixed issue with mining animation not whowing correctly
+		* Added compass poster and sledgehammer as usables -
+
 
 
 		* Fix hitting wall stopps the hit animation in the middle, change transfer?
@@ -175,7 +180,6 @@ Feb-Mar 2024
 
 ***	GAME JAM ***
 
-29/3	READY TO POLISH
 30/3
 31/3 17:00 SUBMISSION DUE
 		
@@ -403,6 +407,9 @@ You will submit even though it is tough
 		// * Polygon  - Farm Pack -  Standard EULA
 		// * Unity Technologies - Particle Pack - Standard EULA
 		// * GarryKillian(freepik) - Wallpaper - Free Licence
+		// * masadepan(freepik) - Vector Compass - Free Licence
+
+		// * Zooperdan - Some logos	
 
 			SINGLE
 

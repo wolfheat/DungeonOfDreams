@@ -79,8 +79,12 @@ public class InteractableUI : MonoBehaviour
         {
             if (((UsableData)data).usableType == UsableType.Bomb)
             {
-                Debug.Log("Adding bomb to inventory" + data.value);
+                Debug.Log("Adding bomb to inventory " + data.value);
                 Stats.Instance.AddBomb(data.value);
+            }else if (((UsableData)data).usableType == UsableType.SledgeHammer)
+            {
+                Debug.Log("Adding sledgehammer " + data.value);
+                //Stats.Instance.AddBomb(data.value);
             }
         }
 

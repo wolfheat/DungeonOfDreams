@@ -67,7 +67,7 @@ public class PlayerAnimationController : MonoBehaviour
     }
     public void AnyHitCompleted()
     {
-        //Debug.Log("HIT Completed");
+        Debug.Log("HIT Completed");
         HitComplete?.Invoke();
         
     }
