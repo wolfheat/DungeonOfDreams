@@ -169,10 +169,10 @@ namespace Wolfheat.StartMenu
         {
             yield return new WaitForSeconds(5f);
             PlaySound(SoundName.MyHeadHurts);
-            yield return new WaitForSeconds(5f);
-            PlaySound(SoundName.WhatIsThisPlace);
             yield return new WaitForSeconds(2f);
             PlaySound(SoundName.IDontRemeber);
+            yield return new WaitForSeconds(5f);
+            PlaySound(SoundName.WhatIsThisPlace);
 
         }
 

@@ -3,7 +3,9 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
-	public float miningSpeed;
+    [SerializeField] SledgeHammerFlicker sledgeHammerFlicker;
+
+    public float miningSpeed;
 	public const float MiningSpeedDefault = 3f;
 	public const float MiningSpeedSpeedUp = 12f;
 
@@ -33,10 +35,13 @@ public class Stats : MonoBehaviour
 
 	public void SetDefaultMiningSpeed()
 	{
-		miningSpeed = MiningSpeedDefault;
+        sledgeHammerFlicker.SetFlicker(false);
+        miningSpeed = MiningSpeedDefault;
 	}
-	public void SetBoostMiningSpeed()
+
+    public void SetBoostMiningSpeed()
 	{
+        sledgeHammerFlicker.SetFlicker(true);
 		miningSpeed = MiningSpeedSpeedUp;
 	}
 

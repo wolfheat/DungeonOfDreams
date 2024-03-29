@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
@@ -14,7 +15,7 @@ public class EnemyController : Interactable
     [SerializeField] private float playerDistance;
     [SerializeField] Animator animator;
     [SerializeField] LayerMask obstructions;
-    [SerializeField] GameObject mock;
+    [SerializeField] Mock mock;
 
     private float timer = 0;
     private const float MoveTime = 2f;
@@ -58,7 +59,7 @@ public class EnemyController : Interactable
     private void Start()
     {
         mock.transform.parent = LevelCreator.Instance.mockHolder?.transform;
-        mock.transform.position = transform.position;
+        PlaceMock(transform.position);
     }
 
     private MoveAction savedAction = null;
@@ -72,10 +73,10 @@ public class EnemyController : Interactable
             if (savedAction.moveType == MoveActionType.Step)
             {
                 Vector3 target = Convert.V2IntToV3(savedAction.move);
-                if (!LevelCreator.Instance.Occupied(target))
+                if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
-                    //Debug.Log("No Walls or Enemies ahead");
-                   // Debug.Log(" loaded action is move");
+                    Debug.Log("No Walls or Mocks ahead");
+                    // Debug.Log(" loaded action is move");
                     StartCoroutine(Move(target));
                 }
                 else
@@ -263,7 +264,8 @@ public class EnemyController : Interactable
         DoingAction = true; 
         Vector3 start = transform.position;
         Vector3 end = target;
-        mock.transform.position = end;
+        PlaceMock(end);
+        
 
         timer = 0;
         while (timer < MoveTime)
@@ -279,6 +281,12 @@ public class EnemyController : Interactable
         ReachedPosition();
     }
 
+    private void PlaceMock(Vector3 position)
+    {
+        mock.pos = Convert.V3ToV2Int(position);
+        mock.transform.position = position;
+        Debug.Log("** Enemy place mock at "+position);
+    }
 
     private IEnumerator RotateLockOnPlayer()
     {
@@ -364,7 +372,7 @@ public class EnemyController : Interactable
 
                         rayColor = Color.green;
                     }else
-                        mock.transform.position = transform.position;
+                        PlaceMock(transform.position);
                 }
             }
 

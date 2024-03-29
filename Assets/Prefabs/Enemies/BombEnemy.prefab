@@ -1205,7 +1205,7 @@ MonoBehaviour:
   obstructions:
     serializedVersion: 2
     m_Bits: 776
-  mock: {fileID: 8664283178001975026}
+  mock: {fileID: 8097422806423441772}
 --- !u!114 &1959130137961795870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,6 +1228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4274335405363883806}
   - component: {fileID: 5691590363094954102}
+  - component: {fileID: 8097422806423441772}
   m_Layer: 10
   m_Name: Mock
   m_TagString: Untagged
@@ -1266,12 +1267,25 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8097422806423441772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8664283178001975026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51046da06ee809c4ea14809d2427bd38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
 --- !u!1 &8681931850010980874
 GameObject:
   m_ObjectHideFlags: 0

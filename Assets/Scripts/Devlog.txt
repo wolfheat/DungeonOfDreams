@@ -122,7 +122,7 @@ Feb-Mar 2024
 		* Placable bomb explodes and updates stats -
 27/3	* Readded MockUp to occupy tiles when enemy moves
 		* Fixed issues with mockup not activating and updating correctly
-		* Player can no longer occfupy same spot as enemy, same for enemies -
+		* Player can no longer occupy same spot as enemy, same for enemies -
 		* Made sure player can't place bombs if not owning any
 		* Changed so bombs can be placed on anything but walls -
 		* Made bombs not placable on other bombs -
@@ -131,42 +131,49 @@ Feb-Mar 2024
 		* Added warning to player if to close to bomb
 		* Fixed oscillations error, it is now a combined solution -
 		* M and N Now works to mute music or all audio -
-
-		* Still one time ended up on same square as bombenemy, dont know why, to much effort to fix now, 
-			prob because player can start moving to a square and enemy does not see this directly
-
-		* Placing bombs sound may be better
+28/3	* Added player Mock, seems to fix issue with occupying same square.
+		* Changed all Mocks to be on same Layer
+		* Fixed double occupation issue by adding a mock item
+		* Sledgehammer glows when boosted
+		* Separated Bloom effect for sledgehammer
+		* Adjusted ligthts reflection in sand and red wall
+		* Created start Room
+		* Added assets from Wills Room
+		* Made Room have separate PostProcessing
+		* Made player spotlight activate when stepping out from room-
 		
 		SPEECE NEEDED
+		* My head hurts
+
+		MAYBE
+		* Placing bombs sound may be better
+		* Adjust skeleton Build Up sound
+		* Add health refill object like food etc
+		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
+		* Have one start area were player cant leave until clearing it finding a certain object etc and then sledgehammer and change to underground?
+		* Add sound effects for boosts running out?
+
+		MUST
+		* GAME HOOK PLAY LOOP
+		* INTRO AREA?
+		* EXIT AREA?
+		* MAIN AREA
 		
 		GENNY AI - MATHEW VOICE -
 
-GAME JAM
+***	GAME JAM ***
 
-28/3
 29/3	READY TO POLISH
 30/3
 31/3 17:00 SUBMISSION DUE
 		
-		* Adjust skeleton Build Up sound
-		* Add health refill object like food etc
-		* Make it clearer when enemy hits player, does it hit to fast? Slow down attack but move faster?
 
-		// Maybe
-		* Have one start area were player cant leave until clearing it finding a certain object etc and then sledgehammer and change to underground?
-		
-		// Name
+		// Game Name ??
 		* Dig down Crawl Up 
 		* Down To Earth
 
 		* enemy, needs other attack animation
-		* Sometimes player can move onto same tile as enemy - fix
-		* Start working on a menu system
-		* Health bar / hearts
-
 		* Figure out game play hook
-
-		* Make enemy occupy level grid correctly, as well as walls and player so grid can be used to step around - CHECK if correct
 		* Make different meshes for different minerals
 
 		// Enemies
@@ -175,7 +182,6 @@ GAME JAM
 		
 		// Player
 		* Have jingle play when player has a powerup?
-		* Add sound effects for boosts running out?
 		* Power-ups as rewards? Have player speed up for a limited time when finding secrets? Or just when finding powerups?
 		* Have player tool light up with particle effects when speed boost is active
 
@@ -244,6 +250,43 @@ My game is great,(great) game is fantastic,
 I'm not the same,(same) maybe I'm drastic
 World passes by,(by by) I got no clue
 The game must complete, it is up to you
+
+
+Female Pop Energetic Ballad
+
+[Verse]
+You got a dream, you've got a vision
+Don't lose your steam, complete the mission
+Gather your strength, don't lose your steam
+You will succeed, fulfill your dream (fulfill your dream)
+
+[Chorus]
+My game is great, My game is massive
+I'm not the same, I'm turning passive
+World passes by, and I got no clue
+Complete my Game, I'm pushing through
+	
+[Verse]
+Early morning to the late of night
+You keep pushing, you keep fighting the fight
+Nothing will stop you, you never had enough 
+You will submit so you stand up and shout
+
+[Chorus]
+My game is great, My game is massive
+I'm not the same, I'm turning passive
+World passes by, and I got no clue
+Complete my Game, I'm pushing through
+	
+[Verse]
+Early morning to the late of night
+You keep pushing, you keep fighting the fight
+Nothing will stop you, you never had enough 
+You will submit even though it is tough 
+(you know it is though)
+
+[End]
+
 
 
 

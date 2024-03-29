@@ -22,16 +22,16 @@ public class Mineral : InteractableItem
     }
     internal void SetData(MineralData data)
     {
-        Debug.Log("Trying to set Data for mineral to "+data.itemName);
-        Debug.Log("meshFilter was " + meshFilter.sharedMesh.name);
-        Debug.Log("meshRenderer was " + meshRenderer.material.name);
+        //Debug.Log("Trying to set Data for mineral to "+data.itemName);
+        //Debug.Log("meshFilter was " + meshFilter.sharedMesh.name);
+        //Debug.Log("meshRenderer was " + meshRenderer.material.name);
         name = data.itemName;
         meshFilter.sharedMesh = data.mesh;
         meshRenderer.material = data.material;
         base.Data = data;
 
-        Debug.Log("meshFilter becomes " + meshFilter.sharedMesh.name);
-        Debug.Log("meshRenderer becomes " + meshRenderer.material.name);
+        //Debug.Log("meshFilter becomes " + meshFilter.sharedMesh.name);
+        //Debug.Log("meshRenderer becomes " + meshRenderer.material.name);
 
     }
 }

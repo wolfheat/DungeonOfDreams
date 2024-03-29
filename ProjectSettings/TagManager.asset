@@ -15,11 +15,11 @@ TagManager:
   - Items
   - Wall
   - Enemy
-  - EnemyMock
-  - 
-  - 
-  - 
-  - 
+  - Mock
+  - PostProcessingTools
+  - PostProcessingMain
+  - PostProcessingRoom
+  - PlayerSpotLight
   - 
   - 
   - 

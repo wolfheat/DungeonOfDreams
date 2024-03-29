@@ -22,7 +22,7 @@ namespace Wolfheat.Pool
             }
             else
             {
-                Debug.Log("Had to Instantiate New item");
+                //Debug.Log("Had to Instantiate New item");
                 item = Object.Instantiate(prefab);
 
             }

@@ -32,13 +32,21 @@ public class Explosion : MonoBehaviour
             {
                 foreach (var collider in colliders)
                 {
-                    Debug.Log("checking Collider " + collider.name+" at position "+pos);
                     if (collider.gameObject.TryGetComponent(out Wall wall))
+                    {
+                        Debug.Log("Bomb destroys wall at position "+pos+ " name: "+collider.name);
                         wall.Damage(explosionDamage);
+                    }
                     else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
+                    {
+                        Debug.Log("Bomb destroys player at position "+pos+ " name: "+collider.name);
                         playerColliderController.TakeDamage(explosionDamage);
+                    }
                     else if(collider.gameObject.TryGetComponent(out EnemyColliderController enemyColliderController))
+                    {
+                        Debug.Log("Bomb destroys enemy at position "+pos+ " name: "+collider.name);
                         enemyColliderController.TakeDamage(explosionDamage);
+                    }
                 }
             }
 

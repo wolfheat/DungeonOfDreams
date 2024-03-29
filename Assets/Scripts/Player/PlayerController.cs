@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
+using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Step,SideStep,Rotate}
@@ -26,6 +27,7 @@ public class MoveAction
 }
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] Mock playerMock;
     [SerializeField] PlayerAnimationController playerAnimationController;
     public PickUpController pickupController;
     public bool DoingAction { get; set; } = false;
@@ -185,7 +187,7 @@ public class PlayerController : MonoBehaviour
             if (savedAction.moveType == MoveActionType.Step || savedAction.moveType == MoveActionType.SideStep)
             {
                 Vector3 target = EndPositionForMotion(savedAction);
-                if (!LevelCreator.Instance.Occupied(target))
+                if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
                     //Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
@@ -281,6 +283,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Move(Vector3 target)
     {
         SoundMaster.Instance.PlayStepSound();
+
+        // Place mock
+        PlaceMock(target);
 
         DoingAction = true;
         Vector3 start = transform.position;
@@ -393,5 +398,14 @@ public class PlayerController : MonoBehaviour
         transform.rotation = Quaternion.identity;   
         savedAction = null;
         Stats.Instance.Revive();
+        PlaceMock(transform.position);
+
+    }
+
+    private void PlaceMock(Vector3 position)
+    {
+        playerMock.pos = Convert.V3ToV2Int(position);        
+        playerMock.transform.position = position;
+        Debug.Log("** Player Placing Mock at " + position+" new pos "+playerMock.pos);
     }
 }
