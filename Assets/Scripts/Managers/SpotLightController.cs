@@ -4,16 +4,21 @@ public class SpotLightController : MonoBehaviour
 {
     [SerializeField] Light spotLight;
 
-
+    int postProcessingRoom;
+    private void Start()
+    {
+        postProcessingRoom = LayerMask.NameToLayer("PostProcessingRoom");
+    }
     private void OnTriggerEnter(Collider other)
     {
-        spotLight.enabled = false;
+        if(other.gameObject.layer == postProcessingRoom)
+            spotLight.enabled = false;
     }
     
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Enable SPOTLIGHT");
-        spotLight.enabled = true;
+        if (other.gameObject.layer == postProcessingRoom)
+            spotLight.enabled = true;            
     }
 
 }

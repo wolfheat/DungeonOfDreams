@@ -36,7 +36,11 @@ namespace Wolfheat.StartMenu
         WhatIsThisPlace,
         MyHeadHurts,
         IDontRemeber,
-        ThatWasTheLastOne
+        ThatWasTheLastOne,
+        IvebeenStuck,
+        MakingThisGame,
+        IShouldGoOut,
+        WhereAreMyWindows
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -167,7 +171,16 @@ namespace Wolfheat.StartMenu
 
         public IEnumerator DelayedSpeech()
         {
+            // Start of Game
             yield return new WaitForSeconds(5f);
+            PlaySound(SoundName.IvebeenStuck);
+            yield return new WaitForSeconds(4f);
+            PlaySound(SoundName.MakingThisGame);
+            yield return new WaitForSeconds(3f);
+            PlaySound(SoundName.IShouldGoOut);
+            yield return new WaitForSeconds(3.5f);
+            PlaySound(SoundName.WhereAreMyWindows);
+            yield return new WaitForSeconds(3.5f);
             PlaySound(SoundName.MyHeadHurts);
             yield return new WaitForSeconds(2f);
             PlaySound(SoundName.IDontRemeber);

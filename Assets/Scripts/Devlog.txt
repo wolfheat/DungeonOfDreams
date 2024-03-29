@@ -141,9 +141,15 @@ Feb-Mar 2024
 		* Added assets from Wills Room
 		* Made Room have separate PostProcessing
 		* Made player spotlight activate when stepping out from room-
-		
+		* Added posters (temporary)
+		* Added more speech
+		* Fixed issue with double speech when cant place and last one -
+
+
 		SPEECE NEEDED
 		* My head hurts
+		* Am I still sleeping
+		* 
 
 		MAYBE
 		* Placing bombs sound may be better
@@ -384,11 +390,13 @@ You will submit even though it is tough
 
 							** USED **
 			STANDARD EULA
+		// * Leartes Studios - Will's Room Environment
 		// * Freepik - Vector Dividers Collection - Free Licence
 		// * upklyak (freepik) - Ground cracks on land isolated - Free Licence
 		// * RRFreelance - Tools Pack 1 - Standard EULA
 		// * Polygon  - Farm Pack -  Standard EULA
 		// * Unity Technologies - Particle Pack - Standard EULA
+		// * GarryKillian(freepik) - Wallpaper - Free Licence
 
 			SINGLE
 

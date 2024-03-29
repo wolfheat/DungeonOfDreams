@@ -335,7 +335,6 @@ public class LevelCreator : MonoBehaviour
     public bool Occupied(Vector3 target)
     {
         Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, gridDetectionLayerMask);
-        Debug.Log("Checking for occupied "+target+" "+(colliders.Length>0));
         return colliders.Length > 0;        
     }
     public Wall TargetHasWall(Vector3 target)

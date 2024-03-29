@@ -95,8 +95,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("You Got No Bombs");
             SoundMaster.Instance.PlaySound(SoundName.NoBombs);
             return;
-        }else if(Stats.Instance.Bombs==1)
-            SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
+        }
 
 
         Vector3 target = transform.position + transform.forward;
@@ -107,6 +106,8 @@ public class PlayerController : MonoBehaviour
             SoundMaster.Instance.PlaySound(SoundName.DropItem);
             ItemSpawner.Instance.PlaceBomb(target);
             Stats.Instance.RemoveBombs(1);
+            if (Stats.Instance.Bombs == 0)
+                SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
         }
         else
         {
@@ -406,6 +407,5 @@ public class PlayerController : MonoBehaviour
     {
         playerMock.pos = Convert.V3ToV2Int(position);        
         playerMock.transform.position = position;
-        Debug.Log("** Player Placing Mock at " + position+" new pos "+playerMock.pos);
     }
 }
