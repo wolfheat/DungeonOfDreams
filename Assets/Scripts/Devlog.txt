@@ -144,6 +144,12 @@ Feb-Mar 2024
 		* Added posters (temporary)
 		* Added more speech
 		* Fixed issue with double speech when cant place and last one -
+		* Issue with missplaced sledgehammer fixed -
+
+
+		* Fix hitting wall stopps the hit animation in the middle, change transfer?
+
+		* Have player not gain control during the beginning speech, player stuck in bed
 
 
 		SPEECE NEEDED

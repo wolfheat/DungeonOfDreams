@@ -111,13 +111,7 @@ namespace Wolfheat.StartMenu
 
         private void OnEnable()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-            {
-                Destroy(gameObject);
-                return;
-            }
+            
             SavingUtility.LoadingComplete += LoadingComplete;
         }
 
@@ -130,6 +124,13 @@ namespace Wolfheat.StartMenu
 
         private void Awake()
         {
+            if (Instance == null)
+                Instance = this;
+            else
+            {
+                Destroy(gameObject);
+                return;
+            }
             Debug.Log("SoundMaster Start");        
             // Define all sounds
             foreach (var sound in sounds)

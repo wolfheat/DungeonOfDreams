@@ -7761,7 +7761,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 527070663}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -7773,7 +7773,7 @@ Transform:
   - {fileID: 1200310272}
   m_Father: {fileID: 2110765796}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &527070666
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -21658,7 +21658,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483046079}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -24427,18 +24427,18 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640061953}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1515798808}
   - {fileID: 2084595675}
-  - {fileID: 1649176340}
   - {fileID: 1073921492}
+  - {fileID: 1649176340}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1640061957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24535,15 +24535,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1649176339}
-  m_LocalRotation: {x: 0.2315582, y: 0.3727361, z: 0.090299234, w: -0.89403284}
-  m_LocalPosition: {x: 0.51883906, y: -0.30200002, z: 0.0023795962}
+  m_LocalRotation: {x: -0.23929256, y: -0.28331065, z: -0.0671711, w: 0.9262625}
+  m_LocalPosition: {x: 0.435, y: -0.384, z: -0.022}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 241589145}
   m_Father: {fileID: 1640061956}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -28.774, y: -45.451, z: 0.729}
+  m_LocalEulerAnglesHint: {x: -28.774, y: -34.201, z: 0.729}
 --- !u!4 &1649431734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4637662265685850, guid: da0c23b9c7b2dd74c87c14176f98ed17, type: 3}
@@ -30091,14 +30091,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: sledgeHammer
       objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: a0042214ad91bb442ac62e8066ff05a2, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: a0042214ad91bb442ac62e8066ff05a2, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a0042214ad91bb442ac62e8066ff05a2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -30142,10 +30134,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: a0042214ad91bb442ac62e8066ff05a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -151.532
-      objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: a0042214ad91bb442ac62e8066ff05a2, type: 3}
-      propertyPath: m_CastShadows
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

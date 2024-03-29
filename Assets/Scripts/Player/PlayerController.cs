@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
-using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.InputSystem.InputAction;
 
 public enum MoveActionType{Step,SideStep,Rotate}
