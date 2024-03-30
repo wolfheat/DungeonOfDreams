@@ -445,7 +445,7 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 36
-  - clip: {fileID: 8300000, guid: 4d0585ae57bfb6e4083f9f537ae9e1c4, type: 3}
+  - clip: {fileID: 8300000, guid: a0ccf0cf1d5e74443a71e9fdd57f4af2, type: 3}
     volume: 0.537
     pitch: 1
     loop: 0
@@ -488,7 +488,7 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 44
-  - clip: {fileID: 8300000, guid: cd99836cc5132e34d9cc7ebd0f0ef7b5, type: 3}
+  - clip: {fileID: 8300000, guid: 637e0e63460a1db449a2d5a06d148bb2, type: 3}
     volume: 0.537
     pitch: 1
     loop: 0

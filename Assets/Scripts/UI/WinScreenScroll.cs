@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Wolfheat.Inputs;
 
 public class WinScreenScroll : MonoBehaviour
 {
@@ -32,7 +33,8 @@ public class WinScreenScroll : MonoBehaviour
         rect.anchoredPosition = pos;
         while (pos.y<EndPosition) {         
             yield return null;
-            pos += Vector2.up * speed * Time.unscaledDeltaTime;
+            float animationSpeed = Inputs.Instance.Controls.Player.Click.IsPressed() ? speed * 6 : speed;
+            pos += Vector2.up * animationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition = pos;
         }
         Debug.Log("Animation of End Credits complete");

@@ -38,7 +38,7 @@ namespace Wolfheat.StartMenu
         IDontRemeber,
         ThatWasTheLastOne,
         IvebeenStuck,
-        MakingThisGame,
+        INeedToBeMoreCareful,
         IShouldGoOut,
         WhereAreMyWindows,
         AmIStillSleeping,
@@ -47,7 +47,8 @@ namespace Wolfheat.StartMenu
         ThankYouDearAdventurer,
         ThereIsSomethingMissing,
         IAmToWeakToHelpYou,
-        ExitSpeech
+        ExitSpeech,
+
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
 
@@ -207,18 +208,27 @@ namespace Wolfheat.StartMenu
             yield return new WaitForSeconds(5f);
             PlaySpeech(SoundName.IvebeenStuck);
             yield return new WaitForSeconds(4f);
-            PlaySpeech(SoundName.MakingThisGame);
-            yield return new WaitForSeconds(3f);
+            //PlaySpeech(SoundName.MakingThisGame);
+            //yield return new WaitForSeconds(3f);
             PlaySpeech(SoundName.IShouldGoOut);
             yield return new WaitForSeconds(3.5f);
-            PlaySpeech(SoundName.WhereAreMyWindows);
-            yield return new WaitForSeconds(3.5f);
-            PlaySpeech(SoundName.MyHeadHurts);
-            yield return new WaitForSeconds(2f);
+            //PlaySpeech(SoundName.MyHeadHurts);
+            //yield return new WaitForSeconds(2f);
             PlaySpeech(SoundName.IDontRemeber);
             yield return new WaitForSeconds(5f);
             PlaySpeech(SoundName.WhatIsThisPlace);
+        }
 
+        public void AddRestartSpeech()
+        {
+            StartCoroutine(AddRestartSpeechCO());
+        }
+        public IEnumerator AddRestartSpeechCO()
+        {
+            yield return new WaitForSeconds(1.5f);
+            PlaySpeech(SoundName.MyHeadHurts);
+            yield return new WaitForSeconds(1.5f);
+            PlaySpeech(SoundName.INeedToBeMoreCareful);
         }
 
         public void PlayMusic(MusicName name)
@@ -256,11 +266,13 @@ namespace Wolfheat.StartMenu
         }
 
         private List<AudioSource> speechQueue = new List<AudioSource>();
-        public AudioSource PlaySpeech(SoundName name)
+        public AudioSource PlaySpeech(SoundName name,bool clearAll = false)
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return null;
 
             if (!soundsDictionary.ContainsKey(name)) return null; // no such speech
+            if(clearAll) speechQueue.Clear();
+
             AudioSource speech = soundsDictionary[name].audioSource;
             if (speechQueue.Contains(speech)) return speech; // No duplicates allowed
             speechQueue.Add(speech);

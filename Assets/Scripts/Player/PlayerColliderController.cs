@@ -24,9 +24,7 @@ public class PlayerColliderController : MonoBehaviour
         }else if(other.TryGetComponent(out ExitPortal portal))
         {
             Debug.Log("Exit portal collission "+portal);
-            SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech);
-
-            UIController.Instance.ShowDeathScreen();
+            UIController.Instance.ShowWinScreen();
         }
     }
 }

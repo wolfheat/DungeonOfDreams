@@ -71,18 +71,21 @@ public class UIController : MonoBehaviour
 	}
     public void ShowDeathScreen()
 	{
-        Debug.Log("Show End Screen after transition");
 
         // Transition to Dark
         transitionScreen.Darken();
-        open = UIActions.WinScreen;
+        open = UIActions.DeathScreen;
 	}
     
     public void ShowWinScreen()
 	{
+
+        SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
+
+        Debug.Log("Show End Screen after transition");
         // Transition to Dark
 		transitionScreen.Darken();
-        open = UIActions.DeathScreen;
+        open = UIActions.WinScreen;
 	}
 
     private UIActions open = UIActions.None;

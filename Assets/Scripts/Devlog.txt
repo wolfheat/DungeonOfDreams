@@ -162,9 +162,11 @@ Feb-Mar 2024
 		* Fixed issue with minerals not respawning correctly from pool (final 4 were incorrect set up)
 		* Added ExitPortal as bed
 		* Added Post Game Credits screen that scrolls and takes player to Start Menu -
+		* Changed some speech
+		* Added respawn speech
+		* Added fast scroll for credits when mouse is held
 
-		* Have player speech when dying and respawning as if waking from another dream?
-		
+
 		* Have player taken to result screen before going to main menu? - MAYBE
 
 		* Have player not gain control during the beginning speech, player stuck in bed

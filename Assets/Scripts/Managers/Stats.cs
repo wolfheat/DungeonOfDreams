@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class Stats : MonoBehaviour
 {
@@ -83,6 +84,7 @@ public class Stats : MonoBehaviour
         Health = CurrentMaxHealth;
         HealthUpdate?.Invoke(Health);
         IsDead = false;
+        SoundMaster.Instance.AddRestartSpeech();
     }
 
     internal void AddHealth(int value)
