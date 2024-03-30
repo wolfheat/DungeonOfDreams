@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.RightClick.performed += RightClick;   
 
         playerAnimationController.HitComplete += HitWithTool;
-
+            
     }
     private void OnDisable()
     {
@@ -89,29 +89,33 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        Debug.Log("PLACE NEW BOMB");
         if (Stats.Instance.Bombs <= 0)
         {
             Debug.Log("You Got No Bombs");
-            SoundMaster.Instance.PlaySound(SoundName.NoBombs);
+            SoundMaster.Instance.PlaySpeech(SoundName.NoBombs);
             return;
         }
-
 
         Vector3 target = transform.position + transform.forward;
         if (LevelCreator.Instance.TargetHasWall(target) == null && !LevelCreator.Instance.TargetHasPlacedBomb(target))
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
             
-            SoundMaster.Instance.PlaySound(SoundName.DropItem);
+            SoundMaster.Instance.PlaySpeech(SoundName.DropItem);
             ItemSpawner.Instance.PlaceBomb(target);
             Stats.Instance.RemoveBombs(1);
             if (Stats.Instance.Bombs == 0)
-                SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
+            {
+                SoundMaster.Instance.PlaySpeech(SoundName.ThatWasTheLastOne);
+                Debug.Log("LAST ONE");
+            }
         }
         else
         {
             // Something is in the way
-            SoundMaster.Instance.PlaySound(SoundName.CantDoThat);
+            Debug.Log("CANT DO THAT");
+            SoundMaster.Instance.PlaySpeech(SoundName.CantDoThat);
         }
     }
 
@@ -147,6 +151,11 @@ public class PlayerController : MonoBehaviour
         {
             if (pickupController.Wall != null)
             {
+                if (!Stats.Instance.HasSledgeHammer)
+                {
+                    Debug.Log("Cant interact with wall, you got no sledgehammer");
+                    return;
+                }
                 //Debug.Log("CRUSHING BLOCK");
                 playerAnimationController.SetState(PlayerState.Hit);
             }

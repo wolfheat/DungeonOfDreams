@@ -27,7 +27,7 @@ public class EnemyStateController
 
         if(newState== EnemyState.Exploding && haveNotSaidExplode)
         {
-            SoundMaster.Instance.PlaySound(SoundName.ItsGonaBlow);
+            SoundMaster.Instance.PlaySpeech(SoundName.ItsGonaBlow);
             haveNotSaidExplode=false;
         }
 

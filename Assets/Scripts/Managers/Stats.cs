@@ -17,6 +17,7 @@ public class Stats : MonoBehaviour
     public bool IsDead { get; set; } = false;
 
     public static Stats Instance { get; private set; }
+    public bool HasSledgeHammer { get; private set; }= false;
 
     public static Action<int> HealthUpdate;
     public static Action<int> BombUpdate;
@@ -103,5 +104,15 @@ public class Stats : MonoBehaviour
     {
         Debug.Log("Adding Mineral "+mineralData.itemName);
     }
+    [SerializeField] GameObject sledgeHammerCamera;
+    internal void ActivateSledgeHammer()
+    {
+        sledgeHammerCamera.GetComponent<Camera>().enabled = true;
+        HasSledgeHammer = true;
+    }
 
+    internal void ActivateCompass()
+    {
+        UIController.Instance.ActivateCompass();
+    }
 }

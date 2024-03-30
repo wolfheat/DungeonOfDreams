@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -104,5 +105,9 @@ public class UIController : MonoBehaviour
         */
     }
 
-
+    [SerializeField] GameObject compass;
+    internal void ActivateCompass()
+    {
+        compass.SetActive(true);
+    }
 }

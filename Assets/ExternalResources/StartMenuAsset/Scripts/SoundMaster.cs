@@ -193,19 +193,19 @@ namespace Wolfheat.StartMenu
         {
             // Start of Game
             yield return new WaitForSeconds(5f);
-            PlaySound(SoundName.IvebeenStuck);
+            PlaySpeech(SoundName.IvebeenStuck);
             yield return new WaitForSeconds(4f);
-            PlaySound(SoundName.MakingThisGame);
+            PlaySpeech(SoundName.MakingThisGame);
             yield return new WaitForSeconds(3f);
-            PlaySound(SoundName.IShouldGoOut);
+            PlaySpeech(SoundName.IShouldGoOut);
             yield return new WaitForSeconds(3.5f);
-            PlaySound(SoundName.WhereAreMyWindows);
+            PlaySpeech(SoundName.WhereAreMyWindows);
             yield return new WaitForSeconds(3.5f);
-            PlaySound(SoundName.MyHeadHurts);
+            PlaySpeech(SoundName.MyHeadHurts);
             yield return new WaitForSeconds(2f);
-            PlaySound(SoundName.IDontRemeber);
+            PlaySpeech(SoundName.IDontRemeber);
             yield return new WaitForSeconds(5f);
-            PlaySound(SoundName.WhatIsThisPlace);
+            PlaySpeech(SoundName.WhatIsThisPlace);
 
         }
 
@@ -229,6 +229,34 @@ namespace Wolfheat.StartMenu
                 Debug.LogWarning("No clip named "+name+" in dictionary.");
 
         }
+
+        private void Update()
+        {
+            if (speechQueue.Count > 0)
+            {
+                if (speechQueue[0].isPlaying)
+                    return;
+                speechQueue.RemoveAt(0);
+                // At least one speech to play
+                if (speechQueue.Count >= 1)
+                    speechQueue[0].Play();
+            }
+        }
+
+        private List<AudioSource> speechQueue = new List<AudioSource>();
+        public void PlaySpeech(SoundName name)
+        {
+            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
+
+            if (!soundsDictionary.ContainsKey(name)) return; // no such speech
+            AudioSource speech = soundsDictionary[name].audioSource;
+            if (speechQueue.Contains(speech)) return; // No duplicates allowed
+            speechQueue.Add(speech);
+            // Auto start the clip if its the only one in the Queue
+            if(speechQueue.Count==1)
+                speechQueue[0].Play();
+        }
+
         public void PlaySound(SoundName name, bool allowInterupt= true)
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
@@ -237,12 +265,8 @@ namespace Wolfheat.StartMenu
             if (soundsDictionary.ContainsKey(name))
             {
                 if (!allowInterupt && soundsDictionary[name].audioSource.isPlaying && !soundsDictionary[name].loop)
-                {
-                    //Debug.Log("Sound is playing and should not loop: "+name+" at:" + Time.realtimeSinceStartup);
                     return;
-                }
                 //Debug.Log("Start Sound: "+name);
-                //Debug.Log("soundsDictionary[name].audioSource.clip: " + soundsDictionary[name].audioSource.clip   );
                 soundsDictionary[name].audioSource.Play();
             }
             else 

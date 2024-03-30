@@ -92,7 +92,7 @@ public class PickUpController : MonoBehaviour
         Debug.DrawLine(c, d, Color.green,3f);
         */
 
-        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Wall>().WallData as ItemData).ToList());
+        UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponent<Wall>().WallData as ItemData).Where(x => x!=null).ToList());
 
         if (colliders.Length == 0)
             Wall = null;

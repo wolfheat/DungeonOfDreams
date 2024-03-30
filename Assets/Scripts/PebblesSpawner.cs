@@ -1,4 +1,6 @@
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.Rendering.DebugUI.Table;
 using Random = UnityEngine.Random;
 
 public class PebblesSpawner : MonoBehaviour
@@ -9,6 +11,53 @@ public class PebblesSpawner : MonoBehaviour
     {
         // GeneratePebbles
         GeneratePebbles();
+        GenerateMushrooms();
+        GenerateRoots();
+    }
+
+    private void GenerateRoots()
+    {
+        // place 100 mushrooms
+        for (int i = 0; i < 1000; i++)
+        {
+            int type = Random.Range(0, rootPrefabs.Length);
+            int count = 0;
+            bool didPlace = false;
+            while (!didPlace && count < 10)
+            {
+                Vector2Int pos = new Vector2Int(Random.Range(-50, 50), Random.Range(-50, 50));
+                if (true) // later change to not colliding with wall
+                {
+                    Quaternion rot = Quaternion.Euler(0, Random.Range(0, 3) * 90f, 0);
+                    Vector3 placePos = Convert.V2IntToV3(pos) + new Vector3((Random.Range(0, 2) - 0.5f) * 0.9f, placePos.y = 0.5f, placePos.z = (Random.Range(0, 2) - 0.5f) * 0.9f);
+                    Root root = Instantiate(rootPrefabs[type], placePos, rot, transform);
+                    didPlace = true;
+                }
+            }
+        }
+    }
+
+    private void GenerateMushrooms()
+    {
+        // place 100 mushrooms
+        for(int i=0; i<1000; i++)
+        {
+            int type = Random.Range(0, mushRoomPrefabs.Length);
+            int count = 0;
+            bool didPlace = false;
+            while(!didPlace && count < 10)
+            {
+                Vector2Int pos = new Vector2Int(Random.Range(-50, 50),Random.Range(-50, 50));
+                if (true) // later change to not colliding with wall
+                {
+                    Quaternion rot = Quaternion.Euler(0, Random.Range(0, 3) * 90f, 0);
+                    Vector3 placePos = Convert.V2IntToV3(pos) + new Vector3((Random.Range(0, 2) - 0.5f) * 0.9f, placePos.y = -0.5f, placePos.z = (Random.Range(0, 2) - 0.5f) * 0.9f);
+                    MushRoom mushRoom = Instantiate(mushRoomPrefabs[type],placePos, rot, transform);
+                    didPlace = true;
+                }
+            }
+        }
+
     }
 
     private void GeneratePebbles()
@@ -30,6 +79,9 @@ public class PebblesSpawner : MonoBehaviour
             } 
         }
     }
+
+    [SerializeField] Root[] rootPrefabs;
+    [SerializeField] MushRoom[] mushRoomPrefabs;
 
     [SerializeField] Pebble[] pebblePrefabs;
     [SerializeField] Material genericPebbleMaterial;

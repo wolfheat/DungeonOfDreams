@@ -17,4 +17,4 @@ MonoBehaviour:
   value: 1
   material: {fileID: 0}
   mesh: {fileID: 0}
-  usableType: 1
+  usableType: 2
