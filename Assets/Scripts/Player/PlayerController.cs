@@ -156,9 +156,14 @@ public class PlayerController : MonoBehaviour
                     return;
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar))
                     altar.PlaceMineral();                    
+                else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))
+                {
+                    Debug.Log("ACTIVATE GLORIA COMPLETION");
+                    gloria.ActivateCompletion();                    
+                }
                 else
-                playerAnimationController.SetState(PlayerState.Hit);
-                Debug.Log("Wall "+pickupController.Wall.name);
+                    playerAnimationController.SetState(PlayerState.Hit);
+                Debug.Log("Wall "+pickupController.Wall?.name);
             }
             else if (pickupController.Enemy != null)
             {

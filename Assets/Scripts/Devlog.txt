@@ -155,8 +155,10 @@ Feb-Mar 2024
 		* Added End area altar room -
 		* Added UI for minerals that lit up when player has the mineral -
 		* Pillars now accept items -
-		
-		* Make altar pillars accept items
+30/3	* Added VFX effects for pillars and Gloria
+		* Added backwards animation for Gloria when completed and interracted with
+		* Added Gloria speech before moving backwards and disappearing
+		* Audio from VFX is now limited around the pillars distance 4 -
 
 
 		
@@ -199,7 +201,6 @@ Feb-Mar 2024
 
 ***	GAME JAM ***
 
-30/3
 31/3 17:00 SUBMISSION DUE
 		
 

@@ -244,17 +244,18 @@ namespace Wolfheat.StartMenu
         }
 
         private List<AudioSource> speechQueue = new List<AudioSource>();
-        public void PlaySpeech(SoundName name)
+        public AudioSource PlaySpeech(SoundName name)
         {
-            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
+            if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return null;
 
-            if (!soundsDictionary.ContainsKey(name)) return; // no such speech
+            if (!soundsDictionary.ContainsKey(name)) return null; // no such speech
             AudioSource speech = soundsDictionary[name].audioSource;
-            if (speechQueue.Contains(speech)) return; // No duplicates allowed
+            if (speechQueue.Contains(speech)) return speech; // No duplicates allowed
             speechQueue.Add(speech);
             // Auto start the clip if its the only one in the Queue
             if(speechQueue.Count==1)
                 speechQueue[0].Play();
+            return speech;
         }
 
         public void PlaySound(SoundName name, bool allowInterupt= true)

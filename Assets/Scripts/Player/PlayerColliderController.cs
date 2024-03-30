@@ -16,6 +16,9 @@ public class PlayerColliderController : MonoBehaviour
         {
             if (other.GetComponent<Bomb>() != null)
                 return;
+            else if (other.TryGetComponent(out Mineral mineral))
+                    Stats.Instance.AddMineral(mineral.Data);
+
             other.gameObject.GetComponent<Interactable>().InteractWith();
         }
     }
