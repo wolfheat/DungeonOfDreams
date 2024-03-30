@@ -145,6 +145,11 @@ public class PickUpController : MonoBehaviour
     {
         if (ActiveInteractable == null) return;
 
+        if(ActiveInteractable is Mineral)
+        {
+            Stats.Instance.AddMineral((ActiveInteractable as Mineral).Data);
+        }
+
         ActiveInteractable.InteractWith();
         UpdateColliders();
     }

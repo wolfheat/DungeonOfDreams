@@ -18,9 +18,12 @@ public class Stats : MonoBehaviour
 
     public static Stats Instance { get; private set; }
     public bool HasSledgeHammer { get; private set; }= false;
+    public bool[] MineralsOwned { get; private set; }= new bool[4];
+
 
     public static Action<int> HealthUpdate;
     public static Action<int> BombUpdate;
+    public static Action MineralsUpdate;
 
 	private void Start()
 	{
@@ -103,6 +106,15 @@ public class Stats : MonoBehaviour
     internal void AddMineral(MineralData mineralData)
     {
         Debug.Log("Adding Mineral "+mineralData.itemName);
+        if(mineralData.mineralType == MineralType.Gold)
+            MineralsOwned[0] = true;
+        else if(mineralData.mineralType == MineralType.Silver)
+            MineralsOwned[1] = true;
+        else if(mineralData.mineralType == MineralType.Copper)
+            MineralsOwned[2] = true;
+        else if(mineralData.mineralType == MineralType.Coal)
+            MineralsOwned[3] = true;
+        MineralsUpdate?.Invoke();
     }
     [SerializeField] GameObject sledgeHammerCamera;
     internal void ActivateSledgeHammer()

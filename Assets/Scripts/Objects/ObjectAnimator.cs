@@ -11,8 +11,8 @@ public class ObjectAnimator : MonoBehaviour
     float animationAcceleration = 0.1f;
     float equilibriumVelocity = -0.1f;
     int dir = 1;
-    float equilibriumY;
-    float equilibriumTarget = -0.3f;
+    float equilibriumY = -0.3f;
+    [SerializeField] float equilibriumTarget = -0.3f;
     Vector3 equilibriumVector;
     bool atEquilibrium = false;
 

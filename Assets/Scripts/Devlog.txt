@@ -149,17 +149,20 @@ Feb-Mar 2024
 29/3	READY TO POLISH DAY ?
 		* Fixed issue with mining animation not whowing correctly
 		* Added compass poster and sledgehammer as usables -
+		* Speech is not queued
+		* Music starts outside room
 		* Added roots, mushrooms
 		* Added End area altar room -
+		* Added UI for minerals that lit up when player has the mineral -
+		
+		
+		* Make altar pillars accept items
 
 
-		* Last one speech and need more bombs play at same time - FIX
-
+		
 		* Have player not gain control during the beginning speech, player stuck in bed
-		* Music starts when exiting room first time
 		* SPEECH IN BED BEFORE MOVEMENT
 		* 
-
 
 		* SPEECH OUTRO WHEN REACHING GOAL ALSO LOCKED
 		* AI generated music? on black credits scroll?
