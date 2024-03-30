@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using Wolfheat.Inputs;
+using Wolfheat.StartMenu;
 
 public enum GameStates { Running, Paused }
 
@@ -11,6 +13,7 @@ public class UIController : MonoBehaviour
     [SerializeField] InteractableUI interactableUI;
     [SerializeField] TransitionScreen transitionScreen;
     [SerializeField] DeathScreenController deathScreen;
+    [SerializeField] WinScreenScroll winScreen;
 
 	public static UIController Instance { get; private set; }
 
@@ -66,10 +69,17 @@ public class UIController : MonoBehaviour
 	{
 		interactableUI.AddPickedUp(data);
 	}
-
     public void ShowDeathScreen()
 	{
+        Debug.Log("Show End Screen after transition");
 
+        // Transition to Dark
+        transitionScreen.Darken();
+        open = UIActions.WinScreen;
+	}
+    
+    public void ShowWinScreen()
+	{
         // Transition to Dark
 		transitionScreen.Darken();
         open = UIActions.DeathScreen;
@@ -78,7 +88,7 @@ public class UIController : MonoBehaviour
     private UIActions open = UIActions.None;
     //private UIActions close = UIActions.None;
 
-    public enum UIActions {None,DeathScreen }
+    public enum UIActions {None,DeathScreen,WinScreen}
 
     public void TransitionComplete()
 	{
@@ -89,6 +99,9 @@ public class UIController : MonoBehaviour
                 break;
             case UIActions.DeathScreen:
                 deathScreen.Show();
+                break;
+            case UIActions.WinScreen:
+                winScreen.Show();
                 break;
         }
         open = UIActions.None;
@@ -109,5 +122,14 @@ public class UIController : MonoBehaviour
     internal void ActivateCompass()
     {
         compass.SetActive(true);
+    }
+
+    internal void ToMainMenu()
+    {
+        Debug.Log("Go to Main menu, unload Dungeon, load start menu");
+        SoundMaster.Instance.ResetMusic();
+
+        SceneManager.UnloadSceneAsync("Dungeon");
+        SceneChanger.Instance.ChangeScene("StartMenu");
     }
 }

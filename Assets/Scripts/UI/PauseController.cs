@@ -22,11 +22,8 @@ public class PauseController : MonoBehaviour
             //LevelLoader.Instance.DefineGameDataForSave();
             //SavingUtility.Instance.SavePlayerDataToFile();
         }
+        UIController.Instance.ToMainMenu();
         
-        SoundMaster.Instance.ResetMusic();
-
-        SceneManager.UnloadSceneAsync("Dungeon");
-        SceneChanger.Instance.ChangeScene("StartMenu");
     }
     public void SetActive(bool doSetActive)
     {

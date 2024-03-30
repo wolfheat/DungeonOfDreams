@@ -159,14 +159,22 @@ Feb-Mar 2024
 		* Added backwards animation for Gloria when completed and interracted with
 		* Added Gloria speech before moving backwards and disappearing
 		* Audio from VFX is now limited around the pillars distance 4 -
+		* Fixed issue with minerals not respawning correctly from pool (final 4 were incorrect set up)
+		* Added ExitPortal as bed
+		* Added Post Game Credits screen that scrolls and takes player to Start Menu -
 
-
+		* Have player speech when dying and respawning as if waking from another dream?
 		
+		* Have player taken to result screen before going to main menu? - MAYBE
+
 		* Have player not gain control during the beginning speech, player stuck in bed
 		* SPEECH IN BED BEFORE MOVEMENT
 		* 
 
 		* SPEECH OUTRO WHEN REACHING GOAL ALSO LOCKED
+
+		GLORIA - Thank you my dear adventurer. You have truly proven yourself worthy. The energy from these items is enough to open a portal back to the world of the living. It is now time for you to return from where you came, it's time for you to wake up again.
+
 		* AI generated music? on black credits scroll?
 
 
@@ -416,9 +424,6 @@ To Complete that Game, I will keep pushing through
 		//
 		//					** OTHER ***
 		//
-		//// * Sigmoid Button Assets - Props 3D - Standard EULA - pack with Chrystal used in breath 
-		//// * 3D.RINA - Animated Spiders Pack - Standard EULA
-		//// * Ekincan Tas - Damage Numbers Pro - Standard EULA
 
 		 - FONTS
 		// * Gomarice - Shiratama Dango - Apache-2.0
@@ -429,9 +434,6 @@ To Complete that Game, I will keep pushing through
 		// * Brock Hewitt - In The Silence - Royalty Free Upbeat - Main Menu
 		// * Vasyl_Sakal - Cellestial Lullaby - Attribution 4.0 (Ambient sound) - InGameMusicA
 
-		//// * Kevin MacLeod - Airport Lounge - Royalty Free Upbeat
-		//// * Moire - Space Ranger - Royalty Free Upbeat
-		//// * Zapsplat - Tropical Dawn - Music from https://www.zapsplat.com
 
 		-SOUND
 		// * PowerupB - freesound - Creative Commons 0

@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Wolfheat.StartMenu;
-
 public class DeathScreenController : MonoBehaviour
 {
     [SerializeField] UIController UIController;

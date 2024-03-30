@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
@@ -42,6 +41,11 @@ public class Gloria : MonoBehaviour
     internal void ActivateCompletion()
     {
         if (completedActivated) return;
+        if (!activation.activeSelf)
+        {
+            SoundMaster.Instance.PlaySpeech(UnityEngine.Random.Range(0, 2) == 0 ? SoundName.IAmToWeakToHelpYou:SoundName.ThereIsSomethingMissing);
+            return;
+        }
 
         StartCoroutine(WaitForClipToComplete());
     }
@@ -49,7 +53,10 @@ public class Gloria : MonoBehaviour
     private IEnumerator WaitForClipToComplete()
     {
         // Start sound here
-        AudioSource clip = SoundMaster.Instance.PlaySpeech(SoundName.IvebeenStuck);
+        AudioSource clip = SoundMaster.Instance.PlaySpeech(SoundName.ThankYouDearAdventurer);
+        // Make sure clip starts to play
+        while (!clip.isPlaying)
+            yield return null;
 
         bool notComplete = true;
         while (notComplete)
@@ -58,6 +65,7 @@ public class Gloria : MonoBehaviour
             notComplete = clip.isPlaying;
         }
 
+        // Clip has completed
         Debug.Log("Crossfade to Backwards");
         completedActivated = true;
         animator.CrossFade("TravelBackwards",0.1f);

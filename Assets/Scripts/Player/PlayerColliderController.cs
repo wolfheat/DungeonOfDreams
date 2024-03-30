@@ -1,4 +1,5 @@
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class PlayerColliderController : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class PlayerColliderController : MonoBehaviour
                     Stats.Instance.AddMineral(mineral.Data);
 
             other.gameObject.GetComponent<Interactable>().InteractWith();
+        }else if(other.TryGetComponent(out ExitPortal portal))
+        {
+            Debug.Log("Exit portal collission "+portal);
+            SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech);
+
+            UIController.Instance.ShowDeathScreen();
         }
     }
 }
