@@ -154,7 +154,7 @@ Feb-Mar 2024
 		* Added roots, mushrooms
 		* Added End area altar room -
 		* Added UI for minerals that lit up when player has the mineral -
-		
+		* Pillars now accept items -
 		
 		* Make altar pillars accept items
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -152,12 +153,12 @@ public class PlayerController : MonoBehaviour
             if (pickupController.Wall != null)
             {
                 if (!Stats.Instance.HasSledgeHammer)
-                {
-                    Debug.Log("Cant interact with wall, you got no sledgehammer");
                     return;
-                }
-                //Debug.Log("CRUSHING BLOCK");
+                else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar))
+                    altar.PlaceMineral();                    
+                else
                 playerAnimationController.SetState(PlayerState.Hit);
+                Debug.Log("Wall "+pickupController.Wall.name);
             }
             else if (pickupController.Enemy != null)
             {
