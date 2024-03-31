@@ -168,6 +168,8 @@ Feb-Mar 2024
 		* Added speech
 		* Made 4 sections for minitemple enemies and walls -
 		* Limited gonablow to just appear once
+		* Opened up roof for altar room -
+		* Added map as carpet -
 
 
 
