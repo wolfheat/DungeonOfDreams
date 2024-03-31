@@ -17,19 +17,12 @@ public class EnemyStateController
         animator = a;
     }
 
-    private bool haveNotSaidExplode = true;
     public void ChangeState(EnemyState newState,bool force = false)
     {
         if (currentState == newState) return;
         //Debug.Log("Change state from "+currentState+" to "+newState);
         if (!force && (currentState == EnemyState.Dead || currentState == EnemyState.Dying))
             return;
-
-        if(newState== EnemyState.Exploding && haveNotSaidExplode)
-        {
-            SoundMaster.Instance.PlaySpeech(SoundName.ItsGonaBlow);
-            haveNotSaidExplode=false;
-        }
 
         switch (newState)
         {
@@ -44,7 +37,7 @@ public class EnemyStateController
                 break;
             case EnemyState.Exploding:
                 animator.CrossFade("Explode", 0.0f);
-                SoundMaster.Instance.PlaySound(SoundName.Hissing);
+                SoundMaster.Instance.BombHissing();
                 break;
             case EnemyState.Dead:
                 break;

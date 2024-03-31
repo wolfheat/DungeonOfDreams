@@ -222,6 +222,16 @@ namespace Wolfheat.StartMenu
             PlaySpeech(SoundName.WhatIsThisPlace);
         }
 
+        private bool haveNotSaidExplode = true;
+        public void BombHissing()
+        {
+            if (haveNotSaidExplode)
+            {
+                PlaySound(SoundName.ItsGonaBlow);
+                haveNotSaidExplode= false;
+            }
+            PlaySound(SoundName.Hissing);
+        }
         public void AddRestartSpeech()
         {
             StartCoroutine(AddRestartSpeechCO());

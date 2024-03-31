@@ -48,8 +48,14 @@ public class LevelCreator : MonoBehaviour
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
         StartCoroutine(SoundMaster.Instance.DelayedSpeech());
-
+        CalculateOverlaps();
     }
+
+    private void CalculateOverlaps()
+    {
+        
+    }
+
     private void OnEnable()
     {
         PlayerController.Instance.PlayerReachedNewTile += UpdatePlayerDistance;

@@ -165,7 +165,9 @@ Feb-Mar 2024
 		* Changed some speech
 		* Added respawn speech
 		* Added fast scroll for credits when mouse is held -
+		* Added speech
 		* Made 4 sections for minitemple enemies and walls -
+		* Limited gonablow to just appear once
 
 
 
