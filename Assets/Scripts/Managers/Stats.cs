@@ -110,14 +110,27 @@ public class Stats : MonoBehaviour
         Debug.Log("Adding Mineral "+mineralData.itemName);
         if(mineralData.mineralType == MineralType.Gold)
             MineralsOwned[0] = true;
-        else if(mineralData.mineralType == MineralType.Silver)
+        else if (mineralData.mineralType == MineralType.Silver)
             MineralsOwned[1] = true;
-        else if(mineralData.mineralType == MineralType.Copper)
+        else if (mineralData.mineralType == MineralType.Copper)
             MineralsOwned[2] = true;
-        else if(mineralData.mineralType == MineralType.Coal)
+        else if (mineralData.mineralType == MineralType.Coal)
             MineralsOwned[3] = true;
+        else
+            return;
+        SoundMaster.Instance.PlaySpeech(SoundName.IHaveFoundAMissingPiece);
+        if(AllMinerals()) SoundMaster.Instance.PlaySpeech(SoundName.IGotAllPieces);
         MineralsUpdate?.Invoke();
     }
+
+    private bool AllMinerals()
+    {
+        foreach(var mineral in MineralsOwned)
+            if(!mineral)
+                return false;
+        return true;
+    }
+
     [SerializeField] GameObject sledgeHammerCamera;
     internal void ActivateSledgeHammer()
     {

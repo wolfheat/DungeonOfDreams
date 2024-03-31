@@ -37,7 +37,7 @@ namespace Wolfheat.StartMenu
         MyHeadHurts,
         IDontRemeber,
         ThatWasTheLastOne,
-        IvebeenStuck,
+        ThisIsNotHowIRemember,
         INeedToBeMoreCareful,
         IShouldGoOut,
         WhereAreMyWindows,
@@ -48,6 +48,9 @@ namespace Wolfheat.StartMenu
         ThereIsSomethingMissing,
         IAmToWeakToHelpYou,
         ExitSpeech,
+        IHaveFoundAMissingPiece,
+        IGotAllPieces,
+        FirstTimeOutsideSpeech
 
     }
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
@@ -206,7 +209,7 @@ namespace Wolfheat.StartMenu
         {
             // Start of Game
             yield return new WaitForSeconds(5f);
-            PlaySpeech(SoundName.IvebeenStuck);
+            PlaySpeech(SoundName.ThisIsNotHowIRemember);
             yield return new WaitForSeconds(4f);
             //PlaySpeech(SoundName.MakingThisGame);
             //yield return new WaitForSeconds(3f);
@@ -465,6 +468,13 @@ namespace Wolfheat.StartMenu
         public void StopMusic()
         {
             musicSource.Stop();
+        }
+        bool playerBeenOutside = false;
+        internal void PlayerExitingStartRoom()
+        {
+            if (playerBeenOutside) return;
+            PlaySpeech(SoundName.FirstTimeOutsideSpeech);
+            playerBeenOutside = true;
         }
     }
 }

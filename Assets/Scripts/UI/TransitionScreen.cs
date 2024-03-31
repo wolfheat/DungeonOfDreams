@@ -40,7 +40,7 @@ public class TransitionScreen : MonoBehaviour
         while (animationTimer < AnimationTime)
         {
             image.color = Color.Lerp(fromColor, toColor, animationTimer/AnimationTime);
-            animationTimer += Time.deltaTime;
+            animationTimer += Time.unscaledDeltaTime;
             yield return null;
         }
         image.color = toColor;

@@ -6,6 +6,9 @@ public class SpotLightController : MonoBehaviour
     [SerializeField] Light spotLight;
 
     int postProcessingRoom;
+
+    
+
     private void Start()
     {
         postProcessingRoom = LayerMask.NameToLayer("PostProcessingRoom");
@@ -25,6 +28,7 @@ public class SpotLightController : MonoBehaviour
         {
             Debug.Log("Turn On Player Spotlight and Resume Music");
             SoundMaster.Instance.PlayMusic(MusicName.OutDoorMusic);
+            SoundMaster.Instance.PlayerExitingStartRoom();
             spotLight.enabled = true;            
         }
     }

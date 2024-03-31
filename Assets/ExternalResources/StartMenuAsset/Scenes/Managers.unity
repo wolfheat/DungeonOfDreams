@@ -439,7 +439,7 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 34
-  - clip: {fileID: 8300000, guid: cd99836cc5132e34d9cc7ebd0f0ef7b5, type: 3}
+  - clip: {fileID: 8300000, guid: e1e3d85519a4a8449b673d20307e56ef, type: 3}
     volume: 0.537
     pitch: 1
     loop: 0
@@ -513,6 +513,24 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 30
+  - clip: {fileID: 8300000, guid: d6eedb1762bec954c8bfa09a2534a60c, type: 3}
+    volume: 0.537
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 47
+  - clip: {fileID: 8300000, guid: dcb0355723bbc15409749850359e74bf, type: 3}
+    volume: 0.537
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 48
+  - clip: {fileID: 8300000, guid: 35910ab3437a28140ae87f6a7ad0944c, type: 3}
+    volume: 0.537
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 49
   musics:
   - clip: {fileID: 8300000, guid: 930c875c371f9d74ea5ecd1868808c8f, type: 3}
     volume: 0.619

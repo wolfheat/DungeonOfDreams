@@ -19,9 +19,6 @@ public class WinScreenScroll : MonoBehaviour
     {
         panel.SetActive(true);
 
-        // Pausing makes scroll not active
-        UIController.Pause(true);
-
         Debug.Log("Win screen Active Pause game");
         StartCoroutine(Animate());
     }

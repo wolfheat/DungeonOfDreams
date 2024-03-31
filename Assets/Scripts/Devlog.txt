@@ -164,8 +164,12 @@ Feb-Mar 2024
 		* Added Post Game Credits screen that scrolls and takes player to Start Menu -
 		* Changed some speech
 		* Added respawn speech
-		* Added fast scroll for credits when mouse is held
+		* Added fast scroll for credits when mouse is held -
+		* Made 4 sections for minitemple enemies and walls -
 
+
+
+		* Limit player from moving when started Exitscreen
 
 		* Have player taken to result screen before going to main menu? - MAYBE
 

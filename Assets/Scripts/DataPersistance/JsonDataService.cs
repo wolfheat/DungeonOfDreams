@@ -18,7 +18,7 @@ public class JsonDataService : IDataService
         string path = Application.persistentDataPath + RelativePath;
         if (!File.Exists(path))
         {
-            Debug.LogError("Cannot load file at "+path+". File does not exist.");
+            Debug.LogWarning("Cannot load file at "+path+". File does not exist.");
             throw new FileNotFoundException("File "+path+" does not exist!");
         }
         try
@@ -28,7 +28,7 @@ public class JsonDataService : IDataService
         }
         catch (Exception e)
         {
-            Debug.LogError("Cannot load file due to " + e.Message+""+e.StackTrace);
+            Debug.LogWarning("Cannot load file due to " + e.Message+""+e.StackTrace);   
             throw e;
         }
     }

@@ -82,6 +82,9 @@ public class UIController : MonoBehaviour
 
         SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
 
+        // Pausing makes scroll not active
+        Pause(true);
+
         Debug.Log("Show End Screen after transition");
         // Transition to Dark
 		transitionScreen.Darken();
