@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Wolfheat.Inputs;
+using Wolfheat.StartMenu;
 
 public class WinScreenScroll : MonoBehaviour
 {
@@ -11,16 +12,13 @@ public class WinScreenScroll : MonoBehaviour
     private float EndPosition = 5500;
     private float speed = 80f;
 
-    private void Start()
-    {
-        
-    }
     public void Show()
     {
         panel.SetActive(true);
 
         Debug.Log("Win screen Active Pause game");
         StartCoroutine(Animate());
+        SoundMaster.Instance.PlayMusic(MusicName.CreditsMusic);
     }
 
     private IEnumerator Animate()

@@ -175,7 +175,8 @@ Feb-Mar 2024
 		* Roof fixed, sound
 		* Made better voice for completion Gloria
 		* Gloria now heals player
-		* Updated start menu credits
+		* Updated start menu credits -
+		* Added glow to special minerals
 
 		* Throne room better walls? +??
 
@@ -188,13 +189,10 @@ Feb-Mar 2024
 		By returning these four items I have regained my powers. I will now be able to open the portal back to your world.
 		Dont stay here for to long or you might be lost here forever. You have done your part in this adventure.
 		New adventures awaits you in the world you came from. It is time for you to return, it's time for you to wake up.
-
-		* AI generated music? on black credits scroll?
-
-
+				
 		MAYBE
 
-		SPEECE NEEDED
+		SPEECH NEEDED
 		* My head hurts
 		* Am I still sleeping
 
@@ -438,6 +436,8 @@ To Complete that Game, I will keep pushing through
 		 - MUSIC		
 		// * Brock Hewitt - In The Silence - Royalty Free Upbeat - Main Menu
 		// * Vasyl_Sakal - Cellestial Lullaby - Attribution 4.0 (Ambient sound) - InGameMusicA
+		// * Monument Music - Love Story
+
 
 
 		-SOUND

@@ -53,7 +53,7 @@ namespace Wolfheat.StartMenu
         FirstTimeOutsideSpeech
 
     }
-    public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic}
+    public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic}
 
     [Serializable]
     public class Music : BaseSound
