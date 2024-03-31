@@ -15,7 +15,10 @@ public class PebblesSpawner : MonoBehaviour
 
     private void GenerateRoots()
     {
-        // place 100 mushrooms
+
+        Vector2Int roomCenter = new Vector2Int(0,1);
+        Vector2Int altarRoomCenter = new Vector2Int(0,20);
+        Vector2Int pos = new Vector2Int();
         for (int i = 0; i < 1000; i++)
         {
             int type = Random.Range(0, rootPrefabs.Length);
@@ -23,7 +26,13 @@ public class PebblesSpawner : MonoBehaviour
             bool didPlace = false;
             while (!didPlace && count < 10)
             {
-                Vector2Int pos = new Vector2Int(Random.Range(-50, 50), Random.Range(-50, 50));
+                bool inRoom = true;
+                while (inRoom)
+                {
+                    pos = new Vector2Int(Random.Range(-50, 50), Random.Range(-50, 50));
+                    inRoom = Vector2Int.Distance(pos, roomCenter) < 3.5f || Vector2Int.Distance(pos, altarRoomCenter) < 5.5f;
+                }
+
                 if (true) // later change to not colliding with wall
                 {
                     Quaternion rot = Quaternion.Euler(0, Random.Range(0, 3) * 90f, 0);

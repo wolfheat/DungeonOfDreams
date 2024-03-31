@@ -170,23 +170,26 @@ Feb-Mar 2024
 		* Limited gonablow to just appear once
 		* Opened up roof for altar room -
 		* Added map as carpet -
+		* BUILD 31/3 - zipped size 131Mb	
+		* Bugfixes
+		* Roof fixed, sound
+		* Made better voice for completion Gloria
+		* Gloria now heals player
+		* Updated start menu credits
 
+		* Throne room better walls? +??
 
+		* Have player taken to result screen before going to main menu? - MAYBE NO NEED
+		* Have result screen showing players score - NO NEED
 
-		* Limit player from moving when started Exitscreen
+		* Have player not gain control during the beginning speech, player stuck in bed - After Jam?
 
-		* Have player taken to result screen before going to main menu? - MAYBE
-
-		* Have player not gain control during the beginning speech, player stuck in bed
-		* SPEECH IN BED BEFORE MOVEMENT
-		* 
-
-		* SPEECH OUTRO WHEN REACHING GOAL ALSO LOCKED
-
-		GLORIA - Thank you my dear adventurer. You have truly proven yourself worthy. The energy from these items is enough to open a portal back to the world of the living. It is now time for you to return from where you came, it's time for you to wake up again.
+		GLORIA - Thank you brave adventurer. You have truly proven yourself worthy. 
+		By returning these four items I have regained my powers. I will now be able to open the portal back to your world.
+		Dont stay here for to long or you might be lost here forever. You have done your part in this adventure.
+		New adventures awaits you in the world you came from. It is time for you to return, it's time for you to wake up.
 
 		* AI generated music? on black credits scroll?
-
 
 
 		MAYBE
@@ -194,17 +197,9 @@ Feb-Mar 2024
 		SPEECE NEEDED
 		* My head hurts
 		* Am I still sleeping
-		* 
-
 
 		MAYBE
 		* Add health refill object like food etc
-		* Make a win area, throne/altar where player fullfills tasks to open the portal to life
-
-		MUST
-		* GAME HOOK PLAY LOOP
-		* EXIT AREA?
-		* MAIN AREA
 
 		MAYBE - LAST CALLS
 		* Placing bombs sound may be better

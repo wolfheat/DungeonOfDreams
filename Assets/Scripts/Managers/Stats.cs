@@ -86,6 +86,16 @@ public class Stats : MonoBehaviour
         IsDead = false;
         SoundMaster.Instance.AddRestartSpeech();
     }
+    
+    internal bool Heal()
+    {
+        if (Health == CurrentMaxHealth)
+            return false;
+        SoundMaster.Instance.PlaySpeech(SoundName.YourWoundsAreHealed);
+        Health = CurrentMaxHealth;
+        HealthUpdate?.Invoke(Health);
+        return true;
+    }
 
     internal void AddHealth(int value)
     {

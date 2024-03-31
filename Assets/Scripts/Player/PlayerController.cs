@@ -159,7 +159,8 @@ public class PlayerController : MonoBehaviour
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))
                 {
                     Debug.Log("ACTIVATE GLORIA COMPLETION");
-                    gloria.ActivateCompletion();                    
+                    gloria.ActivateCompletion();   
+                    
                 }
                 else
                     playerAnimationController.SetState(PlayerState.Hit);

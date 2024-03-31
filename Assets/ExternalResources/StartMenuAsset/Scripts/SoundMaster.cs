@@ -40,7 +40,7 @@ namespace Wolfheat.StartMenu
         ThisIsNotHowIRemember,
         INeedToBeMoreCareful,
         IShouldGoOut,
-        WhereAreMyWindows,
+        YourWoundsAreHealed,
         AmIStillSleeping,
         INowHaveASledgehammer,
         IHaveACompass,
@@ -109,8 +109,8 @@ namespace Wolfheat.StartMenu
 
         [SerializeField]private AudioClip[] swosh;
         [SerializeField]private AudioClip[] getHit;
-        [SerializeField]private AudioClip[] pickAxeHitStone;
-        [SerializeField]private AudioClip[] pickAxeCrushStone;
+            [SerializeField]private AudioClip[] pickAxeHitStone;
+            [SerializeField]private AudioClip[] pickAxeCrushStone;
         [SerializeField]private AudioClip[] footstep;
 
         private Dictionary<SoundName,Sound> soundsDictionary = new();

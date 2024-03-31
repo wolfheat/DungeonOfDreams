@@ -38,16 +38,19 @@ public class Gloria : MonoBehaviour
     }
     [SerializeField] Animator animator;
     bool completedActivated = false;
-    internal void ActivateCompletion()
+    bool startedActivated = false;
+    internal bool ActivateCompletion()
     {
-        if (completedActivated) return;
+        if (completedActivated || startedActivated) return false;
         if (!activation.activeSelf)
         {
-            SoundMaster.Instance.PlaySpeech(UnityEngine.Random.Range(0, 2) == 0 ? SoundName.IAmToWeakToHelpYou:SoundName.ThereIsSomethingMissing);
-            return;
+            if(!Stats.Instance.Heal())
+                SoundMaster.Instance.PlaySpeech(UnityEngine.Random.Range(0, 2) == 0 ? SoundName.IAmToWeakToHelpYou:SoundName.ThereIsSomethingMissing);
+            return false;
         }
-
+        startedActivated = true;
         StartCoroutine(WaitForClipToComplete());
+        return true;
     }
 
     private IEnumerator WaitForClipToComplete()
