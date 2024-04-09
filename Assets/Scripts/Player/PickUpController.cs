@@ -76,7 +76,12 @@ public class PickUpController : MonoBehaviour
 
         Mock candidate = colliders.Where(x => x.GetComponent<Mock>() != null).ToArray().FirstOrDefault()?.GetComponent<Mock>();
         if (candidate != null && !candidate.IsPlayer)
+        {
+            Debug.Log("Found a Mock at position:" + candidate.transform.position + " pos:" + candidate.pos + " name:" + candidate.name);
             Mockup = candidate;
+        }
+        else
+            Mockup = null;
     }
     
     public void UpdateWall()

@@ -183,7 +183,8 @@ Feb-Mar 2024
 9/4		* Added objectivs speech for Gloria
 		* Added dont have crystal for this pillar speech
 		* Made player able to attack mockups
-
+10/4	* Think I fixed the enemy Mock attacked when not around
+		
 
 		* Still some issue with player stabbing walls after attacking enemies - FIX
 		* Enemy mocks are selected at a distance, dont know why, leads to player attacking and miss them when not eve close, how come
