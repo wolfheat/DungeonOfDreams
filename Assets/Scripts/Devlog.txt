@@ -177,9 +177,16 @@ Feb-Mar 2024
 		* Gloria now heals player
 		* Updated start menu credits -
 		* Added glow to special minerals
+
+		- POST JAM -
+
 9/4		* Added objectivs speech for Gloria
 		* Added dont have crystal for this pillar speech
+		* Made player able to attack mockups
 
+
+		* Still some issue with player stabbing walls after attacking enemies - FIX
+		* Enemy mocks are selected at a distance, dont know why, leads to player attacking and miss them when not eve close, how come
 
 		* Throne room better walls? +??
 
@@ -193,11 +200,14 @@ Feb-Mar 2024
 		Dont stay here for to long or you might be lost here forever. You have done your part in this adventure.
 		New adventures awaits you in the world you came from. It is time for you to return, it's time for you to wake up.
 				
-		MAYBE
+		JAM FEEDBACK
+
+		* Better objectives
+		* To repetitive, shorter game loop, smaller game size, better waypoints
+		* Better enemy combat
+
 
 		SPEECH NEEDED
-		* My head hurts
-		* Am I still sleeping
 
 		MAYBE
 		* Add health refill object like food etc

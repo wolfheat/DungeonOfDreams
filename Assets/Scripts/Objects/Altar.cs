@@ -21,6 +21,8 @@ public class Altar : MonoBehaviour
             return;
         }
 
+        SoundMaster.Instance.PlaySpeech(UnityEngine.Random.Range(0, 2) == 0 ? SoundName.Nice:SoundName.ThereYouGo);
+
         Debug.Log("Place Mineral On Altar");
         mineralObject.SetActive(true);
         AltarActivated?.Invoke();

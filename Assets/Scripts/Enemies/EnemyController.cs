@@ -35,7 +35,6 @@ public class EnemyController : Interactable
     public bool Dead { get; private set; }
     private void OnEnable()
     {
-        Debug.Log("Enemy Enabled");
         Health = StartHealth; // Change to data health later
         Dead = false;
         enemyStateController.ChangeState(EnemyState.Idle,true);

@@ -63,7 +63,10 @@ public class PlayerAnimationController : MonoBehaviour
 
         }
         else
+        {
+            Debug.Log("Miss Mining");
             SoundMaster.Instance.PlaySound(SoundName.Miss);
+        }
     }
     public void AnyHitCompleted()
     {
@@ -90,6 +93,10 @@ public class PlayerAnimationController : MonoBehaviour
 
         }
         else
+        {
+            Debug.Log("Miss Attacking");
+
             SoundMaster.Instance.PlaySound(SoundName.Miss);
+        }
     }
 }

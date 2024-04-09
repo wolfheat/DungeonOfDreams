@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PickUpController : MonoBehaviour
@@ -7,9 +8,10 @@ public class PickUpController : MonoBehaviour
     public Interactable ActiveInteractable { get; set; }
     public Wall Wall { get; set; }
     public EnemyController Enemy { get; set; }
-    public bool Mockup { get; set; } = false;
+    public Mock Mockup { get; set; } = null;
 
     private LayerMask enemyLayerMask;
+    private LayerMask mockupLayerMask;
     private LayerMask wallLayerMask;
     private LayerMask itemLayerMask;
 
@@ -17,6 +19,7 @@ public class PickUpController : MonoBehaviour
     {
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
+        mockupLayerMask = LayerMask.GetMask("Mock");
         itemLayerMask = LayerMask.GetMask("Items");
         UpdateColliders();
         StartCoroutine(UpdateCollidersInterval());
@@ -51,12 +54,7 @@ public class PickUpController : MonoBehaviour
     public void UpdateEnemy()
     {
         // Get list of interactable items
-        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, enemyLayerMask);        
-        
-        Mockup = colliders.Where(x => x.GetComponentInParent<Interactable>() == null).ToArray().Length > 0?true:false;
-
-        colliders = colliders.Where(x => x.GetComponentInParent<Interactable>() != null).ToArray();
-        
+        Collider[] colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize,Quaternion.identity, enemyLayerMask);
 
         UIController.Instance.UpdateShownItemsUI(colliders.Select(x => x.GetComponentInParent<EnemyController>().EnemyData as ItemData).ToList());
 
@@ -70,6 +68,15 @@ public class PickUpController : MonoBehaviour
             else 
                 Enemy = null;
         }
+
+
+        // Get enemy mockup
+        //Mockup = colliders.Where(x => x.GetComponentInParent<Interactable>() == null).ToArray().Length > 0?true:false;
+        colliders = Physics.OverlapBox(Convert.Align(transform.position), Game.boxSize, Quaternion.identity, mockupLayerMask);
+
+        Mock candidate = colliders.Where(x => x.GetComponent<Mock>() != null).ToArray().FirstOrDefault()?.GetComponent<Mock>();
+        if (candidate != null && !candidate.IsPlayer)
+            Mockup = candidate;
     }
     
     public void UpdateWall()
@@ -120,9 +127,13 @@ public class PickUpController : MonoBehaviour
 
     public bool InteractWithEnemy()
     {
-        if (Enemy == null) return false;
+        if (Enemy == null && Mockup == null) return false;
 
-        Enemy.TakeDamage(PlayerController.Instance.Damage);
+        if (Enemy != null)
+            Enemy.TakeDamage(PlayerController.Instance.Damage);
+        else if (Mockup.owner.TryGetComponent(out EnemyController enemy))
+            enemy.TakeDamage(PlayerController.Instance.Damage);
+        
         UpdateColliders();
 
         return true;

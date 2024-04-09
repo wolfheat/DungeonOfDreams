@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -169,6 +168,11 @@ public class PlayerController : MonoBehaviour
             else if (pickupController.Enemy != null)
             {
                 //Debug.Log("Hit Enemy");
+                playerAnimationController.SetState(PlayerState.Attack);
+            }
+            else if (pickupController.Mockup != null)
+            {
+                Debug.Log("Hit Enemy Mock "+pickupController.Mockup.name, pickupController.Mockup); 
                 playerAnimationController.SetState(PlayerState.Attack);
             }
 

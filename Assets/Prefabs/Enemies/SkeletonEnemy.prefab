@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51046da06ee809c4ea14809d2427bd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 395999932999725750}
   pos: {x: 0, y: 0}
 --- !u!1 &2353728685426402259
 GameObject:

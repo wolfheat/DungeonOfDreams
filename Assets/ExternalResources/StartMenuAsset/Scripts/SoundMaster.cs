@@ -52,7 +52,9 @@ namespace Wolfheat.StartMenu
         IGotAllPieces,
         FirstTimeOutsideSpeech,
         IHaveLostMyFourCrystals,
-        IGotNoCrystalThatFitsHere    
+        IGotNoCrystalThatFitsHere,
+        ThereYouGo,
+        Nice    
 
     }
 
