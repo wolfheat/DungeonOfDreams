@@ -9,7 +9,7 @@ public class Stats : MonoBehaviour
     public float MiningSpeed { get => miningSpeed;}
     private float miningSpeed;
     public const float MiningSpeedDefault = 3f;
-	public const float MiningSpeedSpeedUp = 30f;
+	public const float MiningSpeedSpeedUp = 6f;
 
 
     public int Damage { get => damage;}

@@ -153,7 +153,7 @@ public class PickUpController : MonoBehaviour
             return false;
         }
         //Debug.Log("Interacting with wall");
-        if(Wall.Damage())
+        if(Wall.Damage(Stats.Instance.Damage))
             UpdateColliders();
         return true;
     }

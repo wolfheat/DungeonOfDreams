@@ -185,7 +185,9 @@ Feb-Mar 2024
 		* Made player able to attack mockups
 10/4	* Think I fixed the enemy Mock attacked when not around
 		* Enemies can now be hit at mock and step through earlier
-
+		* Made power up have more damage to walls, but not hit as fast
+		* Made shorter detonation for bombs placed 1.2 speed atm -
+		
 		* Still some issue with player stabbing walls after attacking enemies - FIX
 		* Enemy mocks are selected at a distance, dont know why, leads to player attacking and miss them when not eve close, how come
 
