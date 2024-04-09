@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class Altar : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Altar : MonoBehaviour
         if (Stats.Instance.MineralsOwned[MineralAccepted] != true)
         {
             Debug.Log("Mineral is not in Owned in stats "+ Stats.Instance.MineralsOwned);
+            SoundMaster.Instance.PlaySound(SoundName.IGotNoCrystalThatFitsHere);
             return;
         }
 

@@ -39,12 +39,19 @@ public class Gloria : MonoBehaviour
     [SerializeField] Animator animator;
     bool completedActivated = false;
     bool startedActivated = false;
+    private bool firstInterract = true;
+
     internal bool ActivateCompletion()
     {
         if (completedActivated || startedActivated) return false;
         if (!activation.activeSelf)
         {
-            if(!Stats.Instance.Heal())
+            if (firstInterract)
+            {
+                SoundMaster.Instance.PlaySpeech(SoundName.IHaveLostMyFourCrystals);
+                firstInterract = false;
+            }
+            if (!Stats.Instance.Heal())
                 SoundMaster.Instance.PlaySpeech(UnityEngine.Random.Range(0, 2) == 0 ? SoundName.IAmToWeakToHelpYou:SoundName.ThereIsSomethingMissing);
             return false;
         }

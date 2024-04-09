@@ -50,9 +50,12 @@ namespace Wolfheat.StartMenu
         ExitSpeech,
         IHaveFoundAMissingPiece,
         IGotAllPieces,
-        FirstTimeOutsideSpeech
+        FirstTimeOutsideSpeech,
+        IHaveLostMyFourCrystals,
+        IGotNoCrystalThatFitsHere    
 
     }
+
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic}
 
     [Serializable]

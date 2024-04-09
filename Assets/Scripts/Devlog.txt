@@ -177,6 +177,9 @@ Feb-Mar 2024
 		* Gloria now heals player
 		* Updated start menu credits -
 		* Added glow to special minerals
+9/4		* Added objectivs speech for Gloria
+		* Added dont have crystal for this pillar speech
+
 
 		* Throne room better walls? +??
 
