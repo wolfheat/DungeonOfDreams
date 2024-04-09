@@ -1197,6 +1197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyData: {fileID: 11400000, guid: ae11c7a3377ec9f499b00f716846117e, type: 2}
+  collider: {fileID: 7850845642816330696}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
@@ -1287,6 +1288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 8066144510914293902}
   pos: {x: 0, y: 0}
+  IsPlayer: 0
 --- !u!1 &8681931850010980874
 GameObject:
   m_ObjectHideFlags: 0

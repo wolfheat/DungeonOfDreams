@@ -6,9 +6,16 @@ public class Stats : MonoBehaviour
 {
     [SerializeField] SledgeHammerFlicker sledgeHammerFlicker;
 
-    public float miningSpeed;
-	public const float MiningSpeedDefault = 3f;
+    public float MiningSpeed { get => miningSpeed;}
+    private float miningSpeed;
+    public const float MiningSpeedDefault = 3f;
 	public const float MiningSpeedSpeedUp = 30f;
+
+
+    public int Damage { get => damage;}
+    private int damage;
+    public const int DamageDefault = 1;
+	public const int DamageBoosted = 30;
 	//public const float MiningSpeedSpeedUp = 12f;
 
     public const int MaxHealth = 8;
@@ -22,12 +29,11 @@ public class Stats : MonoBehaviour
     public bool HasSledgeHammer { get; private set; }= false;
     public bool[] MineralsOwned { get; private set; }= new bool[4];
 
-
     public static Action<int> HealthUpdate;
     public static Action<int> BombUpdate;
     public static Action MineralsUpdate;
 
-	private void Start()
+	private void Awake()
 	{
 		if (Instance != null)
 		{
@@ -37,19 +43,23 @@ public class Stats : MonoBehaviour
 		Instance = this;
 
 		miningSpeed = MiningSpeedDefault;
+		damage = DamageDefault;
     }
 
-	public void SetDefaultMiningSpeed()
+	public void SetDefaultSledgeHammer()
 	{
         sledgeHammerFlicker.SetFlicker(false);
         miningSpeed = MiningSpeedDefault;
-	}
+        damage = DamageDefault;
 
-    public void SetBoostMiningSpeed()
+    }
+
+    public void SetBoostSledgeHammer()
 	{
         sledgeHammerFlicker.SetFlicker(true);
 		miningSpeed = MiningSpeedSpeedUp;
-	}
+        damage = DamageBoosted;
+    }
 
     public void DefineGameDataForSave()
     {

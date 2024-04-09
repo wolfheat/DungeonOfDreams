@@ -184,10 +184,13 @@ Feb-Mar 2024
 		* Added dont have crystal for this pillar speech
 		* Made player able to attack mockups
 10/4	* Think I fixed the enemy Mock attacked when not around
-		
+		* Enemies can now be hit at mock and step through earlier
 
 		* Still some issue with player stabbing walls after attacking enemies - FIX
 		* Enemy mocks are selected at a distance, dont know why, leads to player attacking and miss them when not eve close, how come
+
+		* Holding mouse while enemy walks into range wont start attack, should it?
+
 
 		* Throne room better walls? +??
 

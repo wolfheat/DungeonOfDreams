@@ -17,14 +17,14 @@ public class BoostUIItem : InteractableUIItem
     public IEnumerator StartBoostControl()
     {
         // Just keep count of the current boost duration and disables boost after
-        Stats.Instance.SetBoostMiningSpeed();
+        Stats.Instance.SetBoostSledgeHammer();
         while (boostTimer>= 0)
         {
             UpdateName(nameString +" " +boostTimer.ToString("F1")+"s");
             boostTimer -= Time.deltaTime;
             yield return null;        
         }
-        Stats.Instance.SetDefaultMiningSpeed();
+        Stats.Instance.SetDefaultSledgeHammer();
         Destroy(gameObject);
     }
 

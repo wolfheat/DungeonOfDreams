@@ -9,6 +9,7 @@ public class EnemyController : Interactable
 {
     public EnemyData EnemyData;// { get; set; }
 
+    [SerializeField] Collider collider;
     [SerializeField] LayerMask playerLayerMask;
 
     PlayerController player;
@@ -41,11 +42,31 @@ public class EnemyController : Interactable
         path.Clear();
         DoingAction = false;
         mock.gameObject.SetActive(true);
+        EnableColliders();
     }
 
     private void OnDisable()
     {
-        mock.gameObject.SetActive(false);
+        DisableColliders();
+    }
+    public void DisableColliders()
+    {
+        Debug.Log("Disabling all Enemys colliders ",this);
+        if (collider != null)
+            collider.enabled = false;
+        if (mock != null)
+        {
+            Debug.Log("Disable Mock object for ",this);
+            mock.gameObject.SetActive(false);
+        }
+        player.UpdateInputDelayed();
+    }
+    private void EnableColliders()
+    {
+        if (collider != null)
+            collider.enabled = true;
+        if (mock != null)
+            mock.gameObject.SetActive(true);
     }
 
     private void Awake()
@@ -58,7 +79,7 @@ public class EnemyController : Interactable
     private void Start()
     {
         mock.transform.parent = LevelCreator.Instance.mockHolder?.transform;
-        PlaceMock(transform.position);
+        PlaceMock(transform.position,false);
     }
 
     private MoveAction savedAction = null;
@@ -125,6 +146,7 @@ public class EnemyController : Interactable
         Debug.Log("Enemy Explodes");
         Explosion.Instance.ExplodeNineAround(particleType, transform.position);        
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
+        DisableColliders();
         StopAllCoroutines();
     }
 
@@ -280,11 +302,13 @@ public class EnemyController : Interactable
         ReachedPosition();
     }
 
-    private void PlaceMock(Vector3 position)
+    private void PlaceMock(Vector3 position,bool noticePlayer = true)
     {
         mock.pos = Convert.V3ToV2Int(position);
         mock.transform.position = position;
         Debug.Log("** Enemy place mock at "+position);
+        if(noticePlayer)
+            player.UpdateInputDelayed();
     }
 
     private IEnumerator RotateLockOnPlayer()
@@ -456,7 +480,7 @@ public class EnemyController : Interactable
         if(Dead) return false;
 
         Health -= amt;
-        //Debug.Log("Enemy took damage play hit sound");
+        Debug.Log("Enemy took damage, "+amt+" current health: "+Health);
         SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
 
         if (EnemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
@@ -488,6 +512,7 @@ public class EnemyController : Interactable
                 Debug.Log("Enemy skeleton dies");
                 Dead = true;
                 enemyStateController.ChangeState(EnemyState.Dying);
+                DisableColliders();
                 return true;
             }
 

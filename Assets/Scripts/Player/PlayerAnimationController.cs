@@ -25,7 +25,7 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Idle", 0.1f);
                 break;
             case PlayerState.Hit:
-                animator.SetFloat("mineSpeed", Stats.Instance.miningSpeed);
+                animator.SetFloat("mineSpeed", Stats.Instance.MiningSpeed);
                 animator.SetBool("mine", true);
                 break;
             case PlayerState.Drill:
@@ -35,7 +35,7 @@ public class PlayerAnimationController : MonoBehaviour
                 animator.CrossFade("Shoot", 0.1f);
                 break;
             case PlayerState.Attack:
-                animator.SetFloat("attackSpeed", Stats.Instance.miningSpeed);
+                animator.SetFloat("attackSpeed", Stats.Instance.MiningSpeed);
                 animator.SetBool("attack", true);
                 //animator.CrossFade("Attack", 0.1f);
                 break;
@@ -70,7 +70,7 @@ public class PlayerAnimationController : MonoBehaviour
     }
     public void AnyHitCompleted()
     {
-        Debug.Log("HIT Completed");
+        //Debug.Log("HIT Completed");
         HitComplete?.Invoke();
         
     }

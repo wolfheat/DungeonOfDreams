@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
 
     public Action PlayerReachedNewTile;
     public static PlayerController Instance { get; private set; }
-    public int Damage { get; set; } = 1;
     public bool IsDead { get { return Stats.Instance.IsDead; } }
 
     private void Awake()
@@ -124,6 +123,7 @@ public class PlayerController : MonoBehaviour
         InterractWith();
     }
     
+
     public void InterractWith()
     {
 
@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (pickupController.Enemy != null)
             {
-                //Debug.Log("Hit Enemy");
+                Debug.Log("Player has an Enemy in front "+pickupController.Enemy, pickupController.Enemy);
                 playerAnimationController.SetState(PlayerState.Attack);
             }
             else if (pickupController.Mockup != null)
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
             playerAnimationController.SetState(PlayerState.Idle);
 
         // If player has mouse button down attack again?
-        if (!Inputs.Instance.Controls.Player.Click.IsPressed() || (pickupController.Wall == null && pickupController.Enemy == null))
+        if (!Inputs.Instance.Controls.Player.Click.IsPressed() || (pickupController.Wall == null && pickupController.Enemy == null && pickupController.Mockup == null))
             playerAnimationController.SetState(PlayerState.Idle);
 
     }
@@ -355,15 +355,22 @@ public class PlayerController : MonoBehaviour
         MotionActionCompleted();
     }
 
-    public void MotionActionCompleted()
+    public void UpdateInputDelayed()
     {
-        if (Stats.Instance.IsDead) return;
-
-        //Debug.Log("Motion completed, has stored action: "+savedAction);
-        PlayerReachedNewTile?.Invoke();
+        StartCoroutine(UpdatePlayerInputCO());
+    }
+    
+    public IEnumerator UpdatePlayerInputCO()
+    {
+        yield return null;
+        UpdatePlayerInput();
+    }
+    
+    public void UpdatePlayerInput()
+    {
         pickupController.UpdateColliders();
 
-        if(savedAction==null)
+        if (savedAction == null)
             HeldMovementInput();
 
         //if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
@@ -373,6 +380,14 @@ public class PlayerController : MonoBehaviour
             InterractWith();
         }
 
+    }
+    public void MotionActionCompleted()
+    {
+        if (Stats.Instance.IsDead) return;
+
+        //Debug.Log("Motion completed, has stored action: "+savedAction);
+        PlayerReachedNewTile?.Invoke();
+        UpdatePlayerInput();
     }
 
     public void TakeDamage(int amt,EnemyController enemy = null)

@@ -77,7 +77,7 @@ public class PickUpController : MonoBehaviour
         Mock candidate = colliders.Where(x => x.GetComponent<Mock>() != null).ToArray().FirstOrDefault()?.GetComponent<Mock>();
         if (candidate != null && !candidate.IsPlayer)
         {
-            Debug.Log("Found a Mock at position:" + candidate.transform.position + " pos:" + candidate.pos + " name:" + candidate.name);
+            //Debug.Log("Found a Mock at position:" + candidate.transform.position + " pos:" + candidate.pos + " name:" + candidate.name);
             Mockup = candidate;
         }
         else
@@ -135,9 +135,9 @@ public class PickUpController : MonoBehaviour
         if (Enemy == null && Mockup == null) return false;
 
         if (Enemy != null)
-            Enemy.TakeDamage(PlayerController.Instance.Damage);
+            Enemy.TakeDamage(Stats.Instance.Damage);
         else if (Mockup.owner.TryGetComponent(out EnemyController enemy))
-            enemy.TakeDamage(PlayerController.Instance.Damage);
+            enemy.TakeDamage(Stats.Instance.Damage);
         
         UpdateColliders();
 
