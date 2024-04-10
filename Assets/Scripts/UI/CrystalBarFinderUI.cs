@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,15 +13,24 @@ public class CrystalBarFinderUI : MonoBehaviour
     private void OnEnable()
     {
         Stats.MineralsAmountUpdate += SetSlider;
+        Stats.NoMoreMineralsReached += DeactivateSlider;
     }
     private void OnDisable()
     {
         Stats.MineralsAmountUpdate -= SetSlider;
+        Stats.NoMoreMineralsReached -= DeactivateSlider;
     }
 
     private void SetSlider()
     {
-        slider.value = Stats.Instance.Minerals/100f;
+        slider.value = ((float)Stats.Instance.Minerals)/ Stats.MineralsToGetSeeThrough;
+    }
+    
+    private void DeactivateSlider()
+    {
+        slider.gameObject.SetActive(false);
+        //slider.value = 1;
+        //slider.enabled = false;
     }
 
     // Update is called once per frame

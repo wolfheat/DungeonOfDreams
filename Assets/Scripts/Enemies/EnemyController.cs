@@ -47,7 +47,6 @@ public class EnemyController : Interactable
 
     private void OnDisable()
     {
-        DisableColliders();
     }
     public void DisableColliders()
     {
@@ -59,7 +58,7 @@ public class EnemyController : Interactable
             Debug.Log("Disable Mock object for ",this);
             mock.gameObject.SetActive(false);
         }
-        player.UpdateInputDelayed();
+        player?.UpdateInputDelayed();
     }
     private void EnableColliders()
     {
@@ -153,6 +152,7 @@ public class EnemyController : Interactable
     public void Remove()
     {
         Debug.Log("Enemy Removed");
+
         ItemSpawner.Instance.ReturnEnemy(this);
     }
 
@@ -308,7 +308,7 @@ public class EnemyController : Interactable
         mock.transform.position = position;
         Debug.Log("** Enemy place mock at "+position);
         if(noticePlayer)
-            player.UpdateInputDelayed();
+            player?.UpdateInputDelayed();
     }
 
     private IEnumerator RotateLockOnPlayer()
@@ -504,6 +504,7 @@ public class EnemyController : Interactable
                     ItemSpawner.Instance.ReturnEnemy(this);
                     //Debug.Log("Enemy returned to pool");
                     CreateItem(EnemyData.storedUsable);
+                    DisableColliders();
                     return true;
                 }
             }

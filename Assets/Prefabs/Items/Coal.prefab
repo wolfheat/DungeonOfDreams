@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccc04116f0453c4999d53e96d799d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePool: 0
   Data: {fileID: 11400000, guid: d66fb691a3aa8af488b186e4926ff772, type: 2}
   meshFilter: {fileID: 4654493392093145288}
   meshRenderer: {fileID: 2093169419951993651}

@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 4992173089735942030}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 22.474, y: 7.727, z: -48.551}
 --- !u!33 &4654493392093145288
 MeshFilter:
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dccc04116f0453c4999d53e96d799d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePool: 0
   Data: {fileID: 11400000, guid: 50bd3c3301131c241975e8197c2a103a, type: 2}
   meshFilter: {fileID: 4654493392093145288}
   meshRenderer: {fileID: 2093169419951993651}

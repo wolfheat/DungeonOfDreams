@@ -65,11 +65,11 @@ public class Gloria : MonoBehaviour
         // Start sound here
         AudioSource clip = SoundMaster.Instance.PlaySpeech(SoundName.ThankYouDearAdventurer);
         // Make sure clip starts to play
-        while (!clip.isPlaying)
+        while (clip!= null && !clip.isPlaying)
             yield return null;
 
         bool notComplete = true;
-        while (notComplete)
+        while (clip!= null && notComplete)
         {
             yield return new WaitForSeconds(0.3f);  
             notComplete = clip.isPlaying;

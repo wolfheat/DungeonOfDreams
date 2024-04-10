@@ -18,6 +18,7 @@ public class Stats : MonoBehaviour
     private int damage;
     public const int DamageDefault = 1;
 	public const int DamageBoosted = 30;
+	public const int MineralsToGetSeeThrough = 5;
 	//public const float MiningSpeedSpeedUp = 12f;
 
     public const int MaxHealth = 8;
@@ -30,12 +31,16 @@ public class Stats : MonoBehaviour
     public static Stats Instance { get; private set; }
     public bool HasSledgeHammer { get; private set; }= false;
     public bool[] MineralsOwned { get; private set; }= new bool[4];
+
+    private bool[] MineralsSeeThroughActivated = new bool[4];
+
     [SerializeField] GameObject[] ActivationMinerals;
 
     public static Action<int> HealthUpdate;
     public static Action<int> BombUpdate;
     public static Action MineralsUpdate;
     public static Action MineralsAmountUpdate;
+    public static Action NoMoreMineralsReached;
 
 	private void Awake()
 	{
@@ -137,18 +142,29 @@ public class Stats : MonoBehaviour
     internal void AddMineralCount()
     {
         minerals++;
-        if(minerals >= 10)
+        if(minerals >= MineralsToGetSeeThrough)
         {
             // If there is a unpicked crystal change it to see through and play speech
             for(int i= 0; i<MineralsOwned.Length; i++)
             {
-                if (!MineralsOwned[i])
+                if (!MineralsOwned[i] && !MineralsSeeThroughActivated[i])
                 {
                     Debug.Log("Activating mineral "+i);
+                    MineralsSeeThroughActivated[i] = true;
                     SoundMaster.Instance.PlaySound(SoundName.ISeeAMissingPieceThroughTheWalls);
                     ActivationMinerals[i].layer = LayerMask.NameToLayer("ItemsSeeThrough");
-                    Debug.Log("100 MINERALS ACTIVATE SEE THROUGH");
-                    minerals = 0;
+                    foreach(Transform child in ActivationMinerals[i].GetComponentsInChildren<Transform>())
+                    {
+                        child.gameObject.layer = LayerMask.NameToLayer("ItemsSeeThrough");
+                    }
+                    Debug.Log(MineralsToGetSeeThrough+" MINERALS ACTIVATE SEE THROUGH");
+                    if(HaveCrystalsToActivate())
+                        minerals = 0;
+                    else
+                    {
+                        Debug.Log("Have activated all crystals stop counter from counting!");
+                        NoMoreMineralsReached?.Invoke();
+                    }
                     break;
                 }
             }
@@ -156,7 +172,18 @@ public class Stats : MonoBehaviour
         }
         MineralsAmountUpdate?.Invoke();
     }
-    
+
+    private bool HaveCrystalsToActivate()
+    {        
+        for (int i = 0; i < MineralsOwned.Length; i++)
+        {
+            if (!MineralsOwned[i] && !MineralsSeeThroughActivated[i])
+                return true;
+
+        }
+        return false;
+    }
+
     internal void AddMineral(MineralData mineralData)
     {
         Debug.Log("Adding Mineral "+mineralData.itemName);
@@ -173,9 +200,21 @@ public class Stats : MonoBehaviour
             AddMineralCount();
             return;
         }
+
         SoundMaster.Instance.PlaySpeech(SoundName.IHaveFoundAMissingPiece);
-        if(AllMinerals()) SoundMaster.Instance.PlaySpeech(SoundName.IGotAllPieces);
+
+        if (AllMinerals())
+            SoundMaster.Instance.PlaySpeech(SoundName.IGotAllPieces);         
+
+        if (!HaveCrystalsToActivate())
+            NoMoreMineralsReached?.Invoke();
+
         MineralsUpdate?.Invoke();
+    }
+
+    private void CheckNoMoreMinerals()
+    {
+        throw new NotImplementedException();
     }
 
     private bool AllMinerals()

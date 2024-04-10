@@ -187,14 +187,16 @@ Feb-Mar 2024
 		* Enemies can now be hit at mock and step through earlier
 		* Made power up have more damage to walls, but not hit as fast
 		* Made shorter detonation for bombs placed 1.2 speed atm -		
+		* Resource bar added that fills up and enables waypoint to crystal after 100?
 		* Fixed light flickering -
 		* Removed all Duplicate Walls
 		* Removed all Duplicate Enemies -
+		* Made counter stop counting when no more crystal can be unlocked
+		* Counter bar grey out when no longer of use -
 
 
 		* Add wobble effect for returning to life again? Or Vignette?
 
-		* Have resource bar that fills up and enables waypoint to crystal after 100 or so?
 
 
 		* Throne room better walls? +??
