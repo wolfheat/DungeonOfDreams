@@ -54,7 +54,8 @@ namespace Wolfheat.StartMenu
         IHaveLostMyFourCrystals,
         IGotNoCrystalThatFitsHere,
         ThereYouGo,
-        Nice    
+        Nice,
+        ISeeAMissingPieceThroughTheWalls
 
     }
 

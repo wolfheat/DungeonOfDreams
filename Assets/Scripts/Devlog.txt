@@ -188,8 +188,14 @@ Feb-Mar 2024
 		* Made power up have more damage to walls, but not hit as fast
 		* Made shorter detonation for bombs placed 1.2 speed atm -		
 		* Fixed light flickering -
-		
+		* Removed all Duplicate Walls
+		* Removed all Duplicate Enemies -
+
+
 		* Add wobble effect for returning to life again? Or Vignette?
+
+		* Have resource bar that fills up and enables waypoint to crystal after 100 or so?
+
 
 		* Throne room better walls? +??
 		* Still some issue with player stabbing walls after attacking enemies - FIX

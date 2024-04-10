@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelLoader : MonoBehaviour
@@ -41,8 +42,6 @@ public class LevelLoader : MonoBehaviour
             Debug.Log("Player Game Data is empty, cant load the level.");
             return;
         }
-
-        LoadGameData();
 
     }
 

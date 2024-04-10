@@ -20,7 +20,7 @@ public class PickUpController : MonoBehaviour
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
         mockupLayerMask = LayerMask.GetMask("Mock");
-        itemLayerMask = LayerMask.GetMask("Items");
+        itemLayerMask = LayerMask.GetMask("Items","ItemsSeeThrough") ;
         UpdateColliders();
         StartCoroutine(UpdateCollidersInterval());
     }

@@ -11,6 +11,8 @@ public class Stats : MonoBehaviour
     public const float MiningSpeedDefault = 3f;
 	public const float MiningSpeedSpeedUp = 6f;
 
+    public int Minerals { get => minerals;}
+	public int minerals = 0;
 
     public int Damage { get => damage;}
     private int damage;
@@ -28,10 +30,12 @@ public class Stats : MonoBehaviour
     public static Stats Instance { get; private set; }
     public bool HasSledgeHammer { get; private set; }= false;
     public bool[] MineralsOwned { get; private set; }= new bool[4];
+    [SerializeField] GameObject[] ActivationMinerals;
 
     public static Action<int> HealthUpdate;
     public static Action<int> BombUpdate;
     public static Action MineralsUpdate;
+    public static Action MineralsAmountUpdate;
 
 	private void Awake()
 	{
@@ -45,8 +49,12 @@ public class Stats : MonoBehaviour
 		miningSpeed = MiningSpeedDefault;
 		damage = DamageDefault;
     }
-
-	public void SetDefaultSledgeHammer()
+    private void Start()
+    {
+        if(MineralsOwned.Length != ActivationMinerals.Length)
+            Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need "+MineralsOwned.Length);
+    }
+    public void SetDefaultSledgeHammer()
 	{
         sledgeHammerFlicker.SetFlicker(false);
         miningSpeed = MiningSpeedDefault;
@@ -126,6 +134,29 @@ public class Stats : MonoBehaviour
         BombUpdate?.Invoke(Bombs);
     }
 
+    internal void AddMineralCount()
+    {
+        minerals++;
+        if(minerals >= 10)
+        {
+            // If there is a unpicked crystal change it to see through and play speech
+            for(int i= 0; i<MineralsOwned.Length; i++)
+            {
+                if (!MineralsOwned[i])
+                {
+                    Debug.Log("Activating mineral "+i);
+                    SoundMaster.Instance.PlaySound(SoundName.ISeeAMissingPieceThroughTheWalls);
+                    ActivationMinerals[i].layer = LayerMask.NameToLayer("ItemsSeeThrough");
+                    Debug.Log("100 MINERALS ACTIVATE SEE THROUGH");
+                    minerals = 0;
+                    break;
+                }
+            }
+
+        }
+        MineralsAmountUpdate?.Invoke();
+    }
+    
     internal void AddMineral(MineralData mineralData)
     {
         Debug.Log("Adding Mineral "+mineralData.itemName);
@@ -138,7 +169,10 @@ public class Stats : MonoBehaviour
         else if (mineralData.mineralType == MineralType.Coal)
             MineralsOwned[3] = true;
         else
+        {
+            AddMineralCount();
             return;
+        }
         SoundMaster.Instance.PlaySpeech(SoundName.IHaveFoundAMissingPiece);
         if(AllMinerals()) SoundMaster.Instance.PlaySpeech(SoundName.IGotAllPieces);
         MineralsUpdate?.Invoke();
