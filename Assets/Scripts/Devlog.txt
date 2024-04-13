@@ -193,12 +193,14 @@ Feb-Mar 2024
 		* Removed all Duplicate Enemies -
 		* Made counter stop counting when no more crystal can be unlocked
 		* Counter bar grey out when no longer of use -
+13/4	* Made crystals picked up when walked upon
+		* Fixed hearts artifacts
+		* Fixed walls misalignements
+		* Added drawer and vents in room
+		* Posters framed in room -
 
-
+		
 		* Add wobble effect for returning to life again? Or Vignette?
-
-
-
 		* Throne room better walls? +??
 		* Still some issue with player stabbing walls after attacking enemies - FIX
 

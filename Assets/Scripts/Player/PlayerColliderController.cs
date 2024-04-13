@@ -1,9 +1,17 @@
+using System;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
 public class PlayerColliderController : MonoBehaviour
 {
     [SerializeField] PlayerController playerController;
+
+    LayerMask itemsLayerMask;
+
+    private void Start()
+    {
+        itemsLayerMask = LayerMask.GetMask("Items", "ItemsSeeThrough");
+    }
 
     public void TakeDamage(int amt)
     {
@@ -13,15 +21,18 @@ public class PlayerColliderController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Colliding with "+other.name);
-        if (other.gameObject.layer == LayerMask.NameToLayer("Items"))
+        
+        if ((1<<other.gameObject.layer & itemsLayerMask) != 0)
         {
+            Debug.Log("Colliding with layer in mask");
             if (other.GetComponent<Bomb>() != null)
                 return;
             else if (other.TryGetComponent(out Mineral mineral))
-                    Stats.Instance.AddMineral(mineral.Data);
+                    Stats.Instance.AddMineral(mineral.Data);            
+            other.gameObject.GetComponent<Interactable>()?.InteractWith();
 
-            other.gameObject.GetComponent<Interactable>().InteractWith();
-        }else if(other.TryGetComponent(out ExitPortal portal))
+        }
+        else if(other.TryGetComponent(out ExitPortal portal))
         {
             Debug.Log("Exit portal collission "+portal);
             UIController.Instance.ShowWinScreen();

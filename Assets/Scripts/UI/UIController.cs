@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
     [SerializeField] TransitionScreen transitionScreen;
     [SerializeField] DeathScreenController deathScreen;
     [SerializeField] WinScreenScroll winScreen;
+    [SerializeField] GameObject helpScreen;
 
 	public static UIController Instance { get; private set; }
 
@@ -33,7 +34,17 @@ public class UIController : MonoBehaviour
     {
         Inputs.Instance.Controls.Player.Esc.started += Pause;
         TransitionScreen.AnimationComplete += TransitionComplete;
+        Inputs.Instance.Controls.Player.Tilde.performed += Tilde;
+
         Pause(false);
+        // Initialize Helpscreen as deactivated
+        helpScreen.gameObject.SetActive(false);
+    }
+
+    private void Tilde(InputAction.CallbackContext context)
+    {
+        Debug.Log("Tilde");
+        helpScreen.gameObject.SetActive(!helpScreen.gameObject.activeSelf);
     }
 
     public void OnDisable()
@@ -41,6 +52,7 @@ public class UIController : MonoBehaviour
 
         Inputs.Instance.Controls.Player.Esc.started -= Pause;
         TransitionScreen.AnimationComplete -= TransitionComplete;
+        Inputs.Instance.Controls.Player.Tilde.performed -= Tilde;
     }
 
     public void Pause(InputAction.CallbackContext context)

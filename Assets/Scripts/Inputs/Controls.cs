@@ -127,6 +127,15 @@ namespace UnityEngine.InputSystem
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Tilde"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b125187-b7da-4367-8dfb-f606789e8b37"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -866,6 +875,17 @@ namespace UnityEngine.InputSystem
                     ""action"": ""N"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""946d0c52-eac7-4004-9f9c-2f15336afc8a"",
+                    ""path"": ""<Keyboard>/backquote"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Tilde"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1482,6 +1502,7 @@ namespace UnityEngine.InputSystem
             m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
             m_Player_RightClick = m_Player.FindAction("RightClick", throwIfNotFound: true);
             m_Player_Esc = m_Player.FindAction("Esc", throwIfNotFound: true);
+            m_Player_Tilde = m_Player.FindAction("Tilde", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1567,6 +1588,7 @@ namespace UnityEngine.InputSystem
         private readonly InputAction m_Player_Click;
         private readonly InputAction m_Player_RightClick;
         private readonly InputAction m_Player_Esc;
+        private readonly InputAction m_Player_Tilde;
         public struct PlayerActions
         {
             private @Controls m_Wrapper;
@@ -1582,6 +1604,7 @@ namespace UnityEngine.InputSystem
             public InputAction @Click => m_Wrapper.m_Player_Click;
             public InputAction @RightClick => m_Wrapper.m_Player_RightClick;
             public InputAction @Esc => m_Wrapper.m_Player_Esc;
+            public InputAction @Tilde => m_Wrapper.m_Player_Tilde;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -1624,6 +1647,9 @@ namespace UnityEngine.InputSystem
                 @Esc.started += instance.OnEsc;
                 @Esc.performed += instance.OnEsc;
                 @Esc.canceled += instance.OnEsc;
+                @Tilde.started += instance.OnTilde;
+                @Tilde.performed += instance.OnTilde;
+                @Tilde.canceled += instance.OnTilde;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -1661,6 +1687,9 @@ namespace UnityEngine.InputSystem
                 @Esc.started -= instance.OnEsc;
                 @Esc.performed -= instance.OnEsc;
                 @Esc.canceled -= instance.OnEsc;
+                @Tilde.started -= instance.OnTilde;
+                @Tilde.performed -= instance.OnTilde;
+                @Tilde.canceled -= instance.OnTilde;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -1862,6 +1891,7 @@ namespace UnityEngine.InputSystem
             void OnClick(InputAction.CallbackContext context);
             void OnRightClick(InputAction.CallbackContext context);
             void OnEsc(InputAction.CallbackContext context);
+            void OnTilde(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

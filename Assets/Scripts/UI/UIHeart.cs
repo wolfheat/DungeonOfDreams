@@ -11,6 +11,7 @@ public class UIHeart : MonoBehaviour
     internal void Show(bool show)
     {
         red.SetActive(show);
+        grey.SetActive(!show);
         if (show)
             animator.Play("Pulsating",-1,HealthUIController.Instance.AnimationTime);
     }

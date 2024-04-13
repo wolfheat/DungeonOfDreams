@@ -306,7 +306,7 @@ public class EnemyController : Interactable
     {
         mock.pos = Convert.V3ToV2Int(position);
         mock.transform.position = position;
-        Debug.Log("** Enemy place mock at "+position);
+        //Debug.Log("** Enemy place mock at "+position);
         if(noticePlayer)
             player?.UpdateInputDelayed();
     }

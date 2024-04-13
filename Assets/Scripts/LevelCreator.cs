@@ -54,6 +54,7 @@ public class LevelCreator : MonoBehaviour
 
     }
 
+#if UNITY_EDITOR
     [ContextMenu("Select Duplicates")]
     private void SelectDuplicates()
     {
@@ -74,6 +75,7 @@ public class LevelCreator : MonoBehaviour
         Selection.objects = duplicates.ToArray();
 
     }
+#endif
 
     private void OnEnable()
     {
