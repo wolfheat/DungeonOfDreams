@@ -203,7 +203,9 @@ Feb-Mar 2024
 		* Made bombs placable when moving
 		* Added speech for trying to get out without sledgehammer
 		* Adjusted roof lamp -
-		
+		* Made pillar particle effects play when owning correct crystal -
+
+
 		* Add wobble effect for returning to life again? Or Vignette?
 		* Throne room better walls? +??
 		* Still some issue with player stabbing walls after attacking enemies - FIX

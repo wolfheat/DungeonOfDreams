@@ -4,6 +4,7 @@ using Wolfheat.StartMenu;
 
 public class Altar : MonoBehaviour
 {
+    [SerializeField] GameObject ownCrystalactivation;
     [SerializeField] GameObject mineralObject;
     [SerializeField] int acceptsMineralID;
     bool hasMineral = false;
@@ -11,6 +12,24 @@ public class Altar : MonoBehaviour
     public int MineralAccepted { get { return acceptsMineralID;}}
 
     public static Action AltarActivated;
+
+
+    private void OnEnable()
+    {
+        Stats.MineralsUpdate += SetAsOwned;
+    }
+    
+    private void OnDisable()
+    {
+        Stats.MineralsUpdate -= SetAsOwned;
+    }
+
+    private void SetAsOwned()
+    {
+        if (Stats.Instance.MineralsOwned[acceptsMineralID])
+            ownCrystalactivation.SetActive(true);
+    }
+
     public void PlaceMineral()
     {
         if (mineralObject.activeSelf) return;
