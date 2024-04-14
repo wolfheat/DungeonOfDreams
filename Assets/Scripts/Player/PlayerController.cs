@@ -82,9 +82,10 @@ public class PlayerController : MonoBehaviour
 
     private void PlaceBomb()
     {
-        if (DoingAction || IsDead)
+        // Removed DoingAction to be able to place bomb when moving
+        if (playerAnimationController.IsAttacking || IsDead)
         {
-            Debug.Log("Cant place Bomb, doing action");
+            Debug.Log("Cant place Bomb, doing action or Dead");
             return;
         }
 
@@ -96,7 +97,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        Vector3 target = transform.position + transform.forward;
+        // Change target to be centered
+        
+        Vector3 target = Convert.Align(transform.position + transform.forward);
         if (LevelCreator.Instance.TargetHasWall(target) == null && !LevelCreator.Instance.TargetHasPlacedBomb(target))
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
@@ -152,7 +155,11 @@ public class PlayerController : MonoBehaviour
             if (pickupController.Wall != null)
             {
                 if (!Stats.Instance.HasSledgeHammer)
+                {
+                    SoundMaster.Instance.PlaySpeech(SoundName.ICantBreakThisWithMyBareHands);
                     return;
+                }
+
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Altar altar))
                     altar.PlaceMineral();                    
                 else if (pickupController.Wall.gameObject.TryGetComponent(out Gloria gloria))

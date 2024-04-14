@@ -428,7 +428,7 @@ public class EnemyController : Interactable
 
     public void PerformAttack()
     {
-//Debug.Log("Skeleton performes attack");
+        Debug.Log("Skeleton performes attack");
 
         // Attack entire square infront of enemy if player is there its hit
         Vector3 pos = transform.position + transform.forward;
@@ -487,6 +487,11 @@ public class EnemyController : Interactable
         {
             if(enemyStateController.currentState != EnemyState.Exploding)
                 enemyStateController.ChangeState(EnemyState.Exploding);
+        }else if (EnemyData.enemyType == EnemyType.Skeleton && Health > 0)
+        {
+            enemyStateController.ChangeState(EnemyState.TakeHit);
+
+
         }
 
         if (Health <= 0)

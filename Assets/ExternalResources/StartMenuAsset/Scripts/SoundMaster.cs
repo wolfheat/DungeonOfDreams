@@ -55,8 +55,8 @@ namespace Wolfheat.StartMenu
         IGotNoCrystalThatFitsHere,
         ThereYouGo,
         Nice,
-        ISeeAMissingPieceThroughTheWalls
-
+        ISeeAMissingPieceThroughTheWalls,
+        ICantBreakThisWithMyBareHands
     }
 
     public enum MusicName {MenuMusic, OutDoorMusic, IndoorMusic, DeadMusic, CreditsMusic}

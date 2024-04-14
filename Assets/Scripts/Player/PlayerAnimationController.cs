@@ -10,6 +10,8 @@ public class PlayerAnimationController : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
+    public bool IsAttacking => animator.GetBool("attack");
+
     public PlayerState State{ get; private set; }
 
     public Action HitComplete;

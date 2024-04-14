@@ -506,6 +506,12 @@ MonoBehaviour:
     loop: 0
     audioSource: {fileID: 0}
     name: 40
+  - clip: {fileID: 8300000, guid: 9c9c2bc9c3cda6a46887bcaaef4e09e5, type: 3}
+    volume: 0.537
+    pitch: 1
+    loop: 0
+    audioSource: {fileID: 0}
+    name: 55
   speechEnd:
   - clip: {fileID: 8300000, guid: 3bd25930ea76c7e47a533abee768e00a, type: 3}
     volume: 0.85

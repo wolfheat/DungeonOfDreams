@@ -198,11 +198,16 @@ Feb-Mar 2024
 		* Fixed walls misalignements
 		* Added drawer and vents in room
 		* Posters framed in room -
-
+		* Skeleton attack is better but not good
+		* Added skeleton take hit animation
+		* Made bombs placable when moving
+		* Added speech for trying to get out without sledgehammer
+		* Adjusted roof lamp -
 		
 		* Add wobble effect for returning to life again? Or Vignette?
 		* Throne room better walls? +??
 		* Still some issue with player stabbing walls after attacking enemies - FIX
+		* Make skeleton take damage andattacking animation better
 
 		* Have player taken to result screen before going to main menu? - MAYBE NO NEED
 		* Have result screen showing players score - NO NEED
