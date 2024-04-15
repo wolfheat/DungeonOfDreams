@@ -207,6 +207,11 @@ Feb-Mar 2024
 15/4	* Decorated Altar Room
 		* Added fire torches in altar room -
 
+		* Fix saving system?
+
+		* Make biomes with different enemies?
+		
+
 		* Add wobble effect for returning to life again? Or Vignette?
 		* Throne room better walls? +??
 		* Still some issue with player stabbing walls after attacking enemies - FIX

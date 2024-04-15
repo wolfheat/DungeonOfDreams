@@ -18,7 +18,7 @@ public class Stats : MonoBehaviour
     private int damage;
     public const int DamageDefault = 1;
 	public const int DamageBoosted = 30;
-	public const int MineralsToGetSeeThrough = 5;
+	public const int MineralsToGetSeeThrough = 100;
 	//public const float MiningSpeedSpeedUp = 12f;
 
     public const int MaxHealth = 8;
