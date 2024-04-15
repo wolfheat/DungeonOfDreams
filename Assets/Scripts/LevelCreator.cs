@@ -50,8 +50,11 @@ public class LevelCreator : MonoBehaviour
 
         wallLayerMask = LayerMask.GetMask("Wall");
         enemyLayerMask = LayerMask.GetMask("Enemy");
-        StartCoroutine(SoundMaster.Instance.DelayedSpeech());
 
+    }
+    private void Start()
+    {
+        StartCoroutine(SoundMaster.Instance.DelayedSpeech());
     }
 
 #if UNITY_EDITOR

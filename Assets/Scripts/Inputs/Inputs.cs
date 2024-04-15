@@ -15,9 +15,13 @@ namespace Wolfheat.Inputs
         {
             // Enable this when you want to use the loading of a saved file
             //SavingUtility.LoadingComplete += LoadingComplete;
-            LoadingComplete();
         }
-        
+        private void Start()
+        {
+            LoadingComplete();
+            
+        }
+
         private void LoadingComplete()
         {
             Debug.Log("Loading Complete");

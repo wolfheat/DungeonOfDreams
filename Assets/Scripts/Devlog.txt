@@ -37,7 +37,7 @@ Feb-Mar 2024
 27/2	* Modified cracks
 		* Minerals are pooled
 28/2	* Made held mouse start action when reaching tile
-		* Made block shock shen hit -
+		* Made block shock when hit -
 		* Made resource data as scriptable objects
 		* Changed so only mineral typ is displayed as name when picking up
 29/2	* Moved Wall LayerMask
@@ -204,7 +204,8 @@ Feb-Mar 2024
 		* Added speech for trying to get out without sledgehammer
 		* Adjusted roof lamp -
 		* Made pillar particle effects play when owning correct crystal -
-
+15/4	* Decorated Altar Room
+		* Added fire torches in altar room -
 
 		* Add wobble effect for returning to life again? Or Vignette?
 		* Throne room better walls? +??

@@ -26,11 +26,11 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 8c91300bd2e7c274bb00444d3a76eb70, type: 3}
-        m_Scale: {x: 8, y: 8}
+        m_Scale: {x: 8, y: 19}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 8c91300bd2e7c274bb00444d3a76eb70, type: 3}
-        m_Scale: {x: 8, y: 8}
+        m_Scale: {x: 8, y: 19}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -49,8 +49,8 @@ Material:
     - _Surface: 0
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.4716981, g: 0.46947312, b: 0.46947312, a: 1}
-    - _Color: {r: 0.4716981, g: 0.46947312, b: 0.46947312, a: 1}
+    - _BaseColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
+    - _Color: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &5704195960210817436
 MonoBehaviour:
