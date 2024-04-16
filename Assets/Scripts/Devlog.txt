@@ -208,8 +208,12 @@ Feb-Mar 2024
 		* Added fire torches in altar room -
 16/4	* Added moss blocks -
 		* Added flesh blocks -
-
+		* Added different sounds for hittinf different blocks
+		* Added black backdrop for vents -
 		
+
+		* Make flesh sound when hitting flesh blocks and moss sound when hitting mossblocks
+
 		* Fix saving system?
 		* Bomb enemy locks up sometimes
 

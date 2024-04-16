@@ -18,6 +18,6 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 1a85d630063af2346b00442fc4ed090e, type: 2}
   mesh: {fileID: 1359743842423581617, guid: b05a727491409a54785f25efaf337ce9, type: 3}
   particleType: 0
-  soundName: 0
+  wallSoundType: 2
   mineralStored: {fileID: 11400000, guid: ca1c82ca58570df4298ef9422ffc9b53, type: 2}
   pebbleMaterial: {fileID: 2100000, guid: 172432de8c4e9d44982cbcb62d5502b5, type: 2}

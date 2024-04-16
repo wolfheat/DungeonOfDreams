@@ -5,7 +5,7 @@ using Wolfheat.StartMenu;
 public class WallData : ItemData
 {
     public ParticleType particleType;
-    public SoundName soundName;
+    public WallSoundType wallSoundType;
     public MineralData mineralStored;
     public Material pebbleMaterial;
 }

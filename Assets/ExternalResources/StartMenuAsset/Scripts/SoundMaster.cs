@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace Wolfheat.StartMenu
 {
+    public enum WallSoundType { Stone, Moss, Flesh, Sand } 
     public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
         Explosion,
         StoneShatter,
@@ -115,8 +116,17 @@ namespace Wolfheat.StartMenu
 
         [SerializeField]private AudioClip[] swosh;
         [SerializeField]private AudioClip[] getHit;
-            [SerializeField]private AudioClip[] pickAxeHitStone;
-            [SerializeField]private AudioClip[] pickAxeCrushStone;
+        [SerializeField]private AudioClip[] pickAxeHitStone;
+        [SerializeField]private AudioClip[] pickAxeHitMoss;
+        [SerializeField]private AudioClip[] pickAxeHitFlesh;
+        [SerializeField]private AudioClip[] pickAxeHitSand;
+        [SerializeField]private AudioClip[] pickAxeCrushStone;
+        [SerializeField] private AudioClip[] pickAxeCrushMoss;
+        [SerializeField] private AudioClip[] pickAxeCrushFlesh;
+        [SerializeField] private AudioClip[] pickAxeCrushSand;
+
+
+
         [SerializeField]private AudioClip[] footstep;
 
         private Dictionary<SoundName,Sound> soundsDictionary = new();
@@ -453,16 +463,64 @@ namespace Wolfheat.StartMenu
             //if (!stepSource.isPlaying)
                 stepSource.PlayOneShot(footstep[Random.Range(0, footstep.Length)]);
         }
-        public void PlayPickAxeHitStone()
+
+
+        public void PlayPickAxeHitWall(WallSoundType type = WallSoundType.Stone, bool crushed = false)
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
-            stepSource.PlayOneShot(pickAxeHitStone[Random.Range(0, pickAxeHitStone.Length)]);
+            Debug.Log("Hitting wall "+type+" crush = "+crushed);
+            switch (type)
+            {
+                case WallSoundType.Stone:
+                    if (!crushed && pickAxeHitStone.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitStone[Random.Range(0, pickAxeHitStone.Length)]);
+                    else if (crushed && pickAxeCrushStone.Length > 0)
+                        stepSource.PlayOneShot(pickAxeCrushStone[Random.Range(0, pickAxeCrushStone.Length)]);
+                    break;
+                case WallSoundType.Moss:
+                    if (!crushed && pickAxeHitMoss.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitMoss[Random.Range(0, pickAxeHitMoss.Length)]);
+                    else if (crushed && pickAxeCrushMoss.Length > 0)
+                        stepSource.PlayOneShot(pickAxeCrushMoss[Random.Range(0, pickAxeCrushMoss.Length)]);
+                    break;
+                case WallSoundType.Flesh:
+                    if (!crushed && pickAxeHitFlesh.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitFlesh[Random.Range(0, pickAxeHitFlesh.Length)]);
+                    else if (crushed && pickAxeCrushFlesh.Length > 0)
+                        stepSource.PlayOneShot(pickAxeCrushFlesh[Random.Range(0, pickAxeCrushFlesh.Length)]);
+                    break;
+                case WallSoundType.Sand:
+                    if (!crushed && pickAxeHitSand.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitSand[Random.Range(0, pickAxeHitSand.Length)]);
+                    else if (crushed && pickAxeCrushSand.Length > 0)
+                        stepSource.PlayOneShot(pickAxeCrushSand[Random.Range(0, pickAxeCrushSand.Length)]);
+                    break;
+            }
 
         }
-        public void PlayPickAxeCrushStone()
+        public void PlayPickAxeCrushStone(WallSoundType type = WallSoundType.Stone)
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
-            stepSource.PlayOneShot(pickAxeCrushStone[Random.Range(0, pickAxeCrushStone.Length)]);
+
+            switch (type)
+            {
+                case WallSoundType.Stone:
+                    if (pickAxeHitStone.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitStone[Random.Range(0, pickAxeHitStone.Length)]);
+                    break;
+                case WallSoundType.Moss:
+                    if (pickAxeHitMoss.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitMoss[Random.Range(0, pickAxeHitMoss.Length)]);
+                    break;
+                case WallSoundType.Flesh:
+                    if (pickAxeHitFlesh.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitFlesh[Random.Range(0, pickAxeHitFlesh.Length)]);
+                    break;
+                case WallSoundType.Sand:
+                    if (pickAxeHitSand.Length > 0)
+                        stepSource.PlayOneShot(pickAxeHitStone[Random.Range(0, pickAxeHitSand.Length)]);
+                    break;
+            }
 
         }
         public void ReadDataFromSave()

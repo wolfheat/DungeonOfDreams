@@ -649,8 +649,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 036bb8b18dd1f084c963446236f00404, type: 3}
   - {fileID: 8300000, guid: 9bac378e75376da4c840efe91f711a89, type: 3}
   - {fileID: 8300000, guid: eac0fbbad1b6822448d0c0d3963569ed, type: 3}
+  pickAxeHitMoss:
+  - {fileID: 8300000, guid: aa0ea39fccb362b44b44f00d83bc4ab0, type: 3}
+  pickAxeHitFlesh:
+  - {fileID: 8300000, guid: b7e38318c32f81946922ec7ae07f5dc6, type: 3}
+  pickAxeHitSand:
+  - {fileID: 8300000, guid: 784eab78eb9f128458572a2a15354bed, type: 3}
   pickAxeCrushStone:
   - {fileID: 8300000, guid: e06a18fb764ea6744b157ca61fb1d8f4, type: 3}
+  pickAxeCrushMoss:
+  - {fileID: 8300000, guid: dd3cba700c95e8a43bd19f51864185c6, type: 3}
+  pickAxeCrushFlesh:
+  - {fileID: 8300000, guid: b275567b21127ae4e8c120ed5d937c0a, type: 3}
+  pickAxeCrushSand:
+  - {fileID: 8300000, guid: 784eab78eb9f128458572a2a15354bed, type: 3}
   footstep:
   - {fileID: 8300000, guid: 2f2c7754171a32f4cab8af3dba2763c7, type: 3}
   - {fileID: 8300000, guid: 9b1d48bfc3ed3da46b0ef01d4f8214ac, type: 3}

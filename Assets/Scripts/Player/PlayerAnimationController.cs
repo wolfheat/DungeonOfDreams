@@ -52,16 +52,16 @@ public class PlayerAnimationController : MonoBehaviour
 
         //PlayerController.Instance.pickupController.UpdateColliders();
 
-        bool hasWall = PlayerController.Instance.pickupController.Wall != null;
+        Wall wall = PlayerController.Instance.pickupController.Wall;
         //Debug.Log("HIT SOUND "+ (hasWall?"WALL":"MISS"));
 
         // Determine if hitting wall or air
-        if (hasWall)
+        if (wall != null)
         {
             if(PlayerController.Instance.pickupController.Wall.Health>1)
-                SoundMaster.Instance.PlayPickAxeHitStone();
+                SoundMaster.Instance.PlayPickAxeHitWall(wall.WallData?wall.WallData.wallSoundType:WallSoundType.Stone);
             else
-                SoundMaster.Instance.PlayPickAxeCrushStone();
+                SoundMaster.Instance.PlayPickAxeHitWall(wall.WallData.wallSoundType,crushed: true);
 
         }
         else
