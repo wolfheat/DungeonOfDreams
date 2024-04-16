@@ -209,7 +209,9 @@ Feb-Mar 2024
 16/4	* Added moss blocks -
 
 
+		
 		* Fix saving system?
+		* Bomb enemy locks up sometimes
 
 		* Make biomes with different enemies?
 		
