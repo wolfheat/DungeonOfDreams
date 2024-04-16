@@ -206,6 +206,8 @@ Feb-Mar 2024
 		* Made pillar particle effects play when owning correct crystal -
 15/4	* Decorated Altar Room
 		* Added fire torches in altar room -
+16/4	* Added moss blocks -
+
 
 		* Fix saving system?
 

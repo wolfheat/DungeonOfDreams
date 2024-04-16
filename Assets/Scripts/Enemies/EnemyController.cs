@@ -143,9 +143,9 @@ public class EnemyController : Interactable
     public void Explode()
     {
         Debug.Log("Enemy Explodes");
+        DisableColliders();
         Explosion.Instance.ExplodeNineAround(particleType, transform.position);        
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
-        DisableColliders();
         StopAllCoroutines();
     }
 
