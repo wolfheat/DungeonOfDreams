@@ -207,7 +207,7 @@ Feb-Mar 2024
 15/4	* Decorated Altar Room
 		* Added fire torches in altar room -
 16/4	* Added moss blocks -
-
+		* Added flesh blocks -
 
 		
 		* Fix saving system?
