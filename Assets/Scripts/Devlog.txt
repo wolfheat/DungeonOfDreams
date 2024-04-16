@@ -208,9 +208,9 @@ Feb-Mar 2024
 		* Added fire torches in altar room -
 16/4	* Added moss blocks -
 		* Added flesh blocks -
-		* Added different sounds for hittinf different blocks
+		* Added different sounds for hitting different blocks
 		* Added black backdrop for vents -
-		
+		* Painted Terrain biomes -
 
 		* Make flesh sound when hitting flesh blocks and moss sound when hitting mossblocks
 
