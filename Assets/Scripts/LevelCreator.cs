@@ -36,6 +36,8 @@ public class LevelCreator : MonoBehaviour
     private Stack<Vector2Int> result = new();
 
     public static LevelCreator Instance { get; private set; }
+    [SerializeField] private Terrain activeTerrain;
+    public Terrain ActiveTerrain => activeTerrain;
 
     private void Awake()
     {

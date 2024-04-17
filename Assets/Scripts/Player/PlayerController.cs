@@ -309,7 +309,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator Move(Vector3 target)
     {
-        SoundMaster.Instance.PlayStepSound();
+        int stepSoundFromTerrain = TerrainChecker.ProminentTerrainType(transform.position,LevelCreator.Instance.ActiveTerrain);
+        SoundMaster.Instance.PlayStepSound(stepSoundFromTerrain);
 
         // Place mock
         PlaceMock(target);

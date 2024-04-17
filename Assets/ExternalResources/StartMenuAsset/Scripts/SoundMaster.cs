@@ -127,7 +127,11 @@ namespace Wolfheat.StartMenu
 
 
 
-        [SerializeField]private AudioClip[] footstep;
+        [SerializeField]private AudioClip[] footstepFlesh;
+        [SerializeField]private AudioClip[] footstepSand;
+        [SerializeField]private AudioClip[] footstepMoss;
+        [SerializeField]private AudioClip[] footstepStone;
+        [SerializeField]private AudioClip[] footstepIndoor;
 
         private Dictionary<SoundName,Sound> soundsDictionary = new();
         private Dictionary<MusicName,Music> musicDictionary = new();
@@ -455,13 +459,37 @@ namespace Wolfheat.StartMenu
             if (!stepSource.isPlaying)
                 stepSource.PlayOneShot(getHit[Random.Range(0, getHit.Length)]);
         }
-        public void PlayStepSound()
+        public void PlayStepSound(int stepSoundType = 0)
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
 
+            Debug.Log("Playing step sound "+stepSoundType);
+            switch (stepSoundType)
+            {
+                case 0:
+                    stepSource.PlayOneShot(footstepFlesh[Random.Range(0, footstepFlesh.Length)]);
+                    break;
+                case 1:
+                    stepSource.PlayOneShot(footstepSand[Random.Range(0, footstepSand.Length)]);
+                    break;
+                case 2:
+                    stepSource.PlayOneShot(footstepStone[Random.Range(0, footstepStone.Length)]);
+                    break;
+                case 3:
+                    stepSource.PlayOneShot(footstepMoss[Random.Range(0, footstepMoss.Length)]);
+                    break;
+                case 4:
+                    stepSource.PlayOneShot(footstepStone[Random.Range(0, footstepStone.Length)]);
+                    break;
+                case 5:
+                    stepSource.PlayOneShot(footstepIndoor[Random.Range(0, footstepIndoor.Length)]);
+                    break;
+
+                default:
+                    break;
+            }
             // Only play foot step if last footstep is finished playing
             //if (!stepSource.isPlaying)
-                stepSource.PlayOneShot(footstep[Random.Range(0, footstep.Length)]);
         }
 
 
