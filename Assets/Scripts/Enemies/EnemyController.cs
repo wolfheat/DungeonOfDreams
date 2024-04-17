@@ -279,7 +279,7 @@ public class EnemyController : Interactable
     {
 
         //Debug.Log("Enemy started move action");
-        SoundMaster.Instance.PlayStepSound();
+        //SoundMaster.Instance.PlayStepSound();
 
         // Lock action from enemy
         DoingAction = true; 

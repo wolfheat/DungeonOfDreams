@@ -115,7 +115,7 @@ public class Stats : MonoBehaviour
     {
         if (Health == CurrentMaxHealth)
             return false;
-        SoundMaster.Instance.PlaySpeech(SoundName.YourWoundsAreHealed);
+        SoundMaster.Instance.PlaySound(SoundName.YourWoundsAreHealed);
         Health = CurrentMaxHealth;
         HealthUpdate?.Invoke(Health);
         return true;
@@ -201,10 +201,11 @@ public class Stats : MonoBehaviour
             return;
         }
 
-        SoundMaster.Instance.PlaySpeech(SoundName.IHaveFoundAMissingPiece);
 
         if (AllMinerals())
-            SoundMaster.Instance.PlaySpeech(SoundName.IGotAllPieces);         
+            SoundMaster.Instance.PlaySound(SoundName.IGotAllPieces);         
+        else
+            SoundMaster.Instance.PlaySound(SoundName.IHaveFoundAMissingPiece);
 
         if (!HaveCrystalsToActivate())
             NoMoreMineralsReached?.Invoke();

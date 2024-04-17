@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
         if (Stats.Instance.Bombs <= 0)
         {
             Debug.Log("You Got No Bombs");
-            SoundMaster.Instance.PlaySpeech(SoundName.NoBombs);
+            SoundMaster.Instance.PlaySound(SoundName.NoBombs);
             return;
         }
 
@@ -104,12 +104,12 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("No Walls or Enemies ahead - Place bomb at "+target+" player at "+transform.position);
             
-            SoundMaster.Instance.PlaySpeech(SoundName.DropItem);
+            SoundMaster.Instance.PlaySound(SoundName.DropItem);
             ItemSpawner.Instance.PlaceBomb(target);
             Stats.Instance.RemoveBombs(1);
             if (Stats.Instance.Bombs == 0)
             {
-                SoundMaster.Instance.PlaySpeech(SoundName.ThatWasTheLastOne);
+                SoundMaster.Instance.PlaySound(SoundName.ThatWasTheLastOne);
                 Debug.Log("LAST ONE");
             }
         }
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         {
             // Something is in the way
             Debug.Log("CANT DO THAT");
-            SoundMaster.Instance.PlaySpeech(SoundName.CantDoThat);
+            SoundMaster.Instance.PlaySound(SoundName.CantDoThat);
         }
     }
 
@@ -154,9 +154,9 @@ public class PlayerController : MonoBehaviour
         {
             if (pickupController.Wall != null)
             {
-                if (!Stats.Instance.HasSledgeHammer)
+                if (!Stats.Instance.HasSledgeHammer && pickupController.Wall.GetComponent<Door>() != null)
                 {
-                    SoundMaster.Instance.PlaySpeech(SoundName.ICantBreakThisWithMyBareHands);
+                    SoundMaster.Instance.PlaySound(SoundName.ICantBreakThisWithMyBareHands);
                     return;
                 }
 

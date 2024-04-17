@@ -213,20 +213,21 @@ Feb-Mar 2024
 		* Painted Terrain biomes -
 17/4	* Added separate step sounds depending on surface
 		* Added altar sound -
+		* Updated sounds for sand and moss steps and hits
 
 
+		* Make not all speach wait, some play directly
+		* Maybe have picked minerals animate up to the UI bar?
 		* Sand step sound and hit sounds needs change
 
 		* Fix saving system?
 		* Bomb enemy locks up sometimes
 
 		* Make biomes with different enemies?
-		
 
 		* Add wobble effect for returning to life again? Or Vignette?
-		* Throne room better walls? +??
 		* Still some issue with player stabbing walls after attacking enemies - FIX
-		* Make skeleton take damage andattacking animation better
+		* Make skeleton take damage and attacking animation better
 
 		* Have player taken to result screen before going to main menu? - MAYBE NO NEED
 		* Have result screen showing players score - NO NEED

@@ -52,7 +52,7 @@ public class InteractableUI : MonoBehaviour
             {
                 Debug.Log("Adding health with heart " + data.value);
                 Stats.Instance.AddHealth(data.value); // Dont add health to picked up list?
-                SoundMaster.Instance.PlaySpeech(SoundName.MoreLifeNow);
+                SoundMaster.Instance.PlaySound(SoundName.MoreLifeNow);
                 return;
             }
 
@@ -72,7 +72,7 @@ public class InteractableUI : MonoBehaviour
             boostItem.SetName(data.itemName);
             boostItem.SetSprite(data.sprite);
             boostItem.AddBoost(data as PowerUpData);
-            SoundMaster.Instance.PlaySpeech(SoundName.Energize);
+            SoundMaster.Instance.PlaySound(SoundName.Energize);
             return;
         }
         else if (data is UsableData)
@@ -84,14 +84,14 @@ public class InteractableUI : MonoBehaviour
             }else if (((UsableData)data).usableType == UsableType.SledgeHammer)
             {
                 Debug.Log("Adding sledgehammer " + data.value);
-                SoundMaster.Instance.PlaySpeech(SoundName.INowHaveASledgehammer);
+                SoundMaster.Instance.PlaySound(SoundName.INowHaveASledgehammer);
 
                 Stats.Instance.ActivateSledgeHammer();
             }
             else if (((UsableData)data).usableType == UsableType.Compass)
             {
                 Debug.Log("Adding compass " + data.value);
-                SoundMaster.Instance.PlaySpeech(SoundName.IHaveACompass);
+                SoundMaster.Instance.PlaySound(SoundName.IHaveACompass);
                 Stats.Instance.ActivateCompass();
                 //Stats.Instance.AddBomb(data.value);
             }
