@@ -720,6 +720,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 94d9995b0cea6d64db3e4ec201f30eb1, type: 3}
   - {fileID: 8300000, guid: 874bbfa69f0958f40a3476f171dc9d3f, type: 3}
   - {fileID: 8300000, guid: 50c83a8bab9a35543976400a7b1fbd43, type: 3}
+  footstepAltar:
+  - {fileID: 8300000, guid: 71d6e088016a0624daeab69295f7fc01, type: 3}
+  - {fileID: 8300000, guid: 94172c67e1848c14a8a653a5d3ac5d43, type: 3}
+  - {fileID: 8300000, guid: f1df48701b812674f85b586941063bcc, type: 3}
+  - {fileID: 8300000, guid: d7c111ffbd9bb994bb6f1cc871d84f94, type: 3}
+  - {fileID: 8300000, guid: 883d0c290811c984a8504dfa3859b402, type: 3}
+  - {fileID: 8300000, guid: fef3f614ff310364ba2d210e5ad9d181, type: 3}
 --- !u!4 &2094922433
 Transform:
   m_ObjectHideFlags: 0

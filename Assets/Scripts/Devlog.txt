@@ -211,8 +211,11 @@ Feb-Mar 2024
 		* Added different sounds for hitting different blocks
 		* Added black backdrop for vents -
 		* Painted Terrain biomes -
+17/4	* Added separate step sounds depending on surface
+		* Added altar sound -
 
-		* Make flesh sound when hitting flesh blocks and moss sound when hitting mossblocks
+
+		* Sand step sound and hit sounds needs change
 
 		* Fix saving system?
 		* Bomb enemy locks up sometimes

@@ -132,6 +132,7 @@ namespace Wolfheat.StartMenu
         [SerializeField]private AudioClip[] footstepMoss;
         [SerializeField]private AudioClip[] footstepStone;
         [SerializeField]private AudioClip[] footstepIndoor;
+        [SerializeField]private AudioClip[] footstepAltar;
 
         private Dictionary<SoundName,Sound> soundsDictionary = new();
         private Dictionary<MusicName,Music> musicDictionary = new();
@@ -478,8 +479,8 @@ namespace Wolfheat.StartMenu
                 case 3:
                     stepSource.PlayOneShot(footstepMoss[Random.Range(0, footstepMoss.Length)]);
                     break;
-                case 4:
-                    stepSource.PlayOneShot(footstepStone[Random.Range(0, footstepStone.Length)]);
+                case 4: 
+                    stepSource.PlayOneShot(footstepAltar[Random.Range(0, footstepAltar.Length)]);
                     break;
                 case 5:
                     stepSource.PlayOneShot(footstepIndoor[Random.Range(0, footstepIndoor.Length)]);
