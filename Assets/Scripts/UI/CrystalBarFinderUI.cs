@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class CrystalBarFinderUI : MonoBehaviour
 {
     [SerializeField] Slider slider;
+    [SerializeField] Animator sliderHandleAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,8 @@ public class CrystalBarFinderUI : MonoBehaviour
     private void SetSlider()
     {
         slider.value = ((float)Stats.Instance.Minerals)/ Stats.MineralsToGetSeeThrough;
+        sliderHandleAnimator.CrossFade("FlashBig",0.1f);
+
     }
     
     private void DeactivateSlider()

@@ -656,16 +656,17 @@ MonoBehaviour:
   pickAxeHitFlesh:
   - {fileID: 8300000, guid: b7e38318c32f81946922ec7ae07f5dc6, type: 3}
   pickAxeHitSand:
-  - {fileID: 8300000, guid: 784eab78eb9f128458572a2a15354bed, type: 3}
+  - {fileID: 8300000, guid: 036bb8b18dd1f084c963446236f00404, type: 3}
+  - {fileID: 8300000, guid: 9bac378e75376da4c840efe91f711a89, type: 3}
+  - {fileID: 8300000, guid: eac0fbbad1b6822448d0c0d3963569ed, type: 3}
   pickAxeCrushStone:
   - {fileID: 8300000, guid: e06a18fb764ea6744b157ca61fb1d8f4, type: 3}
   pickAxeCrushMoss:
   - {fileID: 8300000, guid: 9886f8d6bcc228e46b757a8c84c70dc9, type: 3}
-  - {fileID: 8300000, guid: 2f791b12e3ab8504c99c42368d36105f, type: 3}
   pickAxeCrushFlesh:
   - {fileID: 8300000, guid: b275567b21127ae4e8c120ed5d937c0a, type: 3}
   pickAxeCrushSand:
-  - {fileID: 8300000, guid: 784eab78eb9f128458572a2a15354bed, type: 3}
+  - {fileID: 8300000, guid: 4f098149c70bc334da11ecea08b4de67, type: 3}
   footstepFlesh:
   - {fileID: 8300000, guid: 8838ed5e770e6f24ca4740c2760f1a00, type: 3}
   - {fileID: 8300000, guid: 8e0be89bbb0617747a991d4eb74f56dc, type: 3}
@@ -694,9 +695,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 65bab9bc32fb1524dbd23e76da6d3277, type: 3}
   - {fileID: 8300000, guid: 4d6dafac31052d04496c8d14e8d35031, type: 3}
   footstepSand:
-  - {fileID: 8300000, guid: fd0a16c7a568d8047a1aa4cbc3db06ca, type: 3}
-  - {fileID: 8300000, guid: 9cfc23516011a114daf12460fd561d1f, type: 3}
-  - {fileID: 8300000, guid: 41a2f714d54ae8a47a14789182b76096, type: 3}
+  - {fileID: 8300000, guid: 3dab96503d3f7bf4a9965bc66586bbe2, type: 3}
+  - {fileID: 8300000, guid: 170024220bcdff04d98a0684cfe99769, type: 3}
+  - {fileID: 8300000, guid: 43d86761158310d4b806d0b9f4138c31, type: 3}
+  - {fileID: 8300000, guid: 56a12df94b76d3b4497880e06e26d8b9, type: 3}
+  - {fileID: 8300000, guid: 399854dbbdf825747b1ab3d782d602a3, type: 3}
   footstepMoss:
   - {fileID: 8300000, guid: 96182fdbe7be5e6478cb6f666e7fd27c, type: 3}
   - {fileID: 8300000, guid: 1fc1a430aaf103246b2e195f1b620abe, type: 3}

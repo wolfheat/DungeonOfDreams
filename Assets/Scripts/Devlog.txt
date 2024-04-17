@@ -214,7 +214,10 @@ Feb-Mar 2024
 17/4	* Added separate step sounds depending on surface
 		* Added altar sound -
 		* Updated sounds for sand and moss steps and hits
+		* Added Cat enemy -
+		
 
+		* Fully implement cat enemy	
 
 		* Make not all speach wait, some play directly
 		* Maybe have picked minerals animate up to the UI bar?
