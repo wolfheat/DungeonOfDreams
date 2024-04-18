@@ -219,16 +219,19 @@ Feb-Mar 2024
 		* Added wildfire to cat -
 		* Fixed Pooling for particle effects
 		* Fixed Cat collider issue -
+		* Fixed explosion issue for bombs
+		* Wildfire now ignites bombs and kills skelletons
+		* Enemy now targets player from afar if on same X or Z coordinate
+		* Wildfire spell is no longer interupted once started
+		* Damage is taken from wildfire
+		* Limited cat from fire towards player if to far or not visible
+		* Fixed bombs locking up sometimes, hopefully -
 
-
-		* Fully implement cat enemy	
-
-		* Make not all speach wait, some play directly
+		* Add burning up sound for player dying from wildfire
 		* Maybe have picked minerals animate up to the UI bar?
 		* Sand step sound and hit sounds needs change
 
 		* Fix saving system?
-		* Bomb enemy locks up sometimes
 
 		* Make biomes with different enemies?
 

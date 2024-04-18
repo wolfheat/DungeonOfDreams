@@ -45,11 +45,38 @@ public class Explosion : MonoBehaviour
                     else if(collider.gameObject.TryGetComponent(out EnemyColliderController enemyColliderController))
                     {
                         Debug.Log("Bomb destroys enemy at position "+pos+ " name: "+collider.name);
-                        enemyColliderController.TakeDamage(explosionDamage);
+                        enemyColliderController.TakeDamage(explosionDamage,true);
                     }
                 }
             }
 
+        }
+    }
+
+    public void FireDamage(Vector3 pos)
+    {        
+        // Destroy Walls affected and hurt player or Enemy nearby
+        Collider[] colliders = Physics.OverlapBox(pos, Game.boxSize, Quaternion.identity, layerMask);
+        if(colliders.Length > 0)
+        {
+            foreach (var collider in colliders)
+            {
+                if (collider.gameObject.TryGetComponent(out Wall wall))
+                {
+                    Debug.Log("Fire destroys wall at position "+pos+ " name: "+collider.name);
+                    wall.Damage(explosionDamage);
+                }
+                else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
+                {
+                    Debug.Log("Fire destroys player at position "+pos+ " name: "+collider.name);
+                    playerColliderController.TakeDamage(explosionDamage);
+                }
+                else if(collider.gameObject.TryGetComponent(out EnemyColliderController enemyColliderController))
+                {
+                    Debug.Log("Fire destroys enemy at position "+pos+ " name: "+collider.name);
+                    enemyColliderController.TakeDamage(explosionDamage, true);
+                }
+            }
         }
     }
 

@@ -10,8 +10,8 @@ namespace Wolfheat.StartMenu
 {
     public enum WallSoundType { Stone, Moss, Flesh, Sand } 
     public enum SoundName {MenuStep, MenuError, MenuClick, MenuOver, DropItem, EnemyStabs, HUDPositive, HUDError,
-        Explosion,
-        StoneShatter,
+        FireSound,
+        FireContinious,
         RockExplosion,
         CraftComplete,
         StabEnemy,
@@ -108,6 +108,7 @@ namespace Wolfheat.StartMenu
         public AudioMixerGroup musicMixerGroup;  
         public AudioMixerGroup SFXMixerGroup;  
         [SerializeField] private Sound[] sounds;
+        [SerializeField] private Sound[] effects;
         [SerializeField] private Sound[] speech;
         [SerializeField] private Sound[] speechStart;
         [SerializeField] private Sound[] speechEnd;
@@ -169,6 +170,12 @@ namespace Wolfheat.StartMenu
             Debug.Log("SoundMaster Start");        
             // Define all sounds
             foreach (var sound in sounds)
+            {
+                sound.SetSound(gameObject.AddComponent<AudioSource>());
+                sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
+                soundsDictionary.Add(sound.name, sound);
+            }
+            foreach (var sound in effects)
             {
                 sound.SetSound(gameObject.AddComponent<AudioSource>());
                 sound.audioSource.outputAudioMixerGroup = SFXMixerGroup;
@@ -464,7 +471,6 @@ namespace Wolfheat.StartMenu
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
 
-            Debug.Log("Playing step sound "+stepSoundType);
             switch (stepSoundType)
             {
                 case 0:

@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using Wolfheat.StartMenu;
 
 public class WildFireSpawner : MonoBehaviour
 {
@@ -46,9 +47,12 @@ public class WildFireSpawner : MonoBehaviour
             return;
         }
 
-        Debug.Log("Wildfire created at "+position+" ["+alignedPos+"]");
 
         // Legal Wildfire Position
         ParticleEffects.Instance.PlayTypeAt(ParticleType.WildFire, alignedPos+Vector3.down*0.48f);
+
+        Explosion.Instance.FireDamage(transform.position);
+        //SoundMaster.Instance.PlaySound(SoundName.FireSound);
+
     }
 }

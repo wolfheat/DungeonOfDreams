@@ -160,7 +160,7 @@ public class EnemyController : Interactable
         //Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
-        if (enemyStateController.currentState == EnemyState.Exploding)
+        if (enemyStateController.currentState == EnemyState.Exploding || (enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton))
             return;
 
         if (!Stats.Instance.IsDead &&( UpdatePlayerPosition() || !newPositionEvaluated))
@@ -178,56 +178,102 @@ public class EnemyController : Interactable
 
         //CheckForExplosion();
 
-       // Debug.Log("Enemy is going to check if it has a path to follow: "+path?.Count);
+        // Debug.Log("Enemy is going to check if it has a path to follow: "+path?.Count);
 
+        if (Stats.Instance.IsDead) return;
 
-        if (HasPath())
+        switch (EnemyData.enemyType)
         {
-            ActivateNextPoint();
-        }
-        else
-        {
-            if (EnemyData.enemyType != EnemyType.Bomber && !Stats.Instance.IsDead)
-            {
-                //Debug.Log("This is a Skeleton");
-                playerDistance = PlayerDistance();
-                //Debug.Log("distance "+playerDistance);
-                if (playerDistance < 1.1f)
+            case EnemyType.Bomber:
+            case EnemyType.Skeleton:
+            case EnemyType.Dino:
+                if (HasPath())
                 {
-                    // if next to player but not facing player rotate towards player
-                    bool readyToAttack = PlayerIsOneStepAhead();
-                    if (!readyToAttack)
-                    {
-                        //Debug.Log("Added rotation to enemy action");
-                        savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
+                    ActivateNextPoint();
+                    return;
+                }
+                else
+                    if (NormalBehaviour())
                         return;
-                    }
-
-                    //Debug.Log("Enemy within range, Change to Attack animation");
-
-                    if(enemyStateController.currentState != EnemyState.Attack)
-                        enemyStateController.ChangeState(EnemyState.Attack);
-                }
-                else if(path.Count == 0)
-                {
-                    //Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
-                    if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
-                        enemyStateController.ChangeState(EnemyState.Idle);
-                }
-
-                return;
-            }
-
-
-
-            // Enemy should be in patrol mode here
-            //Debug.Log(" Enemy keep patroling",this);
-            enemyStateController.ChangeState(EnemyState.Idle);
+                break;
+            case EnemyType.Cat:
+                if (Catbehaviour())
+                    return;
+                break;
+            default: 
+                break;
 
         }
+
+        // Enemy should be in patrol mode here
+        //Debug.Log(" Enemy keep patroling",this);
+        enemyStateController.ChangeState(EnemyState.Idle);
+
     }
 
-    private bool PlayerIsOneStepAhead()
+    private bool Catbehaviour()
+    {
+        // Prohibit state to change if cat is attacking
+        if(enemyStateController.currentState == EnemyState.Attack)
+            return true; 
+
+        // Check if player is on same X or Z coordinate
+        if (PlayerOnSameGridCross() && PlayerVisibleForEnemy())
+        {
+            // if next to player but not facing player rotate towards player
+            if (!PlayerIsInLookingDirection())
+            {
+                //Debug.Log("Added rotation to enemy action");
+                savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
+                return true;
+            }
+
+            if (enemyStateController.currentState != EnemyState.Attack)
+                enemyStateController.ChangeState(EnemyState.Attack);
+            return true;
+        }
+        else if (HasPath())
+        {
+            ActivateNextPoint();
+            return true;
+        }
+        return false;
+    }
+
+    private bool NormalBehaviour()
+    {
+        //Debug.Log("This is a Skeleton");
+        playerDistance = PlayerDistance();
+        //Debug.Log("distance "+playerDistance);
+        if (playerDistance < 1.1f)
+        {
+            // if next to player but not facing player rotate towards player
+            if (!PlayerIsInLookingDirection())
+            {
+                //Debug.Log("Added rotation to enemy action");
+                savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
+                return true;
+            }
+
+            //Debug.Log("Enemy within range, Change to Attack animation");
+
+            if (enemyStateController.currentState != EnemyState.Attack)
+                enemyStateController.ChangeState(EnemyState.Attack);
+
+            return true;
+        }
+        else if (path.Count == 0)
+        {
+            //Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
+            if (enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
+                enemyStateController.ChangeState(EnemyState.Idle);
+
+            return true;
+        }
+        return false;
+    }
+
+    private bool PlayerIsInLookingDirection()
     {
         return transform.forward == (player.transform.position - transform.position).normalized;
     }
@@ -337,13 +383,15 @@ public class EnemyController : Interactable
         transform.rotation = end;
 
         //Debug.Log("End Rotation -  Reset animation state");
-        if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
+        if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead && enemyStateController.currentState != EnemyState.Exploding)
             enemyStateController.ChangeState(beginState);
 
         DoingAction = false;
         //Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
         ReachedPosition();
     }
+
+    const float EnemySight = 5f;
 
     private void UpdatePlayerDistanceAndPath()
     {
@@ -352,58 +400,36 @@ public class EnemyController : Interactable
             Debug.Log("Dead or exploding or player is dead, current state: "+enemyStateController.currentState);    
             return;
         }
+        
         // Update player distance when player or enemy reaches a new position
-
-        // If Player close enough and valid path to player chase player
-
-        playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
-
-        //Debug.Log("Enemy "+name+" recieved player action complete at distance "+playerDistance);
-
-        const float EnemySight = 5f;
-
         if (EnemyData.enemyType == EnemyType.Bomber && CheckForExplosion())
             return;
-        
-        //Debug.Log("Updating enemies path to player");
 
+        // If Player close enough and valid path to player chase player        
+        playerDistance = PlayerDistance();
+                
         if(playerDistance < EnemySight)
         {
-            Vector3 rayDirection = (player.transform.position - transform.position).normalized*playerDistance;
-            Ray ray = new Ray(transform.position, rayDirection);
-
-            Color rayColor = Color.red;
-            if(Physics.Raycast(ray, out RaycastHit hit, EnemySight, obstructions))
+            if (PlayerVisibleForEnemy())
             {
-                Collider collider = hit.collider;
-                //Debug.Log("RayCast Hit Collider "+collider.name);
-                if(collider.gameObject.layer == LayerMask.NameToLayer("Player"))
+                path = LevelCreator.Instance.CanReach(this, player);
+
+                if (path != null && path.Count > 0)
                 {
-                    // Check if player can be reached find way.
-                    path = LevelCreator.Instance.CanReach(this, player);
-
-                    if (path!= null && path.Count > 0)
+                    // If not chasing start chase
+                    if (enemyStateController.currentState != EnemyState.Chase)
                     {
-                        //Debug.Log("Can reach player, current state "+enemyStateController.currentState);
-
-                        // If not chasing start chase
-                        if(enemyStateController.currentState != EnemyState.Chase)
-                        {
-                            enemyStateController.ChangeState(EnemyState.Chase);
-                            Debug.Log("Enemy starts chasing player",this);
-                        }
-
-                        rayColor = Color.green;
-                    }else
-                        PlaceMock(transform.position);
+                        enemyStateController.ChangeState(EnemyState.Chase);
+                        Debug.Log("Enemy starts chasing player", this);
+                    }
                 }
+                else
+                    PlaceMock(transform.position);
             }
-
-            //Debug.Log("Ray from "+transform.position+" in direction "+ rayDirection);
-            //Debug.DrawRay(transform.position,rayDirection, rayColor, 0.5f);
         }
         else
         {        
+            // This clears the path if player is to far away and not visible
             if(path!=null)
                 path.Clear();
             if(enemyStateController.currentState == EnemyState.Chase)
@@ -418,6 +444,23 @@ public class EnemyController : Interactable
             }
         }
 
+    }
+
+    private bool PlayerVisibleForEnemy()
+    {
+        Vector3 rayDirection = (player.transform.position - transform.position).normalized * playerDistance;
+        Ray ray = new Ray(transform.position, rayDirection);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, EnemySight, obstructions))
+        {
+            Collider collider = hit.collider;
+
+            //Hit player
+            return collider.gameObject.layer == LayerMask.NameToLayer("Player");
+        }
+
+        // Hit nothing
+        return false;
     }
 
     public void LoadUpAttack()
@@ -437,6 +480,7 @@ public class EnemyController : Interactable
     public void SpellCastAnimationComplete()
     {
         Debug.Log("Spell cast animation completed by Cat");
+        enemyStateController.ChangeState(EnemyState.Idle);
     }
 
     public void PerformAttack()
@@ -453,7 +497,7 @@ public class EnemyController : Interactable
             player.TakeDamage(1,this);
         }
     }
-    
+    /*
     private bool CheckForAttack()
     {
         playerDistance = Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
@@ -466,7 +510,7 @@ public class EnemyController : Interactable
             return true;
         }
         return false;
-    }
+    }*/
     
     private bool CheckForExplosion()
     {
@@ -474,7 +518,7 @@ public class EnemyController : Interactable
         playerDistance = PlayerDistance();
         if (playerDistance < 1.1f)
         {
-            //Debug.Log("Player close enough to explode");
+            Debug.Log("Player close enough to explode");
             path.Clear();
             enemyStateController.ChangeState(EnemyState.Exploding);
             StartCoroutine(RotateLockOnPlayer());
@@ -483,6 +527,11 @@ public class EnemyController : Interactable
         return false;
     }
 
+    private bool PlayerOnSameGridCross()
+    {
+        Vector2Int pos = Convert.V3ToV2Int(transform.position);
+        return pos.x == playerLastPosition.x || pos.y == playerLastPosition.y;
+    }
     private float PlayerDistance()
     {
         return Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
@@ -496,46 +545,68 @@ public class EnemyController : Interactable
         Debug.Log("Enemy took damage, "+amt+" current health: "+Health);
         SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
 
-        if (EnemyData.enemyType == EnemyType.Bomber && !explosionDamage && Health > 0)
+        if(Health > 0)
         {
-            if(enemyStateController.currentState != EnemyState.Exploding)
-                enemyStateController.ChangeState(EnemyState.Exploding);
-        }else if (EnemyData.enemyType == EnemyType.Skeleton && Health > 0)
-        {
-            enemyStateController.ChangeState(EnemyState.TakeHit);
-
-
-        }
-
-        if (Health <= 0)
-        {
-
             if (EnemyData.enemyType == EnemyType.Bomber)
+            {
+                if(enemyStateController.currentState != EnemyState.Exploding)
+                {
+                    Debug.Log("Bomber took damage enough to start explode");
+                    enemyStateController.ChangeState(EnemyState.Exploding);
+
+                    return true;
+                }
+            }else if (EnemyData.enemyType == EnemyType.Skeleton)
+            {
+                enemyStateController.ChangeState(EnemyState.TakeHit);
+
+                return true;
+            }
+        }
+        if (EnemyData.enemyType == EnemyType.Bomber)
+        {
+            if (!explosionDamage)
             {
                 Debug.Log("Enemy bomber dies");
                 SoundMaster.Instance.StopSound(SoundName.Hissing);
                 SoundMaster.Instance.StopSound(SoundName.EnemyGetHit);
                 Dead = true;
-                if (!explosionDamage)
-                {
-                    enemyStateController.ChangeState(EnemyState.Idle);
-                    ItemSpawner.Instance.ReturnEnemy(this);
-                    //Debug.Log("Enemy returned to pool");
-                    CreateItem(EnemyData.storedUsable);
-                    DisableColliders();
-                    return true;
-                }
-            }
-            else if (EnemyData.enemyType == EnemyType.Skeleton)
-            {
-                Debug.Log("Enemy skeleton dies");
-                Dead = true;
-                enemyStateController.ChangeState(EnemyState.Dying);
+
+                enemyStateController.ChangeState(EnemyState.Idle);
+                ItemSpawner.Instance.ReturnEnemy(this);
+                    
+                Debug.Log("Enemy returned to pool");
+
+                CreateItem(EnemyData.storedUsable);
                 DisableColliders();
                 return true;
             }
+            else
+            {
+                Debug.Log("Enemy bomb died from explosion damage");
+                if (enemyStateController.currentState != EnemyState.Exploding)
+                {
+                    Debug.Log("Bomber took damage enough to start explode");
+                    enemyStateController.ChangeState(EnemyState.Exploding);
+                    return true;
+                }
+            }
 
-                enemyStateController.ChangeState(EnemyState.Exploding);
+        }
+        else if (EnemyData.enemyType == EnemyType.Skeleton)
+        {
+            Debug.Log("Enemy skeleton dies");
+            Dead = true;
+            enemyStateController.ChangeState(EnemyState.Dying);
+            DisableColliders();
+            return true;
+        }
+        else if (EnemyData.enemyType == EnemyType.Cat)
+        {
+            Debug.Log("Enemy cat dies");
+            Dead = true;
+            enemyStateController.ChangeState(EnemyState.Dying);
+            DisableColliders();
             return true;
         }
         return false;
