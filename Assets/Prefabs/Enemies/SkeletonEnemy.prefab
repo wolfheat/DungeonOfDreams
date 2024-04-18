@@ -183,8 +183,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76922979a232992498c9e333357f6f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePool: 1
   EnemyData: {fileID: 11400000, guid: 4f40d64cb738aca438567a24496cce7d, type: 2}
-  collider: {fileID: 3570972636718531214}
+  enemyCollider: {fileID: 3570972636718531214}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 8

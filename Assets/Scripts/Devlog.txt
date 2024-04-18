@@ -227,9 +227,14 @@ Feb-Mar 2024
 		* Limited cat from fire towards player if to far or not visible
 		* Fixed bombs locking up sometimes, hopefully -
 		* Added different death sound for fire
-		* Updated Credits page
+		* Updated Credits page -
+		* Made Cat able to die from bombs
+		* Skeleton colliders disappear directly when they die again
+		* Bombs die and dont explode when bombed, fixed, also lit when wildfired
 
 
+		* There is a wiggle when moving and changing directions FIX
+		* Player died and kept attacking after death, make it unable to
 		* Game stutters, check profiler for optimizations
 		
 		* Maybe have picked minerals animate up to the UI bar?

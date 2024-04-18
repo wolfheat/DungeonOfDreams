@@ -1196,8 +1196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76922979a232992498c9e333357f6f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  usePool: 1
   EnemyData: {fileID: 11400000, guid: ae11c7a3377ec9f499b00f716846117e, type: 2}
-  collider: {fileID: 7850845642816330696}
+  enemyCollider: {fileID: 7850845642816330696}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 0
