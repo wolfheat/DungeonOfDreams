@@ -9,8 +9,9 @@ public class WinScreenScroll : MonoBehaviour
     [SerializeField] GameObject panel;
     [SerializeField] GameObject scroll;
     private float StartPosition = -1200f;
-    private float EndPosition = 5500;
+    private float EndPosition = 5600;
     private float speed = 80f;
+    private const float Speedup = 6f;
 
     public void Show()
     {
@@ -28,7 +29,7 @@ public class WinScreenScroll : MonoBehaviour
         rect.anchoredPosition = pos;
         while (pos.y<EndPosition) {         
             yield return null;
-            float animationSpeed = Inputs.Instance.Controls.Player.Click.IsPressed() ? speed * 6 : speed;
+            float animationSpeed = Inputs.Instance.Controls.Player.Click.IsPressed() ? speed * Speedup : speed;
             pos += Vector2.up * animationSpeed * Time.unscaledDeltaTime;
             rect.anchoredPosition = pos;
         }

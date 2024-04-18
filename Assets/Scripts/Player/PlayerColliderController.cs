@@ -13,9 +13,9 @@ public class PlayerColliderController : MonoBehaviour
         itemsLayerMask = LayerMask.GetMask("Items", "ItemsSeeThrough");
     }
 
-    public void TakeDamage(int amt)
+    public void TakeDamage(int amt, bool wildFireDamage = false)
     {
-        playerController.TakeDamage(amt);
+        playerController.TakeDamage(amt,null,wildFireDamage);
     }
 
     private void OnTriggerEnter(Collider other)

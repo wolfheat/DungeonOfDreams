@@ -40,12 +40,12 @@ public class Explosion : MonoBehaviour
                     else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
                     {
                         Debug.Log("Bomb destroys player at position "+pos+ " name: "+collider.name);
-                        playerColliderController.TakeDamage(explosionDamage);
+                        playerColliderController.TakeDamage(explosionDamage,true);
                     }
                     else if(collider.gameObject.TryGetComponent(out EnemyColliderController enemyColliderController))
                     {
                         Debug.Log("Bomb destroys enemy at position "+pos+ " name: "+collider.name);
-                        enemyColliderController.TakeDamage(explosionDamage,true);
+                        enemyColliderController.TakeDamage(explosionDamage);
                     }
                 }
             }
@@ -69,12 +69,12 @@ public class Explosion : MonoBehaviour
                 else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
                 {
                     Debug.Log("Fire destroys player at position "+pos+ " name: "+collider.name);
-                    playerColliderController.TakeDamage(explosionDamage);
+                    playerColliderController.TakeDamage(explosionDamage, true);
                 }
                 else if(collider.gameObject.TryGetComponent(out EnemyColliderController enemyColliderController))
                 {
                     Debug.Log("Fire destroys enemy at position "+pos+ " name: "+collider.name);
-                    enemyColliderController.TakeDamage(explosionDamage, true);
+                    enemyColliderController.TakeDamage(explosionDamage);
                 }
             }
         }

@@ -13,7 +13,7 @@ namespace Wolfheat.StartMenu
         FireSound,
         FireContinious,
         RockExplosion,
-        CraftComplete,
+        DieByFire,
         StabEnemy,
         KillEnemy,
         PickUp,

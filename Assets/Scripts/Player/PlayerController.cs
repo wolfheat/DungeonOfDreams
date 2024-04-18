@@ -398,7 +398,7 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerInput();
     }
 
-    public void TakeDamage(int amt,EnemyController enemy = null)
+    public void TakeDamage(int amt,EnemyController enemy = null, bool wildFireDamage = false)
     {
         if (Stats.Instance.IsDead) return;
 
@@ -424,7 +424,8 @@ public class PlayerController : MonoBehaviour
 
             // Show death screen
             UIController.Instance.ShowDeathScreen();
-            SoundMaster.Instance.PlaySound(SoundName.PlayerDies);
+            Debug.Log("PLayer dies play fire damage: "+wildFireDamage);
+            SoundMaster.Instance.PlaySound(wildFireDamage?SoundName.DieByFire:SoundName.PlayerDies);
             SoundMaster.Instance.StopMusic();
         }
         else

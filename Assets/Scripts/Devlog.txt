@@ -226,8 +226,12 @@ Feb-Mar 2024
 		* Damage is taken from wildfire
 		* Limited cat from fire towards player if to far or not visible
 		* Fixed bombs locking up sometimes, hopefully -
+		* Added different death sound for fire
+		* Updated Credits page
 
-		* Add burning up sound for player dying from wildfire
+
+		* Game stutters, check profiler for optimizations
+		
 		* Maybe have picked minerals animate up to the UI bar?
 		* Sand step sound and hit sounds needs change
 
@@ -464,62 +468,90 @@ To Complete that Game, I will keep pushing through
 		 - MECHANICS
 		* Make support for left handers
 
-		 - SOUNDS
 
-		 - GRAPHICS
+		// CREDITS
 
-							** USED **
-			STANDARD EULA
-		// * Leartes Studios - Will's Room Environment
-		// * Freepik - Vector Dividers Collection - Free Licence
-		// * upklyak (freepik) - Ground cracks on land isolated - Free Licence
-		// * RRFreelance - Tools Pack 1 - Standard EULA
-		// * Polygon  - Farm Pack -  Standard EULA
-		// * Pure Poly - Ultimate Low Poly Mining - Standard EULA
-		// * Unity Technologies - Particle Pack - Standard EULA
-		// * GarryKillian(freepik) - Wallpaper - Free Licence
-		// * masadepan(freepik) - Vector Compass - Free Licence
-		// * Zooperdan - Some logos	
+<b>Credits
+</b>
 
-			SINGLE
-
-			EXTENSIONS
-		//// * João Baltieri - Mini Simple Characters | Skeleton | Extension Asset
-		//
-		//					** OTHER ***
-		//
-
-		 - FONTS
-		// * Gomarice - Shiratama Dango - Apache-2.0
-		* Aenigma Games & Fonts - Euphoric - Commersial Use
-		* gluk - Prida01 - Commersial Use 
-
-		 - MUSIC		
-		// * Brock Hewitt - In The Silence - Royalty Free Upbeat - Main Menu
-		// * Vasyl_Sakal - Cellestial Lullaby - Attribution 4.0 (Ambient sound) - InGameMusicA
-		// * Monument Music - Love Story
+A game by wolfheat
 
 
-
-		-SOUND
-		// * PowerupB - freesound - Creative Commons 0
-		// * PowerupC - freesound - Creative Commons 0
-		// * UpgradeA - freesound - Creative Commons 0
+A variety of assets were used to create this game.
 
 
-		* Vasyl Sakal - Celestial Lullaby - Royalty Free FreeSound - InGame Music
+<b>Graphics
+</b>
+
+3D
+Leartes Studios - Will's Room Environment
+RRFreelance - Tools Pack 1
+Polygon  - Farm Pack
+Pure Poly - Ultimate Low Poly Mining
+Siuniaev - Gambler Cat
+João Baltieri - Mini Simple Characters | Skeleton
+
+2D
+Vector Dividers Collection
+upklyak (freepik) - Ground cracks on land isolated
+GarryKillian (freepik) - Wallpaper
+masadepan (freepik) - Vector Compass
+Zooperdan - Some logos
+
+VFX
+Unity Technologies - Particle Pack
+Vefects - Item Pickup VFX
 
 
-		 -TOOLS
-        * AI Art - Playground
-        * Made in Unity
+<b>Audio
+</b>
 
-        TODO
-		If participating in jam start 22mar - deadline 31mar (Dungeon Crawler Jam 2024)
-						
-		MAYBE
+Freesound - Various Sounds
+Pixabay - Various Sounds
+Uppbeat - Music
+Tao & Sound - Medieval Fantasy 2 SFX Pack
 
-		REJECTED
+Vasyl Sakal - Celestial Lullaby 
+Brock Hewitt - In The Silence
+
+Monument Music - Love Story
+
+<b>Fonts
+</b>
+
+Prida01 - gluk
+
+
+<b>AI Tools
+</b>
+
+Genny - Voices - Cloe, Matthew
+
+Playground AI - 2D art
+
+
+<b>Other Tools Used
+</b>
+
+Audacity
+
+Gimp
+
+Blender
+
+Unity
+
+
+<b>Game Jam
+</b>
+
+This game was created for the
+Dungeon Crawler Game Jam 2024
+
+
+Thank you for playing!
+
+
 		
 		
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 		
