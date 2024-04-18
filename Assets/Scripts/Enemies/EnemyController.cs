@@ -143,7 +143,7 @@ public class EnemyController : Interactable
     {
         Debug.Log("Enemy Explodes");
         DisableColliders();
-        Explosion.Instance.ExplodeNineAround(particleType, transform.position);        
+        Explosion.Instance.ExplodeNineAround(ParticleType.Explode, transform.position);        
         SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
         StopAllCoroutines();
     }
@@ -431,7 +431,7 @@ public class EnemyController : Interactable
         Debug.Log("Spell cast by Cat");
 
         // Create Wildfire Object from cat
-        ItemSpawner.Instance.SpawnWildfireAt(transform.position+transform.forward,transform.forward);
+        ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
     }
     
     public void SpellCastAnimationComplete()

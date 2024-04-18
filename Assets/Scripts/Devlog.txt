@@ -216,8 +216,9 @@ Feb-Mar 2024
 		* Updated sounds for sand and moss steps and hits
 		* Added Cat enemy -
 18/4 	* Implemented cat movement and attack animation
-		* Added wildfire to cat
-		
+		* Added wildfire to cat -
+		* Fixed Pooling for particle effects
+		* Fixed Cat collider issue -
 
 
 		* Fully implement cat enemy	

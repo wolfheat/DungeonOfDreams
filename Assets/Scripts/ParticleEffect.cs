@@ -5,6 +5,8 @@ public class ParticleEffect : MonoBehaviour
 {
     [SerializeField] ParticleSystem system;
 
+    public ParticleType ParticleType = ParticleType.PickUp;
+
     public void Play()
     {
         system.Play();
@@ -18,8 +20,8 @@ public class ParticleEffect : MonoBehaviour
         while (true)
         {
             yield return null;
-            if(!system.isPlaying)
-                gameObject.SetActive(false);
+            if (!system.isPlaying)
+                ParticleEffects.Instance.ReturnToPool(this);
         }
     }
 }
