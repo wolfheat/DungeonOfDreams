@@ -215,7 +215,10 @@ Feb-Mar 2024
 		* Added altar sound -
 		* Updated sounds for sand and moss steps and hits
 		* Added Cat enemy -
+18/4 	* Implemented cat movement and attack animation
+		* Added wildfire to cat
 		
+
 
 		* Fully implement cat enemy	
 

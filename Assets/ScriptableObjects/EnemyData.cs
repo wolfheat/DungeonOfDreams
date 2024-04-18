@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Wolfheat.StartMenu;
 
-public enum EnemyType { Bomber, Skeleton}
+public enum EnemyType { Bomber, Skeleton, Cat, Dino}
 
 [CreateAssetMenu(menuName = "Enemies/EnemyData", fileName ="Enemy")]
 public class EnemyData : ItemData

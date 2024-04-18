@@ -2,7 +2,7 @@
 using UnityEngine;
 using Wolfheat.Pool;
 
-public enum ParticleType{PickUp,PowerUpStrength,PowerUpSpeed, Explode, Heart
+public enum ParticleType{PickUp,PowerUpStrength,PowerUpSpeed, Explode, Heart, WildFire
 }
 public class ParticleEffects : MonoBehaviour
 {

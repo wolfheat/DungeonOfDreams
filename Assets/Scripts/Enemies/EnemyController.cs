@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
@@ -9,7 +8,7 @@ public class EnemyController : Interactable
 {
     public EnemyData EnemyData;// { get; set; }
 
-    [SerializeField] Collider collider;
+    [SerializeField] Collider enemyCollider;
     [SerializeField] LayerMask playerLayerMask;
 
     PlayerController player;
@@ -51,8 +50,8 @@ public class EnemyController : Interactable
     public void DisableColliders()
     {
         Debug.Log("Disabling all Enemys colliders ",this);
-        if (collider != null)
-            collider.enabled = false;
+        if (enemyCollider != null)
+            enemyCollider.enabled = false;
         if (mock != null)
         {
             Debug.Log("Disable Mock object for ",this);
@@ -62,8 +61,8 @@ public class EnemyController : Interactable
     }
     private void EnableColliders()
     {
-        if (collider != null)
-            collider.enabled = true;
+        if (enemyCollider != null)
+            enemyCollider.enabled = true;
         if (mock != null)
             mock.gameObject.SetActive(true);
     }
@@ -188,7 +187,7 @@ public class EnemyController : Interactable
         }
         else
         {
-            if (EnemyData.enemyType == EnemyType.Skeleton && !Stats.Instance.IsDead)
+            if (EnemyData.enemyType != EnemyType.Bomber && !Stats.Instance.IsDead)
             {
                 //Debug.Log("This is a Skeleton");
                 playerDistance = PlayerDistance();
@@ -338,7 +337,8 @@ public class EnemyController : Interactable
         transform.rotation = end;
 
         //Debug.Log("End Rotation -  Reset animation state");
-        enemyStateController.ChangeState(beginState);
+        if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
+            enemyStateController.ChangeState(beginState);
 
         DoingAction = false;
         //Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
@@ -390,7 +390,7 @@ public class EnemyController : Interactable
                         if(enemyStateController.currentState != EnemyState.Chase)
                         {
                             enemyStateController.ChangeState(EnemyState.Chase);
-                            //Debug.Log("Enemy starts chasing player",this);
+                            Debug.Log("Enemy starts chasing player",this);
                         }
 
                         rayColor = Color.green;
@@ -424,6 +424,19 @@ public class EnemyController : Interactable
     {
         //Debug.Log("Skeleton loades to attack");
         SoundMaster.Instance.PlaySound(SoundName.SkeletonBuildUpAttack);
+    }
+    
+    public void SpellCastOccured()
+    {
+        Debug.Log("Spell cast by Cat");
+
+        // Create Wildfire Object from cat
+        ItemSpawner.Instance.SpawnWildfireAt(transform.position+transform.forward,transform.forward);
+    }
+    
+    public void SpellCastAnimationComplete()
+    {
+        Debug.Log("Spell cast animation completed by Cat");
     }
 
     public void PerformAttack()

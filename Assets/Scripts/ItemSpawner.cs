@@ -10,6 +10,7 @@ public enum PowerUpType { Speed,Damage,Health}
 public class ItemSpawner : MonoBehaviour
 {
     [SerializeField] EnemyController[] enemyPrefabs;
+    [SerializeField] WildFireSpawner wildFireSpawnerPrefab;
     [SerializeField] Mineral[] mineralPrefabs;
     [SerializeField] Mineral mineralPrefab;
     [SerializeField] EnemyData[] enemyDatas;
@@ -110,6 +111,7 @@ public class ItemSpawner : MonoBehaviour
     {
         enemyPool.ReturnToPool(enemy);
     }
+
     public void SpawnEnemyAt(EnemyData data, Vector3 pos)
     {
         int type = (int)data.enemyType;
@@ -125,6 +127,12 @@ public class ItemSpawner : MonoBehaviour
         enemy.transform.rotation = enemyPrefabs[type].transform.rotation;
         Debug.Log("Enemy at " + enemy.transform.position);
 
+    }
+    
+    public void SpawnWildfireAt(Vector3 pos, Vector3 dir)
+    {        
+        WildFireSpawner wildFireSpawner = Instantiate(wildFireSpawnerPrefab,pos,Quaternion.LookRotation(dir));
+        wildFireSpawner.InitiateAt(Convert.V3ToV2Int(pos),Convert.V3ToV2Int(dir));
     }
 
     public void SpawnUsableAt(UsableData data, Vector3 pos)
