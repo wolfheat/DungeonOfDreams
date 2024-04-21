@@ -20,7 +20,7 @@ public class EnemyController : Interactable
     private float timer = 0;
     private const float MoveTime = 2f;
     private const float RotateTime = 0.4f;
-    public bool DoingAction { get; set; } = false;
+    public bool DoingMovementAction { get; set; } = false;
 
     private EnemyStateController enemyStateController;
 
@@ -39,7 +39,7 @@ public class EnemyController : Interactable
         Dead = false;
         enemyStateController.ChangeState(EnemyState.Idle,true);
         path.Clear();
-        DoingAction = false;
+        DoingMovementAction = false;
         mock.gameObject.SetActive(true);
         EnableColliders();
     }
@@ -83,7 +83,7 @@ public class EnemyController : Interactable
     private MoveAction savedAction = null;
     private void Update()
     {
-        if (DoingAction || Dead) return;
+        if (DoingMovementAction || Dead) return;
 
         if (savedAction != null)
         {
@@ -99,10 +99,8 @@ public class EnemyController : Interactable
                 }
                 else
                 {
-                    //Debug.Log(" loaded action wants to move to a position filled by Wall or Enemy");
-                    
-                    //Debug.Log("* EnemyReachedNewPosition Update loaded savedAction");                    
-                    ReachedPosition();
+                    // Position is blocked
+                    ActionCompleted();
                     return;
                 }
             }
@@ -114,7 +112,7 @@ public class EnemyController : Interactable
         }else if ((enemyStateController.currentState == EnemyState.Attack || enemyStateController.currentState == EnemyState.Idle) && PlayerHasNewPosition())
         {
             //Debug.Log("Enemy is currectly Idle and player has new position");
-            ReachedPosition();
+            ActionCompleted();
         }else if (enemyStateController.currentState == EnemyState.Attack && player.IsDead)
         {
             //Debug.Log("Enemy Attacking but PLayer is Dead, go to Idle");
@@ -155,15 +153,19 @@ public class EnemyController : Interactable
         ItemSpawner.Instance.ReturnEnemy(this);
     }
 
-    public void ReachedPosition()
+    public void ActionCompleted()
     {
-        //Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
+        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
-        if (enemyStateController.currentState == EnemyState.Exploding || (enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton))
-            return;
+        // Exploding disregard player
+        if (enemyStateController.currentState == EnemyState.Exploding) return;
 
-        if (!Stats.Instance.IsDead &&( UpdatePlayerPosition() || !newPositionEvaluated))
+        // Attacking disregard player if not skeleton
+        if(enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton) return;
+
+
+        if (!Stats.Instance.IsDead && (UpdatePlayerPosition() || !newPositionEvaluated))
         {
             newPositionEvaluated = true;
             //Debug.Log("Enemy saw that player has moved");
@@ -327,7 +329,7 @@ public class EnemyController : Interactable
         //SoundMaster.Instance.PlayStepSound();
 
         // Lock action from enemy
-        DoingAction = true; 
+        DoingMovementAction = true; 
         Vector3 start = transform.position;
         Vector3 end = target;
         PlaceMock(end);
@@ -341,10 +343,10 @@ public class EnemyController : Interactable
             timer += Time.deltaTime;
         }
 
-        DoingAction = false;
+        DoingMovementAction = false;
         //Debug.Log("* EnemyReachedNewPosition Move Action Completed");
         newPositionEvaluated = false;
-        ReachedPosition();
+        ActionCompleted();
     }
 
     private void PlaceMock(Vector3 position,bool noticePlayer = true)
@@ -368,7 +370,7 @@ public class EnemyController : Interactable
     {
         EnemyState beginState = enemyStateController.currentState;
 
-        DoingAction = true;
+        DoingMovementAction = true;
         Quaternion start = transform.rotation;
         Quaternion end = target;
         timer = 0;
@@ -386,9 +388,9 @@ public class EnemyController : Interactable
         if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead && enemyStateController.currentState != EnemyState.Exploding)
             enemyStateController.ChangeState(beginState);
 
-        DoingAction = false;
+        DoingMovementAction = false;
         //Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
-        ReachedPosition();
+        ActionCompleted();
     }
 
     const float EnemySight = 5f;
@@ -479,7 +481,8 @@ public class EnemyController : Interactable
     
     public void SpellCastAnimationComplete()
     {
-        Debug.Log("Spell cast animation completed by Cat");
+        Debug.Log("Spell cast animation completed by Cat, go to Idle");
+         
         enemyStateController.ChangeState(EnemyState.Idle);
     }
 

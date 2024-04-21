@@ -38,7 +38,7 @@ public class UIController : MonoBehaviour
 
         Pause(false);
         // Initialize Helpscreen as deactivated
-        helpScreen.gameObject.SetActive(false);
+        //helpScreen.gameObject.SetActive(false);
     }
 
     private void Tilde(InputAction.CallbackContext context)

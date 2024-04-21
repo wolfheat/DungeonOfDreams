@@ -230,10 +230,16 @@ Feb-Mar 2024
 		* Updated Credits page -
 		* Made Cat able to die from bombs
 		* Skeleton colliders disappear directly when they die again
-		* Bombs die and dont explode when bombed, fixed, also lit when wildfired
+		* Bombs die and dont explode when bombed, fixed, also lit when wildfired -
+21/4	* Fixed alignement issue for player when moving
+		
+		* Enemy does not attack if player enters space in front of it after completing its previous attack
+		* Player stepping into fire does not take damage
+		* Make fire last some time on the spots it is created at
+		* Have player caught on fire that hurts a certain time
 
 
-		* There is a wiggle when moving and changing directions FIX
+
 		* Player died and kept attacking after death, make it unable to
 		* Game stutters, check profiler for optimizations
 		

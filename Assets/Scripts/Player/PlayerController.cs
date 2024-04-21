@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     public PickUpController pickupController;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
+    private MoveAction lastAction = null;
 
     private float timer = 0;
     private const float MoveTime = 0.2f;
@@ -216,13 +217,22 @@ public class PlayerController : MonoBehaviour
                 Vector3 target = EndPositionForMotion(savedAction);
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
                 {
+                    lastAction = savedAction;
                     //Debug.Log("No Walls or Enemies ahead");
                     StartCoroutine(Move(target));
-                }//else Debug.Log("Walls or Enemies ahead");
+                }
+                else
+                {
+                    CenterPlayerPosition();
+                    Debug.Log("Walls or Enemies ahead");
+                }
 
             }
             else if (savedAction.moveType == MoveActionType.Rotate)
+            {
+                lastAction = savedAction;
                 StartCoroutine(Rotate(EndRotationForMotion(savedAction)));
+            }
 
             // Remove last attempted motion
             savedAction = null;
@@ -289,9 +299,21 @@ public class PlayerController : MonoBehaviour
 
     private void HeldMovementInput()
     {
-
-        if (Step()) return;
-        if(SideStep()) return;
+        // Check if player is holding a movement button
+        if (Step())
+        {
+            // If held button is not same as last input center player
+            if (savedAction != null && savedAction.moveType != lastAction.moveType)
+                CenterPlayerPosition();
+            return;
+        }
+        if(SideStep())
+        {
+            // If held button is not same as last input center player
+            if (savedAction != null && savedAction.moveType != lastAction.moveType)
+                CenterPlayerPosition();
+            return;
+        }
         CenterPlayerPosition();
         // Check for interact
 
@@ -301,8 +323,9 @@ public class PlayerController : MonoBehaviour
 
     private void CenterPlayerPosition()
     {
-        //Debug.Log("Center player "+transform.position);
-        transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+        Debug.Log("Center player "+transform.position);
+        transform.position = Convert.Align(transform.position);
+        //transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
         //Debug.Log("Centered player " + transform.position);
 
     }
@@ -376,14 +399,19 @@ public class PlayerController : MonoBehaviour
     
     public void UpdatePlayerInput()
     {
-        pickupController.UpdateColliders();
+        // Check to align player
+        if (savedAction != null && savedAction.moveType != lastAction.moveType)
+            CenterPlayerPosition();
 
         if (savedAction == null)
             HeldMovementInput();
 
+        pickupController.UpdateColliders();
+
         //if (Inputs.Instance.Controls.Player.Click.IsPressed() && pickupController.Wall != null)
         if (Inputs.Instance.Controls.Player.Click.IsPressed())
         {
+            CenterPlayerPosition();
             Debug.Log("Mouse is held, interact");
             InterractWith();
         }
