@@ -155,7 +155,7 @@ public class EnemyController : Interactable
 
     public void ActionCompleted()
     {
-        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
+        //Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
         // Player is dead
@@ -236,7 +236,6 @@ public class EnemyController : Interactable
     {
         //Debug.Log("This is a Skeleton");
         playerDistance = PlayerDistance();
-        //Debug.Log("distance "+playerDistance);
         if (playerDistance < 1.1f)
         {
             // if next to player but not facing player rotate towards player
@@ -247,7 +246,7 @@ public class EnemyController : Interactable
                 return true;
             }
 
-            //Debug.Log("Enemy within range, Change to Attack animation");
+            //Debug.Log("Player is within range, Change to Attack animation",this);
 
             if (enemyStateController.currentState != EnemyState.Attack)
                 enemyStateController.ChangeState(EnemyState.Attack);
@@ -387,7 +386,7 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistanceAndPath()
     {
-        Debug.Log("UpdatePlayerDistanceAndPath");    
+        //Debug.Log("UpdatePlayerDistanceAndPath");    
         if (Dead || enemyStateController.currentState == EnemyState.Exploding || Stats.Instance.IsDead)
         {
             Debug.Log("Dead or exploding or player is dead, current state: "+enemyStateController.currentState);    
@@ -491,7 +490,14 @@ public class EnemyController : Interactable
             //Debug.Log("Enemy Hit Player");
             player.TakeDamage(1,this);
         }
+
     }
+    public void NormalAttackCompleted()
+    {
+        //enemyStateController.ChangeState(EnemyState.Idle);
+        NormalBehaviour();
+    }
+
     /*
     private bool CheckForAttack()
     {

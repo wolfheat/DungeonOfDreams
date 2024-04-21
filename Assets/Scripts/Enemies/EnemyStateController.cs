@@ -22,7 +22,7 @@ public class EnemyStateController
     {
         if (currentState == newState) return;
         
-        Debug.Log("Change state from "+currentState+" to "+newState);
+        //Debug.Log("Change state from "+currentState+" to "+newState);
         
         if (!force && (currentState == EnemyState.Dead || currentState == EnemyState.Dying))
             return;

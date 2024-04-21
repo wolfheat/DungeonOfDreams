@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
     public void InterractWith()
     {
-
+        if (Stats.Instance.IsDead) return;
         pickupController.UpdateColliders();
 
         // Disable interact when inventory

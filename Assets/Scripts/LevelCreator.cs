@@ -57,6 +57,8 @@ public class LevelCreator : MonoBehaviour
     private void Start()
     {
         StartCoroutine(SoundMaster.Instance.DelayedSpeech());
+        CreateGrid();
+
     }
 
 #if UNITY_EDITOR
@@ -99,7 +101,7 @@ public class LevelCreator : MonoBehaviour
 
     void Update()
     {
-        CreateGrid();    
+        //CreateGrid();    
     }
 
     private void OnDrawGizmos()

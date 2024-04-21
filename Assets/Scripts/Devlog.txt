@@ -233,36 +233,35 @@ Feb-Mar 2024
 		* Bombs die and dont explode when bombed, fixed, also lit when wildfired -
 21/4	* Fixed alignement issue for player when moving
 		* Cat now attackes again if player is in fron of him after attack completes -
+		* Player died and kept attacking after death, make it unable to - MAYBE FIXED
+
 
 		* Player stepping into fire does not take damage
 		* Make fire last some time on the spots it is created at
 		* Have player caught on fire that hurts a certain time
 
-
-
-		* Player died and kept attacking after death, make it unable to
+		* Game runs slow
 		* Game stutters, check profiler for optimizations
-		
-		* Maybe have picked minerals animate up to the UI bar?
-		* Sand step sound and hit sounds needs change
+		* Skeletons get hurt while moving goes to idle for rest of move animation should go to walk
+		* Sledgehammer still got funky animation 
+		* Black smoke for pickups blocks view when stepping into the and elevated
 
-		* Fix saving system?
-
-		* Make biomes with different enemies?
-
-		* Add wobble effect for returning to life again? Or Vignette?
-		* Still some issue with player stabbing walls after attacking enemies - FIX
-		* Make skeleton take damage and attacking animation better
-
-		* Have player taken to result screen before going to main menu? - MAYBE NO NEED
+		* Add dino?
+		* Add Flesh enemy
 		* Have result screen showing players score - NO NEED
-		* Have player not gain control during the beginning speech, player stuck in bed - After Jam?
 
-		GLORIA - Thank you brave adventurer. You have truly proven yourself worthy. 
-		By returning these four items I have regained my powers. I will now be able to open the portal back to your world.
-		Dont stay here for to long or you might be lost here forever. You have done your part in this adventure.
-		New adventures awaits you in the world you came from. It is time for you to return, it's time for you to wake up.
-				
+
+		// MAYBE
+		* Maybe have picked minerals animate up to the UI bar?
+		* Fix saving system?
+		* Add wobble effect for returning to life again? Or Vignette?
+		* Make skeleton take damage and attacking animation better
+		* Have player taken to result screen before going to main menu? - MAYBE NO NEED
+		* Have player not gain control during the beginning speech, player stuck in bed - After Jam?
+		
+		// SOLVED ?
+		* Still some issue with player stabbing walls after attacking enemies - FIX
+						
 		JAM FEEDBACK
 
 		* Better objectives
