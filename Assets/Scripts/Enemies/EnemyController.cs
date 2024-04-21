@@ -109,7 +109,7 @@ public class EnemyController : Interactable
 
             // Remove last attempted motion
             savedAction = null;
-        }else if ((enemyStateController.currentState == EnemyState.Attack || enemyStateController.currentState == EnemyState.Idle) && PlayerHasNewPosition())
+        }else if (enemyStateController.currentState == EnemyState.Idle && PlayerHasNewPosition())
         {
             //Debug.Log("Enemy is currectly Idle and player has new position");
             ActionCompleted();
@@ -158,31 +158,22 @@ public class EnemyController : Interactable
         Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
+        // Player is dead
+        if (Stats.Instance.IsDead) return;
+
         // Exploding disregard player
         if (enemyStateController.currentState == EnemyState.Exploding) return;
 
         // Attacking disregard player if not skeleton
-        if(enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton) return;
+        if (enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton) return;
 
-
+        // Update path to player if player is alive and got a new Position
         if (!Stats.Instance.IsDead && (UpdatePlayerPosition() || !newPositionEvaluated))
         {
-            newPositionEvaluated = true;
-            //Debug.Log("Enemy saw that player has moved");
-            // Make new path to players last known position if close enough
-            // TODO How about enemy patrols and gets close enough to player, tyhis should also activate chase
-
+            newPositionEvaluated = true;        
             UpdatePlayerDistanceAndPath();
         }
 
-        if (enemyStateController.currentState == EnemyState.Exploding)
-            return;
-
-        //CheckForExplosion();
-
-        // Debug.Log("Enemy is going to check if it has a path to follow: "+path?.Count);
-
-        if (Stats.Instance.IsDead) return;
 
         switch (EnemyData.enemyType)
         {
@@ -199,7 +190,7 @@ public class EnemyController : Interactable
                         return;
                 break;
             case EnemyType.Cat:
-                if (Catbehaviour())
+                if (CatBehaviour())
                     return;
                 break;
             default: 
@@ -209,11 +200,10 @@ public class EnemyController : Interactable
 
         // Enemy should be in patrol mode here
         //Debug.Log(" Enemy keep patroling",this);
-        enemyStateController.ChangeState(EnemyState.Idle);
 
     }
 
-    private bool Catbehaviour()
+    private bool CatBehaviour()
     {
         // Prohibit state to change if cat is attacking
         if(enemyStateController.currentState == EnemyState.Attack)
@@ -230,8 +220,8 @@ public class EnemyController : Interactable
                 return true;
             }
 
-            if (enemyStateController.currentState != EnemyState.Attack)
-                enemyStateController.ChangeState(EnemyState.Attack);
+            enemyStateController.ChangeState(EnemyState.Attack);
+
             return true;
         }
         else if (HasPath())
@@ -397,6 +387,7 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistanceAndPath()
     {
+        Debug.Log("UpdatePlayerDistanceAndPath");    
         if (Dead || enemyStateController.currentState == EnemyState.Exploding || Stats.Instance.IsDead)
         {
             Debug.Log("Dead or exploding or player is dead, current state: "+enemyStateController.currentState);    
@@ -482,8 +473,9 @@ public class EnemyController : Interactable
     public void SpellCastAnimationComplete()
     {
         Debug.Log("Spell cast animation completed by Cat, go to Idle");
-         
         enemyStateController.ChangeState(EnemyState.Idle);
+        CatBehaviour();
+
     }
 
     public void PerformAttack()

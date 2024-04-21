@@ -10,7 +10,7 @@ public class ParticleEffect : MonoBehaviour
 
     public void Play()
     {
-        system.Play();
+        //system.Play();
         /* Play on Awake, then this is not needed   
         if(audioSource!=null)
             audioSource.Play();
