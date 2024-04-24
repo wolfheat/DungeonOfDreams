@@ -112,6 +112,7 @@ public class EnemyController : Interactable
         }else if (enemyStateController.currentState == EnemyState.Idle && PlayerHasNewPosition())
         {
             //Debug.Log("Enemy is currectly Idle and player has new position");
+            UpdatePlayerPosition();
             ActionCompleted();
         }else if (enemyStateController.currentState == EnemyState.Attack && player.IsDead)
         {
@@ -123,9 +124,9 @@ public class EnemyController : Interactable
 
     private Quaternion EndRotationForMotion(MoveAction motion)
     {
-        //Debug.Log("Motion to rotate towards "+motion.move);
+        Debug.Log("** Motion to rotate towards "+motion.move+" position: "+transform.position);
         //Debug.Log("Enemy is at position "+transform.position);
-        //Debug.Log("Moteion to rotate forward "+(Convert.V2IntToV3(motion.move) - transform.position));
+        Debug.Log("** Motion to rotate forward "+(Convert.V2IntToV3(motion.move) - transform.position));
         return Quaternion.LookRotation(Convert.V2IntToV3(motion.move)-transform.position, Vector3.up);
     }
 
@@ -155,11 +156,18 @@ public class EnemyController : Interactable
 
     public void ActionCompleted()
     {
-        //Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
+        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
         // Have new saved action updated with motion
 
         // Player is dead
-        if (Stats.Instance.IsDead) return;
+        if (Stats.Instance.IsDead)
+        {
+            enemyStateController.ChangeState(EnemyState.Idle);
+            return;
+        }
+
+        Debug.Log("Enemy thinks player is alive");
+
 
         // Exploding disregard player
         if (enemyStateController.currentState == EnemyState.Exploding) return;
@@ -182,6 +190,7 @@ public class EnemyController : Interactable
             case EnemyType.Dino:
                 if (HasPath())
                 {
+                    Debug.Log("Enemy activating next Path  "+ path.Peek());
                     ActivateNextPoint();
                     return;
                 }
@@ -298,6 +307,7 @@ public class EnemyController : Interactable
             //    path.Pop(); // remove the first position since enemy is already there
             // Rotate towards this direction
             savedAction = new MoveAction(MoveActionType.Rotate, path.Peek());
+            Debug.Log("Enemy Has a path and activates it as rotation, player is at "+ transform.position+" rotation towards "+ savedAction.move);
         }
     }
 
@@ -386,7 +396,7 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistanceAndPath()
     {
-        //Debug.Log("UpdatePlayerDistanceAndPath");    
+        Debug.Log("UpdatePlayerDistanceAndPath");    
         if (Dead || enemyStateController.currentState == EnemyState.Exploding || Stats.Instance.IsDead)
         {
             Debug.Log("Dead or exploding or player is dead, current state: "+enemyStateController.currentState);    
@@ -463,7 +473,7 @@ public class EnemyController : Interactable
     
     public void SpellCastOccured()
     {
-        Debug.Log("Spell cast by Cat");
+        //Debug.Log("Spell cast by Cat");
 
         // Create Wildfire Object from cat
         ItemSpawner.Instance.SpawnWildfireAt(transform.position,transform.forward);
@@ -471,15 +481,14 @@ public class EnemyController : Interactable
     
     public void SpellCastAnimationComplete()
     {
-        Debug.Log("Spell cast animation completed by Cat, go to Idle");
+        //Debug.Log("Spell cast animation completed by Cat, go to Idle");
         enemyStateController.ChangeState(EnemyState.Idle);
         CatBehaviour();
-
     }
 
     public void PerformAttack()
     {
-        Debug.Log("Skeleton performes attack");
+        //Debug.Log("Skeleton performes attack");
 
         // Attack entire square infront of enemy if player is there its hit
         Vector3 pos = transform.position + transform.forward;

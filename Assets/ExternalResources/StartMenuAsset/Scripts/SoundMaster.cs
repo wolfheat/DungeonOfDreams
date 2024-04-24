@@ -140,6 +140,7 @@ namespace Wolfheat.StartMenu
         AudioSource musicSource;
         MusicName activeMusic;
         AudioSource stepSource;
+        AudioSource getHitSource;
 
         SoundSettings soundSettings = new SoundSettings();
 
@@ -462,10 +463,7 @@ namespace Wolfheat.StartMenu
         public void PlayGetHitSound()
         {
             if (!soundSettings.GlobalMaster || !soundSettings.UseMaster || !soundSettings.UseSFX) return;
-
-            // Only play foot step if last footstep is finished playing
-            if (!stepSource.isPlaying)
-                stepSource.PlayOneShot(getHit[Random.Range(0, getHit.Length)]);
+            stepSource.PlayOneShot(getHit[Random.Range(0, getHit.Length)]);
         }
         public void PlayStepSound(int stepSoundType = 0)
         {

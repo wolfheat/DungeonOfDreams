@@ -68,8 +68,9 @@ public class Explosion : MonoBehaviour
                 }
                 else if(collider.gameObject.TryGetComponent(out PlayerColliderController playerColliderController))
                 {
-                    Debug.Log("Fire destroys player at position "+pos+ " name: "+collider.name);
-                    playerColliderController.TakeDamage(explosionDamage, true);
+                    Debug.Log("Fire destroys player at position "+pos+ " name: "+collider.name);    
+                    //playerColliderController.TakeDamage(explosionDamage, true);
+                    playerColliderController.SetOnFire();
                 }
                 else if(collider.gameObject.TryGetComponent(out EnemyColliderController enemyColliderController))
                 {

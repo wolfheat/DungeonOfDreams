@@ -15,16 +15,28 @@ public class PlayerColliderController : MonoBehaviour
 
     public void TakeDamage(int amt, bool wildFireDamage = false)
     {
+        if (wildFireDamage)
+        {
+            SetOnFire();
+            return;
+        }
         playerController.TakeDamage(amt,null,wildFireDamage);
+    }
+
+    [SerializeField] TakeFireDamage takeFireDamage;
+    public void SetOnFire()
+    {
+        //Debug.Log("Set on fire");
+        takeFireDamage.StartFireTimer();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colliding with "+other.name);
+        //Debug.Log("Colliding with "+other.name);
         
         if ((1<<other.gameObject.layer & itemsLayerMask) != 0)
         {
-            Debug.Log("Colliding with layer in mask");
+            //Debug.Log("Colliding with layer in mask");
             if (other.GetComponent<Bomb>() != null)
                 return;
             else if (other.TryGetComponent(out Mineral mineral))
@@ -34,7 +46,7 @@ public class PlayerColliderController : MonoBehaviour
         }
         else if(other.TryGetComponent(out ExitPortal portal))
         {
-            Debug.Log("Exit portal collission "+portal);
+            //Debug.Log("Exit portal collission "+portal);
             UIController.Instance.ShowWinScreen();
         }
     }

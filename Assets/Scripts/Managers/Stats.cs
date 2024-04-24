@@ -22,8 +22,8 @@ public class Stats : MonoBehaviour
 	//public const float MiningSpeedSpeedUp = 12f;
 
     public const int MaxHealth = 8;
-    public int CurrentMaxHealth { get; private set; } = 2;
-    public int Health { get; private set; } = 2;
+    public int CurrentMaxHealth { get; private set; } = 5;
+    public int Health { get; private set; } = 5;
     public int Bombs { get; private set; } = 0;
 
     public bool IsDead { get; set; } = false;

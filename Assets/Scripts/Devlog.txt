@@ -234,12 +234,13 @@ Feb-Mar 2024
 21/4	* Fixed alignement issue for player when moving
 		* Cat now attackes again if player is in fron of him after attack completes -
 		* Player died and kept attacking after death, make it unable to - MAYBE FIXED
-
-
-		* Player stepping into fire does not take damage
-		* Make fire last some time on the spots it is created at
-		* Have player caught on fire that hurts a certain time
-
+24/4	* Added fire take damage by setting on fire
+		* Fire lasts some time player takes damage every second for 5 seconds
+		* Issue with player on fire not displaying correctly when moving around fixed by separate camera.
+		* Cat nolonger gets stuck in walk animation (added player alive check)
+		
+		* Cat can rotate to uneven direction after attacking, prob due to the call to CatBehaviour after attack completes
+		
 		* Game runs slow
 		* Game stutters, check profiler for optimizations
 		* Skeletons get hurt while moving goes to idle for rest of move animation should go to walk

@@ -42,7 +42,7 @@ public class WildFireSpawner : MonoBehaviour
 
         if (LevelCreator.Instance.TargetHasWall(alignedPos))
         {
-            Debug.Log("Wildfire can not be created at Wall");
+            //Debug.Log("Wildfire can not be created at Wall");
             Destroy(gameObject);
             return;
         }

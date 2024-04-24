@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] Mock playerMock;
     [SerializeField] PlayerAnimationController playerAnimationController;
+    [SerializeField] TakeFireDamage takeFireDamage;
     public PickUpController pickupController;
     public bool DoingAction { get; set; } = false;
     private MoveAction savedAction = null;
@@ -58,11 +59,14 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.SideStep.performed += SideStep;
         Inputs.Instance.Controls.Player.Turn.performed += TurnPerformed;    
         Inputs.Instance.Controls.Player.Click.performed += InterractWith;   
-        Inputs.Instance.Controls.Player.RightClick.performed += RightClick;   
+        Inputs.Instance.Controls.Player.RightClick.performed += RightClick;
+        Inputs.Instance.Controls.Player.Y.performed += InstantDeath;
+        TakeFireDamage.PlayerTakeFireDamage += FireDamage;   
 
         playerAnimationController.HitComplete += HitWithTool;
             
     }
+
     private void OnDisable()
     {
         //Inputs.Instance.Controls.Player.Move.performed -= NewMoveInput;
@@ -72,9 +76,15 @@ public class PlayerController : MonoBehaviour
         Inputs.Instance.Controls.Player.Click.performed -= InterractWith;
         Inputs.Instance.Controls.Player.RightClick.performed -= RightClick;   
         playerAnimationController.HitComplete -= HitWithTool;
+        TakeFireDamage.PlayerTakeFireDamage -= FireDamage;
     }
 
 
+    public void InstantDeath(CallbackContext context)
+    {
+        Debug.Log("Instant Death");
+        TakeDamage(10);
+    }
     public void RightClick(CallbackContext context)
     {
         Debug.Log("Right Click Place Bomb");
@@ -323,7 +333,7 @@ public class PlayerController : MonoBehaviour
 
     private void CenterPlayerPosition()
     {
-        Debug.Log("Center player "+transform.position);
+        //Debug.Log("Center player "+transform.position);
         transform.position = Convert.Align(transform.position);
         //transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
         //Debug.Log("Centered player " + transform.position);
@@ -426,6 +436,12 @@ public class PlayerController : MonoBehaviour
         UpdatePlayerInput();
     }
 
+    private void FireDamage(int amt)
+    {
+        //Debug.Log("Player take fire damage from burning "+amt);
+        TakeDamage(amt,null,true);
+    }
+
     public void TakeDamage(int amt,EnemyController enemy = null, bool wildFireDamage = false)
     {
         if (Stats.Instance.IsDead) return;
@@ -437,7 +453,7 @@ public class PlayerController : MonoBehaviour
         bool died = Stats.Instance.TakeDamage(amt);
         if (died)
         {
-            Debug.Log("Player is Killed by low health");
+            //Debug.Log("Player is Killed by low health");
 
             
 
@@ -452,7 +468,7 @@ public class PlayerController : MonoBehaviour
 
             // Show death screen
             UIController.Instance.ShowDeathScreen();
-            Debug.Log("PLayer dies play fire damage: "+wildFireDamage);
+            //Debug.Log("PLayer dies play fire damage: "+wildFireDamage);
             SoundMaster.Instance.PlaySound(wildFireDamage?SoundName.DieByFire:SoundName.PlayerDies);
             SoundMaster.Instance.StopMusic();
         }
@@ -469,6 +485,7 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.zero;
         transform.rotation = Quaternion.identity;   
         savedAction = null;
+        takeFireDamage.StopFire();
         Stats.Instance.Revive();
         PlaceMock(transform.position);
 
