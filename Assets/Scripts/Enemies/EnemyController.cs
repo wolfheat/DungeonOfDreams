@@ -443,6 +443,12 @@ public class EnemyController : Interactable
         }
 
     }
+    EnemyState enemyGetHitBeginState = EnemyState.Idle;
+    public void TakeDamageCompleted()
+    {
+        enemyStateController.ChangeState(enemyGetHitBeginState);
+    }
+
     public void NormalAttackCompleted()
     {
         if (!Stats.Instance.IsDead && UpdatePlayerPosition())
@@ -514,6 +520,8 @@ public class EnemyController : Interactable
                 }
             }else if (EnemyData.enemyType == EnemyType.Skeleton)
             {
+                if(enemyStateController.currentState != EnemyState.TakeHit)
+                    enemyGetHitBeginState = enemyStateController.currentState;
                 enemyStateController.ChangeState(EnemyState.TakeHit);
 
                 return true;

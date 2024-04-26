@@ -239,7 +239,10 @@ Feb-Mar 2024
 		* Issue with player on fire not displaying correctly when moving around fixed by separate camera.
 		* Cat nolonger gets stuck in walk animation (added player alive check) -
 26/4	* Refactored the state machine for enemies		
-				
+		* Remade SE -	
+			
+		* Make cat part of map SE be more open so fire reaches longer
+
 		* Game runs slow
 		* Game stutters, check profiler for optimizations
 		* Skeletons get hurt while moving goes to idle for rest of move animation should go to walk
