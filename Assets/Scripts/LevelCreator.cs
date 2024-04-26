@@ -207,7 +207,7 @@ public class LevelCreator : MonoBehaviour
 
                 if (dist <= 1.1f )
                 {
-                    Debug.Log("Reached Target since distance from "+n+" to player " +to+ " is "+dist);
+                    //Debug.Log("Reached Target since distance from "+n+" to player " +to+ " is "+dist);
                     return GetResult(newPoint);
                 }
 

@@ -237,11 +237,9 @@ Feb-Mar 2024
 24/4	* Added fire take damage by setting on fire
 		* Fire lasts some time player takes damage every second for 5 seconds
 		* Issue with player on fire not displaying correctly when moving around fixed by separate camera.
-		* Cat nolonger gets stuck in walk animation (added player alive check)
-		
-
-		* Cat can rotate to uneven direction after attacking, prob due to the call to CatBehaviour after attack completes
-		
+		* Cat nolonger gets stuck in walk animation (added player alive check) -
+26/4	* Refactored the state machine for enemies		
+				
 		* Game runs slow
 		* Game stutters, check profiler for optimizations
 		* Skeletons get hurt while moving goes to idle for rest of move animation should go to walk

@@ -31,7 +31,7 @@ public class SpotLightController : MonoBehaviour
     {
         if (other.gameObject.layer == postProcessingRoom)
         {
-            Debug.Log("Turn On Player Spotlight and Resume Music");
+            //Debug.Log("Turn On Player Spotlight and Resume Music");
             SoundMaster.Instance.PlayMusic(MusicName.OutDoorMusic);
             SoundMaster.Instance.PlayerExitingStartRoom();
             spotLight.enabled = true;            

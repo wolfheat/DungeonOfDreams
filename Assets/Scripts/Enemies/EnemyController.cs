@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using Wolfheat.StartMenu;
 
@@ -20,6 +21,7 @@ public class EnemyController : Interactable
     private float timer = 0;
     private const float MoveTime = 2f;
     private const float RotateTime = 0.4f;
+    private const float EnemySight = 5f;
     public bool DoingMovementAction { get; set; } = false;
 
     private EnemyStateController enemyStateController;
@@ -44,17 +46,14 @@ public class EnemyController : Interactable
         EnableColliders();
     }
 
-    private void OnDisable()
-    {
-    }
     public void DisableColliders()
     {
-        Debug.Log("Disabling all Enemys colliders ",this);
+        //Debug.Log("Disabling all Enemys colliders ",this);
         if (enemyCollider != null)
             enemyCollider.enabled = false;
         if (mock != null)
         {
-            Debug.Log("Disable Mock object for ",this);
+            //Debug.Log("Disable Mock object for ",this);
             mock.gameObject.SetActive(false);
         }
         player?.UpdateInputDelayed();
@@ -83,137 +82,107 @@ public class EnemyController : Interactable
     private MoveAction savedAction = null;
     private void Update()
     {
+        // Limit Enemy from doing anything new if allready doing an action or is dead
         if (DoingMovementAction || Dead) return;
 
+        // Check if there is a stored action to perform
         if (savedAction != null)
         {
-            //Debug.Log(" loading action from Save action ");
+            // The unit has a stored movement
+
+            // Step movement is stored
             if (savedAction.moveType == MoveActionType.Step)
             {
                 Vector3 target = Convert.V2IntToV3(savedAction.move);
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
-                {
-                    Debug.Log("No Walls or Mocks ahead");
-                    // Debug.Log(" loaded action is move");
                     StartCoroutine(Move(target));
-                }
                 else
                 {
                     // Position is blocked
-                    ActionCompleted();
+                    // remove actions if have a path then remove the path, need to figure out something else to do
+                    ForgetPath();
                     return;
                 }
             }
+            // Rotate movement is stored
             else if (savedAction.moveType == MoveActionType.Rotate)
                 StartCoroutine(Rotate(EndRotationForMotion(savedAction)));
 
-            // Remove last attempted motion
+            // Motion is handled, remove it
             savedAction = null;
-        }else if (enemyStateController.currentState == EnemyState.Idle && PlayerHasNewPosition())
+        }
+        // No action stored
+        else if (enemyStateController.currentState == EnemyState.Idle && PlayerHasNewPosition())
         {
-            //Debug.Log("Enemy is currectly Idle and player has new position");
-            UpdatePlayerPosition();
-            ActionCompleted();
+            //Debug.Log("Enemy is idle, check everytime player moves to update stored position");
+            // Player Moved 
+            if(!Stats.Instance.IsDead && UpdatePlayerPosition())
+                UpdatePlayerDistanceAndPath();
+            if (path.Count > 0)
+                ActivateNextPoint();
         }else if (enemyStateController.currentState == EnemyState.Attack && player.IsDead)
         {
-            //Debug.Log("Enemy Attacking but PLayer is Dead, go to Idle");
-            path.Clear();
+            // Player is dead
+            ForgetPath();
             enemyStateController.ChangeState(EnemyState.Idle);
         }
     }
 
-    private Quaternion EndRotationForMotion(MoveAction motion)
+    private void ForgetPath() => path.Clear();
+    private Quaternion EndRotationForMotion(MoveAction motion) => Quaternion.LookRotation(Convert.V2IntToV3(motion.move) - transform.position, Vector3.up);
+    private Vector3 GetNextStepTarget() => path.Count == 0 ? Vector3.zero : Convert.V2IntToV3(path.Pop());
+    public void Remove() => ItemSpawner.Instance.ReturnEnemy(this);
+    private bool PlayerIsInLookingDirection() => transform.forward == (player.transform.position - transform.position).normalized;
+
+
+    // SKELETON SPECIFICS
+    private bool NormalBehaviour()
     {
-        Debug.Log("** Motion to rotate towards "+motion.move+" position: "+transform.position);
-        //Debug.Log("Enemy is at position "+transform.position);
-        Debug.Log("** Motion to rotate forward "+(Convert.V2IntToV3(motion.move) - transform.position));
-        return Quaternion.LookRotation(Convert.V2IntToV3(motion.move)-transform.position, Vector3.up);
-    }
+        //Debug.Log(" Normal behaviour");
 
-    private Vector3 GetNextStepTarget()
-    {
-        if (path.Count <= 0) return Vector3.zero;
-
-        Vector3 step = Convert.V2IntToV3(path.Pop());
-        return step;
-    }
-
-    public void Explode()
-    {
-        Debug.Log("Enemy Explodes");
-        DisableColliders();
-        Explosion.Instance.ExplodeNineAround(ParticleType.Explode, transform.position);        
-        SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
-        StopAllCoroutines();
-    }
-
-    public void Remove()
-    {
-        Debug.Log("Enemy Removed");
-
-        ItemSpawner.Instance.ReturnEnemy(this);
-    }
-
-    public void ActionCompleted()
-    {
-        Debug.Log("Enemy is at Position " + transform.position+" if players position has changed or is close enough make new path, else use old path state:"+ enemyStateController.currentState);
-        // Have new saved action updated with motion
-
-        // Player is dead
-        if (Stats.Instance.IsDead)
+        //Debug.Log("This is a Skeleton");
+        playerDistance = PlayersLastPositionDistance();
+        if (playerDistance < 1.1f)
         {
-            enemyStateController.ChangeState(EnemyState.Idle);
-            return;
+            //Debug.Log("Player is close enough to be hit by skeleton");
+            // if next to player but not facing player rotate towards player
+            if (!PlayerIsInLookingDirection())
+            {
+                //Debug.Log("Player is not in looking direction, turn towards player");
+                //Debug.Log("Added rotation to enemy action");
+                savedAction = new MoveAction(MoveActionType.Rotate, playerLastPosition);
+                return true;
+            }
+
+            // remove any path
+            ForgetPath();
+
+            //Debug.Log("Player is within range, Change to Attack animation",this);
+            //Debug.Log("Player is in looking direction start attack");
+            enemyStateController.ChangeState(EnemyState.Attack);
+            return true;
         }
-
-        Debug.Log("Enemy thinks player is alive");
-
-
-        // Exploding disregard player
-        if (enemyStateController.currentState == EnemyState.Exploding) return;
-
-        // Attacking disregard player if not skeleton
-        if (enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton) return;
-
-        // Update path to player if player is alive and got a new Position
-        if (!Stats.Instance.IsDead && (UpdatePlayerPosition() || !newPositionEvaluated))
+        else if (path.Count == 0)
         {
-            newPositionEvaluated = true;        
-            UpdatePlayerDistanceAndPath();
-        }
+            //Debug.Log("Player is not close enough to attack and there is no path");
 
+            //Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
+            if (enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
+                enemyStateController.ChangeState(EnemyState.Idle);
 
-        switch (EnemyData.enemyType)
+            return true;
+        }else
         {
-            case EnemyType.Bomber:
-            case EnemyType.Skeleton:
-            case EnemyType.Dino:
-                if (HasPath())
-                {
-                    Debug.Log("Enemy activating next Path  "+ path.Peek());
-                    ActivateNextPoint();
-                    return;
-                }
-                else
-                    if (NormalBehaviour())
-                        return;
-                break;
-            case EnemyType.Cat:
-                if (CatBehaviour())
-                    return;
-                break;
-            default: 
-                break;
+            //Debug.Log("Player is not close enough to attack, but there is a path");
 
         }
-
-        // Enemy should be in patrol mode here
-        //Debug.Log(" Enemy keep patroling",this);
-
+        return false;
     }
 
+    // CAT SPECIFICS
     private bool CatBehaviour()
     {
+        //Debug.Log("Cat behaviour - current state: "+enemyStateController.currentState);
         // Prohibit state to change if cat is attacking
         if(enemyStateController.currentState == EnemyState.Attack)
             return true; 
@@ -224,12 +193,13 @@ public class EnemyController : Interactable
             // if next to player but not facing player rotate towards player
             if (!PlayerIsInLookingDirection())
             {
-                //Debug.Log("Added rotation to enemy action");
-                savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
+                savedAction = new MoveAction(MoveActionType.Rotate, playerLastPosition);
                 return true;
             }
 
             enemyStateController.ChangeState(EnemyState.Attack);
+            //path.Clear();
+            savedAction = null;
 
             return true;
         }
@@ -241,98 +211,96 @@ public class EnemyController : Interactable
         return false;
     }
 
-    private bool NormalBehaviour()
+    // BOMBER SPECIFICS
+    public void Explode()
     {
-        //Debug.Log("This is a Skeleton");
-        playerDistance = PlayerDistance();
-        if (playerDistance < 1.1f)
+        //Debug.Log("Enemy Explodes");
+        DisableColliders();
+        Explosion.Instance.ExplodeNineAround(ParticleType.Explode, transform.position);        
+        SoundMaster.Instance.PlaySound(SoundName.RockExplosion);
+        StopAllCoroutines();
+    }
+    // -------------------------------
+
+    public void ActionCompleted()
+    {
+        // Have new saved action updated with motion
+        //Debug.Log(" * Action completed * Moved or Rotated to end up here ");
+        
+        // Exploding disregard player
+        if (enemyStateController.currentState == EnemyState.Exploding) return;
+
+        // Player is dead go to idle
+        if (Stats.Instance.IsDead)
         {
-            // if next to player but not facing player rotate towards player
-            if (!PlayerIsInLookingDirection())
-            {
-                //Debug.Log("Added rotation to enemy action");
-                savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(player.transform.position));
-                return true;
-            }
-
-            //Debug.Log("Player is within range, Change to Attack animation",this);
-
-            if (enemyStateController.currentState != EnemyState.Attack)
-                enemyStateController.ChangeState(EnemyState.Attack);
-
-            return true;
+            enemyStateController.ChangeState(EnemyState.Idle);
+            return;
         }
-        else if (path.Count == 0)
+
+        // Attacking disregard player if not skeleton
+        if (enemyStateController.currentState == EnemyState.Attack && EnemyData.enemyType != EnemyType.Skeleton) return;
+
+        // Update path to player if player is alive and got a new Position
+        if (!Stats.Instance.IsDead && UpdatePlayerPosition())
         {
-            //Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
-            if (enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
-                enemyStateController.ChangeState(EnemyState.Idle);
+            //Debug.Log("Action complete - Player change position");
+            UpdatePlayerDistanceAndPath();
+        }//else
+            //Debug.Log("Action complete - Player did not change position");  
 
-            return true;
+        if(EnemyData.enemyType != EnemyType.Cat && PlayersLastPositionDistance() < 1.1f)
+            ForgetPath();  
+
+        switch (EnemyData.enemyType)
+        {
+            case EnemyType.Bomber:
+            case EnemyType.Skeleton:
+            case EnemyType.Dino:
+                if (HasPath())
+                {
+                    //Debug.Log("Activate next point");
+                    ActivateNextPoint();
+                    //Debug.Log("saved action is now "+savedAction?.moveType+""+savedAction?.move);
+                }
+                else
+                    NormalBehaviour();
+                break;
+            case EnemyType.Cat:
+                if (CatBehaviour())
+                    return;
+                break;
+            default: 
+                break;
         }
-        return false;
     }
 
-    private bool PlayerIsInLookingDirection()
-    {
-        return transform.forward == (player.transform.position - transform.position).normalized;
-    }
 
     private bool UpdatePlayerPosition()
     {
         bool changing = LevelCreator.Instance.PlayersLastPosition != playerLastPosition;
+        //Debug.Log("Updating players last position from "+playerLastPosition+" to "+ LevelCreator.Instance.PlayersLastPosition+" changed: "+changing);
         playerLastPosition = LevelCreator.Instance.PlayersLastPosition;
         return changing;
     }
 
-    private bool PlayerHasNewPosition()
-    {
-        return LevelCreator.Instance.PlayersLastPosition != playerLastPosition;        
-    }
-
-    private void ActivateNextPoint()
-    {
-        if (EnemyFacingDirection(path.Peek()))
-        {
-            Vector2Int step = path.Pop();
-            //Vector2Int step = Convert.PosToStep(transform.position, path[0]);
-
-            //Debug.Log("Enemy has a path to go to the player, make next step from this enemy at " + transform.position + " go to " + step);
-            savedAction = new MoveAction(MoveActionType.Step, step);
-            //Debug.Log(" Save action stored with new action");
-        }
-        else
-        {
-            //if (Convert.V3ToV2Int(transform.position) == path.Peek())
-            //    path.Pop(); // remove the first position since enemy is already there
-            // Rotate towards this direction
-            savedAction = new MoveAction(MoveActionType.Rotate, path.Peek());
-            Debug.Log("Enemy Has a path and activates it as rotation, player is at "+ transform.position+" rotation towards "+ savedAction.move);
-        }
-    }
-
-    private bool EnemyFacingDirection(Vector2Int lookPoint)
-    {
-        return Convert.V3ToV2Int(transform.position + transform.forward) == lookPoint;
-    }
-
-    private bool HasPath()
-    {
-        return path != null && path.Count > 0;
-    }
+    private bool PlayerHasNewPosition() => LevelCreator.Instance.PlayersLastPosition != playerLastPosition;
+    private bool EnemyFacingDirection(Vector2Int lookPoint) => Convert.V3ToV2Int(transform.position + transform.forward) == lookPoint;
+    private bool HasPath() => path != null && path.Count > 0;
+    private void ActivateNextPoint() => savedAction = EnemyFacingDirection(path.Peek()) ? new MoveAction(MoveActionType.Step, path.Pop()) : new MoveAction(MoveActionType.Rotate, path.Peek());
 
     public IEnumerator Move(Vector3 target)
     {
 
-        //Debug.Log("Enemy started move action");
-        //SoundMaster.Instance.PlayStepSound();
+        // Also change animation here?
+        // Always want player to animate walk when moving?
+        enemyStateController.ChangeState(EnemyState.Chase);
 
         // Lock action from enemy
         DoingMovementAction = true; 
+
         Vector3 start = transform.position;
         Vector3 end = target;
-        PlaceMock(end);
-        
+        PlaceMock(end);        
 
         timer = 0;
         while (timer < MoveTime)
@@ -343,7 +311,6 @@ public class EnemyController : Interactable
         }
 
         DoingMovementAction = false;
-        //Debug.Log("* EnemyReachedNewPosition Move Action Completed");
         newPositionEvaluated = false;
         ActionCompleted();
     }
@@ -352,7 +319,6 @@ public class EnemyController : Interactable
     {
         mock.pos = Convert.V3ToV2Int(position);
         mock.transform.position = position;
-        //Debug.Log("** Enemy place mock at "+position);
         if(noticePlayer)
             player?.UpdateInputDelayed();
     }
@@ -368,13 +334,12 @@ public class EnemyController : Interactable
     private IEnumerator Rotate(Quaternion target)
     {
         EnemyState beginState = enemyStateController.currentState;
+        enemyStateController.ChangeState(EnemyState.Rotate);
 
         DoingMovementAction = true;
         Quaternion start = transform.rotation;
         Quaternion end = target;
         timer = 0;
-        enemyStateController.ChangeState(EnemyState.Rotate);
-        //Debug.Log("Start Rotation - Change to idle state temporarily");
         while (timer < RotateTime)
         {
             yield return null;
@@ -383,70 +348,47 @@ public class EnemyController : Interactable
         }
         transform.rotation = end;
 
-        //Debug.Log("End Rotation -  Reset animation state");
         if(enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead && enemyStateController.currentState != EnemyState.Exploding)
             enemyStateController.ChangeState(beginState);
 
         DoingMovementAction = false;
-        //Debug.Log("* EnemyReachedNewPosition Rotation Action Completed");
         ActionCompleted();
     }
 
-    const float EnemySight = 5f;
 
     private void UpdatePlayerDistanceAndPath()
     {
-        Debug.Log("UpdatePlayerDistanceAndPath");    
+        //Debug.Log("UpdatePlayerDistanceAndPath");    
         if (Dead || enemyStateController.currentState == EnemyState.Exploding || Stats.Instance.IsDead)
-        {
-            Debug.Log("Dead or exploding or player is dead, current state: "+enemyStateController.currentState);    
             return;
-        }
         
         // Update player distance when player or enemy reaches a new position
         if (EnemyData.enemyType == EnemyType.Bomber && CheckForExplosion())
             return;
 
         // If Player close enough and valid path to player chase player        
-        playerDistance = PlayerDistance();
+        playerDistance = PlayersLastPositionDistance();
                 
-        if(playerDistance < EnemySight)
+        // If visible and close enough get path
+        if (playerDistance < EnemySight && PlayerVisibleForEnemy())
         {
-            if (PlayerVisibleForEnemy())
-            {
-                path = LevelCreator.Instance.CanReach(this, player);
-
-                if (path != null && path.Count > 0)
-                {
-                    // If not chasing start chase
-                    if (enemyStateController.currentState != EnemyState.Chase)
-                    {
-                        enemyStateController.ChangeState(EnemyState.Chase);
-                        Debug.Log("Enemy starts chasing player", this);
-                    }
-                }
-                else
-                    PlaceMock(transform.position);
-            }
+            //Debug.Log(" Get Path");
+            GetPath();
         }
         else
-        {        
+        {
+            //Debug.Log("Player To far away");
             // This clears the path if player is to far away and not visible
-            if(path!=null)
+            if (path.Count>0)
                 path.Clear();
-            if(enemyStateController.currentState == EnemyState.Chase)
-            {
-                //Debug.Log("Enemy Chasing, but player to far, go to idle");
-                enemyStateController.ChangeState(EnemyState.Idle);
-            }
-            else if (enemyStateController.currentState != EnemyState.Chase || enemyStateController.currentState != EnemyState.Idle)
-            {
-                //Debug.Log("player to far, enemy not at idle or patrol, go to idle");
-                enemyStateController.ChangeState(EnemyState.Idle);
-            }
+
+            // Set to idle
+            enemyStateController.ChangeState(EnemyState.Idle);            
         }
 
     }
+
+    private void GetPath() => path = LevelCreator.Instance.CanReach(this, player);
 
     private bool PlayerVisibleForEnemy()
     {
@@ -503,8 +445,19 @@ public class EnemyController : Interactable
     }
     public void NormalAttackCompleted()
     {
-        //enemyStateController.ChangeState(EnemyState.Idle);
-        NormalBehaviour();
+        if (!Stats.Instance.IsDead && UpdatePlayerPosition())
+        {
+            enemyStateController.ChangeState(EnemyState.Idle);
+            newPositionEvaluated = true;
+            UpdatePlayerDistanceAndPath();
+            Debug.Log("Action Complete - Player Path updated");
+            if (path.Count > 0)
+                ActivateNextPoint();
+        }
+        else
+        {
+            Debug.Log("Action Complete - Keep attcking");
+        }
     }
 
     /*
@@ -523,18 +476,14 @@ public class EnemyController : Interactable
     }*/
     
     private bool CheckForExplosion()
-    {
-
-        playerDistance = PlayerDistance();
-        if (playerDistance < 1.1f)
-        {
-            Debug.Log("Player close enough to explode");
-            path.Clear();
-            enemyStateController.ChangeState(EnemyState.Exploding);
-            StartCoroutine(RotateLockOnPlayer());
-            return true;
-        }
-        return false;
+    {   
+        if (PlayersLastPositionDistance() >= 1.1f)
+            return false;
+        //Debug.Log("Player close enough to explode");
+        path.Clear();
+        enemyStateController.ChangeState(EnemyState.Exploding);
+        StartCoroutine(RotateLockOnPlayer());
+        return true;
     }
 
     private bool PlayerOnSameGridCross()
@@ -542,17 +491,14 @@ public class EnemyController : Interactable
         Vector2Int pos = Convert.V3ToV2Int(transform.position);
         return pos.x == playerLastPosition.x || pos.y == playerLastPosition.y;
     }
-    private float PlayerDistance()
-    {
-        return Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
-    }
+    private float PlayersLastPositionDistance() => Vector3.Distance(transform.position, Convert.V2IntToV3(playerLastPosition));
 
     public bool TakeDamage(int amt, bool explosionDamage = false)
     {
         if(Dead) return false;
 
         Health -= amt;
-        Debug.Log("Enemy took damage, "+amt+" current health: "+Health);
+        //Debug.Log("Enemy took damage, "+amt+" current health: "+Health);
         SoundMaster.Instance.PlaySound(SoundName.EnemyGetHit);
 
         if(Health > 0)
@@ -561,7 +507,7 @@ public class EnemyController : Interactable
             {
                 if(enemyStateController.currentState != EnemyState.Exploding)
                 {
-                    Debug.Log("Bomber took damage enough to start explode");
+                    //Debug.Log("Bomber took damage enough to start explode");
                     enemyStateController.ChangeState(EnemyState.Exploding);
 
                     return true;
@@ -577,7 +523,7 @@ public class EnemyController : Interactable
         {
             if (!explosionDamage)
             {
-                Debug.Log("Enemy bomber dies");
+                //Debug.Log("Enemy bomber dies");
                 SoundMaster.Instance.StopSound(SoundName.Hissing);
                 SoundMaster.Instance.StopSound(SoundName.EnemyGetHit);
                 Dead = true;
@@ -585,7 +531,7 @@ public class EnemyController : Interactable
                 enemyStateController.ChangeState(EnemyState.Idle);
                 ItemSpawner.Instance.ReturnEnemy(this);
                     
-                Debug.Log("Enemy returned to pool");
+                //Debug.Log("Enemy returned to pool");
 
                 CreateItem(EnemyData.storedUsable);
                 DisableColliders();
@@ -593,10 +539,10 @@ public class EnemyController : Interactable
             }
             else
             {
-                Debug.Log("Enemy bomb died from explosion damage");
+                //Debug.Log("Enemy bomb died from explosion damage");
                 if (enemyStateController.currentState != EnemyState.Exploding)
                 {
-                    Debug.Log("Bomber took damage enough to start explode");
+                    //Debug.Log("Bomber took damage enough to start explode");
                     enemyStateController.ChangeState(EnemyState.Exploding);
                     return true;
                 }
@@ -605,7 +551,7 @@ public class EnemyController : Interactable
         }
         else if (EnemyData.enemyType == EnemyType.Skeleton)
         {
-            Debug.Log("Enemy skeleton dies");
+            //Debug.Log("Enemy skeleton dies");
             Dead = true;
             enemyStateController.ChangeState(EnemyState.Dying);
             DisableColliders();
@@ -613,7 +559,7 @@ public class EnemyController : Interactable
         }
         else if (EnemyData.enemyType == EnemyType.Cat)
         {
-            Debug.Log("Enemy cat dies");
+            //Debug.Log("Enemy cat dies");
             Dead = true;
             enemyStateController.ChangeState(EnemyState.Dying);
             DisableColliders();
