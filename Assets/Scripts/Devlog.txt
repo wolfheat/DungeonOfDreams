@@ -240,8 +240,10 @@ Feb-Mar 2024
 		* Cat nolonger gets stuck in walk animation (added player alive check) -
 26/4	* Refactored the state machine for enemies		
 		* Remade SE -	
-			
-		* Make cat part of map SE be more open so fire reaches longer
+		* Make cat part of map SE be more open so fire reaches longer -
+		* Released 0.0.3 Version (149MB zipped) -
+
+		* Fix enemies get stuck in walk animation	
 
 		* Game runs slow
 		* Game stutters, check profiler for optimizations
