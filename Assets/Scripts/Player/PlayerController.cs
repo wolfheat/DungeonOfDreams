@@ -442,34 +442,22 @@ public class PlayerController : MonoBehaviour
         TakeDamage(amt,null,true);
     }
 
-    public void TakeDamage(int amt,EnemyController enemy = null, bool wildFireDamage = false)
+    public void TakeDamage(int amt,EnemyController enemy = null, bool bombDamage = false)
     {
         if (Stats.Instance.IsDead) return;
-
-        //Debug.Log("Player get hurt " + amt + " hp");
-
-        SoundMaster.Instance.PlaySound(SoundName.EnemyStabs);
-
-        bool died = Stats.Instance.TakeDamage(amt);
-        if (died)
+                
+        if (Stats.Instance.TakeDamage(amt))
         {
-            //Debug.Log("Player is Killed by low health");
-
-            
-
+            // If there is an enemy that killed player turn to look at it when dying
             if(enemy != null)
-            {
-                //Debug.Log("Enemy at "+enemy.transform.position+" player at: "+transform.position);
                 StartCoroutine(Rotate(Quaternion.LookRotation(enemy.transform.position - transform.position)));
-                //savedAction = new MoveAction(MoveActionType.Rotate, Convert.V3ToV2Int(enemy.transform.position)-Convert.V3ToV2Int(transform.position));
-            }
 
+            // Set player back to idle 
             playerAnimationController.SetState(PlayerState.Idle);
 
             // Show death screen
             UIController.Instance.ShowDeathScreen();
-            //Debug.Log("PLayer dies play fire damage: "+wildFireDamage);
-            SoundMaster.Instance.PlaySound(wildFireDamage?SoundName.DieByFire:SoundName.PlayerDies);
+            SoundMaster.Instance.PlaySound(bombDamage?SoundName.BoomPlayerDies:SoundName.DieByFire);
             SoundMaster.Instance.StopMusic();
         }
         else

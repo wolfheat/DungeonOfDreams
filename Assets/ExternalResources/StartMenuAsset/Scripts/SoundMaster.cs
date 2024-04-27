@@ -25,7 +25,7 @@ namespace Wolfheat.StartMenu
         CrushStone,
         PowerUpDamage,
         PowerUpSpeed,
-        PlayerDies,
+        BoomPlayerDies,
         PickUpHeart,
         SkeletonBuildUpAttack,
         NoBombs,

@@ -242,8 +242,11 @@ Feb-Mar 2024
 		* Remade SE -	
 		* Make cat part of map SE be more open so fire reaches longer -
 		* Released 0.0.3 Version (149MB zipped) -
+27/4	* Refix of AI pathfinding movement - release updated -
 
 		* Fix enemies get stuck in walk animation	
+		* Skeletons dont attack again sometimes even when player is in front of it
+		* Cats sstart to walk towards player instead of fire attack when in line
 
 		* Game runs slow
 		* Game stutters, check profiler for optimizations

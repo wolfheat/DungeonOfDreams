@@ -19,6 +19,7 @@ public class EnemyController : Interactable
     [SerializeField] Mock mock;
 
     private float timer = 0;
+    private string info = "";
     private const float MoveTime = 2f;
     private const float RotateTime = 0.4f;
     private const float EnemySight = 5f;
@@ -95,12 +96,33 @@ public class EnemyController : Interactable
             {
                 Vector3 target = Convert.V2IntToV3(savedAction.move);
                 if (!LevelCreator.Instance.Occupied(target) && Mocks.Instance.IsTileFree(Convert.V3ToV2Int(target)))
+                {
+                    Debug.Log(this.name+"Moving to next path point it is not blocked "+target+" ",this);
                     StartCoroutine(Move(target));
+                }
                 else
                 {
                     // Position is blocked
                     // remove actions if have a path then remove the path, need to figure out something else to do
-                    ForgetPath();
+                    if (path.Count > 0)
+                    {
+                        ForgetPath();
+                        savedAction = null;
+                        Debug.Log(this.name + "Forgeting path and updating it, path is blocked",this);
+                        Debug.Log(this.name + " Set to Idle state", this);
+                        enemyStateController.ChangeState(EnemyState.Idle);
+                        // Issue here that enemy gets the same path since the position ahead is not considered occupied from the level array but from boxcasting
+
+                        UpdatePlayerDistanceAndPath();
+                    }
+                    else
+                    {
+                        Debug.Log(this.name + " Path is blocked have no path savedaction = "+savedAction?.moveType+" move:"+ savedAction?.move+" dir: "+savedAction?.dir+" ", this);
+                        if (savedAction != null)
+                            savedAction = null;
+                        Debug.Log(this.name + " Set to Idle state",this);
+                        enemyStateController.ChangeState(EnemyState.Idle);
+                    }
                     return;
                 }
             }
@@ -138,35 +160,23 @@ public class EnemyController : Interactable
     // SKELETON SPECIFICS
     private bool NormalBehaviour()
     {
-        //Debug.Log(" Normal behaviour");
-
         //Debug.Log("This is a Skeleton");
         playerDistance = PlayersLastPositionDistance();
         if (playerDistance < 1.1f)
         {
-            //Debug.Log("Player is close enough to be hit by skeleton");
             // if next to player but not facing player rotate towards player
             if (!PlayerIsInLookingDirection())
             {
-                //Debug.Log("Player is not in looking direction, turn towards player");
-                //Debug.Log("Added rotation to enemy action");
                 savedAction = new MoveAction(MoveActionType.Rotate, playerLastPosition);
                 return true;
             }
-
             // remove any path
             ForgetPath();
-
-            //Debug.Log("Player is within range, Change to Attack animation",this);
-            //Debug.Log("Player is in looking direction start attack");
-            enemyStateController.ChangeState(EnemyState.Attack);
+            enemyStateController.ChangeState(EnemyData.enemyType == EnemyType.Bomber ? EnemyState.Exploding : EnemyState.Attack);
             return true;
         }
         else if (path.Count == 0)
-        {
-            //Debug.Log("Player is not close enough to attack and there is no path");
-
-            //Debug.Log("Enemy is set to idle since it has no path and player is not next to it");
+        {            
             if (enemyStateController.currentState != EnemyState.Dying && enemyStateController.currentState != EnemyState.Dead)
                 enemyStateController.ChangeState(EnemyState.Idle);
 
@@ -174,7 +184,6 @@ public class EnemyController : Interactable
         }else
         {
             //Debug.Log("Player is not close enough to attack, but there is a path");
-
         }
         return false;
     }
@@ -182,7 +191,7 @@ public class EnemyController : Interactable
     // CAT SPECIFICS
     private bool CatBehaviour()
     {
-        //Debug.Log("Cat behaviour - current state: "+enemyStateController.currentState);
+        Debug.Log("Cat behaviour - current state: "+enemyStateController.currentState);
         // Prohibit state to change if cat is attacking
         if(enemyStateController.currentState == EnemyState.Attack)
             return true; 
@@ -208,6 +217,11 @@ public class EnemyController : Interactable
             ActivateNextPoint();
             return true;
         }
+        else
+        {
+            Debug.Log("Changing enemystate for cat to idle");
+            enemyStateController.ChangeState(EnemyState.Idle);
+        }
         return false;
     }
 
@@ -224,9 +238,10 @@ public class EnemyController : Interactable
 
     public void ActionCompleted()
     {
+        info = "Action Complete";
         // Have new saved action updated with motion
         //Debug.Log(" * Action completed * Moved or Rotated to end up here ");
-        
+
         // Exploding disregard player
         if (enemyStateController.currentState == EnemyState.Exploding) return;
 
@@ -243,7 +258,7 @@ public class EnemyController : Interactable
         // Update path to player if player is alive and got a new Position
         if (!Stats.Instance.IsDead && UpdatePlayerPosition())
         {
-            //Debug.Log("Action complete - Player change position");
+            Debug.Log(this.name+" Action complete - Player change position",this);
             UpdatePlayerDistanceAndPath();
         }//else
             //Debug.Log("Action complete - Player did not change position");  
@@ -286,11 +301,15 @@ public class EnemyController : Interactable
     private bool PlayerHasNewPosition() => LevelCreator.Instance.PlayersLastPosition != playerLastPosition;
     private bool EnemyFacingDirection(Vector2Int lookPoint) => Convert.V3ToV2Int(transform.position + transform.forward) == lookPoint;
     private bool HasPath() => path != null && path.Count > 0;
-    private void ActivateNextPoint() => savedAction = EnemyFacingDirection(path.Peek()) ? new MoveAction(MoveActionType.Step, path.Pop()) : new MoveAction(MoveActionType.Rotate, path.Peek());
+    private void ActivateNextPoint()
+    {
+        savedAction = EnemyFacingDirection(path.Peek()) ? new MoveAction(MoveActionType.Step, path.Pop()) : new MoveAction(MoveActionType.Rotate, path.Peek());
+        Debug.Log(this.name+" Activating next point "+savedAction?.moveType+" "+savedAction?.move);
+    }
 
     public IEnumerator Move(Vector3 target)
     {
-
+        info = "Move started";
         // Also change animation here?
         // Always want player to animate walk when moving?
         enemyStateController.ChangeState(EnemyState.Chase);
@@ -309,6 +328,7 @@ public class EnemyController : Interactable
             transform.position = Vector3.LerpUnclamped(start, end, timer / MoveTime);
             timer += Time.deltaTime;
         }
+        info = "Move ended";
 
         DoingMovementAction = false;
         newPositionEvaluated = false;
@@ -358,7 +378,7 @@ public class EnemyController : Interactable
 
     private void UpdatePlayerDistanceAndPath()
     {
-        //Debug.Log("UpdatePlayerDistanceAndPath");    
+        Debug.Log(this.name+" - UpdatePlayerDistanceAndPath",this);    
         if (Dead || enemyStateController.currentState == EnemyState.Exploding || Stats.Instance.IsDead)
             return;
         
@@ -372,18 +392,19 @@ public class EnemyController : Interactable
         // If visible and close enough get path
         if (playerDistance < EnemySight && PlayerVisibleForEnemy())
         {
-            //Debug.Log(" Get Path");
+            Debug.Log(this.name+" - gets new Path",this);
             GetPath();
         }
         else
         {
             //Debug.Log("Player To far away");
             // This clears the path if player is to far away and not visible
-            if (path.Count>0)
-                path.Clear();
-
-            // Set to idle
-            enemyStateController.ChangeState(EnemyState.Idle);            
+            if (path.Count > 0){
+                Debug.Log(this.name + " - forgets Path (not visible to to far)", this);
+                ForgetPath();
+                // Set to idle
+                enemyStateController.ChangeState(EnemyState.Idle);
+            }
         }
 
     }
@@ -439,6 +460,7 @@ public class EnemyController : Interactable
         if (colliders.Length > 0)
         {
             //Debug.Log("Enemy Hit Player");
+            SoundMaster.Instance.PlaySound(SoundName.EnemyStabs);
             player.TakeDamage(1,this);
         }
 

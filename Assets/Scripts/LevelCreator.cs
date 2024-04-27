@@ -37,6 +37,9 @@ public class LevelCreator : MonoBehaviour
 
     public static LevelCreator Instance { get; private set; }
     [SerializeField] private Terrain activeTerrain;
+    private float gridUpdateTimer = 0;
+    private const float GridUpdateTime = 0.2f;
+
     public Terrain ActiveTerrain => activeTerrain;
 
     private void Awake()
@@ -101,7 +104,12 @@ public class LevelCreator : MonoBehaviour
 
     void Update()
     {
-        //CreateGrid();    
+        gridUpdateTimer += Time.deltaTime;
+        if(gridUpdateTimer >= GridUpdateTime)
+        {
+            CreateGrid();
+            gridUpdateTimer -= GridUpdateTime;
+        }
     }
 
     private void OnDrawGizmos()
@@ -181,6 +189,10 @@ public class LevelCreator : MonoBehaviour
         open.Add(startPoint);
         used.Add(from);
 
+        // Fill all occupied points
+
+
+
 
         bool reachedTarget = false;
 
@@ -192,8 +204,8 @@ public class LevelCreator : MonoBehaviour
 
             // Get the best point
             int bestIndex = GetClosest(open);
-            APoint sourcePoint = open[bestIndex]; // for now just take the first point
-            //Debug.Log("There is at least one Point in open list take first item "+sourcePoint.pos);
+            APoint sourcePoint = open[bestIndex];
+
             int cost = sourcePoint.cost; 
             List<Vector2Int> neighbors = GetNeighbors(sourcePoint.pos,astart,aend,ref used);
             //Debug.Log("Point "+sourcePoint.pos+" had "+neighbors.Count+" neighbors");
@@ -365,11 +377,16 @@ public class LevelCreator : MonoBehaviour
         return null;
     }
 
+    // New occupied check is done from array not box cast
+    /*
     public bool Occupied(Vector3 target)
     {
-        Collider[] colliders = Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, gridDetectionLayerMask);
-        return colliders.Length > 0;        
-    }
+        Vector2Int pos = Convert.V3ToV2Int(target);
+        return level[pos.x, pos.y] == 0;        
+    }*/
+
+    public bool Occupied(Vector3 target) => Physics.OverlapBox(target, Game.boxSize, Quaternion.identity, gridDetectionLayerMask).Length > 0;
+
     public Wall TargetHasWall(Vector3 target)
     {
         // Check if spot is free
@@ -398,12 +415,7 @@ public class LevelCreator : MonoBehaviour
         Debug.DrawLine(new Vector3(from.x, 0, to.y), toPos, Color.cyan, 0.5f);
     }
 
-    public Stack<Vector2Int> CanReach(EnemyController enemyController, PlayerController player)
-    {
-        Vector2Int from = new Vector2Int(Mathf.RoundToInt(enemyController.transform.position.x), Mathf.RoundToInt(enemyController.transform.position.z));
-        Vector2Int to = new Vector2Int(Mathf.RoundToInt(player.transform.position.x), Mathf.RoundToInt(player.transform.position.z));
-        return CanReach(from,to);
-    }
+    public Stack<Vector2Int> CanReach(EnemyController enemyController, PlayerController player) => CanReach(Convert.V3ToV2Int(enemyController.transform.position), Convert.V3ToV2Int(player.transform.position));
 
     internal void RemoveWall(Vector3 position)
     {

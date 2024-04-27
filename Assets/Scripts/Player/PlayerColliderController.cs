@@ -13,15 +13,8 @@ public class PlayerColliderController : MonoBehaviour
         itemsLayerMask = LayerMask.GetMask("Items", "ItemsSeeThrough");
     }
 
-    public void TakeDamage(int amt, bool wildFireDamage = false)
-    {
-        if (wildFireDamage)
-        {
-            SetOnFire();
-            return;
-        }
-        playerController.TakeDamage(amt,null,wildFireDamage);
-    }
+    public void TakeDamage(int amt, bool bombDamage = false) => playerController.TakeDamage(amt, null, bombDamage);
+
 
     [SerializeField] TakeFireDamage takeFireDamage;
     public void SetOnFire()
