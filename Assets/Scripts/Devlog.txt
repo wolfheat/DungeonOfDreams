@@ -243,17 +243,21 @@ Feb-Mar 2024
 		* Make cat part of map SE be more open so fire reaches longer -
 		* Released 0.0.3 Version (149MB zipped) -
 27/4	* Refix of AI pathfinding movement - release updated -
-
+		
+		// Things to fix later
 		* Fix enemies get stuck in walk animation	
 		* Skeletons dont attack again sometimes even when player is in front of it
 		* Cats sstart to walk towards player instead of fire attack when in line
+		* Maybe remake the pathfinding and movement system so it uses the same method - refactoring it
 
+		// Visuals
 		* Game runs slow
 		* Game stutters, check profiler for optimizations
 		* Skeletons get hurt while moving goes to idle for rest of move animation should go to walk
 		* Sledgehammer still got funky animation 
 		* Black smoke for pickups blocks view when stepping into the and elevated
 
+		// Content
 		* Add dino?
 		* Add Flesh enemy
 		* Have result screen showing players score - NO NEED
