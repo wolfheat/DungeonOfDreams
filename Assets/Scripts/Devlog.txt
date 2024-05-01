@@ -243,7 +243,10 @@ Feb-Mar 2024
 		* Make cat part of map SE be more open so fire reaches longer -
 		* Released 0.0.3 Version (149MB zipped) -
 27/4	* Refix of AI pathfinding movement - release updated -
-		
+1/5		* Added Leaves blocks instead of moss -
+
+
+
 		// Things to fix later
 		* Fix enemies get stuck in walk animation	
 		* Skeletons dont attack again sometimes even when player is in front of it
