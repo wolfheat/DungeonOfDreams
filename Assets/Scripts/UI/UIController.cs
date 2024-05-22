@@ -92,6 +92,10 @@ public class UIController : MonoBehaviour
     public void ShowWinScreen()
 	{
 
+        string winTime = Stats.Instance.GetElapsedTime();
+
+        winScreen.SetCompleteTimeText(winTime);
+
         SoundMaster.Instance.PlaySpeech(SoundName.ExitSpeech,true);
 
         // Pausing makes scroll not active

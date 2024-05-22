@@ -1,6 +1,8 @@
 using System;
+using System.Diagnostics;
 using UnityEngine;
 using Wolfheat.StartMenu;
+using Debug = UnityEngine.Debug;
 
 public class Stats : MonoBehaviour
 {
@@ -34,6 +36,9 @@ public class Stats : MonoBehaviour
 
     private bool[] MineralsSeeThroughActivated = new bool[4];
 
+
+    private Stopwatch stopwatch = new();
+
     [SerializeField] GameObject[] ActivationMinerals;
 
     public static Action<int> HealthUpdate;
@@ -58,7 +63,24 @@ public class Stats : MonoBehaviour
     {
         if(MineralsOwned.Length != ActivationMinerals.Length)
             Debug.LogWarning("Place all Minerals references in Stats/ActivationMinerals, need "+MineralsOwned.Length);
+
+        // Start Timer
+        stopwatch.Start();
     }
+
+
+    public string GetElapsedTime(){
+        
+        stopwatch.Stop();
+
+        TimeSpan ts = stopwatch.Elapsed;
+        
+        if(ts.Hours > 0)
+            return String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+        return String.Format("{0:00}:{1:00}.{2:00}", ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+
+    }
+
     public void SetDefaultSledgeHammer()
 	{
         sledgeHammerFlicker.SetFlicker(false);

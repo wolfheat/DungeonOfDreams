@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using Wolfheat.Inputs;
 using Wolfheat.StartMenu;
@@ -6,6 +7,7 @@ using Wolfheat.StartMenu;
 public class WinScreenScroll : MonoBehaviour
 {
     [SerializeField] UIController UIController;
+    [SerializeField] TextMeshProUGUI winTimeText;
     [SerializeField] GameObject panel;
     [SerializeField] GameObject scroll;
     private float StartPosition = -1200f;
@@ -41,6 +43,8 @@ public class WinScreenScroll : MonoBehaviour
     {
         panel.SetActive(false);
     }
+
+    internal void SetCompleteTimeText(string winTime) => winTimeText.text = winTime;
     /*
 
 <b>Credits
@@ -121,5 +125,5 @@ Thank you for playing!
 
 
 
-    */
+*/
 }
